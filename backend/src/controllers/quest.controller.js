@@ -298,11 +298,50 @@ const moderateQuest = async (req, res) => {
   }
 };
 
+// получение квестов по уровню сложности
+const getQuestsByDifficulty = async (req, res) => {
+  const difficultyOption = req.query.difficultyOption; // 1, 2 или 3
+
+  let difficultyFilter;
+
+  switch (difficultyOption) {
+    case '1':
+      difficultyFilter = { gte: 1, lte: 2 };
+      break;
+    case '2':
+      difficultyFilter = { equals: 3 };
+      break;
+    case '3':
+      difficultyFilter = { gte: 4, lte: 5 };
+      break;
+    default:
+      return res.status(400).json({ error: 'Параметр должен быть 1, 2 или 3' });
+  }
+
+  try {
+    const quests = await prisma.quests.findMany({
+      where: {
+        status: { in: ['published', 'archived'] },
+        difficulty: difficultyFilter
+      }
+    });
+
+
+    if(!quests || quests.length === 0) {
+      return res.status(200).json({ message: "Квесты с таким уровнем сложности не найдены" })
+    }
+    res.json(quests);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   createQuest,
   getAllDraftCurrentUser,
   getAllQuestsCurrentUser,
   getAllModerateQuests,
   getQuestById,
-  moderateQuest
+  moderateQuest,
+  getQuestsByDifficulty
 };
