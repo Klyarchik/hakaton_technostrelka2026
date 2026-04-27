@@ -11,9 +11,10 @@ class PrimaryButton extends StatelessWidget {
     return FilledButton(
       onPressed: onPressed,
       style: FilledButton.styleFrom(
-          backgroundColor: Colors.blue,
+        disabledBackgroundColor: Color.fromRGBO(164, 168, 185, 1),
+          backgroundColor: Color.fromRGBO(255, 98, 64, 1),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12)
+              borderRadius: BorderRadius.circular(30)
           )
       ),
       child: Text(text),
