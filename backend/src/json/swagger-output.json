@@ -913,6 +913,11 @@
             "type": "string"
           },
           {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "difficultyOption",
             "in": "query",
             "type": "string"

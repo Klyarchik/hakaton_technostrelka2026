@@ -248,8 +248,10 @@ const moderateQuest = async (req, res) => {
 
     // Проверка прав модератора
     const user = await prisma.users.findUnique({ where: { id: userId } });
-    if (!user || user.role !== 'moderator') {
-      return res.status(403).json({ error: "У вас недостаточно прав для данного запроса" });
+    if (!user || user.role !== "moderator") {
+      return res
+        .status(403)
+        .json({ error: "У вас недостаточно прав для данного запроса" });
     }
 
     if (!id) {
@@ -260,12 +262,17 @@ const moderateQuest = async (req, res) => {
       return res.status(400).json({ error: "Некорректный id" });
     }
 
-    if (!status || !['published', 'rejected'].includes(status)) {
-      return res.status(400).json({ error: "Новый статус должен быть 'published' или 'rejected'" });
+    if (!status || !["published", "rejected"].includes(status)) {
+      return res
+        .status(400)
+        .json({ error: "Новый статус должен быть 'published' или 'rejected'" });
     }
 
     // Если статус rejected — причина обязательна
-    if (status === 'rejected' && (!rejection_reason || rejection_reason.trim() === '')) {
+    if (
+      status === "rejected" &&
+      (!rejection_reason || rejection_reason.trim() === "")
+    ) {
       return res.status(400).json({ error: "Причина отклонения обязательна" });
     }
 
@@ -274,8 +281,10 @@ const moderateQuest = async (req, res) => {
     if (!quest) {
       return res.status(404).json({ error: "Квест не найден" });
     }
-    if (quest.status !== 'moderation') {
-      return res.status(400).json({ error: "Можно менять статус только у квестов на модерации" });
+    if (quest.status !== "moderation") {
+      return res
+        .status(400)
+        .json({ error: "Можно менять статус только у квестов на модерации" });
     }
 
     // Обновляем
@@ -283,14 +292,14 @@ const moderateQuest = async (req, res) => {
       where: { id: questId },
       data: {
         status: status,
-        rejection_reason: status === 'rejected' ? rejection_reason : null,
-        updated_at: new Date()
-      }
+        rejection_reason: status === "rejected" ? rejection_reason : null,
+        updated_at: new Date(),
+      },
     });
 
     res.status(200).json({
-      message: `Квест ${status === 'published' ? 'опубликован' : 'отклонён'}`,
-      quest: updatedQuest
+      message: `Квест ${status === "published" ? "опубликован" : "отклонён"}`,
+      quest: updatedQuest,
     });
   } catch (error) {
     console.error(error);
@@ -300,41 +309,81 @@ const moderateQuest = async (req, res) => {
 
 // получение квестов по уровню сложности
 const getQuestsByDifficulty = async (req, res) => {
-  const difficultyOption = req.query.difficultyOption; // 1, 2 или 3
+  let page = parseInt(req.query.page, 10);
+  if (isNaN(page) || page < 1) page = 1;
+  const limit = 10;
+  const skip = (page - 1) * limit;
 
-  let difficultyFilter;
-
-  switch (difficultyOption) {
-    case '1':
-      difficultyFilter = { gte: 1, lte: 2 };
-      break;
-    case '2':
-      difficultyFilter = { equals: 3 };
-      break;
-    case '3':
-      difficultyFilter = { gte: 4, lte: 5 };
-      break;
-    default:
-      return res.status(400).json({ error: 'Параметр должен быть 1, 2 или 3' });
-  }
+  const difficultyOption = req.query.difficultyOption;
 
   try {
-    const quests = await prisma.quests.findMany({
-      where: {
-        status: { in: ['published', 'archived'] },
-        difficulty: difficultyFilter
-      }
-    });
+    const whereBase = {
+      status: { in: ["published", "archived"] },
+    };
 
+    if (!difficultyOption) {
+      const [quests, total] = await Promise.all([
+        prisma.quests.findMany({
+          where: whereBase,
+          skip: skip,
+          take: limit,
+        }),
+        prisma.quests.count({ where: whereBase }),
+      ]);
 
-    if(!quests || quests.length === 0) {
-      return res.status(200).json({ message: "Квесты с таким уровнем сложности не найдены" })
+      return res.status(200).json({
+        data: quests,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+      });
     }
-    res.json(quests);
+
+    let difficultyFilter;
+    switch (difficultyOption) {
+      case "1":
+        difficultyFilter = { gte: 1, lte: 2 };
+        break;
+      case "2":
+        difficultyFilter = { equals: 3 };
+        break;
+      case "3":
+        difficultyFilter = { gte: 4, lte: 5 };
+        break;
+      default:
+        return res.status(400).json({ error: "Параметр должен быть 1, 2 или 3" });
+    }
+
+    const where = { ...whereBase, difficulty: difficultyFilter };
+    const [quests, total] = await Promise.all([
+      prisma.quests.findMany({
+        where,
+        skip: skip,
+        take: limit,
+      }),
+      prisma.quests.count({ where }),
+    ]);
+
+    if (total === 0) {
+      return res.status(200).json({
+        data: [],
+        total: 0,
+        page,
+        totalPages: 0,
+        message: "Квесты с таким уровнем сложности не найдены",
+      });
+    }
+
+    res.status(200).json({
+      data: quests,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 module.exports = {
   createQuest,
@@ -343,5 +392,5 @@ module.exports = {
   getAllModerateQuests,
   getQuestById,
   moderateQuest,
-  getQuestsByDifficulty
+  getQuestsByDifficulty,
 };
