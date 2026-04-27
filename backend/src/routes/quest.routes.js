@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const {
   createQuest,
-  getAllDraftCurrentUser
+  getAllDraftCurrentUser,
+  getAllQuestsCurrentUser
 } = require('../controllers/quest.controller');
 const multer = require("multer");
 
@@ -92,12 +93,19 @@ router.post(
 );
 
 
-
 router.get(
   "/get-all-draft-current-user",
   authMiddleware,
   /* #swagger.tags = ['Checkpoints'] #swagger.summary = 'Получение всех черновиков текущего пользователя' */
   getAllDraftCurrentUser
+);
+
+
+router.get(
+  "/get-all-quests-current-user",
+  authMiddleware,
+  /* #swagger.tags = ['Checkpoints'] #swagger.summary = 'Получение всех квестов текущего пользователя кроме черновиков' */
+  getAllQuestsCurrentUser
 );
 
 module.exports = router;
