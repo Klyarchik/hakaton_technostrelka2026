@@ -4716,7 +4716,6 @@ export namespace Prisma {
     duration_minutes: number | null
     rules: string | null
     status: string | null
-    rejection_reason: string | null
     is_hidden: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -4733,7 +4732,6 @@ export namespace Prisma {
     duration_minutes: number | null
     rules: string | null
     status: string | null
-    rejection_reason: string | null
     is_hidden: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -4750,7 +4748,6 @@ export namespace Prisma {
     duration_minutes: number
     rules: number
     status: number
-    rejection_reason: number
     is_hidden: number
     created_at: number
     updated_at: number
@@ -4783,7 +4780,6 @@ export namespace Prisma {
     duration_minutes?: true
     rules?: true
     status?: true
-    rejection_reason?: true
     is_hidden?: true
     created_at?: true
     updated_at?: true
@@ -4800,7 +4796,6 @@ export namespace Prisma {
     duration_minutes?: true
     rules?: true
     status?: true
-    rejection_reason?: true
     is_hidden?: true
     created_at?: true
     updated_at?: true
@@ -4817,7 +4812,6 @@ export namespace Prisma {
     duration_minutes?: true
     rules?: true
     status?: true
-    rejection_reason?: true
     is_hidden?: true
     created_at?: true
     updated_at?: true
@@ -4916,12 +4910,11 @@ export namespace Prisma {
     title: string
     description: string
     location_text: string
-    image: string | null
+    image: string
     difficulty: number
     duration_minutes: number
     rules: string | null
     status: string
-    rejection_reason: string | null
     is_hidden: boolean | null
     created_at: Date
     updated_at: Date
@@ -4957,7 +4950,6 @@ export namespace Prisma {
     duration_minutes?: boolean
     rules?: boolean
     status?: boolean
-    rejection_reason?: boolean
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4975,7 +4967,6 @@ export namespace Prisma {
     duration_minutes?: boolean
     rules?: boolean
     status?: boolean
-    rejection_reason?: boolean
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4993,7 +4984,6 @@ export namespace Prisma {
     duration_minutes?: boolean
     rules?: boolean
     status?: boolean
-    rejection_reason?: boolean
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -5011,13 +5001,12 @@ export namespace Prisma {
     duration_minutes?: boolean
     rules?: boolean
     status?: boolean
-    rejection_reason?: boolean
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type questsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creator_id" | "title" | "description" | "location_text" | "image" | "difficulty" | "duration_minutes" | "rules" | "status" | "rejection_reason" | "is_hidden" | "created_at" | "updated_at", ExtArgs["result"]["quests"]>
+  export type questsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creator_id" | "title" | "description" | "location_text" | "image" | "difficulty" | "duration_minutes" | "rules" | "status" | "is_hidden" | "created_at" | "updated_at", ExtArgs["result"]["quests"]>
   export type questsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | usersDefaultArgs<ExtArgs>
   }
@@ -5039,12 +5028,11 @@ export namespace Prisma {
       title: string
       description: string
       location_text: string
-      image: string | null
+      image: string
       difficulty: number
       duration_minutes: number
       rules: string | null
       status: string
-      rejection_reason: string | null
       is_hidden: boolean | null
       created_at: Date
       updated_at: Date
@@ -5482,7 +5470,6 @@ export namespace Prisma {
     readonly duration_minutes: FieldRef<"quests", 'Int'>
     readonly rules: FieldRef<"quests", 'String'>
     readonly status: FieldRef<"quests", 'String'>
-    readonly rejection_reason: FieldRef<"quests", 'String'>
     readonly is_hidden: FieldRef<"quests", 'Boolean'>
     readonly created_at: FieldRef<"quests", 'DateTime'>
     readonly updated_at: FieldRef<"quests", 'DateTime'>
@@ -5967,7 +5954,6 @@ export namespace Prisma {
     duration_minutes: 'duration_minutes',
     rules: 'rules',
     status: 'status',
-    rejection_reason: 'rejection_reason',
     is_hidden: 'is_hidden',
     created_at: 'created_at',
     updated_at: 'updated_at'
@@ -6284,12 +6270,11 @@ export namespace Prisma {
     title?: StringFilter<"quests"> | string
     description?: StringFilter<"quests"> | string
     location_text?: StringFilter<"quests"> | string
-    image?: StringNullableFilter<"quests"> | string | null
+    image?: StringFilter<"quests"> | string
     difficulty?: IntFilter<"quests"> | number
     duration_minutes?: IntFilter<"quests"> | number
     rules?: StringNullableFilter<"quests"> | string | null
     status?: StringFilter<"quests"> | string
-    rejection_reason?: StringNullableFilter<"quests"> | string | null
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
@@ -6302,12 +6287,11 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     location_text?: SortOrder
-    image?: SortOrderInput | SortOrder
+    image?: SortOrder
     difficulty?: SortOrder
     duration_minutes?: SortOrder
     rules?: SortOrderInput | SortOrder
     status?: SortOrder
-    rejection_reason?: SortOrderInput | SortOrder
     is_hidden?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -6316,7 +6300,6 @@ export namespace Prisma {
 
   export type questsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    status?: string
     AND?: questsWhereInput | questsWhereInput[]
     OR?: questsWhereInput[]
     NOT?: questsWhereInput | questsWhereInput[]
@@ -6324,16 +6307,16 @@ export namespace Prisma {
     title?: StringFilter<"quests"> | string
     description?: StringFilter<"quests"> | string
     location_text?: StringFilter<"quests"> | string
-    image?: StringNullableFilter<"quests"> | string | null
+    image?: StringFilter<"quests"> | string
     difficulty?: IntFilter<"quests"> | number
     duration_minutes?: IntFilter<"quests"> | number
     rules?: StringNullableFilter<"quests"> | string | null
-    rejection_reason?: StringNullableFilter<"quests"> | string | null
+    status?: StringFilter<"quests"> | string
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
-  }, "id" | "status">
+  }, "id">
 
   export type questsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -6341,12 +6324,11 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     location_text?: SortOrder
-    image?: SortOrderInput | SortOrder
+    image?: SortOrder
     difficulty?: SortOrder
     duration_minutes?: SortOrder
     rules?: SortOrderInput | SortOrder
     status?: SortOrder
-    rejection_reason?: SortOrderInput | SortOrder
     is_hidden?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -6366,12 +6348,11 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"quests"> | string
     description?: StringWithAggregatesFilter<"quests"> | string
     location_text?: StringWithAggregatesFilter<"quests"> | string
-    image?: StringNullableWithAggregatesFilter<"quests"> | string | null
+    image?: StringWithAggregatesFilter<"quests"> | string
     difficulty?: IntWithAggregatesFilter<"quests"> | number
     duration_minutes?: IntWithAggregatesFilter<"quests"> | number
     rules?: StringNullableWithAggregatesFilter<"quests"> | string | null
     status?: StringWithAggregatesFilter<"quests"> | string
-    rejection_reason?: StringNullableWithAggregatesFilter<"quests"> | string | null
     is_hidden?: BoolNullableWithAggregatesFilter<"quests"> | boolean | null
     created_at?: DateTimeWithAggregatesFilter<"quests"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"quests"> | Date | string
@@ -6581,12 +6562,11 @@ export namespace Prisma {
     title: string
     description: string
     location_text: string
-    image?: string | null
+    image: string
     difficulty: number
     duration_minutes: number
     rules?: string | null
     status: string
-    rejection_reason?: string | null
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -6599,12 +6579,11 @@ export namespace Prisma {
     title: string
     description: string
     location_text: string
-    image?: string | null
+    image: string
     difficulty: number
     duration_minutes: number
     rules?: string | null
     status: string
-    rejection_reason?: string | null
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -6614,12 +6593,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location_text?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     difficulty?: IntFieldUpdateOperationsInput | number
     duration_minutes?: IntFieldUpdateOperationsInput | number
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
-    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6632,12 +6610,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location_text?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     difficulty?: IntFieldUpdateOperationsInput | number
     duration_minutes?: IntFieldUpdateOperationsInput | number
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
-    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6649,12 +6626,11 @@ export namespace Prisma {
     title: string
     description: string
     location_text: string
-    image?: string | null
+    image: string
     difficulty: number
     duration_minutes: number
     rules?: string | null
     status: string
-    rejection_reason?: string | null
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -6664,12 +6640,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location_text?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     difficulty?: IntFieldUpdateOperationsInput | number
     duration_minutes?: IntFieldUpdateOperationsInput | number
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
-    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6681,12 +6656,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location_text?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     difficulty?: IntFieldUpdateOperationsInput | number
     duration_minutes?: IntFieldUpdateOperationsInput | number
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
-    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6990,7 +6964,6 @@ export namespace Prisma {
     duration_minutes?: SortOrder
     rules?: SortOrder
     status?: SortOrder
-    rejection_reason?: SortOrder
     is_hidden?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -7014,7 +6987,6 @@ export namespace Prisma {
     duration_minutes?: SortOrder
     rules?: SortOrder
     status?: SortOrder
-    rejection_reason?: SortOrder
     is_hidden?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -7031,7 +7003,6 @@ export namespace Prisma {
     duration_minutes?: SortOrder
     rules?: SortOrder
     status?: SortOrder
-    rejection_reason?: SortOrder
     is_hidden?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -7453,12 +7424,11 @@ export namespace Prisma {
     title: string
     description: string
     location_text: string
-    image?: string | null
+    image: string
     difficulty: number
     duration_minutes: number
     rules?: string | null
     status: string
-    rejection_reason?: string | null
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -7469,12 +7439,11 @@ export namespace Prisma {
     title: string
     description: string
     location_text: string
-    image?: string | null
+    image: string
     difficulty: number
     duration_minutes: number
     rules?: string | null
     status: string
-    rejection_reason?: string | null
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -7563,12 +7532,11 @@ export namespace Prisma {
     title?: StringFilter<"quests"> | string
     description?: StringFilter<"quests"> | string
     location_text?: StringFilter<"quests"> | string
-    image?: StringNullableFilter<"quests"> | string | null
+    image?: StringFilter<"quests"> | string
     difficulty?: IntFilter<"quests"> | number
     duration_minutes?: IntFilter<"quests"> | number
     rules?: StringNullableFilter<"quests"> | string | null
     status?: StringFilter<"quests"> | string
-    rejection_reason?: StringNullableFilter<"quests"> | string | null
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
@@ -7930,12 +7898,11 @@ export namespace Prisma {
     title: string
     description: string
     location_text: string
-    image?: string | null
+    image: string
     difficulty: number
     duration_minutes: number
     rules?: string | null
     status: string
-    rejection_reason?: string | null
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -7959,12 +7926,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location_text?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     difficulty?: IntFieldUpdateOperationsInput | number
     duration_minutes?: IntFieldUpdateOperationsInput | number
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
-    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7975,12 +7941,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location_text?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     difficulty?: IntFieldUpdateOperationsInput | number
     duration_minutes?: IntFieldUpdateOperationsInput | number
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
-    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7991,12 +7956,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location_text?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     difficulty?: IntFieldUpdateOperationsInput | number
     duration_minutes?: IntFieldUpdateOperationsInput | number
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
-    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string

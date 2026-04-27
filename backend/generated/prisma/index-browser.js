@@ -159,7 +159,6 @@ exports.Prisma.QuestsScalarFieldEnum = {
   duration_minutes: 'duration_minutes',
   rules: 'rules',
   status: 'status',
-  rejection_reason: 'rejection_reason',
   is_hidden: 'is_hidden',
   created_at: 'created_at',
   updated_at: 'updated_at'

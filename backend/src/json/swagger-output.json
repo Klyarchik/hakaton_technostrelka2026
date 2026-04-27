@@ -51,9 +51,6 @@
                 },
                 "age_group": {
                   "example": "any"
-                },
-                "role": {
-                  "example": "any"
                 }
               }
             }
@@ -445,6 +442,289 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/quest/create": {
+      "post": {
+        "tags": [
+          "Quests"
+        ],
+        "summary": "Создание нового квеста",
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Название квеста (минимум 5 символов)"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Описание квеста (минимум 30 символов)"
+          },
+          {
+            "name": "location_text",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Район/город проведения квеста"
+          },
+          {
+            "name": "difficulty",
+            "in": "formData",
+            "type": "integer",
+            "required": true,
+            "description": "Уровень сложности (от 1 до 5)"
+          },
+          {
+            "name": "duration_minutes",
+            "in": "formData",
+            "type": "integer",
+            "required": true,
+            "description": "Примерная длительность квеста в минутах"
+          },
+          {
+            "name": "rules",
+            "in": "formData",
+            "type": "string",
+            "required": false,
+            "description": "Правила / важные предупреждения (опционально)"
+          },
+          {
+            "name": "is_hidden",
+            "in": "formData",
+            "type": "boolean",
+            "required": true,
+            "description": "Если true – квест сохранится как черновик, иначе отправится на модерацию (по умолчанию false)"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Обложка квеста (≤5 МБ)"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "location_text": {
+                  "example": "any"
+                },
+                "difficulty": {
+                  "example": "any"
+                },
+                "duration_minutes": {
+                  "example": "any"
+                },
+                "rules": {
+                  "example": "any"
+                },
+                "rejection_reason": {
+                  "example": "any"
+                },
+                "is_hidden": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Квест успешно создан",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Квест успешно создан"
+                        }
+                      }
+                    },
+                    "quest": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "object"
+                        },
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "example": "integer"
+                                }
+                              }
+                            },
+                            "title": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "example": "string"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "example": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка валидации (неверные или отсутствующие данные)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Название квеста обязательно и должно содержать минимум 5 символов"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Токен не предоставлен"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Internal server error"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }

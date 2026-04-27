@@ -50,12 +50,11 @@ model quests {
   title            String
   description      String
   location_text    String
-  image            String?
+  image            String
   difficulty       Int
   duration_minutes Int
   rules            String?
-  status           String   @unique @db.VarChar(20)
-  rejection_reason String?
+  status           String   @db.VarChar(20)
   is_hidden        Boolean? @default(false)
   created_at       DateTime @default(now()) @db.Timestamptz(6)
   updated_at       DateTime @default(now()) @db.Timestamptz(6)
