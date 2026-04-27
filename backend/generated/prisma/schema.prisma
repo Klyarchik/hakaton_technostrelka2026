@@ -17,6 +17,7 @@ model users {
   avatar       String
   created_at   DateTime       @default(now()) @db.Timestamptz(6)
   updated_at   DateTime       @default(now()) @db.Timestamptz(6)
+  quests       quests[]
   team_members team_members[]
   teams        teams[]
 }
@@ -41,4 +42,22 @@ model teams {
   created_at   DateTime       @default(now()) @db.Timestamptz(6)
   team_members team_members[]
   users        users          @relation(fields: [creator_id], references: [id], onUpdate: NoAction)
+}
+
+model quests {
+  id               Int      @id @default(autoincrement())
+  creator_id       Int
+  title            String
+  description      String
+  location_text    String
+  image            String?
+  difficulty       Int
+  duration_minutes Int
+  rules            String?
+  status           String   @unique @db.VarChar(20)
+  rejection_reason String?
+  is_hidden        Boolean? @default(false)
+  created_at       DateTime @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime @default(now()) @db.Timestamptz(6)
+  users            users    @relation(fields: [creator_id], references: [id], onUpdate: NoAction)
 }

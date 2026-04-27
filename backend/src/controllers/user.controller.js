@@ -6,7 +6,7 @@ const { minioClient, BUCKET_NAME } = require('../configs/minio');
 // Регистрация пользователя
 const register = async (req, res) => {
   try {
-    const { nickname, password, email, age_group, role = 'user' } = req.body;
+    const { nickname, password, email, age_group } = req.body;
 
     if (!nickname) {
       return res.status(400).json({ error: "nickname обязателен" });
@@ -22,9 +22,6 @@ const register = async (req, res) => {
     }
     if (!['14-15', '16-17'].includes(age_group)) {
       return res.status(400).json({ error: "age_group должен быть '14-15' или '16-17'" });
-    }
-    if (!['user', 'moderator'].includes(role)) {
-      return res.status(400).json({ error: "role должен быть 'user' или 'moderator'" });
     }
 
     const existingUser = await prisma.users.findUnique({ where: { nickname } });
@@ -44,7 +41,7 @@ const register = async (req, res) => {
         password: hashPassword,
         email,
         age_group,
-        role,
+        role: 'user',
         avatar: `http://localhost:9000/${BUCKET_NAME}/default-avatar.jpg`
       }
     });

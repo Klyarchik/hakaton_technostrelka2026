@@ -148,6 +148,23 @@ exports.Prisma.TeamsScalarFieldEnum = {
   created_at: 'created_at'
 };
 
+exports.Prisma.QuestsScalarFieldEnum = {
+  id: 'id',
+  creator_id: 'creator_id',
+  title: 'title',
+  description: 'description',
+  location_text: 'location_text',
+  image: 'image',
+  difficulty: 'difficulty',
+  duration_minutes: 'duration_minutes',
+  rules: 'rules',
+  status: 'status',
+  rejection_reason: 'rejection_reason',
+  is_hidden: 'is_hidden',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -167,7 +184,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   users: 'users',
   team_members: 'team_members',
-  teams: 'teams'
+  teams: 'teams',
+  quests: 'quests'
 };
 
 /**
