@@ -1,9 +1,10 @@
 const prisma = require("../client");
 const { minioClient, BUCKET_NAME } = require("../configs/minio");
 
+// создание квеста
 const createQuest = async (req, res) => {
   try {
-    const creator_id = req.user.userId; // из middleware аутентификации
+    const creator_id = req.user.userId;
     const {
       title,
       description,
@@ -14,25 +15,20 @@ const createQuest = async (req, res) => {
       is_hidden,
     } = req.body;
 
-    // Валидация
     if (!req.file) {
       return res.status(400).json({ error: "Обложка квеста обязательна" });
     }
     if (!title || title.length < 5) {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Название квеста обязательно и должно содержать минимум 5 символов",
-        });
+      return res.status(400).json({
+        error:
+          "Название квеста обязательно и должно содержать минимум 5 символов",
+      });
     }
     if (!description || description.length < 30) {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Описание квеста обязательно и должно содержать минимум 30 символов",
-        });
+      return res.status(400).json({
+        error:
+          "Описание квеста обязательно и должно содержать минимум 30 символов",
+      });
     }
     if (!location_text) {
       return res.status(400).json({ error: "Район/город обязателен" });
@@ -43,18 +39,15 @@ const createQuest = async (req, res) => {
         .json({ error: "Уровень сложности должен быть числом от 1 до 5" });
     }
     if (!duration_minutes || duration_minutes <= 0) {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Длительность квеста (в минутах) должна быть положительным числом",
-        });
+      return res.status(400).json({
+        error:
+          "Длительность квеста (в минутах) должна быть положительным числом",
+      });
     }
 
     const isHiddenBoolean = is_hidden === "true" || is_hidden === true;
     let status = isHiddenBoolean ? "draft" : "moderation";
 
-    // Обработка загруженной обложки (если есть)
     let imageUrl;
 
     const fileName = `quest-${Date.now()}-${creator_id}.jpg`;
@@ -94,11 +87,11 @@ const createQuest = async (req, res) => {
   }
 };
 
+// получение всех черновиков пользователя
 const getAllDraftCurrentUser = async (req, res) => {
   try {
-    const userId = req.user.userId; // из middleware аутентификации
+    const userId = req.user.userId;
 
-    // Находим все черновики текущего пользователя, включая чекпоинты
     const allDraft = await prisma.quests.findMany({
       where: {
         creator_id: userId,
@@ -107,13 +100,12 @@ const getAllDraftCurrentUser = async (req, res) => {
       include: {
         quest_checkpoints: {
           orderBy: {
-            order_index: "asc", // сортировка чекпоинтов по порядку
+            order_index: "asc",
           },
         },
       },
     });
 
-    // Если нет черновиков, возвращаем пустой массив
     if (!allDraft || allDraft.length === 0) {
       return res.status(200).json({
         message: "У пользователя нет черновиков",
@@ -121,7 +113,6 @@ const getAllDraftCurrentUser = async (req, res) => {
       });
     }
 
-    // Возвращаем список квестов с их чекпоинтами
     res.status(200).json({
       message: "Черновики успешно получены",
       drafts: allDraft,
@@ -132,11 +123,11 @@ const getAllDraftCurrentUser = async (req, res) => {
   }
 };
 
+// получение всех квестов пользователя кроме черновиков
 const getAllQuestsCurrentUser = async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    // Находим все квесты текущего пользователя, кроме черновиков
     const allQuests = await prisma.quests.findMany({
       where: {
         creator_id: userId,
@@ -171,8 +162,52 @@ const getAllQuestsCurrentUser = async (req, res) => {
   }
 };
 
+// получение всех квестов на модерации
+const getAllModerateQuests = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+    });
+
+    if (user.role !== "moderator") {
+      return res.status(400).json({ error: "У вас недостаточно прав для данного запроса" });
+    }
+
+    const allModerateQuests = await prisma.quests.findMany({
+      where: {
+        status: "moderation",
+      },
+      include: {
+        quest_checkpoints: {
+          orderBy: {
+            order_index: "asc",
+          },
+        },
+      },
+    });
+
+    if (!allModerateQuests || allModerateQuests.length === 0) {
+      return res.status(200).json({
+        message: "Квестов на модерации нет",
+        moderateQuests: [],
+      });
+    }
+
+    res.status(200).json({
+      message: "Квесты на модерации успешно получены",
+      moderateQuests: allModerateQuests,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   createQuest,
   getAllDraftCurrentUser,
-  getAllQuestsCurrentUser
+  getAllQuestsCurrentUser,
+  getAllModerateQuests,
 };

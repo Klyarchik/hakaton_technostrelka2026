@@ -729,7 +729,7 @@
     "/api/quest/get-all-draft-current-user": {
       "get": {
         "tags": [
-          "Checkpoints"
+          "Quests"
         ],
         "summary": "Получение всех черновиков текущего пользователя",
         "description": "",
@@ -756,7 +756,7 @@
     "/api/quest/get-all-quests-current-user": {
       "get": {
         "tags": [
-          "Checkpoints"
+          "Quests"
         ],
         "summary": "Получение всех квестов текущего пользователя кроме черновиков",
         "description": "",
@@ -770,6 +770,36 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/quest/get-all-moderate-quests": {
+      "get": {
+        "tags": [
+          "Quests"
+        ],
+        "summary": "Получение всех квестов на модерации",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "401": {
             "description": "Unauthorized"
