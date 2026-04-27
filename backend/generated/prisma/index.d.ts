@@ -4841,6 +4841,7 @@ export namespace Prisma {
     is_hidden: boolean | null
     created_at: Date | null
     updated_at: Date | null
+    rejection_reason: string | null
   }
 
   export type QuestsMaxAggregateOutputType = {
@@ -4857,6 +4858,7 @@ export namespace Prisma {
     is_hidden: boolean | null
     created_at: Date | null
     updated_at: Date | null
+    rejection_reason: string | null
   }
 
   export type QuestsCountAggregateOutputType = {
@@ -4873,6 +4875,7 @@ export namespace Prisma {
     is_hidden: number
     created_at: number
     updated_at: number
+    rejection_reason: number
     _all: number
   }
 
@@ -4905,6 +4908,7 @@ export namespace Prisma {
     is_hidden?: true
     created_at?: true
     updated_at?: true
+    rejection_reason?: true
   }
 
   export type QuestsMaxAggregateInputType = {
@@ -4921,6 +4925,7 @@ export namespace Prisma {
     is_hidden?: true
     created_at?: true
     updated_at?: true
+    rejection_reason?: true
   }
 
   export type QuestsCountAggregateInputType = {
@@ -4937,6 +4942,7 @@ export namespace Prisma {
     is_hidden?: true
     created_at?: true
     updated_at?: true
+    rejection_reason?: true
     _all?: true
   }
 
@@ -5040,6 +5046,7 @@ export namespace Prisma {
     is_hidden: boolean | null
     created_at: Date
     updated_at: Date
+    rejection_reason: string | null
     _count: QuestsCountAggregateOutputType | null
     _avg: QuestsAvgAggregateOutputType | null
     _sum: QuestsSumAggregateOutputType | null
@@ -5075,6 +5082,7 @@ export namespace Prisma {
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
+    rejection_reason?: boolean
     quest_checkpoints?: boolean | quests$quest_checkpointsArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
     _count?: boolean | QuestsCountOutputTypeDefaultArgs<ExtArgs>
@@ -5094,6 +5102,7 @@ export namespace Prisma {
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
+    rejection_reason?: boolean
     users?: boolean | usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["quests"]>
 
@@ -5111,6 +5120,7 @@ export namespace Prisma {
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
+    rejection_reason?: boolean
     users?: boolean | usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["quests"]>
 
@@ -5128,9 +5138,10 @@ export namespace Prisma {
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
+    rejection_reason?: boolean
   }
 
-  export type questsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creator_id" | "title" | "description" | "location_text" | "image" | "difficulty" | "duration_minutes" | "rules" | "status" | "is_hidden" | "created_at" | "updated_at", ExtArgs["result"]["quests"]>
+  export type questsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creator_id" | "title" | "description" | "location_text" | "image" | "difficulty" | "duration_minutes" | "rules" | "status" | "is_hidden" | "created_at" | "updated_at" | "rejection_reason", ExtArgs["result"]["quests"]>
   export type questsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quest_checkpoints?: boolean | quests$quest_checkpointsArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
@@ -5163,6 +5174,7 @@ export namespace Prisma {
       is_hidden: boolean | null
       created_at: Date
       updated_at: Date
+      rejection_reason: string | null
     }, ExtArgs["result"]["quests"]>
     composites: {}
   }
@@ -5601,6 +5613,7 @@ export namespace Prisma {
     readonly is_hidden: FieldRef<"quests", 'Boolean'>
     readonly created_at: FieldRef<"quests", 'DateTime'>
     readonly updated_at: FieldRef<"quests", 'DateTime'>
+    readonly rejection_reason: FieldRef<"quests", 'String'>
   }
     
 
@@ -7312,7 +7325,8 @@ export namespace Prisma {
     status: 'status',
     is_hidden: 'is_hidden',
     created_at: 'created_at',
-    updated_at: 'updated_at'
+    updated_at: 'updated_at',
+    rejection_reason: 'rejection_reason'
   };
 
   export type QuestsScalarFieldEnum = (typeof QuestsScalarFieldEnum)[keyof typeof QuestsScalarFieldEnum]
@@ -7666,6 +7680,7 @@ export namespace Prisma {
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
+    rejection_reason?: StringNullableFilter<"quests"> | string | null
     quest_checkpoints?: Quest_checkpointsListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }
@@ -7684,6 +7699,7 @@ export namespace Prisma {
     is_hidden?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    rejection_reason?: SortOrderInput | SortOrder
     quest_checkpoints?: quest_checkpointsOrderByRelationAggregateInput
     users?: usersOrderByWithRelationInput
   }
@@ -7705,6 +7721,7 @@ export namespace Prisma {
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
+    rejection_reason?: StringNullableFilter<"quests"> | string | null
     quest_checkpoints?: Quest_checkpointsListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }, "id">
@@ -7723,6 +7740,7 @@ export namespace Prisma {
     is_hidden?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    rejection_reason?: SortOrderInput | SortOrder
     _count?: questsCountOrderByAggregateInput
     _avg?: questsAvgOrderByAggregateInput
     _max?: questsMaxOrderByAggregateInput
@@ -7747,6 +7765,7 @@ export namespace Prisma {
     is_hidden?: BoolNullableWithAggregatesFilter<"quests"> | boolean | null
     created_at?: DateTimeWithAggregatesFilter<"quests"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"quests"> | Date | string
+    rejection_reason?: StringNullableWithAggregatesFilter<"quests"> | string | null
   }
 
   export type quest_checkpointsWhereInput = {
@@ -8054,6 +8073,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsCreateNestedManyWithoutQuestsInput
     users: usersCreateNestedOneWithoutQuestsInput
   }
@@ -8072,6 +8092,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput
   }
 
@@ -8087,6 +8108,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUpdateManyWithoutQuestsNestedInput
     users?: usersUpdateOneRequiredWithoutQuestsNestedInput
   }
@@ -8105,6 +8127,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput
   }
 
@@ -8122,6 +8145,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
   }
 
   export type questsUpdateManyMutationInput = {
@@ -8136,6 +8160,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type questsUncheckedUpdateManyInput = {
@@ -8152,6 +8177,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type quest_checkpointsCreateInput = {
@@ -8566,6 +8592,7 @@ export namespace Prisma {
     is_hidden?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    rejection_reason?: SortOrder
   }
 
   export type questsAvgOrderByAggregateInput = {
@@ -8589,6 +8616,7 @@ export namespace Prisma {
     is_hidden?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    rejection_reason?: SortOrder
   }
 
   export type questsMinOrderByAggregateInput = {
@@ -8605,6 +8633,7 @@ export namespace Prisma {
     is_hidden?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    rejection_reason?: SortOrder
   }
 
   export type questsSumOrderByAggregateInput = {
@@ -9220,6 +9249,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsCreateNestedManyWithoutQuestsInput
   }
 
@@ -9236,6 +9266,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput
   }
 
@@ -9330,6 +9361,7 @@ export namespace Prisma {
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
+    rejection_reason?: StringNullableFilter<"quests"> | string | null
   }
 
   export type team_membersUpsertWithWhereUniqueWithoutUsersInput = {
@@ -9766,6 +9798,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
     users: usersCreateNestedOneWithoutQuestsInput
   }
 
@@ -9783,6 +9816,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
   }
 
   export type questsCreateOrConnectWithoutQuest_checkpointsInput = {
@@ -9813,6 +9847,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     users?: usersUpdateOneRequiredWithoutQuestsNestedInput
   }
 
@@ -9830,6 +9865,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type questsCreateManyUsersInput = {
@@ -9845,6 +9881,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    rejection_reason?: string | null
   }
 
   export type team_membersCreateManyUsersInput = {
@@ -9873,6 +9910,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUpdateManyWithoutQuestsNestedInput
   }
 
@@ -9889,6 +9927,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput
   }
 
@@ -9905,6 +9944,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type team_membersUpdateWithoutUsersInput = {

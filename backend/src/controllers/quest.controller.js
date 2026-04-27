@@ -240,10 +240,69 @@ const getQuestById = async (req, res) => {
   }
 };
 
+// модерация квеста
+const moderateQuest = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { id, status, rejection_reason } = req.body;
+
+    // Проверка прав модератора
+    const user = await prisma.users.findUnique({ where: { id: userId } });
+    if (!user || user.role !== 'moderator') {
+      return res.status(403).json({ error: "У вас недостаточно прав для данного запроса" });
+    }
+
+    if (!id) {
+      return res.status(400).json({ error: "id квеста обязателен" });
+    }
+    const questId = parseInt(id);
+    if (isNaN(questId)) {
+      return res.status(400).json({ error: "Некорректный id" });
+    }
+
+    if (!status || !['published', 'rejected'].includes(status)) {
+      return res.status(400).json({ error: "Новый статус должен быть 'published' или 'rejected'" });
+    }
+
+    // Если статус rejected — причина обязательна
+    if (status === 'rejected' && (!rejection_reason || rejection_reason.trim() === '')) {
+      return res.status(400).json({ error: "Причина отклонения обязательна" });
+    }
+
+    // Проверяем существование квеста и что он в статусе "moderation"
+    const quest = await prisma.quests.findUnique({ where: { id: questId } });
+    if (!quest) {
+      return res.status(404).json({ error: "Квест не найден" });
+    }
+    if (quest.status !== 'moderation') {
+      return res.status(400).json({ error: "Можно менять статус только у квестов на модерации" });
+    }
+
+    // Обновляем
+    const updatedQuest = await prisma.quests.update({
+      where: { id: questId },
+      data: {
+        status: status,
+        rejection_reason: status === 'rejected' ? rejection_reason : null,
+        updated_at: new Date()
+      }
+    });
+
+    res.status(200).json({
+      message: `Квест ${status === 'published' ? 'опубликован' : 'отклонён'}`,
+      quest: updatedQuest
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   createQuest,
   getAllDraftCurrentUser,
   getAllQuestsCurrentUser,
   getAllModerateQuests,
   getQuestById,
+  moderateQuest
 };

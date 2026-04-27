@@ -58,6 +58,7 @@ model quests {
   is_hidden         Boolean?            @default(false)
   created_at        DateTime            @default(now()) @db.Timestamptz(6)
   updated_at        DateTime            @default(now()) @db.Timestamptz(6)
+  rejection_reason  String?
   quest_checkpoints quest_checkpoints[]
   users             users               @relation(fields: [creator_id], references: [id], onUpdate: NoAction)
 }

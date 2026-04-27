@@ -161,7 +161,8 @@ exports.Prisma.QuestsScalarFieldEnum = {
   status: 'status',
   is_hidden: 'is_hidden',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  rejection_reason: 'rejection_reason'
 };
 
 exports.Prisma.Quest_checkpointsScalarFieldEnum = {

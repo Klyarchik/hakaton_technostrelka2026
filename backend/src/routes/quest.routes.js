@@ -5,7 +5,8 @@ const {
   getAllDraftCurrentUser,
   getAllQuestsCurrentUser,
   getAllModerateQuests,
-  getQuestById
+  getQuestById,
+  moderateQuest
 } = require('../controllers/quest.controller');
 const multer = require("multer");
 
@@ -92,6 +93,14 @@ router.post(
     schema: { type: 'object', properties: { error: { type: 'string', example: 'Internal server error' } } }
   } */
   createQuest
+);
+
+
+router.put(
+  "/moderate",
+  authMiddleware,
+  /* #swagger.tags = ['Quests'] #swagger.summary = 'Модерация квеста' */
+  moderateQuest
 );
 
 
