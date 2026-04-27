@@ -172,7 +172,9 @@ const getAllModerateQuests = async (req, res) => {
     });
 
     if (user.role !== "moderator") {
-      return res.status(400).json({ error: "У вас недостаточно прав для данного запроса" });
+      return res
+        .status(400)
+        .json({ error: "У вас недостаточно прав для данного запроса" });
     }
 
     const allModerateQuests = await prisma.quests.findMany({
@@ -205,9 +207,43 @@ const getAllModerateQuests = async (req, res) => {
   }
 };
 
+// получение квеста по id
+const getQuestById = async (req, res) => {
+  try {
+    const id = req.query.id;
+
+    if (!id) {
+      return res.status(400).json({ error: "id квеста обязателен" });
+    }
+
+    const questById = await prisma.quests.findUnique({
+      where: { id: parseInt(id) },
+      include: {
+        quest_checkpoints: {
+          orderBy: {
+            order_index: "asc",
+          },
+        },
+      },
+    });
+
+    if (!questById) {
+      return res.status(200).json({
+        message: "Квеста с таким id не существует",
+      });
+    }
+
+    res.status(200).json({ questById: questById });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   createQuest,
   getAllDraftCurrentUser,
   getAllQuestsCurrentUser,
   getAllModerateQuests,
+  getQuestById,
 };

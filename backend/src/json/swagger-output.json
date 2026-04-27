@@ -810,6 +810,41 @@
         }
       }
     },
+    "/api/quest/get-quest-by-id": {
+      "get": {
+        "tags": [
+          "Quests"
+        ],
+        "summary": "Получить квест по ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/checkpoint/new": {
       "post": {
         "tags": [

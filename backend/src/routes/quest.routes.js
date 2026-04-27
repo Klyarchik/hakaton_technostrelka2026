@@ -4,7 +4,8 @@ const {
   createQuest,
   getAllDraftCurrentUser,
   getAllQuestsCurrentUser,
-  getAllModerateQuests
+  getAllModerateQuests,
+  getQuestById
 } = require('../controllers/quest.controller');
 const multer = require("multer");
 
@@ -115,6 +116,14 @@ router.get(
   authMiddleware,
   /* #swagger.tags = ['Quests'] #swagger.summary = 'Получение всех квестов на модерации' */
   getAllModerateQuests
+);
+
+
+router.get(
+  "/get-quest-by-id",
+  authMiddleware,
+  /* #swagger.tags = ['Quests'] #swagger.summary = 'Получить квест по ID' */
+  getQuestById
 );
 
 
