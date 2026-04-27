@@ -78,6 +78,48 @@ const createQuest = async (req, res) => {
   }
 };
 
+
+
+const getAllDraftCurrentUser = async (req, res) => {
+  try {
+    const userId = req.user.userId; // из middleware аутентификации
+
+    // Находим все черновики текущего пользователя, включая чекпоинты
+    const allDraft = await prisma.quests.findMany({
+      where: {
+        creator_id: userId,
+        status: 'draft'
+      },
+      include: {
+        quest_checkpoints: {
+          orderBy: {
+            order_index: 'asc'   // сортировка чекпоинтов по порядку
+          }
+        }
+      }
+    });
+
+    // Если нет черновиков, возвращаем пустой массив
+    if (!allDraft || allDraft.length === 0) {
+      return res.status(200).json({
+        message: "У пользователя нет черновиков",
+        drafts: []
+      });
+    }
+
+    // Возвращаем список квестов с их чекпоинтами
+    res.status(200).json({
+      message: "Черновики успешно получены",
+      drafts: allDraft
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
 module.exports = {
-  createQuest
+  createQuest,
+  getAllDraftCurrentUser
 };
