@@ -33,6 +33,11 @@ export type teams = $Result.DefaultSelection<Prisma.$teamsPayload>
  * 
  */
 export type quests = $Result.DefaultSelection<Prisma.$questsPayload>
+/**
+ * Model quest_checkpoints
+ * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+ */
+export type quest_checkpoints = $Result.DefaultSelection<Prisma.$quest_checkpointsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -194,6 +199,16 @@ export class PrismaClient<
     * ```
     */
   get quests(): Prisma.questsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.quest_checkpoints`: Exposes CRUD operations for the **quest_checkpoints** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Quest_checkpoints
+    * const quest_checkpoints = await prisma.quest_checkpoints.findMany()
+    * ```
+    */
+  get quest_checkpoints(): Prisma.quest_checkpointsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -631,7 +646,8 @@ export namespace Prisma {
     users: 'users',
     team_members: 'team_members',
     teams: 'teams',
-    quests: 'quests'
+    quests: 'quests',
+    quest_checkpoints: 'quest_checkpoints'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -647,7 +663,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "team_members" | "teams" | "quests"
+      modelProps: "users" | "team_members" | "teams" | "quests" | "quest_checkpoints"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -947,6 +963,80 @@ export namespace Prisma {
           }
         }
       }
+      quest_checkpoints: {
+        payload: Prisma.$quest_checkpointsPayload<ExtArgs>
+        fields: Prisma.quest_checkpointsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.quest_checkpointsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.quest_checkpointsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>
+          }
+          findFirst: {
+            args: Prisma.quest_checkpointsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.quest_checkpointsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>
+          }
+          findMany: {
+            args: Prisma.quest_checkpointsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>[]
+          }
+          create: {
+            args: Prisma.quest_checkpointsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>
+          }
+          createMany: {
+            args: Prisma.quest_checkpointsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.quest_checkpointsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>[]
+          }
+          delete: {
+            args: Prisma.quest_checkpointsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>
+          }
+          update: {
+            args: Prisma.quest_checkpointsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>
+          }
+          deleteMany: {
+            args: Prisma.quest_checkpointsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.quest_checkpointsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.quest_checkpointsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>[]
+          }
+          upsert: {
+            args: Prisma.quest_checkpointsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quest_checkpointsPayload>
+          }
+          aggregate: {
+            args: Prisma.Quest_checkpointsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuest_checkpoints>
+          }
+          groupBy: {
+            args: Prisma.quest_checkpointsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Quest_checkpointsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.quest_checkpointsCountArgs<ExtArgs>
+            result: $Utils.Optional<Quest_checkpointsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1059,6 +1149,7 @@ export namespace Prisma {
     team_members?: team_membersOmit
     teams?: teamsOmit
     quests?: questsOmit
+    quest_checkpoints?: quest_checkpointsOmit
   }
 
   /* Types for Logging */
@@ -1211,6 +1302,37 @@ export namespace Prisma {
    */
   export type TeamsCountOutputTypeCountTeam_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: team_membersWhereInput
+  }
+
+
+  /**
+   * Count Type QuestsCountOutputType
+   */
+
+  export type QuestsCountOutputType = {
+    quest_checkpoints: number
+  }
+
+  export type QuestsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | QuestsCountOutputTypeCountQuest_checkpointsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QuestsCountOutputType without action
+   */
+  export type QuestsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestsCountOutputType
+     */
+    select?: QuestsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QuestsCountOutputType without action
+   */
+  export type QuestsCountOutputTypeCountQuest_checkpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: quest_checkpointsWhereInput
   }
 
 
@@ -4953,7 +5075,9 @@ export namespace Prisma {
     is_hidden?: boolean
     created_at?: boolean
     updated_at?: boolean
+    quest_checkpoints?: boolean | quests$quest_checkpointsArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
+    _count?: boolean | QuestsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["quests"]>
 
   export type questsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5008,7 +5132,9 @@ export namespace Prisma {
 
   export type questsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creator_id" | "title" | "description" | "location_text" | "image" | "difficulty" | "duration_minutes" | "rules" | "status" | "is_hidden" | "created_at" | "updated_at", ExtArgs["result"]["quests"]>
   export type questsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | quests$quest_checkpointsArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
+    _count?: boolean | QuestsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type questsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | usersDefaultArgs<ExtArgs>
@@ -5020,6 +5146,7 @@ export namespace Prisma {
   export type $questsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "quests"
     objects: {
+      quest_checkpoints: Prisma.$quest_checkpointsPayload<ExtArgs>[]
       users: Prisma.$usersPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5430,6 +5557,7 @@ export namespace Prisma {
    */
   export interface Prisma__questsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    quest_checkpoints<T extends quests$quest_checkpointsArgs<ExtArgs> = {}>(args?: Subset<T, quests$quest_checkpointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5874,6 +6002,30 @@ export namespace Prisma {
   }
 
   /**
+   * quests.quest_checkpoints
+   */
+  export type quests$quest_checkpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    where?: quest_checkpointsWhereInput
+    orderBy?: quest_checkpointsOrderByWithRelationInput | quest_checkpointsOrderByWithRelationInput[]
+    cursor?: quest_checkpointsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Quest_checkpointsScalarFieldEnum | Quest_checkpointsScalarFieldEnum[]
+  }
+
+  /**
    * quests without action
    */
   export type questsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5889,6 +6041,1210 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: questsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model quest_checkpoints
+   */
+
+  export type AggregateQuest_checkpoints = {
+    _count: Quest_checkpointsCountAggregateOutputType | null
+    _avg: Quest_checkpointsAvgAggregateOutputType | null
+    _sum: Quest_checkpointsSumAggregateOutputType | null
+    _min: Quest_checkpointsMinAggregateOutputType | null
+    _max: Quest_checkpointsMaxAggregateOutputType | null
+  }
+
+  export type Quest_checkpointsAvgAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    order_index: number | null
+    latitude: Decimal | null
+    longitude: Decimal | null
+  }
+
+  export type Quest_checkpointsSumAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    order_index: number | null
+    latitude: Decimal | null
+    longitude: Decimal | null
+  }
+
+  export type Quest_checkpointsMinAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    order_index: number | null
+    title: string | null
+    task_description: string | null
+    code_word: string | null
+    latitude: Decimal | null
+    longitude: Decimal | null
+    hint: string | null
+    point_rules: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Quest_checkpointsMaxAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    order_index: number | null
+    title: string | null
+    task_description: string | null
+    code_word: string | null
+    latitude: Decimal | null
+    longitude: Decimal | null
+    hint: string | null
+    point_rules: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type Quest_checkpointsCountAggregateOutputType = {
+    id: number
+    quest_id: number
+    order_index: number
+    title: number
+    task_description: number
+    code_word: number
+    latitude: number
+    longitude: number
+    hint: number
+    point_rules: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type Quest_checkpointsAvgAggregateInputType = {
+    id?: true
+    quest_id?: true
+    order_index?: true
+    latitude?: true
+    longitude?: true
+  }
+
+  export type Quest_checkpointsSumAggregateInputType = {
+    id?: true
+    quest_id?: true
+    order_index?: true
+    latitude?: true
+    longitude?: true
+  }
+
+  export type Quest_checkpointsMinAggregateInputType = {
+    id?: true
+    quest_id?: true
+    order_index?: true
+    title?: true
+    task_description?: true
+    code_word?: true
+    latitude?: true
+    longitude?: true
+    hint?: true
+    point_rules?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Quest_checkpointsMaxAggregateInputType = {
+    id?: true
+    quest_id?: true
+    order_index?: true
+    title?: true
+    task_description?: true
+    code_word?: true
+    latitude?: true
+    longitude?: true
+    hint?: true
+    point_rules?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type Quest_checkpointsCountAggregateInputType = {
+    id?: true
+    quest_id?: true
+    order_index?: true
+    title?: true
+    task_description?: true
+    code_word?: true
+    latitude?: true
+    longitude?: true
+    hint?: true
+    point_rules?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type Quest_checkpointsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which quest_checkpoints to aggregate.
+     */
+    where?: quest_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quest_checkpoints to fetch.
+     */
+    orderBy?: quest_checkpointsOrderByWithRelationInput | quest_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: quest_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quest_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quest_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned quest_checkpoints
+    **/
+    _count?: true | Quest_checkpointsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Quest_checkpointsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Quest_checkpointsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Quest_checkpointsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Quest_checkpointsMaxAggregateInputType
+  }
+
+  export type GetQuest_checkpointsAggregateType<T extends Quest_checkpointsAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuest_checkpoints]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuest_checkpoints[P]>
+      : GetScalarType<T[P], AggregateQuest_checkpoints[P]>
+  }
+
+
+
+
+  export type quest_checkpointsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: quest_checkpointsWhereInput
+    orderBy?: quest_checkpointsOrderByWithAggregationInput | quest_checkpointsOrderByWithAggregationInput[]
+    by: Quest_checkpointsScalarFieldEnum[] | Quest_checkpointsScalarFieldEnum
+    having?: quest_checkpointsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Quest_checkpointsCountAggregateInputType | true
+    _avg?: Quest_checkpointsAvgAggregateInputType
+    _sum?: Quest_checkpointsSumAggregateInputType
+    _min?: Quest_checkpointsMinAggregateInputType
+    _max?: Quest_checkpointsMaxAggregateInputType
+  }
+
+  export type Quest_checkpointsGroupByOutputType = {
+    id: number
+    quest_id: number
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal
+    longitude: Decimal
+    hint: string | null
+    point_rules: string | null
+    created_at: Date
+    updated_at: Date
+    _count: Quest_checkpointsCountAggregateOutputType | null
+    _avg: Quest_checkpointsAvgAggregateOutputType | null
+    _sum: Quest_checkpointsSumAggregateOutputType | null
+    _min: Quest_checkpointsMinAggregateOutputType | null
+    _max: Quest_checkpointsMaxAggregateOutputType | null
+  }
+
+  type GetQuest_checkpointsGroupByPayload<T extends quest_checkpointsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Quest_checkpointsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Quest_checkpointsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Quest_checkpointsGroupByOutputType[P]>
+            : GetScalarType<T[P], Quest_checkpointsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type quest_checkpointsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quest_id?: boolean
+    order_index?: boolean
+    title?: boolean
+    task_description?: boolean
+    code_word?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    hint?: boolean
+    point_rules?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quest_checkpoints"]>
+
+  export type quest_checkpointsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quest_id?: boolean
+    order_index?: boolean
+    title?: boolean
+    task_description?: boolean
+    code_word?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    hint?: boolean
+    point_rules?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quest_checkpoints"]>
+
+  export type quest_checkpointsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quest_id?: boolean
+    order_index?: boolean
+    title?: boolean
+    task_description?: boolean
+    code_word?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    hint?: boolean
+    point_rules?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quest_checkpoints"]>
+
+  export type quest_checkpointsSelectScalar = {
+    id?: boolean
+    quest_id?: boolean
+    order_index?: boolean
+    title?: boolean
+    task_description?: boolean
+    code_word?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    hint?: boolean
+    point_rules?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type quest_checkpointsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quest_id" | "order_index" | "title" | "task_description" | "code_word" | "latitude" | "longitude" | "hint" | "point_rules" | "created_at" | "updated_at", ExtArgs["result"]["quest_checkpoints"]>
+  export type quest_checkpointsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+  }
+  export type quest_checkpointsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+  }
+  export type quest_checkpointsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+  }
+
+  export type $quest_checkpointsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "quest_checkpoints"
+    objects: {
+      quests: Prisma.$questsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      quest_id: number
+      order_index: number
+      title: string
+      task_description: string
+      code_word: string
+      latitude: Prisma.Decimal
+      longitude: Prisma.Decimal
+      hint: string | null
+      point_rules: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["quest_checkpoints"]>
+    composites: {}
+  }
+
+  type quest_checkpointsGetPayload<S extends boolean | null | undefined | quest_checkpointsDefaultArgs> = $Result.GetResult<Prisma.$quest_checkpointsPayload, S>
+
+  type quest_checkpointsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<quest_checkpointsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Quest_checkpointsCountAggregateInputType | true
+    }
+
+  export interface quest_checkpointsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['quest_checkpoints'], meta: { name: 'quest_checkpoints' } }
+    /**
+     * Find zero or one Quest_checkpoints that matches the filter.
+     * @param {quest_checkpointsFindUniqueArgs} args - Arguments to find a Quest_checkpoints
+     * @example
+     * // Get one Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends quest_checkpointsFindUniqueArgs>(args: SelectSubset<T, quest_checkpointsFindUniqueArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Quest_checkpoints that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {quest_checkpointsFindUniqueOrThrowArgs} args - Arguments to find a Quest_checkpoints
+     * @example
+     * // Get one Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends quest_checkpointsFindUniqueOrThrowArgs>(args: SelectSubset<T, quest_checkpointsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quest_checkpoints that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quest_checkpointsFindFirstArgs} args - Arguments to find a Quest_checkpoints
+     * @example
+     * // Get one Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends quest_checkpointsFindFirstArgs>(args?: SelectSubset<T, quest_checkpointsFindFirstArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quest_checkpoints that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quest_checkpointsFindFirstOrThrowArgs} args - Arguments to find a Quest_checkpoints
+     * @example
+     * // Get one Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends quest_checkpointsFindFirstOrThrowArgs>(args?: SelectSubset<T, quest_checkpointsFindFirstOrThrowArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Quest_checkpoints that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quest_checkpointsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.findMany()
+     * 
+     * // Get first 10 Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const quest_checkpointsWithIdOnly = await prisma.quest_checkpoints.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends quest_checkpointsFindManyArgs>(args?: SelectSubset<T, quest_checkpointsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Quest_checkpoints.
+     * @param {quest_checkpointsCreateArgs} args - Arguments to create a Quest_checkpoints.
+     * @example
+     * // Create one Quest_checkpoints
+     * const Quest_checkpoints = await prisma.quest_checkpoints.create({
+     *   data: {
+     *     // ... data to create a Quest_checkpoints
+     *   }
+     * })
+     * 
+     */
+    create<T extends quest_checkpointsCreateArgs>(args: SelectSubset<T, quest_checkpointsCreateArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Quest_checkpoints.
+     * @param {quest_checkpointsCreateManyArgs} args - Arguments to create many Quest_checkpoints.
+     * @example
+     * // Create many Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends quest_checkpointsCreateManyArgs>(args?: SelectSubset<T, quest_checkpointsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Quest_checkpoints and returns the data saved in the database.
+     * @param {quest_checkpointsCreateManyAndReturnArgs} args - Arguments to create many Quest_checkpoints.
+     * @example
+     * // Create many Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Quest_checkpoints and only return the `id`
+     * const quest_checkpointsWithIdOnly = await prisma.quest_checkpoints.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends quest_checkpointsCreateManyAndReturnArgs>(args?: SelectSubset<T, quest_checkpointsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Quest_checkpoints.
+     * @param {quest_checkpointsDeleteArgs} args - Arguments to delete one Quest_checkpoints.
+     * @example
+     * // Delete one Quest_checkpoints
+     * const Quest_checkpoints = await prisma.quest_checkpoints.delete({
+     *   where: {
+     *     // ... filter to delete one Quest_checkpoints
+     *   }
+     * })
+     * 
+     */
+    delete<T extends quest_checkpointsDeleteArgs>(args: SelectSubset<T, quest_checkpointsDeleteArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Quest_checkpoints.
+     * @param {quest_checkpointsUpdateArgs} args - Arguments to update one Quest_checkpoints.
+     * @example
+     * // Update one Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends quest_checkpointsUpdateArgs>(args: SelectSubset<T, quest_checkpointsUpdateArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Quest_checkpoints.
+     * @param {quest_checkpointsDeleteManyArgs} args - Arguments to filter Quest_checkpoints to delete.
+     * @example
+     * // Delete a few Quest_checkpoints
+     * const { count } = await prisma.quest_checkpoints.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends quest_checkpointsDeleteManyArgs>(args?: SelectSubset<T, quest_checkpointsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Quest_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quest_checkpointsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends quest_checkpointsUpdateManyArgs>(args: SelectSubset<T, quest_checkpointsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Quest_checkpoints and returns the data updated in the database.
+     * @param {quest_checkpointsUpdateManyAndReturnArgs} args - Arguments to update many Quest_checkpoints.
+     * @example
+     * // Update many Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Quest_checkpoints and only return the `id`
+     * const quest_checkpointsWithIdOnly = await prisma.quest_checkpoints.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends quest_checkpointsUpdateManyAndReturnArgs>(args: SelectSubset<T, quest_checkpointsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Quest_checkpoints.
+     * @param {quest_checkpointsUpsertArgs} args - Arguments to update or create a Quest_checkpoints.
+     * @example
+     * // Update or create a Quest_checkpoints
+     * const quest_checkpoints = await prisma.quest_checkpoints.upsert({
+     *   create: {
+     *     // ... data to create a Quest_checkpoints
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Quest_checkpoints we want to update
+     *   }
+     * })
+     */
+    upsert<T extends quest_checkpointsUpsertArgs>(args: SelectSubset<T, quest_checkpointsUpsertArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Quest_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quest_checkpointsCountArgs} args - Arguments to filter Quest_checkpoints to count.
+     * @example
+     * // Count the number of Quest_checkpoints
+     * const count = await prisma.quest_checkpoints.count({
+     *   where: {
+     *     // ... the filter for the Quest_checkpoints we want to count
+     *   }
+     * })
+    **/
+    count<T extends quest_checkpointsCountArgs>(
+      args?: Subset<T, quest_checkpointsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Quest_checkpointsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Quest_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Quest_checkpointsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Quest_checkpointsAggregateArgs>(args: Subset<T, Quest_checkpointsAggregateArgs>): Prisma.PrismaPromise<GetQuest_checkpointsAggregateType<T>>
+
+    /**
+     * Group by Quest_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quest_checkpointsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends quest_checkpointsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: quest_checkpointsGroupByArgs['orderBy'] }
+        : { orderBy?: quest_checkpointsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, quest_checkpointsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuest_checkpointsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the quest_checkpoints model
+   */
+  readonly fields: quest_checkpointsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for quest_checkpoints.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__quest_checkpointsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quests<T extends questsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, questsDefaultArgs<ExtArgs>>): Prisma__questsClient<$Result.GetResult<Prisma.$questsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the quest_checkpoints model
+   */
+  interface quest_checkpointsFieldRefs {
+    readonly id: FieldRef<"quest_checkpoints", 'Int'>
+    readonly quest_id: FieldRef<"quest_checkpoints", 'Int'>
+    readonly order_index: FieldRef<"quest_checkpoints", 'Int'>
+    readonly title: FieldRef<"quest_checkpoints", 'String'>
+    readonly task_description: FieldRef<"quest_checkpoints", 'String'>
+    readonly code_word: FieldRef<"quest_checkpoints", 'String'>
+    readonly latitude: FieldRef<"quest_checkpoints", 'Decimal'>
+    readonly longitude: FieldRef<"quest_checkpoints", 'Decimal'>
+    readonly hint: FieldRef<"quest_checkpoints", 'String'>
+    readonly point_rules: FieldRef<"quest_checkpoints", 'String'>
+    readonly created_at: FieldRef<"quest_checkpoints", 'DateTime'>
+    readonly updated_at: FieldRef<"quest_checkpoints", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * quest_checkpoints findUnique
+   */
+  export type quest_checkpointsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which quest_checkpoints to fetch.
+     */
+    where: quest_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * quest_checkpoints findUniqueOrThrow
+   */
+  export type quest_checkpointsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which quest_checkpoints to fetch.
+     */
+    where: quest_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * quest_checkpoints findFirst
+   */
+  export type quest_checkpointsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which quest_checkpoints to fetch.
+     */
+    where?: quest_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quest_checkpoints to fetch.
+     */
+    orderBy?: quest_checkpointsOrderByWithRelationInput | quest_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for quest_checkpoints.
+     */
+    cursor?: quest_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quest_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quest_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of quest_checkpoints.
+     */
+    distinct?: Quest_checkpointsScalarFieldEnum | Quest_checkpointsScalarFieldEnum[]
+  }
+
+  /**
+   * quest_checkpoints findFirstOrThrow
+   */
+  export type quest_checkpointsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which quest_checkpoints to fetch.
+     */
+    where?: quest_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quest_checkpoints to fetch.
+     */
+    orderBy?: quest_checkpointsOrderByWithRelationInput | quest_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for quest_checkpoints.
+     */
+    cursor?: quest_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quest_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quest_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of quest_checkpoints.
+     */
+    distinct?: Quest_checkpointsScalarFieldEnum | Quest_checkpointsScalarFieldEnum[]
+  }
+
+  /**
+   * quest_checkpoints findMany
+   */
+  export type quest_checkpointsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which quest_checkpoints to fetch.
+     */
+    where?: quest_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quest_checkpoints to fetch.
+     */
+    orderBy?: quest_checkpointsOrderByWithRelationInput | quest_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing quest_checkpoints.
+     */
+    cursor?: quest_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quest_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quest_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of quest_checkpoints.
+     */
+    distinct?: Quest_checkpointsScalarFieldEnum | Quest_checkpointsScalarFieldEnum[]
+  }
+
+  /**
+   * quest_checkpoints create
+   */
+  export type quest_checkpointsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a quest_checkpoints.
+     */
+    data: XOR<quest_checkpointsCreateInput, quest_checkpointsUncheckedCreateInput>
+  }
+
+  /**
+   * quest_checkpoints createMany
+   */
+  export type quest_checkpointsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many quest_checkpoints.
+     */
+    data: quest_checkpointsCreateManyInput | quest_checkpointsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * quest_checkpoints createManyAndReturn
+   */
+  export type quest_checkpointsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * The data used to create many quest_checkpoints.
+     */
+    data: quest_checkpointsCreateManyInput | quest_checkpointsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * quest_checkpoints update
+   */
+  export type quest_checkpointsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a quest_checkpoints.
+     */
+    data: XOR<quest_checkpointsUpdateInput, quest_checkpointsUncheckedUpdateInput>
+    /**
+     * Choose, which quest_checkpoints to update.
+     */
+    where: quest_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * quest_checkpoints updateMany
+   */
+  export type quest_checkpointsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update quest_checkpoints.
+     */
+    data: XOR<quest_checkpointsUpdateManyMutationInput, quest_checkpointsUncheckedUpdateManyInput>
+    /**
+     * Filter which quest_checkpoints to update
+     */
+    where?: quest_checkpointsWhereInput
+    /**
+     * Limit how many quest_checkpoints to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * quest_checkpoints updateManyAndReturn
+   */
+  export type quest_checkpointsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * The data used to update quest_checkpoints.
+     */
+    data: XOR<quest_checkpointsUpdateManyMutationInput, quest_checkpointsUncheckedUpdateManyInput>
+    /**
+     * Filter which quest_checkpoints to update
+     */
+    where?: quest_checkpointsWhereInput
+    /**
+     * Limit how many quest_checkpoints to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * quest_checkpoints upsert
+   */
+  export type quest_checkpointsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the quest_checkpoints to update in case it exists.
+     */
+    where: quest_checkpointsWhereUniqueInput
+    /**
+     * In case the quest_checkpoints found by the `where` argument doesn't exist, create a new quest_checkpoints with this data.
+     */
+    create: XOR<quest_checkpointsCreateInput, quest_checkpointsUncheckedCreateInput>
+    /**
+     * In case the quest_checkpoints was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<quest_checkpointsUpdateInput, quest_checkpointsUncheckedUpdateInput>
+  }
+
+  /**
+   * quest_checkpoints delete
+   */
+  export type quest_checkpointsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter which quest_checkpoints to delete.
+     */
+    where: quest_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * quest_checkpoints deleteMany
+   */
+  export type quest_checkpointsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which quest_checkpoints to delete
+     */
+    where?: quest_checkpointsWhereInput
+    /**
+     * Limit how many quest_checkpoints to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * quest_checkpoints without action
+   */
+  export type quest_checkpointsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quest_checkpoints
+     */
+    select?: quest_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quest_checkpoints
+     */
+    omit?: quest_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quest_checkpointsInclude<ExtArgs> | null
   }
 
 
@@ -5960,6 +7316,24 @@ export namespace Prisma {
   };
 
   export type QuestsScalarFieldEnum = (typeof QuestsScalarFieldEnum)[keyof typeof QuestsScalarFieldEnum]
+
+
+  export const Quest_checkpointsScalarFieldEnum: {
+    id: 'id',
+    quest_id: 'quest_id',
+    order_index: 'order_index',
+    title: 'title',
+    task_description: 'task_description',
+    code_word: 'code_word',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    hint: 'hint',
+    point_rules: 'point_rules',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type Quest_checkpointsScalarFieldEnum = (typeof Quest_checkpointsScalarFieldEnum)[keyof typeof Quest_checkpointsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6037,6 +7411,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -6278,6 +7666,7 @@ export namespace Prisma {
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
+    quest_checkpoints?: Quest_checkpointsListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }
 
@@ -6295,6 +7684,7 @@ export namespace Prisma {
     is_hidden?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    quest_checkpoints?: quest_checkpointsOrderByRelationAggregateInput
     users?: usersOrderByWithRelationInput
   }
 
@@ -6315,6 +7705,7 @@ export namespace Prisma {
     is_hidden?: BoolNullableFilter<"quests"> | boolean | null
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
+    quest_checkpoints?: Quest_checkpointsListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }, "id">
 
@@ -6356,6 +7747,99 @@ export namespace Prisma {
     is_hidden?: BoolNullableWithAggregatesFilter<"quests"> | boolean | null
     created_at?: DateTimeWithAggregatesFilter<"quests"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"quests"> | Date | string
+  }
+
+  export type quest_checkpointsWhereInput = {
+    AND?: quest_checkpointsWhereInput | quest_checkpointsWhereInput[]
+    OR?: quest_checkpointsWhereInput[]
+    NOT?: quest_checkpointsWhereInput | quest_checkpointsWhereInput[]
+    id?: IntFilter<"quest_checkpoints"> | number
+    quest_id?: IntFilter<"quest_checkpoints"> | number
+    order_index?: IntFilter<"quest_checkpoints"> | number
+    title?: StringFilter<"quest_checkpoints"> | string
+    task_description?: StringFilter<"quest_checkpoints"> | string
+    code_word?: StringFilter<"quest_checkpoints"> | string
+    latitude?: DecimalFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    hint?: StringNullableFilter<"quest_checkpoints"> | string | null
+    point_rules?: StringNullableFilter<"quest_checkpoints"> | string | null
+    created_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
+    updated_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
+    quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
+  }
+
+  export type quest_checkpointsOrderByWithRelationInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    order_index?: SortOrder
+    title?: SortOrder
+    task_description?: SortOrder
+    code_word?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    hint?: SortOrderInput | SortOrder
+    point_rules?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    quests?: questsOrderByWithRelationInput
+  }
+
+  export type quest_checkpointsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    quest_id_order_index?: quest_checkpointsQuest_idOrder_indexCompoundUniqueInput
+    AND?: quest_checkpointsWhereInput | quest_checkpointsWhereInput[]
+    OR?: quest_checkpointsWhereInput[]
+    NOT?: quest_checkpointsWhereInput | quest_checkpointsWhereInput[]
+    quest_id?: IntFilter<"quest_checkpoints"> | number
+    order_index?: IntFilter<"quest_checkpoints"> | number
+    title?: StringFilter<"quest_checkpoints"> | string
+    task_description?: StringFilter<"quest_checkpoints"> | string
+    code_word?: StringFilter<"quest_checkpoints"> | string
+    latitude?: DecimalFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    hint?: StringNullableFilter<"quest_checkpoints"> | string | null
+    point_rules?: StringNullableFilter<"quest_checkpoints"> | string | null
+    created_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
+    updated_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
+    quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
+  }, "id" | "quest_id_order_index">
+
+  export type quest_checkpointsOrderByWithAggregationInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    order_index?: SortOrder
+    title?: SortOrder
+    task_description?: SortOrder
+    code_word?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    hint?: SortOrderInput | SortOrder
+    point_rules?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: quest_checkpointsCountOrderByAggregateInput
+    _avg?: quest_checkpointsAvgOrderByAggregateInput
+    _max?: quest_checkpointsMaxOrderByAggregateInput
+    _min?: quest_checkpointsMinOrderByAggregateInput
+    _sum?: quest_checkpointsSumOrderByAggregateInput
+  }
+
+  export type quest_checkpointsScalarWhereWithAggregatesInput = {
+    AND?: quest_checkpointsScalarWhereWithAggregatesInput | quest_checkpointsScalarWhereWithAggregatesInput[]
+    OR?: quest_checkpointsScalarWhereWithAggregatesInput[]
+    NOT?: quest_checkpointsScalarWhereWithAggregatesInput | quest_checkpointsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"quest_checkpoints"> | number
+    quest_id?: IntWithAggregatesFilter<"quest_checkpoints"> | number
+    order_index?: IntWithAggregatesFilter<"quest_checkpoints"> | number
+    title?: StringWithAggregatesFilter<"quest_checkpoints"> | string
+    task_description?: StringWithAggregatesFilter<"quest_checkpoints"> | string
+    code_word?: StringWithAggregatesFilter<"quest_checkpoints"> | string
+    latitude?: DecimalWithAggregatesFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalWithAggregatesFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    hint?: StringNullableWithAggregatesFilter<"quest_checkpoints"> | string | null
+    point_rules?: StringNullableWithAggregatesFilter<"quest_checkpoints"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"quest_checkpoints"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"quest_checkpoints"> | Date | string
   }
 
   export type usersCreateInput = {
@@ -6570,6 +8054,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    quest_checkpoints?: quest_checkpointsCreateNestedManyWithoutQuestsInput
     users: usersCreateNestedOneWithoutQuestsInput
   }
 
@@ -6587,6 +8072,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    quest_checkpoints?: quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput
   }
 
   export type questsUpdateInput = {
@@ -6601,6 +8087,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateManyWithoutQuestsNestedInput
     users?: usersUpdateOneRequiredWithoutQuestsNestedInput
   }
 
@@ -6618,6 +8105,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsCreateManyInput = {
@@ -6662,6 +8150,107 @@ export namespace Prisma {
     rules?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quest_checkpointsCreateInput = {
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    quests: questsCreateNestedOneWithoutQuest_checkpointsInput
+  }
+
+  export type quest_checkpointsUncheckedCreateInput = {
+    id?: number
+    quest_id: number
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type quest_checkpointsUpdateInput = {
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quests?: questsUpdateOneRequiredWithoutQuest_checkpointsNestedInput
+  }
+
+  export type quest_checkpointsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quest_checkpointsCreateManyInput = {
+    id?: number
+    quest_id: number
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type quest_checkpointsUpdateManyMutationInput = {
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quest_checkpointsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6953,6 +8542,16 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type Quest_checkpointsListRelationFilter = {
+    every?: quest_checkpointsWhereInput
+    some?: quest_checkpointsWhereInput
+    none?: quest_checkpointsWhereInput
+  }
+
+  export type quest_checkpointsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type questsCountOrderByAggregateInput = {
     id?: SortOrder
     creator_id?: SortOrder
@@ -7021,6 +8620,104 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type QuestsScalarRelationFilter = {
+    is?: questsWhereInput
+    isNot?: questsWhereInput
+  }
+
+  export type quest_checkpointsQuest_idOrder_indexCompoundUniqueInput = {
+    quest_id: number
+    order_index: number
+  }
+
+  export type quest_checkpointsCountOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    order_index?: SortOrder
+    title?: SortOrder
+    task_description?: SortOrder
+    code_word?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    hint?: SortOrder
+    point_rules?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type quest_checkpointsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    order_index?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type quest_checkpointsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    order_index?: SortOrder
+    title?: SortOrder
+    task_description?: SortOrder
+    code_word?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    hint?: SortOrder
+    point_rules?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type quest_checkpointsMinOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    order_index?: SortOrder
+    title?: SortOrder
+    task_description?: SortOrder
+    code_word?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    hint?: SortOrder
+    point_rules?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type quest_checkpointsSumOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    order_index?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type questsCreateNestedManyWithoutUsersInput = {
@@ -7253,14 +8950,42 @@ export namespace Prisma {
     deleteMany?: team_membersScalarWhereInput | team_membersScalarWhereInput[]
   }
 
+  export type quest_checkpointsCreateNestedManyWithoutQuestsInput = {
+    create?: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput> | quest_checkpointsCreateWithoutQuestsInput[] | quest_checkpointsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutQuestsInput | quest_checkpointsCreateOrConnectWithoutQuestsInput[]
+    createMany?: quest_checkpointsCreateManyQuestsInputEnvelope
+    connect?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+  }
+
   export type usersCreateNestedOneWithoutQuestsInput = {
     create?: XOR<usersCreateWithoutQuestsInput, usersUncheckedCreateWithoutQuestsInput>
     connectOrCreate?: usersCreateOrConnectWithoutQuestsInput
     connect?: usersWhereUniqueInput
   }
 
+  export type quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput = {
+    create?: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput> | quest_checkpointsCreateWithoutQuestsInput[] | quest_checkpointsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutQuestsInput | quest_checkpointsCreateOrConnectWithoutQuestsInput[]
+    createMany?: quest_checkpointsCreateManyQuestsInputEnvelope
+    connect?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+  }
+
   export type NullableBoolFieldUpdateOperationsInput = {
     set?: boolean | null
+  }
+
+  export type quest_checkpointsUpdateManyWithoutQuestsNestedInput = {
+    create?: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput> | quest_checkpointsCreateWithoutQuestsInput[] | quest_checkpointsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutQuestsInput | quest_checkpointsCreateOrConnectWithoutQuestsInput[]
+    upsert?: quest_checkpointsUpsertWithWhereUniqueWithoutQuestsInput | quest_checkpointsUpsertWithWhereUniqueWithoutQuestsInput[]
+    createMany?: quest_checkpointsCreateManyQuestsInputEnvelope
+    set?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    disconnect?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    delete?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    connect?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    update?: quest_checkpointsUpdateWithWhereUniqueWithoutQuestsInput | quest_checkpointsUpdateWithWhereUniqueWithoutQuestsInput[]
+    updateMany?: quest_checkpointsUpdateManyWithWhereWithoutQuestsInput | quest_checkpointsUpdateManyWithWhereWithoutQuestsInput[]
+    deleteMany?: quest_checkpointsScalarWhereInput | quest_checkpointsScalarWhereInput[]
   }
 
   export type usersUpdateOneRequiredWithoutQuestsNestedInput = {
@@ -7269,6 +8994,42 @@ export namespace Prisma {
     upsert?: usersUpsertWithoutQuestsInput
     connect?: usersWhereUniqueInput
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutQuestsInput, usersUpdateWithoutQuestsInput>, usersUncheckedUpdateWithoutQuestsInput>
+  }
+
+  export type quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput = {
+    create?: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput> | quest_checkpointsCreateWithoutQuestsInput[] | quest_checkpointsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutQuestsInput | quest_checkpointsCreateOrConnectWithoutQuestsInput[]
+    upsert?: quest_checkpointsUpsertWithWhereUniqueWithoutQuestsInput | quest_checkpointsUpsertWithWhereUniqueWithoutQuestsInput[]
+    createMany?: quest_checkpointsCreateManyQuestsInputEnvelope
+    set?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    disconnect?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    delete?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    connect?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+    update?: quest_checkpointsUpdateWithWhereUniqueWithoutQuestsInput | quest_checkpointsUpdateWithWhereUniqueWithoutQuestsInput[]
+    updateMany?: quest_checkpointsUpdateManyWithWhereWithoutQuestsInput | quest_checkpointsUpdateManyWithWhereWithoutQuestsInput[]
+    deleteMany?: quest_checkpointsScalarWhereInput | quest_checkpointsScalarWhereInput[]
+  }
+
+  export type questsCreateNestedOneWithoutQuest_checkpointsInput = {
+    create?: XOR<questsCreateWithoutQuest_checkpointsInput, questsUncheckedCreateWithoutQuest_checkpointsInput>
+    connectOrCreate?: questsCreateOrConnectWithoutQuest_checkpointsInput
+    connect?: questsWhereUniqueInput
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type questsUpdateOneRequiredWithoutQuest_checkpointsNestedInput = {
+    create?: XOR<questsCreateWithoutQuest_checkpointsInput, questsUncheckedCreateWithoutQuest_checkpointsInput>
+    connectOrCreate?: questsCreateOrConnectWithoutQuest_checkpointsInput
+    upsert?: questsUpsertWithoutQuest_checkpointsInput
+    connect?: questsWhereUniqueInput
+    update?: XOR<XOR<questsUpdateToOneWithWhereWithoutQuest_checkpointsInput, questsUpdateWithoutQuest_checkpointsInput>, questsUncheckedUpdateWithoutQuest_checkpointsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7420,6 +9181,33 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
   export type questsCreateWithoutUsersInput = {
     title: string
     description: string
@@ -7432,6 +9220,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    quest_checkpoints?: quest_checkpointsCreateNestedManyWithoutQuestsInput
   }
 
   export type questsUncheckedCreateWithoutUsersInput = {
@@ -7447,6 +9236,7 @@ export namespace Prisma {
     is_hidden?: boolean | null
     created_at?: Date | string
     updated_at?: Date | string
+    quest_checkpoints?: quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput
   }
 
   export type questsCreateOrConnectWithoutUsersInput = {
@@ -7823,6 +9613,43 @@ export namespace Prisma {
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
   }
 
+  export type quest_checkpointsCreateWithoutQuestsInput = {
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type quest_checkpointsUncheckedCreateWithoutQuestsInput = {
+    id?: number
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type quest_checkpointsCreateOrConnectWithoutQuestsInput = {
+    where: quest_checkpointsWhereUniqueInput
+    create: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput>
+  }
+
+  export type quest_checkpointsCreateManyQuestsInputEnvelope = {
+    data: quest_checkpointsCreateManyQuestsInput | quest_checkpointsCreateManyQuestsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type usersCreateWithoutQuestsInput = {
     email: string
     password: string
@@ -7853,6 +9680,40 @@ export namespace Prisma {
   export type usersCreateOrConnectWithoutQuestsInput = {
     where: usersWhereUniqueInput
     create: XOR<usersCreateWithoutQuestsInput, usersUncheckedCreateWithoutQuestsInput>
+  }
+
+  export type quest_checkpointsUpsertWithWhereUniqueWithoutQuestsInput = {
+    where: quest_checkpointsWhereUniqueInput
+    update: XOR<quest_checkpointsUpdateWithoutQuestsInput, quest_checkpointsUncheckedUpdateWithoutQuestsInput>
+    create: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput>
+  }
+
+  export type quest_checkpointsUpdateWithWhereUniqueWithoutQuestsInput = {
+    where: quest_checkpointsWhereUniqueInput
+    data: XOR<quest_checkpointsUpdateWithoutQuestsInput, quest_checkpointsUncheckedUpdateWithoutQuestsInput>
+  }
+
+  export type quest_checkpointsUpdateManyWithWhereWithoutQuestsInput = {
+    where: quest_checkpointsScalarWhereInput
+    data: XOR<quest_checkpointsUpdateManyMutationInput, quest_checkpointsUncheckedUpdateManyWithoutQuestsInput>
+  }
+
+  export type quest_checkpointsScalarWhereInput = {
+    AND?: quest_checkpointsScalarWhereInput | quest_checkpointsScalarWhereInput[]
+    OR?: quest_checkpointsScalarWhereInput[]
+    NOT?: quest_checkpointsScalarWhereInput | quest_checkpointsScalarWhereInput[]
+    id?: IntFilter<"quest_checkpoints"> | number
+    quest_id?: IntFilter<"quest_checkpoints"> | number
+    order_index?: IntFilter<"quest_checkpoints"> | number
+    title?: StringFilter<"quest_checkpoints"> | string
+    task_description?: StringFilter<"quest_checkpoints"> | string
+    code_word?: StringFilter<"quest_checkpoints"> | string
+    latitude?: DecimalFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFilter<"quest_checkpoints"> | Decimal | DecimalJsLike | number | string
+    hint?: StringNullableFilter<"quest_checkpoints"> | string | null
+    point_rules?: StringNullableFilter<"quest_checkpoints"> | string | null
+    created_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
+    updated_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
   }
 
   export type usersUpsertWithoutQuestsInput = {
@@ -7891,6 +9752,84 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type questsCreateWithoutQuest_checkpointsInput = {
+    title: string
+    description: string
+    location_text: string
+    image: string
+    difficulty: number
+    duration_minutes: number
+    rules?: string | null
+    status: string
+    is_hidden?: boolean | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    users: usersCreateNestedOneWithoutQuestsInput
+  }
+
+  export type questsUncheckedCreateWithoutQuest_checkpointsInput = {
+    id?: number
+    creator_id: number
+    title: string
+    description: string
+    location_text: string
+    image: string
+    difficulty: number
+    duration_minutes: number
+    rules?: string | null
+    status: string
+    is_hidden?: boolean | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type questsCreateOrConnectWithoutQuest_checkpointsInput = {
+    where: questsWhereUniqueInput
+    create: XOR<questsCreateWithoutQuest_checkpointsInput, questsUncheckedCreateWithoutQuest_checkpointsInput>
+  }
+
+  export type questsUpsertWithoutQuest_checkpointsInput = {
+    update: XOR<questsUpdateWithoutQuest_checkpointsInput, questsUncheckedUpdateWithoutQuest_checkpointsInput>
+    create: XOR<questsCreateWithoutQuest_checkpointsInput, questsUncheckedCreateWithoutQuest_checkpointsInput>
+    where?: questsWhereInput
+  }
+
+  export type questsUpdateToOneWithWhereWithoutQuest_checkpointsInput = {
+    where?: questsWhereInput
+    data: XOR<questsUpdateWithoutQuest_checkpointsInput, questsUncheckedUpdateWithoutQuest_checkpointsInput>
+  }
+
+  export type questsUpdateWithoutQuest_checkpointsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    location_text?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    duration_minutes?: IntFieldUpdateOperationsInput | number
+    rules?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutQuestsNestedInput
+  }
+
+  export type questsUncheckedUpdateWithoutQuest_checkpointsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creator_id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    location_text?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    duration_minutes?: IntFieldUpdateOperationsInput | number
+    rules?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type questsCreateManyUsersInput = {
@@ -7934,6 +9873,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsUncheckedUpdateWithoutUsersInput = {
@@ -7949,6 +9889,7 @@ export namespace Prisma {
     is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsUncheckedUpdateManyWithoutUsersInput = {
@@ -8029,6 +9970,61 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     user_id?: IntFieldUpdateOperationsInput | number
     joined_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quest_checkpointsCreateManyQuestsInput = {
+    id?: number
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type quest_checkpointsUpdateWithoutQuestsInput = {
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quest_checkpointsUncheckedUpdateWithoutQuestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quest_checkpointsUncheckedUpdateManyWithoutQuestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

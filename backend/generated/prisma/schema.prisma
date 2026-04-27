@@ -45,18 +45,38 @@ model teams {
 }
 
 model quests {
+  id                Int                 @id @default(autoincrement())
+  creator_id        Int
+  title             String
+  description       String
+  location_text     String
+  image             String
+  difficulty        Int
+  duration_minutes  Int
+  rules             String?
+  status            String              @db.VarChar(20)
+  is_hidden         Boolean?            @default(false)
+  created_at        DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime            @default(now()) @db.Timestamptz(6)
+  quest_checkpoints quest_checkpoints[]
+  users             users               @relation(fields: [creator_id], references: [id], onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model quest_checkpoints {
   id               Int      @id @default(autoincrement())
-  creator_id       Int
+  quest_id         Int
+  order_index      Int
   title            String
-  description      String
-  location_text    String
-  image            String
-  difficulty       Int
-  duration_minutes Int
-  rules            String?
-  status           String   @db.VarChar(20)
-  is_hidden        Boolean? @default(false)
+  task_description String
+  code_word        String
+  latitude         Decimal  @db.Decimal(15, 10)
+  longitude        Decimal  @db.Decimal(15, 10)
+  hint             String?
+  point_rules      String?
   created_at       DateTime @default(now()) @db.Timestamptz(6)
   updated_at       DateTime @default(now()) @db.Timestamptz(6)
-  users            users    @relation(fields: [creator_id], references: [id], onUpdate: NoAction)
+  quests           quests   @relation(fields: [quest_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([quest_id, order_index])
 }

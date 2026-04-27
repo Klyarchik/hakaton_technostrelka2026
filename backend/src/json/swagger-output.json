@@ -542,9 +542,6 @@
                 "rules": {
                   "example": "any"
                 },
-                "rejection_reason": {
-                  "example": "any"
-                },
                 "is_hidden": {
                   "example": "any"
                 }
@@ -725,6 +722,75 @@
                 "name": "main"
               }
             }
+          }
+        }
+      }
+    },
+    "/api/checkpoint/register": {
+      "post": {
+        "tags": [
+          "Checkpoints"
+        ],
+        "summary": "Создания нового чекпоинта",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quest_id": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                },
+                "task_description": {
+                  "example": "any"
+                },
+                "code_word": {
+                  "example": "any"
+                },
+                "latitude": {
+                  "example": "any"
+                },
+                "longitude": {
+                  "example": "any"
+                },
+                "hint": {
+                  "example": "any"
+                },
+                "point_rules": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
