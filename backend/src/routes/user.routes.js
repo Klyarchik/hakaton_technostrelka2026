@@ -35,33 +35,37 @@ router.put(
   /* #swagger.tags = ['Users'] */
   /* #swagger.summary = 'Изменение данных текущего пользователя' */
   /* #swagger.consumes = ['multipart/form-data'] */
-  /* #swagger.parameters['username'] = {
+  /* #swagger.parameters['nickname'] = {
     in: 'formData',
     type: 'string',
     required: true,
-    description: 'Имя пользователя'
+    description: 'Новый никнейм пользователя'
   } */
   /* #swagger.parameters['avatar'] = {
     in: 'formData',
     type: 'file',
     required: false,
-    description: 'Аватар пользователя'
+    description: 'Новый аватар'
   } */
-  /* #swagger.responses[201] = {
+  /* #swagger.responses[200] = {
     description: 'Данные пользователя успешно обновлены',
-    schema: { type: 'object', properties: { message: { type: 'string', example: 'Данные пользователя успешно обновлены' } } }
+    schema: { type: 'object', properties: { message: { type: 'string', example: 'Данные пользователя обновлены' } } }
   } */
   /* #swagger.responses[400] = {
-      description: 'Ошибка валидации',
-      schema: { type: 'object', properties: { error: { type: 'string', message: 'Пароль должен быть не менее 6 символов' } } }
+      description: 'Ошибка валидации (nickname уже занят или неверные данные)',
+      schema: { type: 'object', properties: { error: { type: 'string', example: 'Пользователь с таким nickname уже существует' } } }
     } */
   /* #swagger.responses[401] = {
       description: 'Unauthorized',
-      schema: { type: 'object', properties: { error: { type: 'string', message: 'Токен не предоставлен' } } }
+      schema: { type: 'object', properties: { error: { type: 'string', example: 'Токен не предоставлен' } } }
+    } */
+  /* #swagger.responses[404] = {
+      description: 'Пользователь не найден',
+      schema: { type: 'object', properties: { error: { type: 'string', example: 'Пользователь не найден' } } }
     } */
   /* #swagger.responses[500] = {
       description: 'Internal Server Error',
-      schema: { type: 'object', properties: { error: { type: 'string', message: 'Internal server error' } } }
+      schema: { type: 'object', properties: { error: { type: 'string', example: 'Internal server error' } } }
   } */
   updateCurrentUserData,
 );

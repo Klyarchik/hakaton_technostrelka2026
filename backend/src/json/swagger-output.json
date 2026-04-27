@@ -40,10 +40,19 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
+                "nickname": {
                   "example": "any"
                 },
                 "password": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "age_group": {
+                  "example": "any"
+                },
+                "role": {
                   "example": "any"
                 }
               }
@@ -77,7 +86,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
+                "nickname": {
                   "example": "any"
                 },
                 "password": {
@@ -117,18 +126,18 @@
             "type": "string"
           },
           {
-            "name": "username",
+            "name": "nickname",
             "in": "formData",
             "type": "string",
             "required": true,
-            "description": "Имя пользователя"
+            "description": "Новый никнейм пользователя"
           },
           {
             "name": "avatar",
             "in": "formData",
             "type": "file",
             "required": false,
-            "description": "Аватар пользователя"
+            "description": "Новый аватар"
           },
           {
             "name": "body",
@@ -136,7 +145,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
+                "nickname": {
                   "example": "any"
                 }
               }
@@ -145,9 +154,6 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "201": {
             "description": "Данные пользователя успешно обновлены",
             "schema": {
               "type": "object",
@@ -168,7 +174,7 @@
                         },
                         "example": {
                           "type": "string",
-                          "example": "Данные пользователя успешно обновлены"
+                          "example": "Данные пользователя обновлены"
                         }
                       }
                     }
@@ -181,7 +187,7 @@
             }
           },
           "400": {
-            "description": "Ошибка валидации",
+            "description": "Ошибка валидации (nickname уже занят или неверные данные)",
             "schema": {
               "type": "object",
               "properties": {
@@ -199,9 +205,9 @@
                           "type": "string",
                           "example": "string"
                         },
-                        "message": {
+                        "example": {
                           "type": "string",
-                          "example": "Пароль должен быть не менее 6 символов"
+                          "example": "Пользователь с таким nickname уже существует"
                         }
                       }
                     }
@@ -232,7 +238,7 @@
                           "type": "string",
                           "example": "string"
                         },
-                        "message": {
+                        "example": {
                           "type": "string",
                           "example": "Токен не предоставлен"
                         }
@@ -247,7 +253,37 @@
             }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Пользователь не найден",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Пользователь не найден"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error",
@@ -268,7 +304,7 @@
                           "type": "string",
                           "example": "string"
                         },
-                        "message": {
+                        "example": {
                           "type": "string",
                           "example": "Internal server error"
                         }
