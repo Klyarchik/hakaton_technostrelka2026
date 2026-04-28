@@ -38,6 +38,11 @@ export type quests = $Result.DefaultSelection<Prisma.$questsPayload>
  * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
  */
 export type quest_checkpoints = $Result.DefaultSelection<Prisma.$quest_checkpointsPayload>
+/**
+ * Model sessions
+ * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+ */
+export type sessions = $Result.DefaultSelection<Prisma.$sessionsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -209,6 +214,16 @@ export class PrismaClient<
     * ```
     */
   get quest_checkpoints(): Prisma.quest_checkpointsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sessions`: Exposes CRUD operations for the **sessions** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sessions
+    * const sessions = await prisma.sessions.findMany()
+    * ```
+    */
+  get sessions(): Prisma.sessionsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -647,7 +662,8 @@ export namespace Prisma {
     team_members: 'team_members',
     teams: 'teams',
     quests: 'quests',
-    quest_checkpoints: 'quest_checkpoints'
+    quest_checkpoints: 'quest_checkpoints',
+    sessions: 'sessions'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -663,7 +679,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "team_members" | "teams" | "quests" | "quest_checkpoints"
+      modelProps: "users" | "team_members" | "teams" | "quests" | "quest_checkpoints" | "sessions"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1037,6 +1053,80 @@ export namespace Prisma {
           }
         }
       }
+      sessions: {
+        payload: Prisma.$sessionsPayload<ExtArgs>
+        fields: Prisma.sessionsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.sessionsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.sessionsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>
+          }
+          findFirst: {
+            args: Prisma.sessionsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.sessionsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>
+          }
+          findMany: {
+            args: Prisma.sessionsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>[]
+          }
+          create: {
+            args: Prisma.sessionsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>
+          }
+          createMany: {
+            args: Prisma.sessionsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.sessionsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>[]
+          }
+          delete: {
+            args: Prisma.sessionsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>
+          }
+          update: {
+            args: Prisma.sessionsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>
+          }
+          deleteMany: {
+            args: Prisma.sessionsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.sessionsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.sessionsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>[]
+          }
+          upsert: {
+            args: Prisma.sessionsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$sessionsPayload>
+          }
+          aggregate: {
+            args: Prisma.SessionsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSessions>
+          }
+          groupBy: {
+            args: Prisma.sessionsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SessionsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.sessionsCountArgs<ExtArgs>
+            result: $Utils.Optional<SessionsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1150,6 +1240,7 @@ export namespace Prisma {
     teams?: teamsOmit
     quests?: questsOmit
     quest_checkpoints?: quest_checkpointsOmit
+    sessions?: sessionsOmit
   }
 
   /* Types for Logging */
@@ -1231,12 +1322,14 @@ export namespace Prisma {
 
   export type UsersCountOutputType = {
     quests: number
+    sessions: number
     team_members: number
     teams: number
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quests?: boolean | UsersCountOutputTypeCountQuestsArgs
+    sessions?: boolean | UsersCountOutputTypeCountSessionsArgs
     team_members?: boolean | UsersCountOutputTypeCountTeam_membersArgs
     teams?: boolean | UsersCountOutputTypeCountTeamsArgs
   }
@@ -1262,6 +1355,13 @@ export namespace Prisma {
   /**
    * UsersCountOutputType without action
    */
+  export type UsersCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sessionsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
   export type UsersCountOutputTypeCountTeam_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: team_membersWhereInput
   }
@@ -1279,10 +1379,12 @@ export namespace Prisma {
    */
 
   export type TeamsCountOutputType = {
+    sessions: number
     team_members: number
   }
 
   export type TeamsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | TeamsCountOutputTypeCountSessionsArgs
     team_members?: boolean | TeamsCountOutputTypeCountTeam_membersArgs
   }
 
@@ -1300,6 +1402,13 @@ export namespace Prisma {
   /**
    * TeamsCountOutputType without action
    */
+  export type TeamsCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sessionsWhereInput
+  }
+
+  /**
+   * TeamsCountOutputType without action
+   */
   export type TeamsCountOutputTypeCountTeam_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: team_membersWhereInput
   }
@@ -1311,10 +1420,12 @@ export namespace Prisma {
 
   export type QuestsCountOutputType = {
     quest_checkpoints: number
+    sessions: number
   }
 
   export type QuestsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quest_checkpoints?: boolean | QuestsCountOutputTypeCountQuest_checkpointsArgs
+    sessions?: boolean | QuestsCountOutputTypeCountSessionsArgs
   }
 
   // Custom InputTypes
@@ -1333,6 +1444,13 @@ export namespace Prisma {
    */
   export type QuestsCountOutputTypeCountQuest_checkpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: quest_checkpointsWhereInput
+  }
+
+  /**
+   * QuestsCountOutputType without action
+   */
+  export type QuestsCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sessionsWhereInput
   }
 
 
@@ -1571,6 +1689,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     quests?: boolean | users$questsArgs<ExtArgs>
+    sessions?: boolean | users$sessionsArgs<ExtArgs>
     team_members?: boolean | users$team_membersArgs<ExtArgs>
     teams?: boolean | users$teamsArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
@@ -1615,6 +1734,7 @@ export namespace Prisma {
   export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "nickname" | "age_group" | "role" | "avatar" | "created_at" | "updated_at", ExtArgs["result"]["users"]>
   export type usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quests?: boolean | users$questsArgs<ExtArgs>
+    sessions?: boolean | users$sessionsArgs<ExtArgs>
     team_members?: boolean | users$team_membersArgs<ExtArgs>
     teams?: boolean | users$teamsArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
@@ -1626,6 +1746,7 @@ export namespace Prisma {
     name: "users"
     objects: {
       quests: Prisma.$questsPayload<ExtArgs>[]
+      sessions: Prisma.$sessionsPayload<ExtArgs>[]
       team_members: Prisma.$team_membersPayload<ExtArgs>[]
       teams: Prisma.$teamsPayload<ExtArgs>[]
     }
@@ -2034,6 +2155,7 @@ export namespace Prisma {
   export interface Prisma__usersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     quests<T extends users$questsArgs<ExtArgs> = {}>(args?: Subset<T, users$questsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$questsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends users$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, users$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     team_members<T extends users$team_membersArgs<ExtArgs> = {}>(args?: Subset<T, users$team_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$team_membersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     teams<T extends users$teamsArgs<ExtArgs> = {}>(args?: Subset<T, users$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$teamsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -2488,6 +2610,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: QuestsScalarFieldEnum | QuestsScalarFieldEnum[]
+  }
+
+  /**
+   * users.sessions
+   */
+  export type users$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    where?: sessionsWhereInput
+    orderBy?: sessionsOrderByWithRelationInput | sessionsOrderByWithRelationInput[]
+    cursor?: sessionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
   }
 
   /**
@@ -3867,6 +4013,7 @@ export namespace Prisma {
     creator_id?: boolean
     invite_code?: boolean
     created_at?: boolean
+    sessions?: boolean | teams$sessionsArgs<ExtArgs>
     team_members?: boolean | teams$team_membersArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
     _count?: boolean | TeamsCountOutputTypeDefaultArgs<ExtArgs>
@@ -3903,6 +4050,7 @@ export namespace Prisma {
 
   export type teamsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "creator_id" | "invite_code" | "created_at", ExtArgs["result"]["teams"]>
   export type teamsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | teams$sessionsArgs<ExtArgs>
     team_members?: boolean | teams$team_membersArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
     _count?: boolean | TeamsCountOutputTypeDefaultArgs<ExtArgs>
@@ -3917,6 +4065,7 @@ export namespace Prisma {
   export type $teamsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "teams"
     objects: {
+      sessions: Prisma.$sessionsPayload<ExtArgs>[]
       team_members: Prisma.$team_membersPayload<ExtArgs>[]
       users: Prisma.$usersPayload<ExtArgs>
     }
@@ -4321,6 +4470,7 @@ export namespace Prisma {
    */
   export interface Prisma__teamsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    sessions<T extends teams$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, teams$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     team_members<T extends teams$team_membersArgs<ExtArgs> = {}>(args?: Subset<T, teams$team_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$team_membersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -4759,6 +4909,30 @@ export namespace Prisma {
   }
 
   /**
+   * teams.sessions
+   */
+  export type teams$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    where?: sessionsWhereInput
+    orderBy?: sessionsOrderByWithRelationInput | sessionsOrderByWithRelationInput[]
+    cursor?: sessionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
+  }
+
+  /**
    * teams.team_members
    */
   export type teams$team_membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5085,6 +5259,7 @@ export namespace Prisma {
     rejection_reason?: boolean
     quest_checkpoints?: boolean | quests$quest_checkpointsArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
+    sessions?: boolean | quests$sessionsArgs<ExtArgs>
     _count?: boolean | QuestsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["quests"]>
 
@@ -5145,6 +5320,7 @@ export namespace Prisma {
   export type questsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quest_checkpoints?: boolean | quests$quest_checkpointsArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
+    sessions?: boolean | quests$sessionsArgs<ExtArgs>
     _count?: boolean | QuestsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type questsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5159,6 +5335,7 @@ export namespace Prisma {
     objects: {
       quest_checkpoints: Prisma.$quest_checkpointsPayload<ExtArgs>[]
       users: Prisma.$usersPayload<ExtArgs>
+      sessions: Prisma.$sessionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5571,6 +5748,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     quest_checkpoints<T extends quests$quest_checkpointsArgs<ExtArgs> = {}>(args?: Subset<T, quests$quest_checkpointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sessions<T extends quests$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, quests$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6036,6 +6214,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Quest_checkpointsScalarFieldEnum | Quest_checkpointsScalarFieldEnum[]
+  }
+
+  /**
+   * quests.sessions
+   */
+  export type quests$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    where?: sessionsWhereInput
+    orderBy?: sessionsOrderByWithRelationInput | sessionsOrderByWithRelationInput[]
+    cursor?: sessionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
   }
 
   /**
@@ -7262,6 +7464,1225 @@ export namespace Prisma {
 
 
   /**
+   * Model sessions
+   */
+
+  export type AggregateSessions = {
+    _count: SessionsCountAggregateOutputType | null
+    _avg: SessionsAvgAggregateOutputType | null
+    _sum: SessionsSumAggregateOutputType | null
+    _min: SessionsMinAggregateOutputType | null
+    _max: SessionsMaxAggregateOutputType | null
+  }
+
+  export type SessionsAvgAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    user_id: number | null
+    team_id: number | null
+    current_checkpoint_order: number | null
+  }
+
+  export type SessionsSumAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    user_id: number | null
+    team_id: number | null
+    current_checkpoint_order: number | null
+  }
+
+  export type SessionsMinAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    user_id: number | null
+    team_id: number | null
+    status: string | null
+    transport_mode: string | null
+    started_at: Date | null
+    finished_at: Date | null
+    current_checkpoint_order: number | null
+  }
+
+  export type SessionsMaxAggregateOutputType = {
+    id: number | null
+    quest_id: number | null
+    user_id: number | null
+    team_id: number | null
+    status: string | null
+    transport_mode: string | null
+    started_at: Date | null
+    finished_at: Date | null
+    current_checkpoint_order: number | null
+  }
+
+  export type SessionsCountAggregateOutputType = {
+    id: number
+    quest_id: number
+    user_id: number
+    team_id: number
+    status: number
+    transport_mode: number
+    started_at: number
+    finished_at: number
+    current_checkpoint_order: number
+    _all: number
+  }
+
+
+  export type SessionsAvgAggregateInputType = {
+    id?: true
+    quest_id?: true
+    user_id?: true
+    team_id?: true
+    current_checkpoint_order?: true
+  }
+
+  export type SessionsSumAggregateInputType = {
+    id?: true
+    quest_id?: true
+    user_id?: true
+    team_id?: true
+    current_checkpoint_order?: true
+  }
+
+  export type SessionsMinAggregateInputType = {
+    id?: true
+    quest_id?: true
+    user_id?: true
+    team_id?: true
+    status?: true
+    transport_mode?: true
+    started_at?: true
+    finished_at?: true
+    current_checkpoint_order?: true
+  }
+
+  export type SessionsMaxAggregateInputType = {
+    id?: true
+    quest_id?: true
+    user_id?: true
+    team_id?: true
+    status?: true
+    transport_mode?: true
+    started_at?: true
+    finished_at?: true
+    current_checkpoint_order?: true
+  }
+
+  export type SessionsCountAggregateInputType = {
+    id?: true
+    quest_id?: true
+    user_id?: true
+    team_id?: true
+    status?: true
+    transport_mode?: true
+    started_at?: true
+    finished_at?: true
+    current_checkpoint_order?: true
+    _all?: true
+  }
+
+  export type SessionsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which sessions to aggregate.
+     */
+    where?: sessionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sessions to fetch.
+     */
+    orderBy?: sessionsOrderByWithRelationInput | sessionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: sessionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned sessions
+    **/
+    _count?: true | SessionsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SessionsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SessionsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SessionsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SessionsMaxAggregateInputType
+  }
+
+  export type GetSessionsAggregateType<T extends SessionsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSessions]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSessions[P]>
+      : GetScalarType<T[P], AggregateSessions[P]>
+  }
+
+
+
+
+  export type sessionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sessionsWhereInput
+    orderBy?: sessionsOrderByWithAggregationInput | sessionsOrderByWithAggregationInput[]
+    by: SessionsScalarFieldEnum[] | SessionsScalarFieldEnum
+    having?: sessionsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SessionsCountAggregateInputType | true
+    _avg?: SessionsAvgAggregateInputType
+    _sum?: SessionsSumAggregateInputType
+    _min?: SessionsMinAggregateInputType
+    _max?: SessionsMaxAggregateInputType
+  }
+
+  export type SessionsGroupByOutputType = {
+    id: number
+    quest_id: number
+    user_id: number | null
+    team_id: number | null
+    status: string
+    transport_mode: string | null
+    started_at: Date
+    finished_at: Date | null
+    current_checkpoint_order: number | null
+    _count: SessionsCountAggregateOutputType | null
+    _avg: SessionsAvgAggregateOutputType | null
+    _sum: SessionsSumAggregateOutputType | null
+    _min: SessionsMinAggregateOutputType | null
+    _max: SessionsMaxAggregateOutputType | null
+  }
+
+  type GetSessionsGroupByPayload<T extends sessionsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SessionsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SessionsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SessionsGroupByOutputType[P]>
+            : GetScalarType<T[P], SessionsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type sessionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quest_id?: boolean
+    user_id?: boolean
+    team_id?: boolean
+    status?: boolean
+    transport_mode?: boolean
+    started_at?: boolean
+    finished_at?: boolean
+    current_checkpoint_order?: boolean
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+    teams?: boolean | sessions$teamsArgs<ExtArgs>
+    users?: boolean | sessions$usersArgs<ExtArgs>
+  }, ExtArgs["result"]["sessions"]>
+
+  export type sessionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quest_id?: boolean
+    user_id?: boolean
+    team_id?: boolean
+    status?: boolean
+    transport_mode?: boolean
+    started_at?: boolean
+    finished_at?: boolean
+    current_checkpoint_order?: boolean
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+    teams?: boolean | sessions$teamsArgs<ExtArgs>
+    users?: boolean | sessions$usersArgs<ExtArgs>
+  }, ExtArgs["result"]["sessions"]>
+
+  export type sessionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quest_id?: boolean
+    user_id?: boolean
+    team_id?: boolean
+    status?: boolean
+    transport_mode?: boolean
+    started_at?: boolean
+    finished_at?: boolean
+    current_checkpoint_order?: boolean
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+    teams?: boolean | sessions$teamsArgs<ExtArgs>
+    users?: boolean | sessions$usersArgs<ExtArgs>
+  }, ExtArgs["result"]["sessions"]>
+
+  export type sessionsSelectScalar = {
+    id?: boolean
+    quest_id?: boolean
+    user_id?: boolean
+    team_id?: boolean
+    status?: boolean
+    transport_mode?: boolean
+    started_at?: boolean
+    finished_at?: boolean
+    current_checkpoint_order?: boolean
+  }
+
+  export type sessionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quest_id" | "user_id" | "team_id" | "status" | "transport_mode" | "started_at" | "finished_at" | "current_checkpoint_order", ExtArgs["result"]["sessions"]>
+  export type sessionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+    teams?: boolean | sessions$teamsArgs<ExtArgs>
+    users?: boolean | sessions$usersArgs<ExtArgs>
+  }
+  export type sessionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+    teams?: boolean | sessions$teamsArgs<ExtArgs>
+    users?: boolean | sessions$usersArgs<ExtArgs>
+  }
+  export type sessionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quests?: boolean | questsDefaultArgs<ExtArgs>
+    teams?: boolean | sessions$teamsArgs<ExtArgs>
+    users?: boolean | sessions$usersArgs<ExtArgs>
+  }
+
+  export type $sessionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "sessions"
+    objects: {
+      quests: Prisma.$questsPayload<ExtArgs>
+      teams: Prisma.$teamsPayload<ExtArgs> | null
+      users: Prisma.$usersPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      quest_id: number
+      user_id: number | null
+      team_id: number | null
+      status: string
+      transport_mode: string | null
+      started_at: Date
+      finished_at: Date | null
+      current_checkpoint_order: number | null
+    }, ExtArgs["result"]["sessions"]>
+    composites: {}
+  }
+
+  type sessionsGetPayload<S extends boolean | null | undefined | sessionsDefaultArgs> = $Result.GetResult<Prisma.$sessionsPayload, S>
+
+  type sessionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<sessionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SessionsCountAggregateInputType | true
+    }
+
+  export interface sessionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['sessions'], meta: { name: 'sessions' } }
+    /**
+     * Find zero or one Sessions that matches the filter.
+     * @param {sessionsFindUniqueArgs} args - Arguments to find a Sessions
+     * @example
+     * // Get one Sessions
+     * const sessions = await prisma.sessions.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends sessionsFindUniqueArgs>(args: SelectSubset<T, sessionsFindUniqueArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Sessions that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {sessionsFindUniqueOrThrowArgs} args - Arguments to find a Sessions
+     * @example
+     * // Get one Sessions
+     * const sessions = await prisma.sessions.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends sessionsFindUniqueOrThrowArgs>(args: SelectSubset<T, sessionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sessionsFindFirstArgs} args - Arguments to find a Sessions
+     * @example
+     * // Get one Sessions
+     * const sessions = await prisma.sessions.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends sessionsFindFirstArgs>(args?: SelectSubset<T, sessionsFindFirstArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sessions that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sessionsFindFirstOrThrowArgs} args - Arguments to find a Sessions
+     * @example
+     * // Get one Sessions
+     * const sessions = await prisma.sessions.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends sessionsFindFirstOrThrowArgs>(args?: SelectSubset<T, sessionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Sessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sessionsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sessions
+     * const sessions = await prisma.sessions.findMany()
+     * 
+     * // Get first 10 Sessions
+     * const sessions = await prisma.sessions.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sessionsWithIdOnly = await prisma.sessions.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends sessionsFindManyArgs>(args?: SelectSubset<T, sessionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Sessions.
+     * @param {sessionsCreateArgs} args - Arguments to create a Sessions.
+     * @example
+     * // Create one Sessions
+     * const Sessions = await prisma.sessions.create({
+     *   data: {
+     *     // ... data to create a Sessions
+     *   }
+     * })
+     * 
+     */
+    create<T extends sessionsCreateArgs>(args: SelectSubset<T, sessionsCreateArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Sessions.
+     * @param {sessionsCreateManyArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const sessions = await prisma.sessions.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends sessionsCreateManyArgs>(args?: SelectSubset<T, sessionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sessions and returns the data saved in the database.
+     * @param {sessionsCreateManyAndReturnArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const sessions = await prisma.sessions.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sessions and only return the `id`
+     * const sessionsWithIdOnly = await prisma.sessions.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends sessionsCreateManyAndReturnArgs>(args?: SelectSubset<T, sessionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Sessions.
+     * @param {sessionsDeleteArgs} args - Arguments to delete one Sessions.
+     * @example
+     * // Delete one Sessions
+     * const Sessions = await prisma.sessions.delete({
+     *   where: {
+     *     // ... filter to delete one Sessions
+     *   }
+     * })
+     * 
+     */
+    delete<T extends sessionsDeleteArgs>(args: SelectSubset<T, sessionsDeleteArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Sessions.
+     * @param {sessionsUpdateArgs} args - Arguments to update one Sessions.
+     * @example
+     * // Update one Sessions
+     * const sessions = await prisma.sessions.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends sessionsUpdateArgs>(args: SelectSubset<T, sessionsUpdateArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Sessions.
+     * @param {sessionsDeleteManyArgs} args - Arguments to filter Sessions to delete.
+     * @example
+     * // Delete a few Sessions
+     * const { count } = await prisma.sessions.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends sessionsDeleteManyArgs>(args?: SelectSubset<T, sessionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sessionsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sessions
+     * const sessions = await prisma.sessions.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends sessionsUpdateManyArgs>(args: SelectSubset<T, sessionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sessions and returns the data updated in the database.
+     * @param {sessionsUpdateManyAndReturnArgs} args - Arguments to update many Sessions.
+     * @example
+     * // Update many Sessions
+     * const sessions = await prisma.sessions.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Sessions and only return the `id`
+     * const sessionsWithIdOnly = await prisma.sessions.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends sessionsUpdateManyAndReturnArgs>(args: SelectSubset<T, sessionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Sessions.
+     * @param {sessionsUpsertArgs} args - Arguments to update or create a Sessions.
+     * @example
+     * // Update or create a Sessions
+     * const sessions = await prisma.sessions.upsert({
+     *   create: {
+     *     // ... data to create a Sessions
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Sessions we want to update
+     *   }
+     * })
+     */
+    upsert<T extends sessionsUpsertArgs>(args: SelectSubset<T, sessionsUpsertArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sessionsCountArgs} args - Arguments to filter Sessions to count.
+     * @example
+     * // Count the number of Sessions
+     * const count = await prisma.sessions.count({
+     *   where: {
+     *     // ... the filter for the Sessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends sessionsCountArgs>(
+      args?: Subset<T, sessionsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SessionsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SessionsAggregateArgs>(args: Subset<T, SessionsAggregateArgs>): Prisma.PrismaPromise<GetSessionsAggregateType<T>>
+
+    /**
+     * Group by Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sessionsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends sessionsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: sessionsGroupByArgs['orderBy'] }
+        : { orderBy?: sessionsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, sessionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the sessions model
+   */
+  readonly fields: sessionsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for sessions.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__sessionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quests<T extends questsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, questsDefaultArgs<ExtArgs>>): Prisma__questsClient<$Result.GetResult<Prisma.$questsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    teams<T extends sessions$teamsArgs<ExtArgs> = {}>(args?: Subset<T, sessions$teamsArgs<ExtArgs>>): Prisma__teamsClient<$Result.GetResult<Prisma.$teamsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    users<T extends sessions$usersArgs<ExtArgs> = {}>(args?: Subset<T, sessions$usersArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the sessions model
+   */
+  interface sessionsFieldRefs {
+    readonly id: FieldRef<"sessions", 'Int'>
+    readonly quest_id: FieldRef<"sessions", 'Int'>
+    readonly user_id: FieldRef<"sessions", 'Int'>
+    readonly team_id: FieldRef<"sessions", 'Int'>
+    readonly status: FieldRef<"sessions", 'String'>
+    readonly transport_mode: FieldRef<"sessions", 'String'>
+    readonly started_at: FieldRef<"sessions", 'DateTime'>
+    readonly finished_at: FieldRef<"sessions", 'DateTime'>
+    readonly current_checkpoint_order: FieldRef<"sessions", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * sessions findUnique
+   */
+  export type sessionsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * Filter, which sessions to fetch.
+     */
+    where: sessionsWhereUniqueInput
+  }
+
+  /**
+   * sessions findUniqueOrThrow
+   */
+  export type sessionsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * Filter, which sessions to fetch.
+     */
+    where: sessionsWhereUniqueInput
+  }
+
+  /**
+   * sessions findFirst
+   */
+  export type sessionsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * Filter, which sessions to fetch.
+     */
+    where?: sessionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sessions to fetch.
+     */
+    orderBy?: sessionsOrderByWithRelationInput | sessionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sessions.
+     */
+    cursor?: sessionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sessions.
+     */
+    distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
+  }
+
+  /**
+   * sessions findFirstOrThrow
+   */
+  export type sessionsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * Filter, which sessions to fetch.
+     */
+    where?: sessionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sessions to fetch.
+     */
+    orderBy?: sessionsOrderByWithRelationInput | sessionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sessions.
+     */
+    cursor?: sessionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sessions.
+     */
+    distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
+  }
+
+  /**
+   * sessions findMany
+   */
+  export type sessionsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * Filter, which sessions to fetch.
+     */
+    where?: sessionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sessions to fetch.
+     */
+    orderBy?: sessionsOrderByWithRelationInput | sessionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing sessions.
+     */
+    cursor?: sessionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sessions.
+     */
+    distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
+  }
+
+  /**
+   * sessions create
+   */
+  export type sessionsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a sessions.
+     */
+    data: XOR<sessionsCreateInput, sessionsUncheckedCreateInput>
+  }
+
+  /**
+   * sessions createMany
+   */
+  export type sessionsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many sessions.
+     */
+    data: sessionsCreateManyInput | sessionsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * sessions createManyAndReturn
+   */
+  export type sessionsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * The data used to create many sessions.
+     */
+    data: sessionsCreateManyInput | sessionsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * sessions update
+   */
+  export type sessionsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a sessions.
+     */
+    data: XOR<sessionsUpdateInput, sessionsUncheckedUpdateInput>
+    /**
+     * Choose, which sessions to update.
+     */
+    where: sessionsWhereUniqueInput
+  }
+
+  /**
+   * sessions updateMany
+   */
+  export type sessionsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update sessions.
+     */
+    data: XOR<sessionsUpdateManyMutationInput, sessionsUncheckedUpdateManyInput>
+    /**
+     * Filter which sessions to update
+     */
+    where?: sessionsWhereInput
+    /**
+     * Limit how many sessions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * sessions updateManyAndReturn
+   */
+  export type sessionsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * The data used to update sessions.
+     */
+    data: XOR<sessionsUpdateManyMutationInput, sessionsUncheckedUpdateManyInput>
+    /**
+     * Filter which sessions to update
+     */
+    where?: sessionsWhereInput
+    /**
+     * Limit how many sessions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * sessions upsert
+   */
+  export type sessionsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the sessions to update in case it exists.
+     */
+    where: sessionsWhereUniqueInput
+    /**
+     * In case the sessions found by the `where` argument doesn't exist, create a new sessions with this data.
+     */
+    create: XOR<sessionsCreateInput, sessionsUncheckedCreateInput>
+    /**
+     * In case the sessions was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<sessionsUpdateInput, sessionsUncheckedUpdateInput>
+  }
+
+  /**
+   * sessions delete
+   */
+  export type sessionsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+    /**
+     * Filter which sessions to delete.
+     */
+    where: sessionsWhereUniqueInput
+  }
+
+  /**
+   * sessions deleteMany
+   */
+  export type sessionsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which sessions to delete
+     */
+    where?: sessionsWhereInput
+    /**
+     * Limit how many sessions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * sessions.teams
+   */
+  export type sessions$teamsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the teams
+     */
+    select?: teamsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the teams
+     */
+    omit?: teamsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: teamsInclude<ExtArgs> | null
+    where?: teamsWhereInput
+  }
+
+  /**
+   * sessions.users
+   */
+  export type sessions$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the users
+     */
+    select?: usersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the users
+     */
+    omit?: usersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersInclude<ExtArgs> | null
+    where?: usersWhereInput
+  }
+
+  /**
+   * sessions without action
+   */
+  export type sessionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the sessions
+     */
+    select?: sessionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the sessions
+     */
+    omit?: sessionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: sessionsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7348,6 +8769,21 @@ export namespace Prisma {
   };
 
   export type Quest_checkpointsScalarFieldEnum = (typeof Quest_checkpointsScalarFieldEnum)[keyof typeof Quest_checkpointsScalarFieldEnum]
+
+
+  export const SessionsScalarFieldEnum: {
+    id: 'id',
+    quest_id: 'quest_id',
+    user_id: 'user_id',
+    team_id: 'team_id',
+    status: 'status',
+    transport_mode: 'transport_mode',
+    started_at: 'started_at',
+    finished_at: 'finished_at',
+    current_checkpoint_order: 'current_checkpoint_order'
+  };
+
+  export type SessionsScalarFieldEnum = (typeof SessionsScalarFieldEnum)[keyof typeof SessionsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7473,6 +8909,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"users"> | Date | string
     updated_at?: DateTimeFilter<"users"> | Date | string
     quests?: QuestsListRelationFilter
+    sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
     teams?: TeamsListRelationFilter
   }
@@ -7488,6 +8925,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     quests?: questsOrderByRelationAggregateInput
+    sessions?: sessionsOrderByRelationAggregateInput
     team_members?: team_membersOrderByRelationAggregateInput
     teams?: teamsOrderByRelationAggregateInput
   }
@@ -7506,6 +8944,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"users"> | Date | string
     updated_at?: DateTimeFilter<"users"> | Date | string
     quests?: QuestsListRelationFilter
+    sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
     teams?: TeamsListRelationFilter
   }, "id" | "email" | "nickname">
@@ -7608,6 +9047,7 @@ export namespace Prisma {
     creator_id?: IntFilter<"teams"> | number
     invite_code?: StringFilter<"teams"> | string
     created_at?: DateTimeFilter<"teams"> | Date | string
+    sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }
@@ -7619,6 +9059,7 @@ export namespace Prisma {
     creator_id?: SortOrder
     invite_code?: SortOrder
     created_at?: SortOrder
+    sessions?: sessionsOrderByRelationAggregateInput
     team_members?: team_membersOrderByRelationAggregateInput
     users?: usersOrderByWithRelationInput
   }
@@ -7633,6 +9074,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"teams"> | string | null
     creator_id?: IntFilter<"teams"> | number
     created_at?: DateTimeFilter<"teams"> | Date | string
+    sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }, "id" | "invite_code">
@@ -7683,6 +9125,7 @@ export namespace Prisma {
     rejection_reason?: StringNullableFilter<"quests"> | string | null
     quest_checkpoints?: Quest_checkpointsListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    sessions?: SessionsListRelationFilter
   }
 
   export type questsOrderByWithRelationInput = {
@@ -7702,6 +9145,7 @@ export namespace Prisma {
     rejection_reason?: SortOrderInput | SortOrder
     quest_checkpoints?: quest_checkpointsOrderByRelationAggregateInput
     users?: usersOrderByWithRelationInput
+    sessions?: sessionsOrderByRelationAggregateInput
   }
 
   export type questsWhereUniqueInput = Prisma.AtLeast<{
@@ -7724,6 +9168,7 @@ export namespace Prisma {
     rejection_reason?: StringNullableFilter<"quests"> | string | null
     quest_checkpoints?: Quest_checkpointsListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    sessions?: SessionsListRelationFilter
   }, "id">
 
   export type questsOrderByWithAggregationInput = {
@@ -7861,6 +9306,89 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"quest_checkpoints"> | Date | string
   }
 
+  export type sessionsWhereInput = {
+    AND?: sessionsWhereInput | sessionsWhereInput[]
+    OR?: sessionsWhereInput[]
+    NOT?: sessionsWhereInput | sessionsWhereInput[]
+    id?: IntFilter<"sessions"> | number
+    quest_id?: IntFilter<"sessions"> | number
+    user_id?: IntNullableFilter<"sessions"> | number | null
+    team_id?: IntNullableFilter<"sessions"> | number | null
+    status?: StringFilter<"sessions"> | string
+    transport_mode?: StringNullableFilter<"sessions"> | string | null
+    started_at?: DateTimeFilter<"sessions"> | Date | string
+    finished_at?: DateTimeNullableFilter<"sessions"> | Date | string | null
+    current_checkpoint_order?: IntNullableFilter<"sessions"> | number | null
+    quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
+    teams?: XOR<TeamsNullableScalarRelationFilter, teamsWhereInput> | null
+    users?: XOR<UsersNullableScalarRelationFilter, usersWhereInput> | null
+  }
+
+  export type sessionsOrderByWithRelationInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    user_id?: SortOrderInput | SortOrder
+    team_id?: SortOrderInput | SortOrder
+    status?: SortOrder
+    transport_mode?: SortOrderInput | SortOrder
+    started_at?: SortOrder
+    finished_at?: SortOrderInput | SortOrder
+    current_checkpoint_order?: SortOrderInput | SortOrder
+    quests?: questsOrderByWithRelationInput
+    teams?: teamsOrderByWithRelationInput
+    users?: usersOrderByWithRelationInput
+  }
+
+  export type sessionsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: sessionsWhereInput | sessionsWhereInput[]
+    OR?: sessionsWhereInput[]
+    NOT?: sessionsWhereInput | sessionsWhereInput[]
+    quest_id?: IntFilter<"sessions"> | number
+    user_id?: IntNullableFilter<"sessions"> | number | null
+    team_id?: IntNullableFilter<"sessions"> | number | null
+    status?: StringFilter<"sessions"> | string
+    transport_mode?: StringNullableFilter<"sessions"> | string | null
+    started_at?: DateTimeFilter<"sessions"> | Date | string
+    finished_at?: DateTimeNullableFilter<"sessions"> | Date | string | null
+    current_checkpoint_order?: IntNullableFilter<"sessions"> | number | null
+    quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
+    teams?: XOR<TeamsNullableScalarRelationFilter, teamsWhereInput> | null
+    users?: XOR<UsersNullableScalarRelationFilter, usersWhereInput> | null
+  }, "id">
+
+  export type sessionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    user_id?: SortOrderInput | SortOrder
+    team_id?: SortOrderInput | SortOrder
+    status?: SortOrder
+    transport_mode?: SortOrderInput | SortOrder
+    started_at?: SortOrder
+    finished_at?: SortOrderInput | SortOrder
+    current_checkpoint_order?: SortOrderInput | SortOrder
+    _count?: sessionsCountOrderByAggregateInput
+    _avg?: sessionsAvgOrderByAggregateInput
+    _max?: sessionsMaxOrderByAggregateInput
+    _min?: sessionsMinOrderByAggregateInput
+    _sum?: sessionsSumOrderByAggregateInput
+  }
+
+  export type sessionsScalarWhereWithAggregatesInput = {
+    AND?: sessionsScalarWhereWithAggregatesInput | sessionsScalarWhereWithAggregatesInput[]
+    OR?: sessionsScalarWhereWithAggregatesInput[]
+    NOT?: sessionsScalarWhereWithAggregatesInput | sessionsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"sessions"> | number
+    quest_id?: IntWithAggregatesFilter<"sessions"> | number
+    user_id?: IntNullableWithAggregatesFilter<"sessions"> | number | null
+    team_id?: IntNullableWithAggregatesFilter<"sessions"> | number | null
+    status?: StringWithAggregatesFilter<"sessions"> | string
+    transport_mode?: StringNullableWithAggregatesFilter<"sessions"> | string | null
+    started_at?: DateTimeWithAggregatesFilter<"sessions"> | Date | string
+    finished_at?: DateTimeNullableWithAggregatesFilter<"sessions"> | Date | string | null
+    current_checkpoint_order?: IntNullableWithAggregatesFilter<"sessions"> | number | null
+  }
+
   export type usersCreateInput = {
     email: string
     password: string
@@ -7871,6 +9399,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quests?: questsCreateNestedManyWithoutUsersInput
+    sessions?: sessionsCreateNestedManyWithoutUsersInput
     team_members?: team_membersCreateNestedManyWithoutUsersInput
     teams?: teamsCreateNestedManyWithoutUsersInput
   }
@@ -7886,6 +9415,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quests?: questsUncheckedCreateNestedManyWithoutUsersInput
+    sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
     teams?: teamsUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -7900,6 +9430,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quests?: questsUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUpdateManyWithoutUsersNestedInput
     teams?: teamsUpdateManyWithoutUsersNestedInput
   }
@@ -7915,6 +9446,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -8003,6 +9535,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    sessions?: sessionsCreateNestedManyWithoutTeamsInput
     team_members?: team_membersCreateNestedManyWithoutTeamsInput
     users: usersCreateNestedOneWithoutTeamsInput
   }
@@ -8014,6 +9547,7 @@ export namespace Prisma {
     creator_id: number
     invite_code: string
     created_at?: Date | string
+    sessions?: sessionsUncheckedCreateNestedManyWithoutTeamsInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutTeamsInput
   }
 
@@ -8022,6 +9556,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUpdateManyWithoutTeamsNestedInput
     users?: usersUpdateOneRequiredWithoutTeamsNestedInput
   }
@@ -8033,6 +9568,7 @@ export namespace Prisma {
     creator_id?: IntFieldUpdateOperationsInput | number
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUncheckedUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutTeamsNestedInput
   }
 
@@ -8076,6 +9612,7 @@ export namespace Prisma {
     rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsCreateNestedManyWithoutQuestsInput
     users: usersCreateNestedOneWithoutQuestsInput
+    sessions?: sessionsCreateNestedManyWithoutQuestsInput
   }
 
   export type questsUncheckedCreateInput = {
@@ -8094,6 +9631,7 @@ export namespace Prisma {
     updated_at?: Date | string
     rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput
+    sessions?: sessionsUncheckedCreateNestedManyWithoutQuestsInput
   }
 
   export type questsUpdateInput = {
@@ -8111,6 +9649,7 @@ export namespace Prisma {
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUpdateManyWithoutQuestsNestedInput
     users?: usersUpdateOneRequiredWithoutQuestsNestedInput
+    sessions?: sessionsUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsUncheckedUpdateInput = {
@@ -8129,6 +9668,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput
+    sessions?: sessionsUncheckedUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsCreateManyInput = {
@@ -8281,6 +9821,84 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type sessionsCreateInput = {
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    quests: questsCreateNestedOneWithoutSessionsInput
+    teams?: teamsCreateNestedOneWithoutSessionsInput
+    users?: usersCreateNestedOneWithoutSessionsInput
+  }
+
+  export type sessionsUncheckedCreateInput = {
+    id?: number
+    quest_id: number
+    user_id?: number | null
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+  }
+
+  export type sessionsUpdateInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
+    teams?: teamsUpdateOneWithoutSessionsNestedInput
+    users?: usersUpdateOneWithoutSessionsNestedInput
+  }
+
+  export type sessionsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type sessionsCreateManyInput = {
+    id?: number
+    quest_id: number
+    user_id?: number | null
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+  }
+
+  export type sessionsUpdateManyMutationInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type sessionsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8324,6 +9942,12 @@ export namespace Prisma {
     none?: questsWhereInput
   }
 
+  export type SessionsListRelationFilter = {
+    every?: sessionsWhereInput
+    some?: sessionsWhereInput
+    none?: sessionsWhereInput
+  }
+
   export type Team_membersListRelationFilter = {
     every?: team_membersWhereInput
     some?: team_membersWhereInput
@@ -8337,6 +9961,10 @@ export namespace Prisma {
   }
 
   export type questsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type sessionsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8749,11 +10377,132 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type TeamsNullableScalarRelationFilter = {
+    is?: teamsWhereInput | null
+    isNot?: teamsWhereInput | null
+  }
+
+  export type UsersNullableScalarRelationFilter = {
+    is?: usersWhereInput | null
+    isNot?: usersWhereInput | null
+  }
+
+  export type sessionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    user_id?: SortOrder
+    team_id?: SortOrder
+    status?: SortOrder
+    transport_mode?: SortOrder
+    started_at?: SortOrder
+    finished_at?: SortOrder
+    current_checkpoint_order?: SortOrder
+  }
+
+  export type sessionsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    user_id?: SortOrder
+    team_id?: SortOrder
+    current_checkpoint_order?: SortOrder
+  }
+
+  export type sessionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    user_id?: SortOrder
+    team_id?: SortOrder
+    status?: SortOrder
+    transport_mode?: SortOrder
+    started_at?: SortOrder
+    finished_at?: SortOrder
+    current_checkpoint_order?: SortOrder
+  }
+
+  export type sessionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    user_id?: SortOrder
+    team_id?: SortOrder
+    status?: SortOrder
+    transport_mode?: SortOrder
+    started_at?: SortOrder
+    finished_at?: SortOrder
+    current_checkpoint_order?: SortOrder
+  }
+
+  export type sessionsSumOrderByAggregateInput = {
+    id?: SortOrder
+    quest_id?: SortOrder
+    user_id?: SortOrder
+    team_id?: SortOrder
+    current_checkpoint_order?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type questsCreateNestedManyWithoutUsersInput = {
     create?: XOR<questsCreateWithoutUsersInput, questsUncheckedCreateWithoutUsersInput> | questsCreateWithoutUsersInput[] | questsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: questsCreateOrConnectWithoutUsersInput | questsCreateOrConnectWithoutUsersInput[]
     createMany?: questsCreateManyUsersInputEnvelope
     connect?: questsWhereUniqueInput | questsWhereUniqueInput[]
+  }
+
+  export type sessionsCreateNestedManyWithoutUsersInput = {
+    create?: XOR<sessionsCreateWithoutUsersInput, sessionsUncheckedCreateWithoutUsersInput> | sessionsCreateWithoutUsersInput[] | sessionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutUsersInput | sessionsCreateOrConnectWithoutUsersInput[]
+    createMany?: sessionsCreateManyUsersInputEnvelope
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
   }
 
   export type team_membersCreateNestedManyWithoutUsersInput = {
@@ -8775,6 +10524,13 @@ export namespace Prisma {
     connectOrCreate?: questsCreateOrConnectWithoutUsersInput | questsCreateOrConnectWithoutUsersInput[]
     createMany?: questsCreateManyUsersInputEnvelope
     connect?: questsWhereUniqueInput | questsWhereUniqueInput[]
+  }
+
+  export type sessionsUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<sessionsCreateWithoutUsersInput, sessionsUncheckedCreateWithoutUsersInput> | sessionsCreateWithoutUsersInput[] | sessionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutUsersInput | sessionsCreateOrConnectWithoutUsersInput[]
+    createMany?: sessionsCreateManyUsersInputEnvelope
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
   }
 
   export type team_membersUncheckedCreateNestedManyWithoutUsersInput = {
@@ -8811,6 +10567,20 @@ export namespace Prisma {
     update?: questsUpdateWithWhereUniqueWithoutUsersInput | questsUpdateWithWhereUniqueWithoutUsersInput[]
     updateMany?: questsUpdateManyWithWhereWithoutUsersInput | questsUpdateManyWithWhereWithoutUsersInput[]
     deleteMany?: questsScalarWhereInput | questsScalarWhereInput[]
+  }
+
+  export type sessionsUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<sessionsCreateWithoutUsersInput, sessionsUncheckedCreateWithoutUsersInput> | sessionsCreateWithoutUsersInput[] | sessionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutUsersInput | sessionsCreateOrConnectWithoutUsersInput[]
+    upsert?: sessionsUpsertWithWhereUniqueWithoutUsersInput | sessionsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: sessionsCreateManyUsersInputEnvelope
+    set?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    disconnect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    delete?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    update?: sessionsUpdateWithWhereUniqueWithoutUsersInput | sessionsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: sessionsUpdateManyWithWhereWithoutUsersInput | sessionsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
   }
 
   export type team_membersUpdateManyWithoutUsersNestedInput = {
@@ -8861,6 +10631,20 @@ export namespace Prisma {
     update?: questsUpdateWithWhereUniqueWithoutUsersInput | questsUpdateWithWhereUniqueWithoutUsersInput[]
     updateMany?: questsUpdateManyWithWhereWithoutUsersInput | questsUpdateManyWithWhereWithoutUsersInput[]
     deleteMany?: questsScalarWhereInput | questsScalarWhereInput[]
+  }
+
+  export type sessionsUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<sessionsCreateWithoutUsersInput, sessionsUncheckedCreateWithoutUsersInput> | sessionsCreateWithoutUsersInput[] | sessionsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutUsersInput | sessionsCreateOrConnectWithoutUsersInput[]
+    upsert?: sessionsUpsertWithWhereUniqueWithoutUsersInput | sessionsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: sessionsCreateManyUsersInputEnvelope
+    set?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    disconnect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    delete?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    update?: sessionsUpdateWithWhereUniqueWithoutUsersInput | sessionsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: sessionsUpdateManyWithWhereWithoutUsersInput | sessionsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
   }
 
   export type team_membersUncheckedUpdateManyWithoutUsersNestedInput = {
@@ -8919,6 +10703,13 @@ export namespace Prisma {
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutTeam_membersInput, usersUpdateWithoutTeam_membersInput>, usersUncheckedUpdateWithoutTeam_membersInput>
   }
 
+  export type sessionsCreateNestedManyWithoutTeamsInput = {
+    create?: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput> | sessionsCreateWithoutTeamsInput[] | sessionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutTeamsInput | sessionsCreateOrConnectWithoutTeamsInput[]
+    createMany?: sessionsCreateManyTeamsInputEnvelope
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+  }
+
   export type team_membersCreateNestedManyWithoutTeamsInput = {
     create?: XOR<team_membersCreateWithoutTeamsInput, team_membersUncheckedCreateWithoutTeamsInput> | team_membersCreateWithoutTeamsInput[] | team_membersUncheckedCreateWithoutTeamsInput[]
     connectOrCreate?: team_membersCreateOrConnectWithoutTeamsInput | team_membersCreateOrConnectWithoutTeamsInput[]
@@ -8932,6 +10723,13 @@ export namespace Prisma {
     connect?: usersWhereUniqueInput
   }
 
+  export type sessionsUncheckedCreateNestedManyWithoutTeamsInput = {
+    create?: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput> | sessionsCreateWithoutTeamsInput[] | sessionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutTeamsInput | sessionsCreateOrConnectWithoutTeamsInput[]
+    createMany?: sessionsCreateManyTeamsInputEnvelope
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+  }
+
   export type team_membersUncheckedCreateNestedManyWithoutTeamsInput = {
     create?: XOR<team_membersCreateWithoutTeamsInput, team_membersUncheckedCreateWithoutTeamsInput> | team_membersCreateWithoutTeamsInput[] | team_membersUncheckedCreateWithoutTeamsInput[]
     connectOrCreate?: team_membersCreateOrConnectWithoutTeamsInput | team_membersCreateOrConnectWithoutTeamsInput[]
@@ -8941,6 +10739,20 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type sessionsUpdateManyWithoutTeamsNestedInput = {
+    create?: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput> | sessionsCreateWithoutTeamsInput[] | sessionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutTeamsInput | sessionsCreateOrConnectWithoutTeamsInput[]
+    upsert?: sessionsUpsertWithWhereUniqueWithoutTeamsInput | sessionsUpsertWithWhereUniqueWithoutTeamsInput[]
+    createMany?: sessionsCreateManyTeamsInputEnvelope
+    set?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    disconnect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    delete?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    update?: sessionsUpdateWithWhereUniqueWithoutTeamsInput | sessionsUpdateWithWhereUniqueWithoutTeamsInput[]
+    updateMany?: sessionsUpdateManyWithWhereWithoutTeamsInput | sessionsUpdateManyWithWhereWithoutTeamsInput[]
+    deleteMany?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
   }
 
   export type team_membersUpdateManyWithoutTeamsNestedInput = {
@@ -8963,6 +10775,20 @@ export namespace Prisma {
     upsert?: usersUpsertWithoutTeamsInput
     connect?: usersWhereUniqueInput
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutTeamsInput, usersUpdateWithoutTeamsInput>, usersUncheckedUpdateWithoutTeamsInput>
+  }
+
+  export type sessionsUncheckedUpdateManyWithoutTeamsNestedInput = {
+    create?: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput> | sessionsCreateWithoutTeamsInput[] | sessionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutTeamsInput | sessionsCreateOrConnectWithoutTeamsInput[]
+    upsert?: sessionsUpsertWithWhereUniqueWithoutTeamsInput | sessionsUpsertWithWhereUniqueWithoutTeamsInput[]
+    createMany?: sessionsCreateManyTeamsInputEnvelope
+    set?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    disconnect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    delete?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    update?: sessionsUpdateWithWhereUniqueWithoutTeamsInput | sessionsUpdateWithWhereUniqueWithoutTeamsInput[]
+    updateMany?: sessionsUpdateManyWithWhereWithoutTeamsInput | sessionsUpdateManyWithWhereWithoutTeamsInput[]
+    deleteMany?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
   }
 
   export type team_membersUncheckedUpdateManyWithoutTeamsNestedInput = {
@@ -8992,11 +10818,25 @@ export namespace Prisma {
     connect?: usersWhereUniqueInput
   }
 
+  export type sessionsCreateNestedManyWithoutQuestsInput = {
+    create?: XOR<sessionsCreateWithoutQuestsInput, sessionsUncheckedCreateWithoutQuestsInput> | sessionsCreateWithoutQuestsInput[] | sessionsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutQuestsInput | sessionsCreateOrConnectWithoutQuestsInput[]
+    createMany?: sessionsCreateManyQuestsInputEnvelope
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+  }
+
   export type quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput = {
     create?: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput> | quest_checkpointsCreateWithoutQuestsInput[] | quest_checkpointsUncheckedCreateWithoutQuestsInput[]
     connectOrCreate?: quest_checkpointsCreateOrConnectWithoutQuestsInput | quest_checkpointsCreateOrConnectWithoutQuestsInput[]
     createMany?: quest_checkpointsCreateManyQuestsInputEnvelope
     connect?: quest_checkpointsWhereUniqueInput | quest_checkpointsWhereUniqueInput[]
+  }
+
+  export type sessionsUncheckedCreateNestedManyWithoutQuestsInput = {
+    create?: XOR<sessionsCreateWithoutQuestsInput, sessionsUncheckedCreateWithoutQuestsInput> | sessionsCreateWithoutQuestsInput[] | sessionsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutQuestsInput | sessionsCreateOrConnectWithoutQuestsInput[]
+    createMany?: sessionsCreateManyQuestsInputEnvelope
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -9025,6 +10865,20 @@ export namespace Prisma {
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutQuestsInput, usersUpdateWithoutQuestsInput>, usersUncheckedUpdateWithoutQuestsInput>
   }
 
+  export type sessionsUpdateManyWithoutQuestsNestedInput = {
+    create?: XOR<sessionsCreateWithoutQuestsInput, sessionsUncheckedCreateWithoutQuestsInput> | sessionsCreateWithoutQuestsInput[] | sessionsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutQuestsInput | sessionsCreateOrConnectWithoutQuestsInput[]
+    upsert?: sessionsUpsertWithWhereUniqueWithoutQuestsInput | sessionsUpsertWithWhereUniqueWithoutQuestsInput[]
+    createMany?: sessionsCreateManyQuestsInputEnvelope
+    set?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    disconnect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    delete?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    update?: sessionsUpdateWithWhereUniqueWithoutQuestsInput | sessionsUpdateWithWhereUniqueWithoutQuestsInput[]
+    updateMany?: sessionsUpdateManyWithWhereWithoutQuestsInput | sessionsUpdateManyWithWhereWithoutQuestsInput[]
+    deleteMany?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
+  }
+
   export type quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput = {
     create?: XOR<quest_checkpointsCreateWithoutQuestsInput, quest_checkpointsUncheckedCreateWithoutQuestsInput> | quest_checkpointsCreateWithoutQuestsInput[] | quest_checkpointsUncheckedCreateWithoutQuestsInput[]
     connectOrCreate?: quest_checkpointsCreateOrConnectWithoutQuestsInput | quest_checkpointsCreateOrConnectWithoutQuestsInput[]
@@ -9037,6 +10891,20 @@ export namespace Prisma {
     update?: quest_checkpointsUpdateWithWhereUniqueWithoutQuestsInput | quest_checkpointsUpdateWithWhereUniqueWithoutQuestsInput[]
     updateMany?: quest_checkpointsUpdateManyWithWhereWithoutQuestsInput | quest_checkpointsUpdateManyWithWhereWithoutQuestsInput[]
     deleteMany?: quest_checkpointsScalarWhereInput | quest_checkpointsScalarWhereInput[]
+  }
+
+  export type sessionsUncheckedUpdateManyWithoutQuestsNestedInput = {
+    create?: XOR<sessionsCreateWithoutQuestsInput, sessionsUncheckedCreateWithoutQuestsInput> | sessionsCreateWithoutQuestsInput[] | sessionsUncheckedCreateWithoutQuestsInput[]
+    connectOrCreate?: sessionsCreateOrConnectWithoutQuestsInput | sessionsCreateOrConnectWithoutQuestsInput[]
+    upsert?: sessionsUpsertWithWhereUniqueWithoutQuestsInput | sessionsUpsertWithWhereUniqueWithoutQuestsInput[]
+    createMany?: sessionsCreateManyQuestsInputEnvelope
+    set?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    disconnect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    delete?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    connect?: sessionsWhereUniqueInput | sessionsWhereUniqueInput[]
+    update?: sessionsUpdateWithWhereUniqueWithoutQuestsInput | sessionsUpdateWithWhereUniqueWithoutQuestsInput[]
+    updateMany?: sessionsUpdateManyWithWhereWithoutQuestsInput | sessionsUpdateManyWithWhereWithoutQuestsInput[]
+    deleteMany?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
   }
 
   export type questsCreateNestedOneWithoutQuest_checkpointsInput = {
@@ -9059,6 +10927,64 @@ export namespace Prisma {
     upsert?: questsUpsertWithoutQuest_checkpointsInput
     connect?: questsWhereUniqueInput
     update?: XOR<XOR<questsUpdateToOneWithWhereWithoutQuest_checkpointsInput, questsUpdateWithoutQuest_checkpointsInput>, questsUncheckedUpdateWithoutQuest_checkpointsInput>
+  }
+
+  export type questsCreateNestedOneWithoutSessionsInput = {
+    create?: XOR<questsCreateWithoutSessionsInput, questsUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: questsCreateOrConnectWithoutSessionsInput
+    connect?: questsWhereUniqueInput
+  }
+
+  export type teamsCreateNestedOneWithoutSessionsInput = {
+    create?: XOR<teamsCreateWithoutSessionsInput, teamsUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: teamsCreateOrConnectWithoutSessionsInput
+    connect?: teamsWhereUniqueInput
+  }
+
+  export type usersCreateNestedOneWithoutSessionsInput = {
+    create?: XOR<usersCreateWithoutSessionsInput, usersUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutSessionsInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type questsUpdateOneRequiredWithoutSessionsNestedInput = {
+    create?: XOR<questsCreateWithoutSessionsInput, questsUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: questsCreateOrConnectWithoutSessionsInput
+    upsert?: questsUpsertWithoutSessionsInput
+    connect?: questsWhereUniqueInput
+    update?: XOR<XOR<questsUpdateToOneWithWhereWithoutSessionsInput, questsUpdateWithoutSessionsInput>, questsUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type teamsUpdateOneWithoutSessionsNestedInput = {
+    create?: XOR<teamsCreateWithoutSessionsInput, teamsUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: teamsCreateOrConnectWithoutSessionsInput
+    upsert?: teamsUpsertWithoutSessionsInput
+    disconnect?: teamsWhereInput | boolean
+    delete?: teamsWhereInput | boolean
+    connect?: teamsWhereUniqueInput
+    update?: XOR<XOR<teamsUpdateToOneWithWhereWithoutSessionsInput, teamsUpdateWithoutSessionsInput>, teamsUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type usersUpdateOneWithoutSessionsNestedInput = {
+    create?: XOR<usersCreateWithoutSessionsInput, usersUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutSessionsInput
+    upsert?: usersUpsertWithoutSessionsInput
+    disconnect?: usersWhereInput | boolean
+    delete?: usersWhereInput | boolean
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutSessionsInput, usersUpdateWithoutSessionsInput>, usersUncheckedUpdateWithoutSessionsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -9237,6 +11163,58 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type questsCreateWithoutUsersInput = {
     title: string
     description: string
@@ -9251,6 +11229,7 @@ export namespace Prisma {
     updated_at?: Date | string
     rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsCreateNestedManyWithoutQuestsInput
+    sessions?: sessionsCreateNestedManyWithoutQuestsInput
   }
 
   export type questsUncheckedCreateWithoutUsersInput = {
@@ -9268,6 +11247,7 @@ export namespace Prisma {
     updated_at?: Date | string
     rejection_reason?: string | null
     quest_checkpoints?: quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput
+    sessions?: sessionsUncheckedCreateNestedManyWithoutQuestsInput
   }
 
   export type questsCreateOrConnectWithoutUsersInput = {
@@ -9277,6 +11257,37 @@ export namespace Prisma {
 
   export type questsCreateManyUsersInputEnvelope = {
     data: questsCreateManyUsersInput | questsCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type sessionsCreateWithoutUsersInput = {
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    quests: questsCreateNestedOneWithoutSessionsInput
+    teams?: teamsCreateNestedOneWithoutSessionsInput
+  }
+
+  export type sessionsUncheckedCreateWithoutUsersInput = {
+    id?: number
+    quest_id: number
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+  }
+
+  export type sessionsCreateOrConnectWithoutUsersInput = {
+    where: sessionsWhereUniqueInput
+    create: XOR<sessionsCreateWithoutUsersInput, sessionsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type sessionsCreateManyUsersInputEnvelope = {
+    data: sessionsCreateManyUsersInput | sessionsCreateManyUsersInput[]
     skipDuplicates?: boolean
   }
 
@@ -9306,6 +11317,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    sessions?: sessionsCreateNestedManyWithoutTeamsInput
     team_members?: team_membersCreateNestedManyWithoutTeamsInput
   }
 
@@ -9315,6 +11327,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    sessions?: sessionsUncheckedCreateNestedManyWithoutTeamsInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutTeamsInput
   }
 
@@ -9362,6 +11375,37 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"quests"> | Date | string
     updated_at?: DateTimeFilter<"quests"> | Date | string
     rejection_reason?: StringNullableFilter<"quests"> | string | null
+  }
+
+  export type sessionsUpsertWithWhereUniqueWithoutUsersInput = {
+    where: sessionsWhereUniqueInput
+    update: XOR<sessionsUpdateWithoutUsersInput, sessionsUncheckedUpdateWithoutUsersInput>
+    create: XOR<sessionsCreateWithoutUsersInput, sessionsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type sessionsUpdateWithWhereUniqueWithoutUsersInput = {
+    where: sessionsWhereUniqueInput
+    data: XOR<sessionsUpdateWithoutUsersInput, sessionsUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type sessionsUpdateManyWithWhereWithoutUsersInput = {
+    where: sessionsScalarWhereInput
+    data: XOR<sessionsUpdateManyMutationInput, sessionsUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type sessionsScalarWhereInput = {
+    AND?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
+    OR?: sessionsScalarWhereInput[]
+    NOT?: sessionsScalarWhereInput | sessionsScalarWhereInput[]
+    id?: IntFilter<"sessions"> | number
+    quest_id?: IntFilter<"sessions"> | number
+    user_id?: IntNullableFilter<"sessions"> | number | null
+    team_id?: IntNullableFilter<"sessions"> | number | null
+    status?: StringFilter<"sessions"> | string
+    transport_mode?: StringNullableFilter<"sessions"> | string | null
+    started_at?: DateTimeFilter<"sessions"> | Date | string
+    finished_at?: DateTimeNullableFilter<"sessions"> | Date | string | null
+    current_checkpoint_order?: IntNullableFilter<"sessions"> | number | null
   }
 
   export type team_membersUpsertWithWhereUniqueWithoutUsersInput = {
@@ -9423,6 +11467,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    sessions?: sessionsCreateNestedManyWithoutTeamsInput
     users: usersCreateNestedOneWithoutTeamsInput
   }
 
@@ -9433,6 +11478,7 @@ export namespace Prisma {
     creator_id: number
     invite_code: string
     created_at?: Date | string
+    sessions?: sessionsUncheckedCreateNestedManyWithoutTeamsInput
   }
 
   export type teamsCreateOrConnectWithoutTeam_membersInput = {
@@ -9450,6 +11496,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quests?: questsCreateNestedManyWithoutUsersInput
+    sessions?: sessionsCreateNestedManyWithoutUsersInput
     teams?: teamsCreateNestedManyWithoutUsersInput
   }
 
@@ -9464,6 +11511,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quests?: questsUncheckedCreateNestedManyWithoutUsersInput
+    sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     teams?: teamsUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -9488,6 +11536,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUpdateManyWithoutTeamsNestedInput
     users?: usersUpdateOneRequiredWithoutTeamsNestedInput
   }
 
@@ -9498,6 +11547,7 @@ export namespace Prisma {
     creator_id?: IntFieldUpdateOperationsInput | number
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUncheckedUpdateManyWithoutTeamsNestedInput
   }
 
   export type usersUpsertWithoutTeam_membersInput = {
@@ -9521,6 +11571,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quests?: questsUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUpdateManyWithoutUsersNestedInput
     teams?: teamsUpdateManyWithoutUsersNestedInput
   }
 
@@ -9535,7 +11586,39 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type sessionsCreateWithoutTeamsInput = {
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    quests: questsCreateNestedOneWithoutSessionsInput
+    users?: usersCreateNestedOneWithoutSessionsInput
+  }
+
+  export type sessionsUncheckedCreateWithoutTeamsInput = {
+    id?: number
+    quest_id: number
+    user_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+  }
+
+  export type sessionsCreateOrConnectWithoutTeamsInput = {
+    where: sessionsWhereUniqueInput
+    create: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput>
+  }
+
+  export type sessionsCreateManyTeamsInputEnvelope = {
+    data: sessionsCreateManyTeamsInput | sessionsCreateManyTeamsInput[]
+    skipDuplicates?: boolean
   }
 
   export type team_membersCreateWithoutTeamsInput = {
@@ -9569,6 +11652,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quests?: questsCreateNestedManyWithoutUsersInput
+    sessions?: sessionsCreateNestedManyWithoutUsersInput
     team_members?: team_membersCreateNestedManyWithoutUsersInput
   }
 
@@ -9583,12 +11667,29 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quests?: questsUncheckedCreateNestedManyWithoutUsersInput
+    sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type usersCreateOrConnectWithoutTeamsInput = {
     where: usersWhereUniqueInput
     create: XOR<usersCreateWithoutTeamsInput, usersUncheckedCreateWithoutTeamsInput>
+  }
+
+  export type sessionsUpsertWithWhereUniqueWithoutTeamsInput = {
+    where: sessionsWhereUniqueInput
+    update: XOR<sessionsUpdateWithoutTeamsInput, sessionsUncheckedUpdateWithoutTeamsInput>
+    create: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput>
+  }
+
+  export type sessionsUpdateWithWhereUniqueWithoutTeamsInput = {
+    where: sessionsWhereUniqueInput
+    data: XOR<sessionsUpdateWithoutTeamsInput, sessionsUncheckedUpdateWithoutTeamsInput>
+  }
+
+  export type sessionsUpdateManyWithWhereWithoutTeamsInput = {
+    where: sessionsScalarWhereInput
+    data: XOR<sessionsUpdateManyMutationInput, sessionsUncheckedUpdateManyWithoutTeamsInput>
   }
 
   export type team_membersUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -9628,6 +11729,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quests?: questsUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUpdateManyWithoutUsersNestedInput
   }
 
@@ -9642,6 +11744,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -9691,6 +11794,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    sessions?: sessionsCreateNestedManyWithoutUsersInput
     team_members?: team_membersCreateNestedManyWithoutUsersInput
     teams?: teamsCreateNestedManyWithoutUsersInput
   }
@@ -9705,6 +11809,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
     teams?: teamsUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -9712,6 +11817,37 @@ export namespace Prisma {
   export type usersCreateOrConnectWithoutQuestsInput = {
     where: usersWhereUniqueInput
     create: XOR<usersCreateWithoutQuestsInput, usersUncheckedCreateWithoutQuestsInput>
+  }
+
+  export type sessionsCreateWithoutQuestsInput = {
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    teams?: teamsCreateNestedOneWithoutSessionsInput
+    users?: usersCreateNestedOneWithoutSessionsInput
+  }
+
+  export type sessionsUncheckedCreateWithoutQuestsInput = {
+    id?: number
+    user_id?: number | null
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+  }
+
+  export type sessionsCreateOrConnectWithoutQuestsInput = {
+    where: sessionsWhereUniqueInput
+    create: XOR<sessionsCreateWithoutQuestsInput, sessionsUncheckedCreateWithoutQuestsInput>
+  }
+
+  export type sessionsCreateManyQuestsInputEnvelope = {
+    data: sessionsCreateManyQuestsInput | sessionsCreateManyQuestsInput[]
+    skipDuplicates?: boolean
   }
 
   export type quest_checkpointsUpsertWithWhereUniqueWithoutQuestsInput = {
@@ -9768,6 +11904,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUpdateManyWithoutUsersNestedInput
     teams?: teamsUpdateManyWithoutUsersNestedInput
   }
@@ -9782,8 +11919,25 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type sessionsUpsertWithWhereUniqueWithoutQuestsInput = {
+    where: sessionsWhereUniqueInput
+    update: XOR<sessionsUpdateWithoutQuestsInput, sessionsUncheckedUpdateWithoutQuestsInput>
+    create: XOR<sessionsCreateWithoutQuestsInput, sessionsUncheckedCreateWithoutQuestsInput>
+  }
+
+  export type sessionsUpdateWithWhereUniqueWithoutQuestsInput = {
+    where: sessionsWhereUniqueInput
+    data: XOR<sessionsUpdateWithoutQuestsInput, sessionsUncheckedUpdateWithoutQuestsInput>
+  }
+
+  export type sessionsUpdateManyWithWhereWithoutQuestsInput = {
+    where: sessionsScalarWhereInput
+    data: XOR<sessionsUpdateManyMutationInput, sessionsUncheckedUpdateManyWithoutQuestsInput>
   }
 
   export type questsCreateWithoutQuest_checkpointsInput = {
@@ -9800,6 +11954,7 @@ export namespace Prisma {
     updated_at?: Date | string
     rejection_reason?: string | null
     users: usersCreateNestedOneWithoutQuestsInput
+    sessions?: sessionsCreateNestedManyWithoutQuestsInput
   }
 
   export type questsUncheckedCreateWithoutQuest_checkpointsInput = {
@@ -9817,6 +11972,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     rejection_reason?: string | null
+    sessions?: sessionsUncheckedCreateNestedManyWithoutQuestsInput
   }
 
   export type questsCreateOrConnectWithoutQuest_checkpointsInput = {
@@ -9849,6 +12005,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     users?: usersUpdateOneRequiredWithoutQuestsNestedInput
+    sessions?: sessionsUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsUncheckedUpdateWithoutQuest_checkpointsInput = {
@@ -9866,6 +12023,221 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    sessions?: sessionsUncheckedUpdateManyWithoutQuestsNestedInput
+  }
+
+  export type questsCreateWithoutSessionsInput = {
+    title: string
+    description: string
+    location_text: string
+    image: string
+    difficulty: number
+    duration_minutes: number
+    rules?: string | null
+    status: string
+    is_hidden?: boolean | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    rejection_reason?: string | null
+    quest_checkpoints?: quest_checkpointsCreateNestedManyWithoutQuestsInput
+    users: usersCreateNestedOneWithoutQuestsInput
+  }
+
+  export type questsUncheckedCreateWithoutSessionsInput = {
+    id?: number
+    creator_id: number
+    title: string
+    description: string
+    location_text: string
+    image: string
+    difficulty: number
+    duration_minutes: number
+    rules?: string | null
+    status: string
+    is_hidden?: boolean | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    rejection_reason?: string | null
+    quest_checkpoints?: quest_checkpointsUncheckedCreateNestedManyWithoutQuestsInput
+  }
+
+  export type questsCreateOrConnectWithoutSessionsInput = {
+    where: questsWhereUniqueInput
+    create: XOR<questsCreateWithoutSessionsInput, questsUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type teamsCreateWithoutSessionsInput = {
+    name: string
+    description?: string | null
+    invite_code: string
+    created_at?: Date | string
+    team_members?: team_membersCreateNestedManyWithoutTeamsInput
+    users: usersCreateNestedOneWithoutTeamsInput
+  }
+
+  export type teamsUncheckedCreateWithoutSessionsInput = {
+    id?: number
+    name: string
+    description?: string | null
+    creator_id: number
+    invite_code: string
+    created_at?: Date | string
+    team_members?: team_membersUncheckedCreateNestedManyWithoutTeamsInput
+  }
+
+  export type teamsCreateOrConnectWithoutSessionsInput = {
+    where: teamsWhereUniqueInput
+    create: XOR<teamsCreateWithoutSessionsInput, teamsUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type usersCreateWithoutSessionsInput = {
+    email: string
+    password: string
+    nickname: string
+    age_group: string
+    role: string
+    avatar: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    quests?: questsCreateNestedManyWithoutUsersInput
+    team_members?: team_membersCreateNestedManyWithoutUsersInput
+    teams?: teamsCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutSessionsInput = {
+    id?: number
+    email: string
+    password: string
+    nickname: string
+    age_group: string
+    role: string
+    avatar: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    quests?: questsUncheckedCreateNestedManyWithoutUsersInput
+    team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
+    teams?: teamsUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutSessionsInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutSessionsInput, usersUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type questsUpsertWithoutSessionsInput = {
+    update: XOR<questsUpdateWithoutSessionsInput, questsUncheckedUpdateWithoutSessionsInput>
+    create: XOR<questsCreateWithoutSessionsInput, questsUncheckedCreateWithoutSessionsInput>
+    where?: questsWhereInput
+  }
+
+  export type questsUpdateToOneWithWhereWithoutSessionsInput = {
+    where?: questsWhereInput
+    data: XOR<questsUpdateWithoutSessionsInput, questsUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type questsUpdateWithoutSessionsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    location_text?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    duration_minutes?: IntFieldUpdateOperationsInput | number
+    rules?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    quest_checkpoints?: quest_checkpointsUpdateManyWithoutQuestsNestedInput
+    users?: usersUpdateOneRequiredWithoutQuestsNestedInput
+  }
+
+  export type questsUncheckedUpdateWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creator_id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    location_text?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    duration_minutes?: IntFieldUpdateOperationsInput | number
+    rules?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    is_hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    quest_checkpoints?: quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput
+  }
+
+  export type teamsUpsertWithoutSessionsInput = {
+    update: XOR<teamsUpdateWithoutSessionsInput, teamsUncheckedUpdateWithoutSessionsInput>
+    create: XOR<teamsCreateWithoutSessionsInput, teamsUncheckedCreateWithoutSessionsInput>
+    where?: teamsWhereInput
+  }
+
+  export type teamsUpdateToOneWithWhereWithoutSessionsInput = {
+    where?: teamsWhereInput
+    data: XOR<teamsUpdateWithoutSessionsInput, teamsUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type teamsUpdateWithoutSessionsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    invite_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    team_members?: team_membersUpdateManyWithoutTeamsNestedInput
+    users?: usersUpdateOneRequiredWithoutTeamsNestedInput
+  }
+
+  export type teamsUncheckedUpdateWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    creator_id?: IntFieldUpdateOperationsInput | number
+    invite_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    team_members?: team_membersUncheckedUpdateManyWithoutTeamsNestedInput
+  }
+
+  export type usersUpsertWithoutSessionsInput = {
+    update: XOR<usersUpdateWithoutSessionsInput, usersUncheckedUpdateWithoutSessionsInput>
+    create: XOR<usersCreateWithoutSessionsInput, usersUncheckedCreateWithoutSessionsInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutSessionsInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutSessionsInput, usersUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type usersUpdateWithoutSessionsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    age_group?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quests?: questsUpdateManyWithoutUsersNestedInput
+    team_members?: team_membersUpdateManyWithoutUsersNestedInput
+    teams?: teamsUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    age_group?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
+    team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
+    teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type questsCreateManyUsersInput = {
@@ -9882,6 +12254,17 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     rejection_reason?: string | null
+  }
+
+  export type sessionsCreateManyUsersInput = {
+    id?: number
+    quest_id: number
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
   }
 
   export type team_membersCreateManyUsersInput = {
@@ -9912,6 +12295,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUpdateManyWithoutQuestsNestedInput
+    sessions?: sessionsUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsUncheckedUpdateWithoutUsersInput = {
@@ -9929,6 +12313,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     quest_checkpoints?: quest_checkpointsUncheckedUpdateManyWithoutQuestsNestedInput
+    sessions?: sessionsUncheckedUpdateManyWithoutQuestsNestedInput
   }
 
   export type questsUncheckedUpdateManyWithoutUsersInput = {
@@ -9945,6 +12330,38 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type sessionsUpdateWithoutUsersInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
+    teams?: teamsUpdateOneWithoutSessionsNestedInput
+  }
+
+  export type sessionsUncheckedUpdateWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type sessionsUncheckedUpdateManyWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type team_membersUpdateWithoutUsersInput = {
@@ -9969,6 +12386,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUpdateManyWithoutTeamsNestedInput
   }
 
@@ -9978,6 +12396,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUncheckedUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutTeamsNestedInput
   }
 
@@ -9989,10 +12408,53 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type sessionsCreateManyTeamsInput = {
+    id?: number
+    quest_id: number
+    user_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+  }
+
   export type team_membersCreateManyTeamsInput = {
     id?: number
     user_id: number
     joined_at?: Date | string
+  }
+
+  export type sessionsUpdateWithoutTeamsInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
+    users?: usersUpdateOneWithoutSessionsNestedInput
+  }
+
+  export type sessionsUncheckedUpdateWithoutTeamsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type sessionsUncheckedUpdateManyWithoutTeamsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type team_membersUpdateWithoutTeamsInput = {
@@ -10024,6 +12486,17 @@ export namespace Prisma {
     point_rules?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+  }
+
+  export type sessionsCreateManyQuestsInput = {
+    id?: number
+    user_id?: number | null
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
   }
 
   export type quest_checkpointsUpdateWithoutQuestsInput = {
@@ -10065,6 +12538,38 @@ export namespace Prisma {
     point_rules?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type sessionsUpdateWithoutQuestsInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    teams?: teamsUpdateOneWithoutSessionsNestedInput
+    users?: usersUpdateOneWithoutSessionsNestedInput
+  }
+
+  export type sessionsUncheckedUpdateWithoutQuestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type sessionsUncheckedUpdateManyWithoutQuestsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

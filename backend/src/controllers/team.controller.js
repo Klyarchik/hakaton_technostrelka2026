@@ -121,7 +121,6 @@ const getTeamCurrentUser = async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    // Проверяем, существует ли пользователь
     const user = await prisma.users.findUnique({
       where: { id: userId },
     });
@@ -129,7 +128,6 @@ const getTeamCurrentUser = async (req, res) => {
       return res.status(404).json({ error: 'Пользователь не найден' });
     }
 
-    // Ищем членство пользователя в команде
     const membership = await prisma.team_members.findFirst({
       where: { user_id: userId },
       include: {
@@ -162,7 +160,6 @@ const getTeamCurrentUser = async (req, res) => {
 
     const team = membership.teams;
 
-    // Формируем ответ: данные команды + список участников
     const response = {
       id: team.id,
       name: team.name,

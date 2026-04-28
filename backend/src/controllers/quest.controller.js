@@ -319,6 +319,7 @@ const getQuestsByDifficulty = async (req, res) => {
   try {
     const whereBase = {
       status: { in: ["published", "archived"] },
+      is_hidden: false
     };
 
     if (!difficultyOption) {

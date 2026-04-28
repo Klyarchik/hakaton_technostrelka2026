@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { minioClient, BUCKET_NAME } = require('../configs/minio');
 
-// Регистрация пользователя
+// регистрация пользователя
 const register = async (req, res) => {
   try {
     const { nickname, password, email, age_group } = req.body;
@@ -54,7 +54,7 @@ const register = async (req, res) => {
   }
 };
 
-// Авторизация пользователя
+// авторизация пользователя
 const entrance = async (req, res) => {
   try {
     const { nickname, password } = req.body;
@@ -82,7 +82,7 @@ const entrance = async (req, res) => {
   }
 };
 
-// Изменение данных текущего пользователя (nickname и avatar)
+// изменение данных текущего пользователя (nickname и avatar)
 const updateCurrentUserData = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -130,7 +130,7 @@ const updateCurrentUserData = async (req, res) => {
   }
 };
 
-// Изменение пароля пользователя
+// изменение пароля пользователя
 const changePassword = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -167,7 +167,7 @@ const changePassword = async (req, res) => {
   }
 };
 
-// Получение всех данных текущего пользователя
+// получение всех данных текущего пользователя
 const getCurrentUserData = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -196,7 +196,7 @@ const getCurrentUserData = async (req, res) => {
   }
 };
 
-// Получение всех пользователей (только публичные данные)
+// получение всех пользователей (только публичные данные)
 const getAllUsers = async (req, res) => {
   try {
     const users = await prisma.users.findMany({
@@ -220,7 +220,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// Получение пользователя по id
+// получение пользователя по id
 const getUserById = async (req, res) => {
   try {
     const id = Number(req.query.id);

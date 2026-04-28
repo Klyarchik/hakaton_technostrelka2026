@@ -180,6 +180,18 @@ exports.Prisma.Quest_checkpointsScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.SessionsScalarFieldEnum = {
+  id: 'id',
+  quest_id: 'quest_id',
+  user_id: 'user_id',
+  team_id: 'team_id',
+  status: 'status',
+  transport_mode: 'transport_mode',
+  started_at: 'started_at',
+  finished_at: 'finished_at',
+  current_checkpoint_order: 'current_checkpoint_order'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -201,7 +213,8 @@ exports.Prisma.ModelName = {
   team_members: 'team_members',
   teams: 'teams',
   quests: 'quests',
-  quest_checkpoints: 'quest_checkpoints'
+  quest_checkpoints: 'quest_checkpoints',
+  sessions: 'sessions'
 };
 
 /**

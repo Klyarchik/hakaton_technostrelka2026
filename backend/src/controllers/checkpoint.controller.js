@@ -1,5 +1,6 @@
 const prisma = require("../client");
 
+// создание чекпоинта
 const createCheckpoint = async (req, res) => {
   try {
     const userId = req.user.userId;
