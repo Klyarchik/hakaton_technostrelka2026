@@ -386,6 +386,71 @@ const getQuestsByDifficulty = async (req, res) => {
   }
 };
 
+// создатель квеста или модератор изменять видимость квеста (is_hidden)
+const updateQuestStatus = async (req, res) => {
+  const { questId, action } = req.body; // action: 'archive' или 'hide'
+  const userId = req.user.userId;
+
+  if (!questId || !action) {
+    return res.status(400).json({ error: 'Необходимо указать questId и action (archive/hide)' });
+  }
+
+  if (action !== 'archive' && action !== 'hide') {
+    return res.status(400).json({ error: 'action должен быть "archive" или "hide"' });
+  }
+
+  try {
+    // 1. Находим квест
+    const quest = await prisma.quests.findUnique({
+      where: { id: parseInt(questId) }
+    });
+    if (!quest) {
+      return res.status(404).json({ error: 'Квест не найден' });
+    }
+
+    // 2. Проверяем права: создатель или модератор
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+      select: { role: true }
+    });
+    const isModerator = user.role === 'moderator';
+    const isCreator = quest.creator_id === userId;
+
+    if (!isCreator && !isModerator) {
+      return res.status(403).json({ error: 'У вас недостаточно прав. Только создатель квеста или модератор может изменять статус.' });
+    }
+
+    // 3. Определяем новые значения status и is_hidden
+    let newStatus, newIsHidden;
+    if (action === 'archive') {
+      newStatus = 'archived';
+      newIsHidden = false;
+    } else if (action === 'hide') {
+      newStatus = 'draft';
+      newIsHidden = true;
+    }
+
+    // 4. Обновляем квест
+    const updatedQuest = await prisma.quests.update({
+      where: { id: parseInt(questId) },
+      data: {
+        status: newStatus,
+        is_hidden: newIsHidden,
+        updated_at: new Date()
+      }
+    });
+
+    res.status(200).json({
+      message: action === 'archive' ? 'Квест архивирован' : 'Квест скрыт',
+      quest: updatedQuest
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
   createQuest,
   getAllDraftCurrentUser,
@@ -394,4 +459,5 @@ module.exports = {
   getQuestById,
   moderateQuest,
   getQuestsByDifficulty,
+  updateQuestStatus
 };

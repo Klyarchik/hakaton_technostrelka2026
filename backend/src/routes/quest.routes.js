@@ -7,7 +7,8 @@ const {
   getAllModerateQuests,
   getQuestById,
   moderateQuest,
-  getQuestsByDifficulty
+  getQuestsByDifficulty,
+  updateQuestStatus
 } = require('../controllers/quest.controller');
 const multer = require("multer");
 
@@ -102,6 +103,13 @@ router.put(
   authMiddleware,
   /* #swagger.tags = ['Quests'] #swagger.summary = 'Модерация квеста' */
   moderateQuest
+);
+
+router.put(
+  "/hidden",
+  authMiddleware,
+  /* #swagger.tags = ['Quests'] #swagger.summary = 'Изменения статуса видимости (создатель квеста или модератор)' */
+  updateQuestStatus
 );
 
 
