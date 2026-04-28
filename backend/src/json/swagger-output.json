@@ -536,6 +536,36 @@
         }
       }
     },
+    "/api/team/team-current-user": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Получение команды текущего пользователя",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/quest/create": {
       "post": {
         "tags": [
