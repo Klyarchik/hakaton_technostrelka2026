@@ -1,5 +1,7 @@
 const prisma = require("../client");
 const { awardQuestPoints } = require("../utils/awards.quests");
+const { sendNotification } = require("../services/firebase.notifications");
+const { error } = require("node:console");
 
 // создание чекпоинта
 const createCheckpoint = async (req, res) => {
@@ -146,6 +148,28 @@ const submitAnswer = async (req, res) => {
         data: { status: "completed", finished_at: new Date() },
       });
 
+      // получение информации о создателе квеста
+      const questCreator = await prisma.users.findUnique({
+        where: { id: quest.creator_id },
+      });
+
+      if(!questCreator) {
+        res.status(404).json({ error: "Создатель квеста не найден для отправки уведомления" });
+      }
+
+      const token_devices = questCreator.token_device;
+
+      if (!token_devices || token_devices.length === 0) {
+        console.error(
+          `У пользователя нет ни одного токена устройства`,
+        );
+      }
+
+      // информация о текущем пользователе
+      const userInfo = await prisma.users.findUnique({
+        where: { id: userId }
+      });     
+
       // Начисляем очки команде (если командная сессия)
       if (session.team_id && session.teams) {
         await awardQuestPoints(
@@ -154,6 +178,43 @@ const submitAnswer = async (req, res) => {
           session.transport_mode,
           session.id,
         );
+
+        //информация о команде если она есть
+        const teamInfo = await prisma.teams.findUnique({
+          where: { id: session.team_id }
+        });
+
+        if(!teamInfo) {
+          return res.status(404).json({ error: "Команда не найдена для отправки уведомления" })
+        }
+
+        if (token_devices && token_devices.length > 0) {
+          for (const token_device of token_devices) {
+            try {
+              await sendNotification(
+                token_device,
+                "🏁 Квест пройден!",
+                `Команда «${teamInfo.name}» только что прошла ваш квест «${quest.title}»!`,
+              );
+            } catch (error) {
+              console.error(`Ошибка при отправке на токен устройства ${token_device}:`, error.message);
+            }
+          }
+        }
+      } else {
+        if (token_devices && token_devices.length > 0) {
+          for (const token_device of token_devices) {
+            try {
+              await sendNotification(
+                token_device,
+                "🏁 Квест пройден!",
+                `Пользователь ${userInfo.nickname} только что прошёл ваш квест «${quest.title}»!`,
+              );
+            } catch (error) {
+              console.error(`Ошибка при отправке на токен устройства ${token_device}:`, error.message);
+            }
+          }
+        }
       }
 
       return res.status(200).json({

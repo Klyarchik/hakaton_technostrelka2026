@@ -1,4 +1,5 @@
 const prisma = require("../client");
+const { sendNotification } = require("../services/firebase.notifications");
 
 // создание сессии прохождения
 const createSession = async (req, res) => {
@@ -20,6 +21,18 @@ const createSession = async (req, res) => {
         .json({ error: "Квест не найден или не опубликован" });
     }
 
+    const questCreator = await prisma.users.findUnique({
+      where: { id: quest.creator_id },
+    });
+
+    const token_devices = questCreator.token_device;
+
+    if (!token_devices || token_devices.length === 0) {
+      console.error(
+        `У пользователя нет ни одного токена устройства`,
+      );
+    }
+
     const ALLOWED_TRANSPORT_MODES = [
       "walk",
       "public_transport",
@@ -38,6 +51,14 @@ const createSession = async (req, res) => {
 
     // 2. Режим соло
     if (mode === "solo") {
+      const userInfo = await prisma.users.findUnique({
+        where: { id: userId }
+      });
+
+      if(!userInfo) {
+        return res.status(404).json({ error: "Пользователь не найден при создании записи на квест" });
+      }
+
       // Проверить, не начат ли уже квест этим пользователем (активная сессия)
       const activeSession = await prisma.sessions.findFirst({
         where: {
@@ -88,6 +109,21 @@ const createSession = async (req, res) => {
           users: { select: { id: true, nickname: true, avatar: true } },
         },
       });
+
+      if (token_devices && token_devices.length > 0) {
+        for (const token_device of token_devices) {
+          try {
+            await sendNotification(
+              token_device,
+              "🎯 Ваш квест в игре",
+              `${userInfo.nickname} только что приступил(а) к вашему квесту «${quest.title}».`,
+            );
+          } catch (error) {
+            console.error(`Ошибка при отправке на токен устройства ${token_device}:`, error.message);
+          }
+        }
+      }
+
       return res.status(201).json(session);
     }
 
@@ -102,6 +138,15 @@ const createSession = async (req, res) => {
         return res.status(400).json({ error: "Вы не состоите в команде" });
       }
       const teamId = membership.team_id;
+
+      // получение информации о команде
+      const teamInfo = await prisma.teams.findUnique({
+        where: { id: teamId },
+      });
+
+      if(!teamInfo) {
+        return res.status(404),json({ error: "Команда не найдена при создании записи на квест" });
+      }
 
       // проверка, что в команде от 2 до 6 человек
       const membersCount = await prisma.team_members.count({
@@ -178,6 +223,21 @@ const createSession = async (req, res) => {
           },
         },
       });
+
+      if (token_devices && token_devices.length > 0) {
+        for (const token_device of token_devices) {
+          try {
+            await sendNotification(
+              token_device,
+              "🏆 Команда на старте",
+              `Команда «${teamInfo.name}» приступила к вашему квесту «${quest.title}». Пожелайте им удачи!`,
+            );
+          } catch (error) {
+            console.error(`Ошибка при отправке на токен устройства ${token_device}:`, error.message);
+          }
+        }
+      }
+
       return res
         .status(201)
         .json({ message: "Вы успешно записались на квест", session: session });
@@ -203,9 +263,9 @@ const getCurrentSession = async (req, res) => {
       where: {
         OR: [
           { user_id: userId },
-          { teams: { team_members: { some: { user_id: userId } } } }
+          { teams: { team_members: { some: { user_id: userId } } } },
         ],
-        status: { in: ['started', 'in_progress'] }
+        status: { in: ["started", "in_progress"] },
       },
       include: {
         quests: {
@@ -217,45 +277,45 @@ const getCurrentSession = async (req, res) => {
             description: true,
             location_text: true,
             image: true,
-            rules: true
-          }
+            rules: true,
+          },
         },
         users: {
-          select: { id: true, nickname: true, avatar: true }
+          select: { id: true, nickname: true, avatar: true },
         },
         teams: {
           include: {
             team_members: {
               include: {
-                users: { select: { id: true, nickname: true, avatar: true } }
-              }
-            }
-          }
-        }
-      }
+                users: { select: { id: true, nickname: true, avatar: true } },
+              },
+            },
+          },
+        },
+      },
     });
 
     if (!session) {
-      return res.status(200).json({ message: 'Нет активной сессии' });
+      return res.status(200).json({ message: "Нет активной сессии" });
     }
 
     // Получаем все чекпоинты квеста из quest_checkpoints
     const questCheckpoints = await prisma.quest_checkpoints.findMany({
       where: { quest_id: session.quest_id },
-      orderBy: { order_index: 'asc' }
+      orderBy: { order_index: "asc" },
     });
 
     const currentOrder = session.current_checkpoint_order;
 
     // Формируем массив чекпоинтов со статусами
-    const checkpoints = questCheckpoints.map(cp => {
+    const checkpoints = questCheckpoints.map((cp) => {
       let status;
       if (cp.order_index < currentOrder) {
-        status = 'completed';       // пройденный
+        status = "completed"; // пройденный
       } else if (cp.order_index === currentOrder) {
-        status = 'active';          // текущий
+        status = "active"; // текущий
       } else {
-        status = 'locked';          // заблокированный
+        status = "locked"; // заблокированный
       }
       return {
         id: cp.id,
@@ -267,7 +327,7 @@ const getCurrentSession = async (req, res) => {
         point_rules: cp.point_rules,
         latitude: cp.latitude,
         longitude: cp.longitude,
-        status: status
+        status: status,
       };
     });
 
@@ -285,11 +345,11 @@ const getCurrentSession = async (req, res) => {
       user: session.users,
       team: session.teams,
       checkpoints: checkpoints,
-      total_checkpoints: totalCheckpoints
+      total_checkpoints: totalCheckpoints,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -400,7 +460,6 @@ const abandonSession = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 module.exports = {
   createSession,

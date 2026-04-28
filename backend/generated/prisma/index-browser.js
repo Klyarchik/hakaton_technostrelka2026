@@ -129,7 +129,8 @@ exports.Prisma.UsersScalarFieldEnum = {
   role: 'role',
   avatar: 'avatar',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  token_device: 'token_device'
 };
 
 exports.Prisma.Team_membersScalarFieldEnum = {

@@ -2145,6 +2145,7 @@ export namespace Prisma {
     avatar: number
     created_at: number
     updated_at: number
+    token_device: number
     _all: number
   }
 
@@ -2191,6 +2192,7 @@ export namespace Prisma {
     avatar?: true
     created_at?: true
     updated_at?: true
+    token_device?: true
     _all?: true
   }
 
@@ -2290,6 +2292,7 @@ export namespace Prisma {
     avatar: string
     created_at: Date
     updated_at: Date
+    token_device: string[]
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -2321,6 +2324,7 @@ export namespace Prisma {
     avatar?: boolean
     created_at?: boolean
     updated_at?: boolean
+    token_device?: boolean
     quests?: boolean | users$questsArgs<ExtArgs>
     sessions?: boolean | users$sessionsArgs<ExtArgs>
     team_members?: boolean | users$team_membersArgs<ExtArgs>
@@ -2338,6 +2342,7 @@ export namespace Prisma {
     avatar?: boolean
     created_at?: boolean
     updated_at?: boolean
+    token_device?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type usersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2350,6 +2355,7 @@ export namespace Prisma {
     avatar?: boolean
     created_at?: boolean
     updated_at?: boolean
+    token_device?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type usersSelectScalar = {
@@ -2362,9 +2368,10 @@ export namespace Prisma {
     avatar?: boolean
     created_at?: boolean
     updated_at?: boolean
+    token_device?: boolean
   }
 
-  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "nickname" | "age_group" | "role" | "avatar" | "created_at" | "updated_at", ExtArgs["result"]["users"]>
+  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "nickname" | "age_group" | "role" | "avatar" | "created_at" | "updated_at" | "token_device", ExtArgs["result"]["users"]>
   export type usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quests?: boolean | users$questsArgs<ExtArgs>
     sessions?: boolean | users$sessionsArgs<ExtArgs>
@@ -2393,6 +2400,7 @@ export namespace Prisma {
       avatar: string
       created_at: Date
       updated_at: Date
+      token_device: string[]
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -2829,6 +2837,7 @@ export namespace Prisma {
     readonly avatar: FieldRef<"users", 'String'>
     readonly created_at: FieldRef<"users", 'DateTime'>
     readonly updated_at: FieldRef<"users", 'DateTime'>
+    readonly token_device: FieldRef<"users", 'String[]'>
   }
     
 
@@ -15266,7 +15275,8 @@ export namespace Prisma {
     role: 'role',
     avatar: 'avatar',
     created_at: 'created_at',
-    updated_at: 'updated_at'
+    updated_at: 'updated_at',
+    token_device: 'token_device'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -15528,6 +15538,7 @@ export namespace Prisma {
     avatar?: StringFilter<"users"> | string
     created_at?: DateTimeFilter<"users"> | Date | string
     updated_at?: DateTimeFilter<"users"> | Date | string
+    token_device?: StringNullableListFilter<"users">
     quests?: QuestsListRelationFilter
     sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
@@ -15544,6 +15555,7 @@ export namespace Prisma {
     avatar?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    token_device?: SortOrder
     quests?: questsOrderByRelationAggregateInput
     sessions?: sessionsOrderByRelationAggregateInput
     team_members?: team_membersOrderByRelationAggregateInput
@@ -15563,6 +15575,7 @@ export namespace Prisma {
     avatar?: StringFilter<"users"> | string
     created_at?: DateTimeFilter<"users"> | Date | string
     updated_at?: DateTimeFilter<"users"> | Date | string
+    token_device?: StringNullableListFilter<"users">
     quests?: QuestsListRelationFilter
     sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
@@ -15579,6 +15592,7 @@ export namespace Prisma {
     avatar?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    token_device?: SortOrder
     _count?: usersCountOrderByAggregateInput
     _avg?: usersAvgOrderByAggregateInput
     _max?: usersMaxOrderByAggregateInput
@@ -15599,6 +15613,7 @@ export namespace Prisma {
     avatar?: StringWithAggregatesFilter<"users"> | string
     created_at?: DateTimeWithAggregatesFilter<"users"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"users"> | Date | string
+    token_device?: StringNullableListFilter<"users">
   }
 
   export type team_membersWhereInput = {
@@ -16372,6 +16387,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     team_members?: team_membersCreateNestedManyWithoutUsersInput
@@ -16388,6 +16404,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
@@ -16403,6 +16420,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUpdateManyWithoutUsersNestedInput
@@ -16419,6 +16437,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
@@ -16435,6 +16454,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
   }
 
   export type usersUpdateManyMutationInput = {
@@ -16446,6 +16466,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
   }
 
   export type usersUncheckedUpdateManyInput = {
@@ -16458,6 +16479,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
   }
 
   export type team_membersCreateInput = {
@@ -17233,6 +17255,14 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type QuestsListRelationFilter = {
     every?: questsWhereInput
     some?: questsWhereInput
@@ -17283,6 +17313,7 @@ export namespace Prisma {
     avatar?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    token_device?: SortOrder
   }
 
   export type usersAvgOrderByAggregateInput = {
@@ -18086,6 +18117,10 @@ export namespace Prisma {
     points?: SortOrder
   }
 
+  export type usersCreatetoken_deviceInput = {
+    set: string[]
+  }
+
   export type questsCreateNestedManyWithoutUsersInput = {
     create?: XOR<questsCreateWithoutUsersInput, questsUncheckedCreateWithoutUsersInput> | questsCreateWithoutUsersInput[] | questsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: questsCreateOrConnectWithoutUsersInput | questsCreateOrConnectWithoutUsersInput[]
@@ -18148,6 +18183,11 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type usersUpdatetoken_deviceInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type questsUpdateManyWithoutUsersNestedInput = {
@@ -19679,6 +19719,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     teams?: teamsCreateNestedManyWithoutUsersInput
@@ -19694,6 +19735,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     teams?: teamsUncheckedCreateNestedManyWithoutUsersInput
@@ -19756,6 +19798,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     teams?: teamsUpdateManyWithoutUsersNestedInput
@@ -19771,6 +19814,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
@@ -19868,6 +19912,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     team_members?: team_membersCreateNestedManyWithoutUsersInput
@@ -19883,6 +19928,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
@@ -19973,6 +20019,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUpdateManyWithoutUsersNestedInput
@@ -19988,6 +20035,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
@@ -20045,6 +20093,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     team_members?: team_membersCreateNestedManyWithoutUsersInput
     teams?: teamsCreateNestedManyWithoutUsersInput
@@ -20060,6 +20109,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
     teams?: teamsUncheckedCreateNestedManyWithoutUsersInput
@@ -20161,6 +20211,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUpdateManyWithoutUsersNestedInput
     teams?: teamsUpdateManyWithoutUsersNestedInput
@@ -20176,6 +20227,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
@@ -20604,6 +20656,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsCreateNestedManyWithoutUsersInput
     team_members?: team_membersCreateNestedManyWithoutUsersInput
     teams?: teamsCreateNestedManyWithoutUsersInput
@@ -20619,6 +20672,7 @@ export namespace Prisma {
     avatar: string
     created_at?: Date | string
     updated_at?: Date | string
+    token_device?: usersCreatetoken_deviceInput | string[]
     quests?: questsUncheckedCreateNestedManyWithoutUsersInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutUsersInput
     teams?: teamsUncheckedCreateNestedManyWithoutUsersInput
@@ -20775,6 +20829,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUpdateManyWithoutUsersNestedInput
     teams?: teamsUpdateManyWithoutUsersNestedInput
@@ -20790,6 +20845,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_device?: usersUpdatetoken_deviceInput | string[]
     quests?: questsUncheckedUpdateManyWithoutUsersNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutUsersNestedInput
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
