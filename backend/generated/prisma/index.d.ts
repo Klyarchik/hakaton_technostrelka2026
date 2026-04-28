@@ -63,6 +63,11 @@ export type session_answers = $Result.DefaultSelection<Prisma.$session_answersPa
  * 
  */
 export type session_checkpoints = $Result.DefaultSelection<Prisma.$session_checkpointsPayload>
+/**
+ * Model points_transactions
+ * 
+ */
+export type points_transactions = $Result.DefaultSelection<Prisma.$points_transactionsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -284,6 +289,16 @@ export class PrismaClient<
     * ```
     */
   get session_checkpoints(): Prisma.session_checkpointsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.points_transactions`: Exposes CRUD operations for the **points_transactions** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Points_transactions
+    * const points_transactions = await prisma.points_transactions.findMany()
+    * ```
+    */
+  get points_transactions(): Prisma.points_transactionsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -727,7 +742,8 @@ export namespace Prisma {
     checkpoint_tasks: 'checkpoint_tasks',
     task_choice_options: 'task_choice_options',
     session_answers: 'session_answers',
-    session_checkpoints: 'session_checkpoints'
+    session_checkpoints: 'session_checkpoints',
+    points_transactions: 'points_transactions'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -743,7 +759,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "team_members" | "teams" | "quests" | "quest_checkpoints" | "sessions" | "checkpoint_tasks" | "task_choice_options" | "session_answers" | "session_checkpoints"
+      modelProps: "users" | "team_members" | "teams" | "quests" | "quest_checkpoints" | "sessions" | "checkpoint_tasks" | "task_choice_options" | "session_answers" | "session_checkpoints" | "points_transactions"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1487,6 +1503,80 @@ export namespace Prisma {
           }
         }
       }
+      points_transactions: {
+        payload: Prisma.$points_transactionsPayload<ExtArgs>
+        fields: Prisma.points_transactionsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.points_transactionsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.points_transactionsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>
+          }
+          findFirst: {
+            args: Prisma.points_transactionsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.points_transactionsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>
+          }
+          findMany: {
+            args: Prisma.points_transactionsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>[]
+          }
+          create: {
+            args: Prisma.points_transactionsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>
+          }
+          createMany: {
+            args: Prisma.points_transactionsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.points_transactionsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>[]
+          }
+          delete: {
+            args: Prisma.points_transactionsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>
+          }
+          update: {
+            args: Prisma.points_transactionsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>
+          }
+          deleteMany: {
+            args: Prisma.points_transactionsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.points_transactionsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.points_transactionsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>[]
+          }
+          upsert: {
+            args: Prisma.points_transactionsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$points_transactionsPayload>
+          }
+          aggregate: {
+            args: Prisma.Points_transactionsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePoints_transactions>
+          }
+          groupBy: {
+            args: Prisma.points_transactionsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Points_transactionsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.points_transactionsCountArgs<ExtArgs>
+            result: $Utils.Optional<Points_transactionsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1605,6 +1695,7 @@ export namespace Prisma {
     task_choice_options?: task_choice_optionsOmit
     session_answers?: session_answersOmit
     session_checkpoints?: session_checkpointsOmit
+    points_transactions?: points_transactionsOmit
   }
 
   /* Types for Logging */
@@ -1743,11 +1834,13 @@ export namespace Prisma {
    */
 
   export type TeamsCountOutputType = {
+    points_transactions: number
     sessions: number
     team_members: number
   }
 
   export type TeamsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    points_transactions?: boolean | TeamsCountOutputTypeCountPoints_transactionsArgs
     sessions?: boolean | TeamsCountOutputTypeCountSessionsArgs
     team_members?: boolean | TeamsCountOutputTypeCountTeam_membersArgs
   }
@@ -1761,6 +1854,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the TeamsCountOutputType
      */
     select?: TeamsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TeamsCountOutputType without action
+   */
+  export type TeamsCountOutputTypeCountPoints_transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: points_transactionsWhereInput
   }
 
   /**
@@ -1872,11 +1972,13 @@ export namespace Prisma {
    */
 
   export type SessionsCountOutputType = {
+    points_transactions: number
     session_answers: number
     session_checkpoints: number
   }
 
   export type SessionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    points_transactions?: boolean | SessionsCountOutputTypeCountPoints_transactionsArgs
     session_answers?: boolean | SessionsCountOutputTypeCountSession_answersArgs
     session_checkpoints?: boolean | SessionsCountOutputTypeCountSession_checkpointsArgs
   }
@@ -1890,6 +1992,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the SessionsCountOutputType
      */
     select?: SessionsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SessionsCountOutputType without action
+   */
+  export type SessionsCountOutputTypeCountPoints_transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: points_transactionsWhereInput
   }
 
   /**
@@ -4537,6 +4646,7 @@ export namespace Prisma {
     creator_id?: boolean
     invite_code?: boolean
     created_at?: boolean
+    points_transactions?: boolean | teams$points_transactionsArgs<ExtArgs>
     sessions?: boolean | teams$sessionsArgs<ExtArgs>
     team_members?: boolean | teams$team_membersArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
@@ -4574,6 +4684,7 @@ export namespace Prisma {
 
   export type teamsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "creator_id" | "invite_code" | "created_at", ExtArgs["result"]["teams"]>
   export type teamsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    points_transactions?: boolean | teams$points_transactionsArgs<ExtArgs>
     sessions?: boolean | teams$sessionsArgs<ExtArgs>
     team_members?: boolean | teams$team_membersArgs<ExtArgs>
     users?: boolean | usersDefaultArgs<ExtArgs>
@@ -4589,6 +4700,7 @@ export namespace Prisma {
   export type $teamsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "teams"
     objects: {
+      points_transactions: Prisma.$points_transactionsPayload<ExtArgs>[]
       sessions: Prisma.$sessionsPayload<ExtArgs>[]
       team_members: Prisma.$team_membersPayload<ExtArgs>[]
       users: Prisma.$usersPayload<ExtArgs>
@@ -4994,6 +5106,7 @@ export namespace Prisma {
    */
   export interface Prisma__teamsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    points_transactions<T extends teams$points_transactionsArgs<ExtArgs> = {}>(args?: Subset<T, teams$points_transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends teams$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, teams$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     team_members<T extends teams$team_membersArgs<ExtArgs> = {}>(args?: Subset<T, teams$team_membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$team_membersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -5430,6 +5543,30 @@ export namespace Prisma {
      * Limit how many teams to delete.
      */
     limit?: number
+  }
+
+  /**
+   * teams.points_transactions
+   */
+  export type teams$points_transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    where?: points_transactionsWhereInput
+    orderBy?: points_transactionsOrderByWithRelationInput | points_transactionsOrderByWithRelationInput[]
+    cursor?: points_transactionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Points_transactionsScalarFieldEnum | Points_transactionsScalarFieldEnum[]
   }
 
   /**
@@ -8319,6 +8456,7 @@ export namespace Prisma {
     started_at?: boolean
     finished_at?: boolean
     current_checkpoint_order?: boolean
+    points_transactions?: boolean | sessions$points_transactionsArgs<ExtArgs>
     session_answers?: boolean | sessions$session_answersArgs<ExtArgs>
     session_checkpoints?: boolean | sessions$session_checkpointsArgs<ExtArgs>
     quests?: boolean | questsDefaultArgs<ExtArgs>
@@ -8371,6 +8509,7 @@ export namespace Prisma {
 
   export type sessionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quest_id" | "user_id" | "team_id" | "status" | "transport_mode" | "started_at" | "finished_at" | "current_checkpoint_order", ExtArgs["result"]["sessions"]>
   export type sessionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    points_transactions?: boolean | sessions$points_transactionsArgs<ExtArgs>
     session_answers?: boolean | sessions$session_answersArgs<ExtArgs>
     session_checkpoints?: boolean | sessions$session_checkpointsArgs<ExtArgs>
     quests?: boolean | questsDefaultArgs<ExtArgs>
@@ -8392,6 +8531,7 @@ export namespace Prisma {
   export type $sessionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "sessions"
     objects: {
+      points_transactions: Prisma.$points_transactionsPayload<ExtArgs>[]
       session_answers: Prisma.$session_answersPayload<ExtArgs>[]
       session_checkpoints: Prisma.$session_checkpointsPayload<ExtArgs>[]
       quests: Prisma.$questsPayload<ExtArgs>
@@ -8802,6 +8942,7 @@ export namespace Prisma {
    */
   export interface Prisma__sessionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    points_transactions<T extends sessions$points_transactionsArgs<ExtArgs> = {}>(args?: Subset<T, sessions$points_transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     session_answers<T extends sessions$session_answersArgs<ExtArgs> = {}>(args?: Subset<T, sessions$session_answersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     session_checkpoints<T extends sessions$session_checkpointsArgs<ExtArgs> = {}>(args?: Subset<T, sessions$session_checkpointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     quests<T extends questsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, questsDefaultArgs<ExtArgs>>): Prisma__questsClient<$Result.GetResult<Prisma.$questsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -9243,6 +9384,30 @@ export namespace Prisma {
      * Limit how many sessions to delete.
      */
     limit?: number
+  }
+
+  /**
+   * sessions.points_transactions
+   */
+  export type sessions$points_transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    where?: points_transactionsWhereInput
+    orderBy?: points_transactionsOrderByWithRelationInput | points_transactionsOrderByWithRelationInput[]
+    cursor?: points_transactionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Points_transactionsScalarFieldEnum | Points_transactionsScalarFieldEnum[]
   }
 
   /**
@@ -13949,6 +14114,1136 @@ export namespace Prisma {
 
 
   /**
+   * Model points_transactions
+   */
+
+  export type AggregatePoints_transactions = {
+    _count: Points_transactionsCountAggregateOutputType | null
+    _avg: Points_transactionsAvgAggregateOutputType | null
+    _sum: Points_transactionsSumAggregateOutputType | null
+    _min: Points_transactionsMinAggregateOutputType | null
+    _max: Points_transactionsMaxAggregateOutputType | null
+  }
+
+  export type Points_transactionsAvgAggregateOutputType = {
+    id: number | null
+    team_id: number | null
+    session_id: number | null
+    points: number | null
+  }
+
+  export type Points_transactionsSumAggregateOutputType = {
+    id: number | null
+    team_id: number | null
+    session_id: number | null
+    points: number | null
+  }
+
+  export type Points_transactionsMinAggregateOutputType = {
+    id: number | null
+    team_id: number | null
+    session_id: number | null
+    points: number | null
+    reason: string | null
+    created_at: Date | null
+  }
+
+  export type Points_transactionsMaxAggregateOutputType = {
+    id: number | null
+    team_id: number | null
+    session_id: number | null
+    points: number | null
+    reason: string | null
+    created_at: Date | null
+  }
+
+  export type Points_transactionsCountAggregateOutputType = {
+    id: number
+    team_id: number
+    session_id: number
+    points: number
+    reason: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type Points_transactionsAvgAggregateInputType = {
+    id?: true
+    team_id?: true
+    session_id?: true
+    points?: true
+  }
+
+  export type Points_transactionsSumAggregateInputType = {
+    id?: true
+    team_id?: true
+    session_id?: true
+    points?: true
+  }
+
+  export type Points_transactionsMinAggregateInputType = {
+    id?: true
+    team_id?: true
+    session_id?: true
+    points?: true
+    reason?: true
+    created_at?: true
+  }
+
+  export type Points_transactionsMaxAggregateInputType = {
+    id?: true
+    team_id?: true
+    session_id?: true
+    points?: true
+    reason?: true
+    created_at?: true
+  }
+
+  export type Points_transactionsCountAggregateInputType = {
+    id?: true
+    team_id?: true
+    session_id?: true
+    points?: true
+    reason?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type Points_transactionsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which points_transactions to aggregate.
+     */
+    where?: points_transactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of points_transactions to fetch.
+     */
+    orderBy?: points_transactionsOrderByWithRelationInput | points_transactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: points_transactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` points_transactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` points_transactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned points_transactions
+    **/
+    _count?: true | Points_transactionsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Points_transactionsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Points_transactionsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Points_transactionsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Points_transactionsMaxAggregateInputType
+  }
+
+  export type GetPoints_transactionsAggregateType<T extends Points_transactionsAggregateArgs> = {
+        [P in keyof T & keyof AggregatePoints_transactions]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePoints_transactions[P]>
+      : GetScalarType<T[P], AggregatePoints_transactions[P]>
+  }
+
+
+
+
+  export type points_transactionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: points_transactionsWhereInput
+    orderBy?: points_transactionsOrderByWithAggregationInput | points_transactionsOrderByWithAggregationInput[]
+    by: Points_transactionsScalarFieldEnum[] | Points_transactionsScalarFieldEnum
+    having?: points_transactionsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Points_transactionsCountAggregateInputType | true
+    _avg?: Points_transactionsAvgAggregateInputType
+    _sum?: Points_transactionsSumAggregateInputType
+    _min?: Points_transactionsMinAggregateInputType
+    _max?: Points_transactionsMaxAggregateInputType
+  }
+
+  export type Points_transactionsGroupByOutputType = {
+    id: number
+    team_id: number
+    session_id: number
+    points: number
+    reason: string
+    created_at: Date
+    _count: Points_transactionsCountAggregateOutputType | null
+    _avg: Points_transactionsAvgAggregateOutputType | null
+    _sum: Points_transactionsSumAggregateOutputType | null
+    _min: Points_transactionsMinAggregateOutputType | null
+    _max: Points_transactionsMaxAggregateOutputType | null
+  }
+
+  type GetPoints_transactionsGroupByPayload<T extends points_transactionsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Points_transactionsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Points_transactionsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Points_transactionsGroupByOutputType[P]>
+            : GetScalarType<T[P], Points_transactionsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type points_transactionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    team_id?: boolean
+    session_id?: boolean
+    points?: boolean
+    reason?: boolean
+    created_at?: boolean
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    teams?: boolean | teamsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["points_transactions"]>
+
+  export type points_transactionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    team_id?: boolean
+    session_id?: boolean
+    points?: boolean
+    reason?: boolean
+    created_at?: boolean
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    teams?: boolean | teamsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["points_transactions"]>
+
+  export type points_transactionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    team_id?: boolean
+    session_id?: boolean
+    points?: boolean
+    reason?: boolean
+    created_at?: boolean
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    teams?: boolean | teamsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["points_transactions"]>
+
+  export type points_transactionsSelectScalar = {
+    id?: boolean
+    team_id?: boolean
+    session_id?: boolean
+    points?: boolean
+    reason?: boolean
+    created_at?: boolean
+  }
+
+  export type points_transactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "team_id" | "session_id" | "points" | "reason" | "created_at", ExtArgs["result"]["points_transactions"]>
+  export type points_transactionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    teams?: boolean | teamsDefaultArgs<ExtArgs>
+  }
+  export type points_transactionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    teams?: boolean | teamsDefaultArgs<ExtArgs>
+  }
+  export type points_transactionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    teams?: boolean | teamsDefaultArgs<ExtArgs>
+  }
+
+  export type $points_transactionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "points_transactions"
+    objects: {
+      sessions: Prisma.$sessionsPayload<ExtArgs>
+      teams: Prisma.$teamsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      team_id: number
+      session_id: number
+      points: number
+      reason: string
+      created_at: Date
+    }, ExtArgs["result"]["points_transactions"]>
+    composites: {}
+  }
+
+  type points_transactionsGetPayload<S extends boolean | null | undefined | points_transactionsDefaultArgs> = $Result.GetResult<Prisma.$points_transactionsPayload, S>
+
+  type points_transactionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<points_transactionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Points_transactionsCountAggregateInputType | true
+    }
+
+  export interface points_transactionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['points_transactions'], meta: { name: 'points_transactions' } }
+    /**
+     * Find zero or one Points_transactions that matches the filter.
+     * @param {points_transactionsFindUniqueArgs} args - Arguments to find a Points_transactions
+     * @example
+     * // Get one Points_transactions
+     * const points_transactions = await prisma.points_transactions.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends points_transactionsFindUniqueArgs>(args: SelectSubset<T, points_transactionsFindUniqueArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Points_transactions that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {points_transactionsFindUniqueOrThrowArgs} args - Arguments to find a Points_transactions
+     * @example
+     * // Get one Points_transactions
+     * const points_transactions = await prisma.points_transactions.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends points_transactionsFindUniqueOrThrowArgs>(args: SelectSubset<T, points_transactionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Points_transactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {points_transactionsFindFirstArgs} args - Arguments to find a Points_transactions
+     * @example
+     * // Get one Points_transactions
+     * const points_transactions = await prisma.points_transactions.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends points_transactionsFindFirstArgs>(args?: SelectSubset<T, points_transactionsFindFirstArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Points_transactions that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {points_transactionsFindFirstOrThrowArgs} args - Arguments to find a Points_transactions
+     * @example
+     * // Get one Points_transactions
+     * const points_transactions = await prisma.points_transactions.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends points_transactionsFindFirstOrThrowArgs>(args?: SelectSubset<T, points_transactionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Points_transactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {points_transactionsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Points_transactions
+     * const points_transactions = await prisma.points_transactions.findMany()
+     * 
+     * // Get first 10 Points_transactions
+     * const points_transactions = await prisma.points_transactions.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const points_transactionsWithIdOnly = await prisma.points_transactions.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends points_transactionsFindManyArgs>(args?: SelectSubset<T, points_transactionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Points_transactions.
+     * @param {points_transactionsCreateArgs} args - Arguments to create a Points_transactions.
+     * @example
+     * // Create one Points_transactions
+     * const Points_transactions = await prisma.points_transactions.create({
+     *   data: {
+     *     // ... data to create a Points_transactions
+     *   }
+     * })
+     * 
+     */
+    create<T extends points_transactionsCreateArgs>(args: SelectSubset<T, points_transactionsCreateArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Points_transactions.
+     * @param {points_transactionsCreateManyArgs} args - Arguments to create many Points_transactions.
+     * @example
+     * // Create many Points_transactions
+     * const points_transactions = await prisma.points_transactions.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends points_transactionsCreateManyArgs>(args?: SelectSubset<T, points_transactionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Points_transactions and returns the data saved in the database.
+     * @param {points_transactionsCreateManyAndReturnArgs} args - Arguments to create many Points_transactions.
+     * @example
+     * // Create many Points_transactions
+     * const points_transactions = await prisma.points_transactions.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Points_transactions and only return the `id`
+     * const points_transactionsWithIdOnly = await prisma.points_transactions.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends points_transactionsCreateManyAndReturnArgs>(args?: SelectSubset<T, points_transactionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Points_transactions.
+     * @param {points_transactionsDeleteArgs} args - Arguments to delete one Points_transactions.
+     * @example
+     * // Delete one Points_transactions
+     * const Points_transactions = await prisma.points_transactions.delete({
+     *   where: {
+     *     // ... filter to delete one Points_transactions
+     *   }
+     * })
+     * 
+     */
+    delete<T extends points_transactionsDeleteArgs>(args: SelectSubset<T, points_transactionsDeleteArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Points_transactions.
+     * @param {points_transactionsUpdateArgs} args - Arguments to update one Points_transactions.
+     * @example
+     * // Update one Points_transactions
+     * const points_transactions = await prisma.points_transactions.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends points_transactionsUpdateArgs>(args: SelectSubset<T, points_transactionsUpdateArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Points_transactions.
+     * @param {points_transactionsDeleteManyArgs} args - Arguments to filter Points_transactions to delete.
+     * @example
+     * // Delete a few Points_transactions
+     * const { count } = await prisma.points_transactions.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends points_transactionsDeleteManyArgs>(args?: SelectSubset<T, points_transactionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Points_transactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {points_transactionsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Points_transactions
+     * const points_transactions = await prisma.points_transactions.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends points_transactionsUpdateManyArgs>(args: SelectSubset<T, points_transactionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Points_transactions and returns the data updated in the database.
+     * @param {points_transactionsUpdateManyAndReturnArgs} args - Arguments to update many Points_transactions.
+     * @example
+     * // Update many Points_transactions
+     * const points_transactions = await prisma.points_transactions.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Points_transactions and only return the `id`
+     * const points_transactionsWithIdOnly = await prisma.points_transactions.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends points_transactionsUpdateManyAndReturnArgs>(args: SelectSubset<T, points_transactionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Points_transactions.
+     * @param {points_transactionsUpsertArgs} args - Arguments to update or create a Points_transactions.
+     * @example
+     * // Update or create a Points_transactions
+     * const points_transactions = await prisma.points_transactions.upsert({
+     *   create: {
+     *     // ... data to create a Points_transactions
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Points_transactions we want to update
+     *   }
+     * })
+     */
+    upsert<T extends points_transactionsUpsertArgs>(args: SelectSubset<T, points_transactionsUpsertArgs<ExtArgs>>): Prisma__points_transactionsClient<$Result.GetResult<Prisma.$points_transactionsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Points_transactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {points_transactionsCountArgs} args - Arguments to filter Points_transactions to count.
+     * @example
+     * // Count the number of Points_transactions
+     * const count = await prisma.points_transactions.count({
+     *   where: {
+     *     // ... the filter for the Points_transactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends points_transactionsCountArgs>(
+      args?: Subset<T, points_transactionsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Points_transactionsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Points_transactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Points_transactionsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Points_transactionsAggregateArgs>(args: Subset<T, Points_transactionsAggregateArgs>): Prisma.PrismaPromise<GetPoints_transactionsAggregateType<T>>
+
+    /**
+     * Group by Points_transactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {points_transactionsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends points_transactionsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: points_transactionsGroupByArgs['orderBy'] }
+        : { orderBy?: points_transactionsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, points_transactionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPoints_transactionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the points_transactions model
+   */
+  readonly fields: points_transactionsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for points_transactions.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__points_transactionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sessions<T extends sessionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sessionsDefaultArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    teams<T extends teamsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, teamsDefaultArgs<ExtArgs>>): Prisma__teamsClient<$Result.GetResult<Prisma.$teamsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the points_transactions model
+   */
+  interface points_transactionsFieldRefs {
+    readonly id: FieldRef<"points_transactions", 'Int'>
+    readonly team_id: FieldRef<"points_transactions", 'Int'>
+    readonly session_id: FieldRef<"points_transactions", 'Int'>
+    readonly points: FieldRef<"points_transactions", 'Int'>
+    readonly reason: FieldRef<"points_transactions", 'String'>
+    readonly created_at: FieldRef<"points_transactions", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * points_transactions findUnique
+   */
+  export type points_transactionsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which points_transactions to fetch.
+     */
+    where: points_transactionsWhereUniqueInput
+  }
+
+  /**
+   * points_transactions findUniqueOrThrow
+   */
+  export type points_transactionsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which points_transactions to fetch.
+     */
+    where: points_transactionsWhereUniqueInput
+  }
+
+  /**
+   * points_transactions findFirst
+   */
+  export type points_transactionsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which points_transactions to fetch.
+     */
+    where?: points_transactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of points_transactions to fetch.
+     */
+    orderBy?: points_transactionsOrderByWithRelationInput | points_transactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for points_transactions.
+     */
+    cursor?: points_transactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` points_transactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` points_transactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of points_transactions.
+     */
+    distinct?: Points_transactionsScalarFieldEnum | Points_transactionsScalarFieldEnum[]
+  }
+
+  /**
+   * points_transactions findFirstOrThrow
+   */
+  export type points_transactionsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which points_transactions to fetch.
+     */
+    where?: points_transactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of points_transactions to fetch.
+     */
+    orderBy?: points_transactionsOrderByWithRelationInput | points_transactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for points_transactions.
+     */
+    cursor?: points_transactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` points_transactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` points_transactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of points_transactions.
+     */
+    distinct?: Points_transactionsScalarFieldEnum | Points_transactionsScalarFieldEnum[]
+  }
+
+  /**
+   * points_transactions findMany
+   */
+  export type points_transactionsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * Filter, which points_transactions to fetch.
+     */
+    where?: points_transactionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of points_transactions to fetch.
+     */
+    orderBy?: points_transactionsOrderByWithRelationInput | points_transactionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing points_transactions.
+     */
+    cursor?: points_transactionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` points_transactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` points_transactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of points_transactions.
+     */
+    distinct?: Points_transactionsScalarFieldEnum | Points_transactionsScalarFieldEnum[]
+  }
+
+  /**
+   * points_transactions create
+   */
+  export type points_transactionsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a points_transactions.
+     */
+    data: XOR<points_transactionsCreateInput, points_transactionsUncheckedCreateInput>
+  }
+
+  /**
+   * points_transactions createMany
+   */
+  export type points_transactionsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many points_transactions.
+     */
+    data: points_transactionsCreateManyInput | points_transactionsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * points_transactions createManyAndReturn
+   */
+  export type points_transactionsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * The data used to create many points_transactions.
+     */
+    data: points_transactionsCreateManyInput | points_transactionsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * points_transactions update
+   */
+  export type points_transactionsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a points_transactions.
+     */
+    data: XOR<points_transactionsUpdateInput, points_transactionsUncheckedUpdateInput>
+    /**
+     * Choose, which points_transactions to update.
+     */
+    where: points_transactionsWhereUniqueInput
+  }
+
+  /**
+   * points_transactions updateMany
+   */
+  export type points_transactionsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update points_transactions.
+     */
+    data: XOR<points_transactionsUpdateManyMutationInput, points_transactionsUncheckedUpdateManyInput>
+    /**
+     * Filter which points_transactions to update
+     */
+    where?: points_transactionsWhereInput
+    /**
+     * Limit how many points_transactions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * points_transactions updateManyAndReturn
+   */
+  export type points_transactionsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * The data used to update points_transactions.
+     */
+    data: XOR<points_transactionsUpdateManyMutationInput, points_transactionsUncheckedUpdateManyInput>
+    /**
+     * Filter which points_transactions to update
+     */
+    where?: points_transactionsWhereInput
+    /**
+     * Limit how many points_transactions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * points_transactions upsert
+   */
+  export type points_transactionsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the points_transactions to update in case it exists.
+     */
+    where: points_transactionsWhereUniqueInput
+    /**
+     * In case the points_transactions found by the `where` argument doesn't exist, create a new points_transactions with this data.
+     */
+    create: XOR<points_transactionsCreateInput, points_transactionsUncheckedCreateInput>
+    /**
+     * In case the points_transactions was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<points_transactionsUpdateInput, points_transactionsUncheckedUpdateInput>
+  }
+
+  /**
+   * points_transactions delete
+   */
+  export type points_transactionsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+    /**
+     * Filter which points_transactions to delete.
+     */
+    where: points_transactionsWhereUniqueInput
+  }
+
+  /**
+   * points_transactions deleteMany
+   */
+  export type points_transactionsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which points_transactions to delete
+     */
+    where?: points_transactionsWhereInput
+    /**
+     * Limit how many points_transactions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * points_transactions without action
+   */
+  export type points_transactionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the points_transactions
+     */
+    select?: points_transactionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the points_transactions
+     */
+    omit?: points_transactionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: points_transactionsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -14097,6 +15392,18 @@ export namespace Prisma {
   };
 
   export type Session_checkpointsScalarFieldEnum = (typeof Session_checkpointsScalarFieldEnum)[keyof typeof Session_checkpointsScalarFieldEnum]
+
+
+  export const Points_transactionsScalarFieldEnum: {
+    id: 'id',
+    team_id: 'team_id',
+    session_id: 'session_id',
+    points: 'points',
+    reason: 'reason',
+    created_at: 'created_at'
+  };
+
+  export type Points_transactionsScalarFieldEnum = (typeof Points_transactionsScalarFieldEnum)[keyof typeof Points_transactionsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14360,6 +15667,7 @@ export namespace Prisma {
     creator_id?: IntFilter<"teams"> | number
     invite_code?: StringFilter<"teams"> | string
     created_at?: DateTimeFilter<"teams"> | Date | string
+    points_transactions?: Points_transactionsListRelationFilter
     sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
@@ -14372,6 +15680,7 @@ export namespace Prisma {
     creator_id?: SortOrder
     invite_code?: SortOrder
     created_at?: SortOrder
+    points_transactions?: points_transactionsOrderByRelationAggregateInput
     sessions?: sessionsOrderByRelationAggregateInput
     team_members?: team_membersOrderByRelationAggregateInput
     users?: usersOrderByWithRelationInput
@@ -14387,6 +15696,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"teams"> | string | null
     creator_id?: IntFilter<"teams"> | number
     created_at?: DateTimeFilter<"teams"> | Date | string
+    points_transactions?: Points_transactionsListRelationFilter
     sessions?: SessionsListRelationFilter
     team_members?: Team_membersListRelationFilter
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
@@ -14641,6 +15951,7 @@ export namespace Prisma {
     started_at?: DateTimeFilter<"sessions"> | Date | string
     finished_at?: DateTimeNullableFilter<"sessions"> | Date | string | null
     current_checkpoint_order?: IntNullableFilter<"sessions"> | number | null
+    points_transactions?: Points_transactionsListRelationFilter
     session_answers?: Session_answersListRelationFilter
     session_checkpoints?: Session_checkpointsListRelationFilter
     quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
@@ -14658,6 +15969,7 @@ export namespace Prisma {
     started_at?: SortOrder
     finished_at?: SortOrderInput | SortOrder
     current_checkpoint_order?: SortOrderInput | SortOrder
+    points_transactions?: points_transactionsOrderByRelationAggregateInput
     session_answers?: session_answersOrderByRelationAggregateInput
     session_checkpoints?: session_checkpointsOrderByRelationAggregateInput
     quests?: questsOrderByWithRelationInput
@@ -14678,6 +15990,7 @@ export namespace Prisma {
     started_at?: DateTimeFilter<"sessions"> | Date | string
     finished_at?: DateTimeNullableFilter<"sessions"> | Date | string | null
     current_checkpoint_order?: IntNullableFilter<"sessions"> | number | null
+    points_transactions?: Points_transactionsListRelationFilter
     session_answers?: Session_answersListRelationFilter
     session_checkpoints?: Session_checkpointsListRelationFilter
     quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
@@ -14985,6 +16298,71 @@ export namespace Prisma {
     completed_at?: DateTimeNullableWithAggregatesFilter<"session_checkpoints"> | Date | string | null
   }
 
+  export type points_transactionsWhereInput = {
+    AND?: points_transactionsWhereInput | points_transactionsWhereInput[]
+    OR?: points_transactionsWhereInput[]
+    NOT?: points_transactionsWhereInput | points_transactionsWhereInput[]
+    id?: IntFilter<"points_transactions"> | number
+    team_id?: IntFilter<"points_transactions"> | number
+    session_id?: IntFilter<"points_transactions"> | number
+    points?: IntFilter<"points_transactions"> | number
+    reason?: StringFilter<"points_transactions"> | string
+    created_at?: DateTimeFilter<"points_transactions"> | Date | string
+    sessions?: XOR<SessionsScalarRelationFilter, sessionsWhereInput>
+    teams?: XOR<TeamsScalarRelationFilter, teamsWhereInput>
+  }
+
+  export type points_transactionsOrderByWithRelationInput = {
+    id?: SortOrder
+    team_id?: SortOrder
+    session_id?: SortOrder
+    points?: SortOrder
+    reason?: SortOrder
+    created_at?: SortOrder
+    sessions?: sessionsOrderByWithRelationInput
+    teams?: teamsOrderByWithRelationInput
+  }
+
+  export type points_transactionsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: points_transactionsWhereInput | points_transactionsWhereInput[]
+    OR?: points_transactionsWhereInput[]
+    NOT?: points_transactionsWhereInput | points_transactionsWhereInput[]
+    team_id?: IntFilter<"points_transactions"> | number
+    session_id?: IntFilter<"points_transactions"> | number
+    points?: IntFilter<"points_transactions"> | number
+    reason?: StringFilter<"points_transactions"> | string
+    created_at?: DateTimeFilter<"points_transactions"> | Date | string
+    sessions?: XOR<SessionsScalarRelationFilter, sessionsWhereInput>
+    teams?: XOR<TeamsScalarRelationFilter, teamsWhereInput>
+  }, "id">
+
+  export type points_transactionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    team_id?: SortOrder
+    session_id?: SortOrder
+    points?: SortOrder
+    reason?: SortOrder
+    created_at?: SortOrder
+    _count?: points_transactionsCountOrderByAggregateInput
+    _avg?: points_transactionsAvgOrderByAggregateInput
+    _max?: points_transactionsMaxOrderByAggregateInput
+    _min?: points_transactionsMinOrderByAggregateInput
+    _sum?: points_transactionsSumOrderByAggregateInput
+  }
+
+  export type points_transactionsScalarWhereWithAggregatesInput = {
+    AND?: points_transactionsScalarWhereWithAggregatesInput | points_transactionsScalarWhereWithAggregatesInput[]
+    OR?: points_transactionsScalarWhereWithAggregatesInput[]
+    NOT?: points_transactionsScalarWhereWithAggregatesInput | points_transactionsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"points_transactions"> | number
+    team_id?: IntWithAggregatesFilter<"points_transactions"> | number
+    session_id?: IntWithAggregatesFilter<"points_transactions"> | number
+    points?: IntWithAggregatesFilter<"points_transactions"> | number
+    reason?: StringWithAggregatesFilter<"points_transactions"> | string
+    created_at?: DateTimeWithAggregatesFilter<"points_transactions"> | Date | string
+  }
+
   export type usersCreateInput = {
     email: string
     password: string
@@ -15131,6 +16509,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsCreateNestedManyWithoutTeamsInput
     sessions?: sessionsCreateNestedManyWithoutTeamsInput
     team_members?: team_membersCreateNestedManyWithoutTeamsInput
     users: usersCreateNestedOneWithoutTeamsInput
@@ -15143,6 +16522,7 @@ export namespace Prisma {
     creator_id: number
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutTeamsInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutTeamsInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutTeamsInput
   }
@@ -15152,6 +16532,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUpdateManyWithoutTeamsNestedInput
     sessions?: sessionsUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUpdateManyWithoutTeamsNestedInput
     users?: usersUpdateOneRequiredWithoutTeamsNestedInput
@@ -15164,6 +16545,7 @@ export namespace Prisma {
     creator_id?: IntFieldUpdateOperationsInput | number
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutTeamsNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutTeamsNestedInput
   }
@@ -15435,6 +16817,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
@@ -15452,6 +16835,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
@@ -15462,6 +16846,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
@@ -15479,6 +16864,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
@@ -15752,6 +17138,64 @@ export namespace Prisma {
     completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type points_transactionsCreateInput = {
+    points: number
+    reason: string
+    created_at?: Date | string
+    sessions: sessionsCreateNestedOneWithoutPoints_transactionsInput
+    teams: teamsCreateNestedOneWithoutPoints_transactionsInput
+  }
+
+  export type points_transactionsUncheckedCreateInput = {
+    id?: number
+    team_id: number
+    session_id: number
+    points: number
+    reason: string
+    created_at?: Date | string
+  }
+
+  export type points_transactionsUpdateInput = {
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUpdateOneRequiredWithoutPoints_transactionsNestedInput
+    teams?: teamsUpdateOneRequiredWithoutPoints_transactionsNestedInput
+  }
+
+  export type points_transactionsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    team_id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type points_transactionsCreateManyInput = {
+    id?: number
+    team_id: number
+    session_id: number
+    points: number
+    reason: string
+    created_at?: Date | string
+  }
+
+  export type points_transactionsUpdateManyMutationInput = {
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type points_transactionsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    team_id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -15984,9 +17428,19 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type Points_transactionsListRelationFilter = {
+    every?: points_transactionsWhereInput
+    some?: points_transactionsWhereInput
+    none?: points_transactionsWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type points_transactionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type teamsCountOrderByAggregateInput = {
@@ -16591,6 +18045,47 @@ export namespace Prisma {
     checkpoint_id?: SortOrder
   }
 
+  export type points_transactionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    team_id?: SortOrder
+    session_id?: SortOrder
+    points?: SortOrder
+    reason?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type points_transactionsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    team_id?: SortOrder
+    session_id?: SortOrder
+    points?: SortOrder
+  }
+
+  export type points_transactionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    team_id?: SortOrder
+    session_id?: SortOrder
+    points?: SortOrder
+    reason?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type points_transactionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    team_id?: SortOrder
+    session_id?: SortOrder
+    points?: SortOrder
+    reason?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type points_transactionsSumOrderByAggregateInput = {
+    id?: SortOrder
+    team_id?: SortOrder
+    session_id?: SortOrder
+    points?: SortOrder
+  }
+
   export type questsCreateNestedManyWithoutUsersInput = {
     create?: XOR<questsCreateWithoutUsersInput, questsUncheckedCreateWithoutUsersInput> | questsCreateWithoutUsersInput[] | questsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: questsCreateOrConnectWithoutUsersInput | questsCreateOrConnectWithoutUsersInput[]
@@ -16803,6 +18298,13 @@ export namespace Prisma {
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutTeam_membersInput, usersUpdateWithoutTeam_membersInput>, usersUncheckedUpdateWithoutTeam_membersInput>
   }
 
+  export type points_transactionsCreateNestedManyWithoutTeamsInput = {
+    create?: XOR<points_transactionsCreateWithoutTeamsInput, points_transactionsUncheckedCreateWithoutTeamsInput> | points_transactionsCreateWithoutTeamsInput[] | points_transactionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutTeamsInput | points_transactionsCreateOrConnectWithoutTeamsInput[]
+    createMany?: points_transactionsCreateManyTeamsInputEnvelope
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+  }
+
   export type sessionsCreateNestedManyWithoutTeamsInput = {
     create?: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput> | sessionsCreateWithoutTeamsInput[] | sessionsUncheckedCreateWithoutTeamsInput[]
     connectOrCreate?: sessionsCreateOrConnectWithoutTeamsInput | sessionsCreateOrConnectWithoutTeamsInput[]
@@ -16823,6 +18325,13 @@ export namespace Prisma {
     connect?: usersWhereUniqueInput
   }
 
+  export type points_transactionsUncheckedCreateNestedManyWithoutTeamsInput = {
+    create?: XOR<points_transactionsCreateWithoutTeamsInput, points_transactionsUncheckedCreateWithoutTeamsInput> | points_transactionsCreateWithoutTeamsInput[] | points_transactionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutTeamsInput | points_transactionsCreateOrConnectWithoutTeamsInput[]
+    createMany?: points_transactionsCreateManyTeamsInputEnvelope
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+  }
+
   export type sessionsUncheckedCreateNestedManyWithoutTeamsInput = {
     create?: XOR<sessionsCreateWithoutTeamsInput, sessionsUncheckedCreateWithoutTeamsInput> | sessionsCreateWithoutTeamsInput[] | sessionsUncheckedCreateWithoutTeamsInput[]
     connectOrCreate?: sessionsCreateOrConnectWithoutTeamsInput | sessionsCreateOrConnectWithoutTeamsInput[]
@@ -16839,6 +18348,20 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type points_transactionsUpdateManyWithoutTeamsNestedInput = {
+    create?: XOR<points_transactionsCreateWithoutTeamsInput, points_transactionsUncheckedCreateWithoutTeamsInput> | points_transactionsCreateWithoutTeamsInput[] | points_transactionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutTeamsInput | points_transactionsCreateOrConnectWithoutTeamsInput[]
+    upsert?: points_transactionsUpsertWithWhereUniqueWithoutTeamsInput | points_transactionsUpsertWithWhereUniqueWithoutTeamsInput[]
+    createMany?: points_transactionsCreateManyTeamsInputEnvelope
+    set?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    disconnect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    delete?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    update?: points_transactionsUpdateWithWhereUniqueWithoutTeamsInput | points_transactionsUpdateWithWhereUniqueWithoutTeamsInput[]
+    updateMany?: points_transactionsUpdateManyWithWhereWithoutTeamsInput | points_transactionsUpdateManyWithWhereWithoutTeamsInput[]
+    deleteMany?: points_transactionsScalarWhereInput | points_transactionsScalarWhereInput[]
   }
 
   export type sessionsUpdateManyWithoutTeamsNestedInput = {
@@ -16875,6 +18398,20 @@ export namespace Prisma {
     upsert?: usersUpsertWithoutTeamsInput
     connect?: usersWhereUniqueInput
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutTeamsInput, usersUpdateWithoutTeamsInput>, usersUncheckedUpdateWithoutTeamsInput>
+  }
+
+  export type points_transactionsUncheckedUpdateManyWithoutTeamsNestedInput = {
+    create?: XOR<points_transactionsCreateWithoutTeamsInput, points_transactionsUncheckedCreateWithoutTeamsInput> | points_transactionsCreateWithoutTeamsInput[] | points_transactionsUncheckedCreateWithoutTeamsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutTeamsInput | points_transactionsCreateOrConnectWithoutTeamsInput[]
+    upsert?: points_transactionsUpsertWithWhereUniqueWithoutTeamsInput | points_transactionsUpsertWithWhereUniqueWithoutTeamsInput[]
+    createMany?: points_transactionsCreateManyTeamsInputEnvelope
+    set?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    disconnect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    delete?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    update?: points_transactionsUpdateWithWhereUniqueWithoutTeamsInput | points_transactionsUpdateWithWhereUniqueWithoutTeamsInput[]
+    updateMany?: points_transactionsUpdateManyWithWhereWithoutTeamsInput | points_transactionsUpdateManyWithWhereWithoutTeamsInput[]
+    deleteMany?: points_transactionsScalarWhereInput | points_transactionsScalarWhereInput[]
   }
 
   export type sessionsUncheckedUpdateManyWithoutTeamsNestedInput = {
@@ -17155,6 +18692,13 @@ export namespace Prisma {
     deleteMany?: session_checkpointsScalarWhereInput | session_checkpointsScalarWhereInput[]
   }
 
+  export type points_transactionsCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<points_transactionsCreateWithoutSessionsInput, points_transactionsUncheckedCreateWithoutSessionsInput> | points_transactionsCreateWithoutSessionsInput[] | points_transactionsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutSessionsInput | points_transactionsCreateOrConnectWithoutSessionsInput[]
+    createMany?: points_transactionsCreateManySessionsInputEnvelope
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+  }
+
   export type session_answersCreateNestedManyWithoutSessionsInput = {
     create?: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput> | session_answersCreateWithoutSessionsInput[] | session_answersUncheckedCreateWithoutSessionsInput[]
     connectOrCreate?: session_answersCreateOrConnectWithoutSessionsInput | session_answersCreateOrConnectWithoutSessionsInput[]
@@ -17187,6 +18731,13 @@ export namespace Prisma {
     connect?: usersWhereUniqueInput
   }
 
+  export type points_transactionsUncheckedCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<points_transactionsCreateWithoutSessionsInput, points_transactionsUncheckedCreateWithoutSessionsInput> | points_transactionsCreateWithoutSessionsInput[] | points_transactionsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutSessionsInput | points_transactionsCreateOrConnectWithoutSessionsInput[]
+    createMany?: points_transactionsCreateManySessionsInputEnvelope
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+  }
+
   export type session_answersUncheckedCreateNestedManyWithoutSessionsInput = {
     create?: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput> | session_answersCreateWithoutSessionsInput[] | session_answersUncheckedCreateWithoutSessionsInput[]
     connectOrCreate?: session_answersCreateOrConnectWithoutSessionsInput | session_answersCreateOrConnectWithoutSessionsInput[]
@@ -17211,6 +18762,20 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type points_transactionsUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<points_transactionsCreateWithoutSessionsInput, points_transactionsUncheckedCreateWithoutSessionsInput> | points_transactionsCreateWithoutSessionsInput[] | points_transactionsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutSessionsInput | points_transactionsCreateOrConnectWithoutSessionsInput[]
+    upsert?: points_transactionsUpsertWithWhereUniqueWithoutSessionsInput | points_transactionsUpsertWithWhereUniqueWithoutSessionsInput[]
+    createMany?: points_transactionsCreateManySessionsInputEnvelope
+    set?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    disconnect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    delete?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    update?: points_transactionsUpdateWithWhereUniqueWithoutSessionsInput | points_transactionsUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: points_transactionsUpdateManyWithWhereWithoutSessionsInput | points_transactionsUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: points_transactionsScalarWhereInput | points_transactionsScalarWhereInput[]
   }
 
   export type session_answersUpdateManyWithoutSessionsNestedInput = {
@@ -17267,6 +18832,20 @@ export namespace Prisma {
     delete?: usersWhereInput | boolean
     connect?: usersWhereUniqueInput
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutSessionsInput, usersUpdateWithoutSessionsInput>, usersUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type points_transactionsUncheckedUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<points_transactionsCreateWithoutSessionsInput, points_transactionsUncheckedCreateWithoutSessionsInput> | points_transactionsCreateWithoutSessionsInput[] | points_transactionsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: points_transactionsCreateOrConnectWithoutSessionsInput | points_transactionsCreateOrConnectWithoutSessionsInput[]
+    upsert?: points_transactionsUpsertWithWhereUniqueWithoutSessionsInput | points_transactionsUpsertWithWhereUniqueWithoutSessionsInput[]
+    createMany?: points_transactionsCreateManySessionsInputEnvelope
+    set?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    disconnect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    delete?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    connect?: points_transactionsWhereUniqueInput | points_transactionsWhereUniqueInput[]
+    update?: points_transactionsUpdateWithWhereUniqueWithoutSessionsInput | points_transactionsUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: points_transactionsUpdateManyWithWhereWithoutSessionsInput | points_transactionsUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: points_transactionsScalarWhereInput | points_transactionsScalarWhereInput[]
   }
 
   export type session_answersUncheckedUpdateManyWithoutSessionsNestedInput = {
@@ -17539,6 +19118,34 @@ export namespace Prisma {
     upsert?: sessionsUpsertWithoutSession_checkpointsInput
     connect?: sessionsWhereUniqueInput
     update?: XOR<XOR<sessionsUpdateToOneWithWhereWithoutSession_checkpointsInput, sessionsUpdateWithoutSession_checkpointsInput>, sessionsUncheckedUpdateWithoutSession_checkpointsInput>
+  }
+
+  export type sessionsCreateNestedOneWithoutPoints_transactionsInput = {
+    create?: XOR<sessionsCreateWithoutPoints_transactionsInput, sessionsUncheckedCreateWithoutPoints_transactionsInput>
+    connectOrCreate?: sessionsCreateOrConnectWithoutPoints_transactionsInput
+    connect?: sessionsWhereUniqueInput
+  }
+
+  export type teamsCreateNestedOneWithoutPoints_transactionsInput = {
+    create?: XOR<teamsCreateWithoutPoints_transactionsInput, teamsUncheckedCreateWithoutPoints_transactionsInput>
+    connectOrCreate?: teamsCreateOrConnectWithoutPoints_transactionsInput
+    connect?: teamsWhereUniqueInput
+  }
+
+  export type sessionsUpdateOneRequiredWithoutPoints_transactionsNestedInput = {
+    create?: XOR<sessionsCreateWithoutPoints_transactionsInput, sessionsUncheckedCreateWithoutPoints_transactionsInput>
+    connectOrCreate?: sessionsCreateOrConnectWithoutPoints_transactionsInput
+    upsert?: sessionsUpsertWithoutPoints_transactionsInput
+    connect?: sessionsWhereUniqueInput
+    update?: XOR<XOR<sessionsUpdateToOneWithWhereWithoutPoints_transactionsInput, sessionsUpdateWithoutPoints_transactionsInput>, sessionsUncheckedUpdateWithoutPoints_transactionsInput>
+  }
+
+  export type teamsUpdateOneRequiredWithoutPoints_transactionsNestedInput = {
+    create?: XOR<teamsCreateWithoutPoints_transactionsInput, teamsUncheckedCreateWithoutPoints_transactionsInput>
+    connectOrCreate?: teamsCreateOrConnectWithoutPoints_transactionsInput
+    upsert?: teamsUpsertWithoutPoints_transactionsInput
+    connect?: teamsWhereUniqueInput
+    update?: XOR<XOR<teamsUpdateToOneWithWhereWithoutPoints_transactionsInput, teamsUpdateWithoutPoints_transactionsInput>, teamsUncheckedUpdateWithoutPoints_transactionsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -17833,6 +19440,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
@@ -17848,6 +19456,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
@@ -17888,6 +19497,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsCreateNestedManyWithoutTeamsInput
     sessions?: sessionsCreateNestedManyWithoutTeamsInput
     team_members?: team_membersCreateNestedManyWithoutTeamsInput
   }
@@ -17898,6 +19508,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutTeamsInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutTeamsInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutTeamsInput
   }
@@ -18038,6 +19649,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsCreateNestedManyWithoutTeamsInput
     sessions?: sessionsCreateNestedManyWithoutTeamsInput
     users: usersCreateNestedOneWithoutTeamsInput
   }
@@ -18049,6 +19661,7 @@ export namespace Prisma {
     creator_id: number
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutTeamsInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutTeamsInput
   }
 
@@ -18107,6 +19720,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUpdateManyWithoutTeamsNestedInput
     sessions?: sessionsUpdateManyWithoutTeamsNestedInput
     users?: usersUpdateOneRequiredWithoutTeamsNestedInput
   }
@@ -18118,6 +19732,7 @@ export namespace Prisma {
     creator_id?: IntFieldUpdateOperationsInput | number
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutTeamsNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutTeamsNestedInput
   }
 
@@ -18161,12 +19776,38 @@ export namespace Prisma {
     teams?: teamsUncheckedUpdateManyWithoutUsersNestedInput
   }
 
+  export type points_transactionsCreateWithoutTeamsInput = {
+    points: number
+    reason: string
+    created_at?: Date | string
+    sessions: sessionsCreateNestedOneWithoutPoints_transactionsInput
+  }
+
+  export type points_transactionsUncheckedCreateWithoutTeamsInput = {
+    id?: number
+    session_id: number
+    points: number
+    reason: string
+    created_at?: Date | string
+  }
+
+  export type points_transactionsCreateOrConnectWithoutTeamsInput = {
+    where: points_transactionsWhereUniqueInput
+    create: XOR<points_transactionsCreateWithoutTeamsInput, points_transactionsUncheckedCreateWithoutTeamsInput>
+  }
+
+  export type points_transactionsCreateManyTeamsInputEnvelope = {
+    data: points_transactionsCreateManyTeamsInput | points_transactionsCreateManyTeamsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type sessionsCreateWithoutTeamsInput = {
     status?: string
     transport_mode?: string | null
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
@@ -18182,6 +19823,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
@@ -18249,6 +19891,34 @@ export namespace Prisma {
   export type usersCreateOrConnectWithoutTeamsInput = {
     where: usersWhereUniqueInput
     create: XOR<usersCreateWithoutTeamsInput, usersUncheckedCreateWithoutTeamsInput>
+  }
+
+  export type points_transactionsUpsertWithWhereUniqueWithoutTeamsInput = {
+    where: points_transactionsWhereUniqueInput
+    update: XOR<points_transactionsUpdateWithoutTeamsInput, points_transactionsUncheckedUpdateWithoutTeamsInput>
+    create: XOR<points_transactionsCreateWithoutTeamsInput, points_transactionsUncheckedCreateWithoutTeamsInput>
+  }
+
+  export type points_transactionsUpdateWithWhereUniqueWithoutTeamsInput = {
+    where: points_transactionsWhereUniqueInput
+    data: XOR<points_transactionsUpdateWithoutTeamsInput, points_transactionsUncheckedUpdateWithoutTeamsInput>
+  }
+
+  export type points_transactionsUpdateManyWithWhereWithoutTeamsInput = {
+    where: points_transactionsScalarWhereInput
+    data: XOR<points_transactionsUpdateManyMutationInput, points_transactionsUncheckedUpdateManyWithoutTeamsInput>
+  }
+
+  export type points_transactionsScalarWhereInput = {
+    AND?: points_transactionsScalarWhereInput | points_transactionsScalarWhereInput[]
+    OR?: points_transactionsScalarWhereInput[]
+    NOT?: points_transactionsScalarWhereInput | points_transactionsScalarWhereInput[]
+    id?: IntFilter<"points_transactions"> | number
+    team_id?: IntFilter<"points_transactions"> | number
+    session_id?: IntFilter<"points_transactions"> | number
+    points?: IntFilter<"points_transactions"> | number
+    reason?: StringFilter<"points_transactions"> | string
+    created_at?: DateTimeFilter<"points_transactions"> | Date | string
   }
 
   export type sessionsUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -18406,6 +20076,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     teams?: teamsCreateNestedOneWithoutSessionsInput
@@ -18421,6 +20092,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
@@ -18780,6 +20452,31 @@ export namespace Prisma {
     completed_at?: DateTimeNullableFilter<"session_checkpoints"> | Date | string | null
   }
 
+  export type points_transactionsCreateWithoutSessionsInput = {
+    points: number
+    reason: string
+    created_at?: Date | string
+    teams: teamsCreateNestedOneWithoutPoints_transactionsInput
+  }
+
+  export type points_transactionsUncheckedCreateWithoutSessionsInput = {
+    id?: number
+    team_id: number
+    points: number
+    reason: string
+    created_at?: Date | string
+  }
+
+  export type points_transactionsCreateOrConnectWithoutSessionsInput = {
+    where: points_transactionsWhereUniqueInput
+    create: XOR<points_transactionsCreateWithoutSessionsInput, points_transactionsUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type points_transactionsCreateManySessionsInputEnvelope = {
+    data: points_transactionsCreateManySessionsInput | points_transactionsCreateManySessionsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type session_answersCreateWithoutSessionsInput = {
     answer_text?: string | null
     is_correct: boolean
@@ -18877,6 +20574,7 @@ export namespace Prisma {
     description?: string | null
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsCreateNestedManyWithoutTeamsInput
     team_members?: team_membersCreateNestedManyWithoutTeamsInput
     users: usersCreateNestedOneWithoutTeamsInput
   }
@@ -18888,6 +20586,7 @@ export namespace Prisma {
     creator_id: number
     invite_code: string
     created_at?: Date | string
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutTeamsInput
     team_members?: team_membersUncheckedCreateNestedManyWithoutTeamsInput
   }
 
@@ -18928,6 +20627,22 @@ export namespace Prisma {
   export type usersCreateOrConnectWithoutSessionsInput = {
     where: usersWhereUniqueInput
     create: XOR<usersCreateWithoutSessionsInput, usersUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type points_transactionsUpsertWithWhereUniqueWithoutSessionsInput = {
+    where: points_transactionsWhereUniqueInput
+    update: XOR<points_transactionsUpdateWithoutSessionsInput, points_transactionsUncheckedUpdateWithoutSessionsInput>
+    create: XOR<points_transactionsCreateWithoutSessionsInput, points_transactionsUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type points_transactionsUpdateWithWhereUniqueWithoutSessionsInput = {
+    where: points_transactionsWhereUniqueInput
+    data: XOR<points_transactionsUpdateWithoutSessionsInput, points_transactionsUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type points_transactionsUpdateManyWithWhereWithoutSessionsInput = {
+    where: points_transactionsScalarWhereInput
+    data: XOR<points_transactionsUpdateManyMutationInput, points_transactionsUncheckedUpdateManyWithoutSessionsInput>
   }
 
   export type session_answersUpsertWithWhereUniqueWithoutSessionsInput = {
@@ -19024,6 +20739,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUpdateManyWithoutTeamsNestedInput
     users?: usersUpdateOneRequiredWithoutTeamsNestedInput
   }
@@ -19035,6 +20751,7 @@ export namespace Prisma {
     creator_id?: IntFieldUpdateOperationsInput | number
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutTeamsNestedInput
   }
 
@@ -19414,6 +21131,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
     teams?: teamsCreateNestedOneWithoutSessionsInput
@@ -19430,6 +21148,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutSessionsInput
     session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
 
@@ -19547,6 +21266,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
     teams?: teamsUpdateOneWithoutSessionsNestedInput
@@ -19563,6 +21283,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
@@ -19642,6 +21363,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
     teams?: teamsCreateNestedOneWithoutSessionsInput
@@ -19658,6 +21380,7 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    points_transactions?: points_transactionsUncheckedCreateNestedManyWithoutSessionsInput
     session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
   }
 
@@ -19727,6 +21450,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
     teams?: teamsUpdateOneWithoutSessionsNestedInput
@@ -19743,7 +21467,136 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
+  }
+
+  export type sessionsCreateWithoutPoints_transactionsInput = {
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    session_answers?: session_answersCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
+    quests: questsCreateNestedOneWithoutSessionsInput
+    teams?: teamsCreateNestedOneWithoutSessionsInput
+    users?: usersCreateNestedOneWithoutSessionsInput
+  }
+
+  export type sessionsUncheckedCreateWithoutPoints_transactionsInput = {
+    id?: number
+    quest_id: number
+    user_id?: number | null
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
+  }
+
+  export type sessionsCreateOrConnectWithoutPoints_transactionsInput = {
+    where: sessionsWhereUniqueInput
+    create: XOR<sessionsCreateWithoutPoints_transactionsInput, sessionsUncheckedCreateWithoutPoints_transactionsInput>
+  }
+
+  export type teamsCreateWithoutPoints_transactionsInput = {
+    name: string
+    description?: string | null
+    invite_code: string
+    created_at?: Date | string
+    sessions?: sessionsCreateNestedManyWithoutTeamsInput
+    team_members?: team_membersCreateNestedManyWithoutTeamsInput
+    users: usersCreateNestedOneWithoutTeamsInput
+  }
+
+  export type teamsUncheckedCreateWithoutPoints_transactionsInput = {
+    id?: number
+    name: string
+    description?: string | null
+    creator_id: number
+    invite_code: string
+    created_at?: Date | string
+    sessions?: sessionsUncheckedCreateNestedManyWithoutTeamsInput
+    team_members?: team_membersUncheckedCreateNestedManyWithoutTeamsInput
+  }
+
+  export type teamsCreateOrConnectWithoutPoints_transactionsInput = {
+    where: teamsWhereUniqueInput
+    create: XOR<teamsCreateWithoutPoints_transactionsInput, teamsUncheckedCreateWithoutPoints_transactionsInput>
+  }
+
+  export type sessionsUpsertWithoutPoints_transactionsInput = {
+    update: XOR<sessionsUpdateWithoutPoints_transactionsInput, sessionsUncheckedUpdateWithoutPoints_transactionsInput>
+    create: XOR<sessionsCreateWithoutPoints_transactionsInput, sessionsUncheckedCreateWithoutPoints_transactionsInput>
+    where?: sessionsWhereInput
+  }
+
+  export type sessionsUpdateToOneWithWhereWithoutPoints_transactionsInput = {
+    where?: sessionsWhereInput
+    data: XOR<sessionsUpdateWithoutPoints_transactionsInput, sessionsUncheckedUpdateWithoutPoints_transactionsInput>
+  }
+
+  export type sessionsUpdateWithoutPoints_transactionsInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
+    quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
+    teams?: teamsUpdateOneWithoutSessionsNestedInput
+    users?: usersUpdateOneWithoutSessionsNestedInput
+  }
+
+  export type sessionsUncheckedUpdateWithoutPoints_transactionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
+  }
+
+  export type teamsUpsertWithoutPoints_transactionsInput = {
+    update: XOR<teamsUpdateWithoutPoints_transactionsInput, teamsUncheckedUpdateWithoutPoints_transactionsInput>
+    create: XOR<teamsCreateWithoutPoints_transactionsInput, teamsUncheckedCreateWithoutPoints_transactionsInput>
+    where?: teamsWhereInput
+  }
+
+  export type teamsUpdateToOneWithWhereWithoutPoints_transactionsInput = {
+    where?: teamsWhereInput
+    data: XOR<teamsUpdateWithoutPoints_transactionsInput, teamsUncheckedUpdateWithoutPoints_transactionsInput>
+  }
+
+  export type teamsUpdateWithoutPoints_transactionsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    invite_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUpdateManyWithoutTeamsNestedInput
+    team_members?: team_membersUpdateManyWithoutTeamsNestedInput
+    users?: usersUpdateOneRequiredWithoutTeamsNestedInput
+  }
+
+  export type teamsUncheckedUpdateWithoutPoints_transactionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    creator_id?: IntFieldUpdateOperationsInput | number
+    invite_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUncheckedUpdateManyWithoutTeamsNestedInput
+    team_members?: team_membersUncheckedUpdateManyWithoutTeamsNestedInput
   }
 
   export type questsCreateManyUsersInput = {
@@ -19844,6 +21697,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
@@ -19859,6 +21713,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
@@ -19896,6 +21751,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUpdateManyWithoutTeamsNestedInput
     sessions?: sessionsUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUpdateManyWithoutTeamsNestedInput
   }
@@ -19906,6 +21762,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutTeamsNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutTeamsNestedInput
     team_members?: team_membersUncheckedUpdateManyWithoutTeamsNestedInput
   }
@@ -19916,6 +21773,14 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     invite_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type points_transactionsCreateManyTeamsInput = {
+    id?: number
+    session_id: number
+    points: number
+    reason: string
+    created_at?: Date | string
   }
 
   export type sessionsCreateManyTeamsInput = {
@@ -19935,12 +21800,36 @@ export namespace Prisma {
     joined_at?: Date | string
   }
 
+  export type points_transactionsUpdateWithoutTeamsInput = {
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: sessionsUpdateOneRequiredWithoutPoints_transactionsNestedInput
+  }
+
+  export type points_transactionsUncheckedUpdateWithoutTeamsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type points_transactionsUncheckedUpdateManyWithoutTeamsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type sessionsUpdateWithoutTeamsInput = {
     status?: StringFieldUpdateOperationsInput | string
     transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
@@ -19956,6 +21845,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
@@ -20066,6 +21956,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     teams?: teamsUpdateOneWithoutSessionsNestedInput
@@ -20081,6 +21972,7 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    points_transactions?: points_transactionsUncheckedUpdateManyWithoutSessionsNestedInput
     session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
     session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
@@ -20201,6 +22093,14 @@ export namespace Prisma {
     completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type points_transactionsCreateManySessionsInput = {
+    id?: number
+    team_id: number
+    points: number
+    reason: string
+    created_at?: Date | string
+  }
+
   export type session_answersCreateManySessionsInput = {
     id?: number
     checkpoint_id: number
@@ -20216,6 +22116,29 @@ export namespace Prisma {
     checkpoint_id: number
     status: string
     completed_at?: Date | string | null
+  }
+
+  export type points_transactionsUpdateWithoutSessionsInput = {
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    teams?: teamsUpdateOneRequiredWithoutPoints_transactionsNestedInput
+  }
+
+  export type points_transactionsUncheckedUpdateWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    team_id?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type points_transactionsUncheckedUpdateManyWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    team_id?: IntFieldUpdateOperationsInput | number
+    points?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type session_answersUpdateWithoutSessionsInput = {
