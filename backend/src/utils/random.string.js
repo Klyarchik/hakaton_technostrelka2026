@@ -8,4 +8,4 @@ function generateString(length) {
   return result;
 }
 
-module.exports = {generateString};
+module.exports = { generateString };
