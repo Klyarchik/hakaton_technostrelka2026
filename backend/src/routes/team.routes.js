@@ -3,7 +3,9 @@ const router = express.Router();
 const {
   createTeam,
   joinTeamByCode,
-  getTeamCurrentUser
+  getTeamCurrentUser,
+  leaveTeam,
+  removeMemberFromTeam
 } = require('../controllers/team.controller');
 const { authMiddleware } = require('../middlewares/auth.middleware');
 
@@ -30,6 +32,22 @@ router.get(
   authMiddleware,
   /* #swagger.tags = ['Teams'] #swagger.summary = 'Получение команды текущего пользователя' */
   getTeamCurrentUser
+);
+
+
+router.delete(
+  "/leave",
+  authMiddleware,
+  /* #swagger.tags = ['Teams'] #swagger.summary = 'Выход из команды' */
+  leaveTeam
+);
+
+
+router.delete(
+  "/member/remove",
+  authMiddleware,
+  /* #swagger.tags = ['Teams'] #swagger.summary = 'Удаление из команды' */
+  removeMemberFromTeam
 );
 
 module.exports = router;

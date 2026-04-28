@@ -185,8 +185,102 @@ const getTeamCurrentUser = async (req, res) => {
   }
 };
 
+// выход из команды
+const leaveTeam = async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    // Найти текущее членство пользователя
+    const membership = await prisma.team_members.findFirst({
+      where: { user_id: userId },
+      include: { teams: true }
+    });
+
+    if (!membership) {
+      return res.status(400).json({ error: 'Вы не состоите в команде' });
+    }
+
+    const teamId = membership.team_id;
+    const team = membership.teams;
+    const isCreator = (team.creator_id === userId);
+
+    // Если пользователь — создатель команды
+    if (isCreator) {
+      // Проверить, есть ли в команде другие участники
+      const membersCount = await prisma.team_members.count({
+        where: { team_id: teamId }
+      });
+
+      if (membersCount > 1) {
+        return res.status(400).json({
+          error: 'Вы не можете покинуть команду, так как в ней есть другие участники.'
+        });
+      } else {
+        // Создатель один — удаляем всю команду (каскадно удалятся team_members)
+        await prisma.teams.delete({ where: { id: teamId } });
+        return res.status(200).json({ message: 'Команда удалена, так как вы были единственным участником' });
+      }
+    } else {
+      // Обычный участник — просто выходит
+      await prisma.team_members.delete({ where: { id: membership.id } });
+      return res.status(200).json({ message: 'Вы покинули команду' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+// удаление участника из команды (только для капитана)
+const removeMemberFromTeam = async (req, res) => {
+  const captainId = req.user.userId;
+  const { memberId } = req.body; // id удаляемого пользователя
+
+  if (!memberId) {
+    return res.status(400).json({ error: 'Не указан ID участника' });
+  }
+
+  try {
+    // Найти команду, в которой капитан является создателем
+    const team = await prisma.teams.findFirst({
+      where: { creator_id: captainId }
+    });
+
+    if (!team) {
+      return res.status(404).json({ error: 'У вас недостаточно прав для данного запроса' });
+    }
+
+    // Проверить, что удаляемый не капитан
+    if (team.creator_id === parseInt(memberId)) {
+      return res.status(400).json({ error: 'Нельзя удалить самого себя.' });
+    }
+
+    // Найти запись членства удаляемого пользователя в этой команде
+    const membership = await prisma.team_members.findFirst({
+      where: {
+        team_id: team.id,
+        user_id: parseInt(memberId)
+      }
+    });
+
+    if (!membership) {
+      return res.status(404).json({ error: 'Такого участника нет в вашей команде' });
+    }
+
+    // Удалить участника
+    await prisma.team_members.delete({ where: { id: membership.id } });
+
+    res.status(200).json({ message: 'Участник удалён из команды' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
   createTeam,
   joinTeamByCode,
-  getTeamCurrentUser
+  getTeamCurrentUser,
+  leaveTeam,
+  removeMemberFromTeam
 };
