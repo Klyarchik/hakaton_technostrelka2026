@@ -68,50 +68,95 @@ model quests {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model quest_checkpoints {
-  id               Int                @id @default(autoincrement())
-  quest_id         Int
-  order_index      Int
-  title            String
-  task_description String
-  code_word        String
-  latitude         Decimal            @db.Decimal(15, 10)
-  longitude        Decimal            @db.Decimal(15, 10)
-  hint             String?
-  point_rules      String?
-  created_at       DateTime           @default(now()) @db.Timestamptz(6)
-  updated_at       DateTime           @default(now()) @db.Timestamptz(6)
-  checkpoint_tasks checkpoint_tasks[]
-  quests           quests             @relation(fields: [quest_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id                  Int                   @id @default(autoincrement())
+  quest_id            Int
+  order_index         Int
+  title               String
+  task_description    String
+  code_word           String
+  latitude            Decimal               @db.Decimal(15, 10)
+  longitude           Decimal               @db.Decimal(15, 10)
+  hint                String?
+  point_rules         String?
+  created_at          DateTime              @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime              @default(now()) @db.Timestamptz(6)
+  checkpoint_tasks    checkpoint_tasks[]
+  quests              quests                @relation(fields: [quest_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  session_answers     session_answers[]
+  session_checkpoints session_checkpoints[]
 
   @@unique([quest_id, order_index])
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model sessions {
-  id                       Int       @id @default(autoincrement())
+  id                       Int                   @id @default(autoincrement())
   quest_id                 Int
   user_id                  Int?
   team_id                  Int?
-  status                   String    @default("started")
+  status                   String                @default("started")
   transport_mode           String?
-  started_at               DateTime  @default(now()) @db.Timestamptz(6)
-  finished_at              DateTime? @db.Timestamptz(6)
-  current_checkpoint_order Int?      @default(0)
-  quests                   quests    @relation(fields: [quest_id], references: [id], onUpdate: NoAction)
-  teams                    teams?    @relation(fields: [team_id], references: [id], onUpdate: NoAction)
-  users                    users?    @relation(fields: [user_id], references: [id], onUpdate: NoAction)
+  started_at               DateTime              @default(now()) @db.Timestamptz(6)
+  finished_at              DateTime?             @db.Timestamptz(6)
+  current_checkpoint_order Int?                  @default(0)
+  session_answers          session_answers[]
+  session_checkpoints      session_checkpoints[]
+  quests                   quests                @relation(fields: [quest_id], references: [id], onUpdate: NoAction)
+  teams                    teams?                @relation(fields: [team_id], references: [id], onUpdate: NoAction)
+  users                    users?                @relation(fields: [user_id], references: [id], onUpdate: NoAction)
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model checkpoint_tasks {
-  id                Int               @id @default(autoincrement())
-  checkpoint_id     Int
-  task_type         String
-  question_text     String?
-  correct_answer    String
-  created_at        DateTime          @default(now()) @db.Timestamptz(6)
-  updated_at        DateTime          @default(now()) @db.Timestamptz(6)
-  quest_checkpoints quest_checkpoints @relation(fields: [checkpoint_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id                  Int                   @id @default(autoincrement())
+  checkpoint_id       Int
+  task_type           String
+  question_text       String?
+  correct_answer      String
+  created_at          DateTime              @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime              @default(now()) @db.Timestamptz(6)
+  quest_checkpoints   quest_checkpoints     @relation(fields: [checkpoint_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  session_answers     session_answers[]
+  task_choice_options task_choice_options[]
 
   @@unique([checkpoint_id, task_type])
+}
+
+model task_choice_options {
+  id               Int               @id @default(autoincrement())
+  task_id          Int
+  option_text      String
+  session_answers  session_answers[]
+  checkpoint_tasks checkpoint_tasks  @relation(fields: [task_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([task_id, option_text])
+}
+
+model session_answers {
+  id                  Int                  @id @default(autoincrement())
+  session_id          Int
+  checkpoint_id       Int
+  task_id             Int
+  answer_text         String?
+  chosen_option_id    Int?
+  is_correct          Boolean
+  answered_at         DateTime             @default(now()) @db.Timestamptz(6)
+  quest_checkpoints   quest_checkpoints    @relation(fields: [checkpoint_id], references: [id], onUpdate: NoAction)
+  task_choice_options task_choice_options? @relation(fields: [chosen_option_id], references: [id], onUpdate: NoAction)
+  sessions            sessions             @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  checkpoint_tasks    checkpoint_tasks     @relation(fields: [task_id], references: [id], onUpdate: NoAction)
+
+  @@unique([session_id, checkpoint_id, task_id])
+}
+
+model session_checkpoints {
+  id                Int               @id @default(autoincrement())
+  session_id        Int
+  checkpoint_id     Int
+  status            String
+  completed_at      DateTime?         @db.Timestamptz(6)
+  quest_checkpoints quest_checkpoints @relation(fields: [checkpoint_id], references: [id], onUpdate: NoAction)
+  sessions          sessions          @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([session_id, checkpoint_id])
 }

@@ -202,6 +202,31 @@ exports.Prisma.Checkpoint_tasksScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.Task_choice_optionsScalarFieldEnum = {
+  id: 'id',
+  task_id: 'task_id',
+  option_text: 'option_text'
+};
+
+exports.Prisma.Session_answersScalarFieldEnum = {
+  id: 'id',
+  session_id: 'session_id',
+  checkpoint_id: 'checkpoint_id',
+  task_id: 'task_id',
+  answer_text: 'answer_text',
+  chosen_option_id: 'chosen_option_id',
+  is_correct: 'is_correct',
+  answered_at: 'answered_at'
+};
+
+exports.Prisma.Session_checkpointsScalarFieldEnum = {
+  id: 'id',
+  session_id: 'session_id',
+  checkpoint_id: 'checkpoint_id',
+  status: 'status',
+  completed_at: 'completed_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -225,7 +250,10 @@ exports.Prisma.ModelName = {
   quests: 'quests',
   quest_checkpoints: 'quest_checkpoints',
   sessions: 'sessions',
-  checkpoint_tasks: 'checkpoint_tasks'
+  checkpoint_tasks: 'checkpoint_tasks',
+  task_choice_options: 'task_choice_options',
+  session_answers: 'session_answers',
+  session_checkpoints: 'session_checkpoints'
 };
 
 /**

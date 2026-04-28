@@ -48,6 +48,21 @@ export type sessions = $Result.DefaultSelection<Prisma.$sessionsPayload>
  * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
  */
 export type checkpoint_tasks = $Result.DefaultSelection<Prisma.$checkpoint_tasksPayload>
+/**
+ * Model task_choice_options
+ * 
+ */
+export type task_choice_options = $Result.DefaultSelection<Prisma.$task_choice_optionsPayload>
+/**
+ * Model session_answers
+ * 
+ */
+export type session_answers = $Result.DefaultSelection<Prisma.$session_answersPayload>
+/**
+ * Model session_checkpoints
+ * 
+ */
+export type session_checkpoints = $Result.DefaultSelection<Prisma.$session_checkpointsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -239,6 +254,36 @@ export class PrismaClient<
     * ```
     */
   get checkpoint_tasks(): Prisma.checkpoint_tasksDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.task_choice_options`: Exposes CRUD operations for the **task_choice_options** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Task_choice_options
+    * const task_choice_options = await prisma.task_choice_options.findMany()
+    * ```
+    */
+  get task_choice_options(): Prisma.task_choice_optionsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.session_answers`: Exposes CRUD operations for the **session_answers** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Session_answers
+    * const session_answers = await prisma.session_answers.findMany()
+    * ```
+    */
+  get session_answers(): Prisma.session_answersDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.session_checkpoints`: Exposes CRUD operations for the **session_checkpoints** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Session_checkpoints
+    * const session_checkpoints = await prisma.session_checkpoints.findMany()
+    * ```
+    */
+  get session_checkpoints(): Prisma.session_checkpointsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -679,7 +724,10 @@ export namespace Prisma {
     quests: 'quests',
     quest_checkpoints: 'quest_checkpoints',
     sessions: 'sessions',
-    checkpoint_tasks: 'checkpoint_tasks'
+    checkpoint_tasks: 'checkpoint_tasks',
+    task_choice_options: 'task_choice_options',
+    session_answers: 'session_answers',
+    session_checkpoints: 'session_checkpoints'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -695,7 +743,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "team_members" | "teams" | "quests" | "quest_checkpoints" | "sessions" | "checkpoint_tasks"
+      modelProps: "users" | "team_members" | "teams" | "quests" | "quest_checkpoints" | "sessions" | "checkpoint_tasks" | "task_choice_options" | "session_answers" | "session_checkpoints"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1217,6 +1265,228 @@ export namespace Prisma {
           }
         }
       }
+      task_choice_options: {
+        payload: Prisma.$task_choice_optionsPayload<ExtArgs>
+        fields: Prisma.task_choice_optionsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.task_choice_optionsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.task_choice_optionsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>
+          }
+          findFirst: {
+            args: Prisma.task_choice_optionsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.task_choice_optionsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>
+          }
+          findMany: {
+            args: Prisma.task_choice_optionsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>[]
+          }
+          create: {
+            args: Prisma.task_choice_optionsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>
+          }
+          createMany: {
+            args: Prisma.task_choice_optionsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.task_choice_optionsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>[]
+          }
+          delete: {
+            args: Prisma.task_choice_optionsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>
+          }
+          update: {
+            args: Prisma.task_choice_optionsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>
+          }
+          deleteMany: {
+            args: Prisma.task_choice_optionsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.task_choice_optionsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.task_choice_optionsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>[]
+          }
+          upsert: {
+            args: Prisma.task_choice_optionsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$task_choice_optionsPayload>
+          }
+          aggregate: {
+            args: Prisma.Task_choice_optionsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTask_choice_options>
+          }
+          groupBy: {
+            args: Prisma.task_choice_optionsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Task_choice_optionsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.task_choice_optionsCountArgs<ExtArgs>
+            result: $Utils.Optional<Task_choice_optionsCountAggregateOutputType> | number
+          }
+        }
+      }
+      session_answers: {
+        payload: Prisma.$session_answersPayload<ExtArgs>
+        fields: Prisma.session_answersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.session_answersFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.session_answersFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>
+          }
+          findFirst: {
+            args: Prisma.session_answersFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.session_answersFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>
+          }
+          findMany: {
+            args: Prisma.session_answersFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>[]
+          }
+          create: {
+            args: Prisma.session_answersCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>
+          }
+          createMany: {
+            args: Prisma.session_answersCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.session_answersCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>[]
+          }
+          delete: {
+            args: Prisma.session_answersDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>
+          }
+          update: {
+            args: Prisma.session_answersUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>
+          }
+          deleteMany: {
+            args: Prisma.session_answersDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.session_answersUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.session_answersUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>[]
+          }
+          upsert: {
+            args: Prisma.session_answersUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_answersPayload>
+          }
+          aggregate: {
+            args: Prisma.Session_answersAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSession_answers>
+          }
+          groupBy: {
+            args: Prisma.session_answersGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Session_answersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.session_answersCountArgs<ExtArgs>
+            result: $Utils.Optional<Session_answersCountAggregateOutputType> | number
+          }
+        }
+      }
+      session_checkpoints: {
+        payload: Prisma.$session_checkpointsPayload<ExtArgs>
+        fields: Prisma.session_checkpointsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.session_checkpointsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.session_checkpointsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>
+          }
+          findFirst: {
+            args: Prisma.session_checkpointsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.session_checkpointsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>
+          }
+          findMany: {
+            args: Prisma.session_checkpointsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>[]
+          }
+          create: {
+            args: Prisma.session_checkpointsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>
+          }
+          createMany: {
+            args: Prisma.session_checkpointsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.session_checkpointsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>[]
+          }
+          delete: {
+            args: Prisma.session_checkpointsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>
+          }
+          update: {
+            args: Prisma.session_checkpointsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>
+          }
+          deleteMany: {
+            args: Prisma.session_checkpointsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.session_checkpointsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.session_checkpointsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>[]
+          }
+          upsert: {
+            args: Prisma.session_checkpointsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$session_checkpointsPayload>
+          }
+          aggregate: {
+            args: Prisma.Session_checkpointsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSession_checkpoints>
+          }
+          groupBy: {
+            args: Prisma.session_checkpointsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Session_checkpointsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.session_checkpointsCountArgs<ExtArgs>
+            result: $Utils.Optional<Session_checkpointsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1332,6 +1602,9 @@ export namespace Prisma {
     quest_checkpoints?: quest_checkpointsOmit
     sessions?: sessionsOmit
     checkpoint_tasks?: checkpoint_tasksOmit
+    task_choice_options?: task_choice_optionsOmit
+    session_answers?: session_answersOmit
+    session_checkpoints?: session_checkpointsOmit
   }
 
   /* Types for Logging */
@@ -1551,10 +1824,14 @@ export namespace Prisma {
 
   export type Quest_checkpointsCountOutputType = {
     checkpoint_tasks: number
+    session_answers: number
+    session_checkpoints: number
   }
 
   export type Quest_checkpointsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     checkpoint_tasks?: boolean | Quest_checkpointsCountOutputTypeCountCheckpoint_tasksArgs
+    session_answers?: boolean | Quest_checkpointsCountOutputTypeCountSession_answersArgs
+    session_checkpoints?: boolean | Quest_checkpointsCountOutputTypeCountSession_checkpointsArgs
   }
 
   // Custom InputTypes
@@ -1573,6 +1850,131 @@ export namespace Prisma {
    */
   export type Quest_checkpointsCountOutputTypeCountCheckpoint_tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: checkpoint_tasksWhereInput
+  }
+
+  /**
+   * Quest_checkpointsCountOutputType without action
+   */
+  export type Quest_checkpointsCountOutputTypeCountSession_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_answersWhereInput
+  }
+
+  /**
+   * Quest_checkpointsCountOutputType without action
+   */
+  export type Quest_checkpointsCountOutputTypeCountSession_checkpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_checkpointsWhereInput
+  }
+
+
+  /**
+   * Count Type SessionsCountOutputType
+   */
+
+  export type SessionsCountOutputType = {
+    session_answers: number
+    session_checkpoints: number
+  }
+
+  export type SessionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session_answers?: boolean | SessionsCountOutputTypeCountSession_answersArgs
+    session_checkpoints?: boolean | SessionsCountOutputTypeCountSession_checkpointsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SessionsCountOutputType without action
+   */
+  export type SessionsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SessionsCountOutputType
+     */
+    select?: SessionsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SessionsCountOutputType without action
+   */
+  export type SessionsCountOutputTypeCountSession_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_answersWhereInput
+  }
+
+  /**
+   * SessionsCountOutputType without action
+   */
+  export type SessionsCountOutputTypeCountSession_checkpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_checkpointsWhereInput
+  }
+
+
+  /**
+   * Count Type Checkpoint_tasksCountOutputType
+   */
+
+  export type Checkpoint_tasksCountOutputType = {
+    session_answers: number
+    task_choice_options: number
+  }
+
+  export type Checkpoint_tasksCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session_answers?: boolean | Checkpoint_tasksCountOutputTypeCountSession_answersArgs
+    task_choice_options?: boolean | Checkpoint_tasksCountOutputTypeCountTask_choice_optionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Checkpoint_tasksCountOutputType without action
+   */
+  export type Checkpoint_tasksCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Checkpoint_tasksCountOutputType
+     */
+    select?: Checkpoint_tasksCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Checkpoint_tasksCountOutputType without action
+   */
+  export type Checkpoint_tasksCountOutputTypeCountSession_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_answersWhereInput
+  }
+
+  /**
+   * Checkpoint_tasksCountOutputType without action
+   */
+  export type Checkpoint_tasksCountOutputTypeCountTask_choice_optionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: task_choice_optionsWhereInput
+  }
+
+
+  /**
+   * Count Type Task_choice_optionsCountOutputType
+   */
+
+  export type Task_choice_optionsCountOutputType = {
+    session_answers: number
+  }
+
+  export type Task_choice_optionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session_answers?: boolean | Task_choice_optionsCountOutputTypeCountSession_answersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Task_choice_optionsCountOutputType without action
+   */
+  export type Task_choice_optionsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Task_choice_optionsCountOutputType
+     */
+    select?: Task_choice_optionsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Task_choice_optionsCountOutputType without action
+   */
+  export type Task_choice_optionsCountOutputTypeCountSession_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_answersWhereInput
   }
 
 
@@ -6653,6 +7055,8 @@ export namespace Prisma {
     updated_at?: boolean
     checkpoint_tasks?: boolean | quest_checkpoints$checkpoint_tasksArgs<ExtArgs>
     quests?: boolean | questsDefaultArgs<ExtArgs>
+    session_answers?: boolean | quest_checkpoints$session_answersArgs<ExtArgs>
+    session_checkpoints?: boolean | quest_checkpoints$session_checkpointsArgs<ExtArgs>
     _count?: boolean | Quest_checkpointsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["quest_checkpoints"]>
 
@@ -6707,6 +7111,8 @@ export namespace Prisma {
   export type quest_checkpointsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     checkpoint_tasks?: boolean | quest_checkpoints$checkpoint_tasksArgs<ExtArgs>
     quests?: boolean | questsDefaultArgs<ExtArgs>
+    session_answers?: boolean | quest_checkpoints$session_answersArgs<ExtArgs>
+    session_checkpoints?: boolean | quest_checkpoints$session_checkpointsArgs<ExtArgs>
     _count?: boolean | Quest_checkpointsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type quest_checkpointsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6721,6 +7127,8 @@ export namespace Prisma {
     objects: {
       checkpoint_tasks: Prisma.$checkpoint_tasksPayload<ExtArgs>[]
       quests: Prisma.$questsPayload<ExtArgs>
+      session_answers: Prisma.$session_answersPayload<ExtArgs>[]
+      session_checkpoints: Prisma.$session_checkpointsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -7131,6 +7539,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     checkpoint_tasks<T extends quest_checkpoints$checkpoint_tasksArgs<ExtArgs> = {}>(args?: Subset<T, quest_checkpoints$checkpoint_tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$checkpoint_tasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     quests<T extends questsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, questsDefaultArgs<ExtArgs>>): Prisma__questsClient<$Result.GetResult<Prisma.$questsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    session_answers<T extends quest_checkpoints$session_answersArgs<ExtArgs> = {}>(args?: Subset<T, quest_checkpoints$session_answersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    session_checkpoints<T extends quest_checkpoints$session_checkpointsArgs<ExtArgs> = {}>(args?: Subset<T, quest_checkpoints$session_checkpointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7597,6 +8007,54 @@ export namespace Prisma {
   }
 
   /**
+   * quest_checkpoints.session_answers
+   */
+  export type quest_checkpoints$session_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    where?: session_answersWhereInput
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    cursor?: session_answersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Session_answersScalarFieldEnum | Session_answersScalarFieldEnum[]
+  }
+
+  /**
+   * quest_checkpoints.session_checkpoints
+   */
+  export type quest_checkpoints$session_checkpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    where?: session_checkpointsWhereInput
+    orderBy?: session_checkpointsOrderByWithRelationInput | session_checkpointsOrderByWithRelationInput[]
+    cursor?: session_checkpointsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Session_checkpointsScalarFieldEnum | Session_checkpointsScalarFieldEnum[]
+  }
+
+  /**
    * quest_checkpoints without action
    */
   export type quest_checkpointsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7861,9 +8319,12 @@ export namespace Prisma {
     started_at?: boolean
     finished_at?: boolean
     current_checkpoint_order?: boolean
+    session_answers?: boolean | sessions$session_answersArgs<ExtArgs>
+    session_checkpoints?: boolean | sessions$session_checkpointsArgs<ExtArgs>
     quests?: boolean | questsDefaultArgs<ExtArgs>
     teams?: boolean | sessions$teamsArgs<ExtArgs>
     users?: boolean | sessions$usersArgs<ExtArgs>
+    _count?: boolean | SessionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sessions"]>
 
   export type sessionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7910,9 +8371,12 @@ export namespace Prisma {
 
   export type sessionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quest_id" | "user_id" | "team_id" | "status" | "transport_mode" | "started_at" | "finished_at" | "current_checkpoint_order", ExtArgs["result"]["sessions"]>
   export type sessionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session_answers?: boolean | sessions$session_answersArgs<ExtArgs>
+    session_checkpoints?: boolean | sessions$session_checkpointsArgs<ExtArgs>
     quests?: boolean | questsDefaultArgs<ExtArgs>
     teams?: boolean | sessions$teamsArgs<ExtArgs>
     users?: boolean | sessions$usersArgs<ExtArgs>
+    _count?: boolean | SessionsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type sessionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quests?: boolean | questsDefaultArgs<ExtArgs>
@@ -7928,6 +8392,8 @@ export namespace Prisma {
   export type $sessionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "sessions"
     objects: {
+      session_answers: Prisma.$session_answersPayload<ExtArgs>[]
+      session_checkpoints: Prisma.$session_checkpointsPayload<ExtArgs>[]
       quests: Prisma.$questsPayload<ExtArgs>
       teams: Prisma.$teamsPayload<ExtArgs> | null
       users: Prisma.$usersPayload<ExtArgs> | null
@@ -8336,6 +8802,8 @@ export namespace Prisma {
    */
   export interface Prisma__sessionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    session_answers<T extends sessions$session_answersArgs<ExtArgs> = {}>(args?: Subset<T, sessions$session_answersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    session_checkpoints<T extends sessions$session_checkpointsArgs<ExtArgs> = {}>(args?: Subset<T, sessions$session_checkpointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     quests<T extends questsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, questsDefaultArgs<ExtArgs>>): Prisma__questsClient<$Result.GetResult<Prisma.$questsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     teams<T extends sessions$teamsArgs<ExtArgs> = {}>(args?: Subset<T, sessions$teamsArgs<ExtArgs>>): Prisma__teamsClient<$Result.GetResult<Prisma.$teamsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     users<T extends sessions$usersArgs<ExtArgs> = {}>(args?: Subset<T, sessions$usersArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -8778,6 +9246,54 @@ export namespace Prisma {
   }
 
   /**
+   * sessions.session_answers
+   */
+  export type sessions$session_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    where?: session_answersWhereInput
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    cursor?: session_answersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Session_answersScalarFieldEnum | Session_answersScalarFieldEnum[]
+  }
+
+  /**
+   * sessions.session_checkpoints
+   */
+  export type sessions$session_checkpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    where?: session_checkpointsWhereInput
+    orderBy?: session_checkpointsOrderByWithRelationInput | session_checkpointsOrderByWithRelationInput[]
+    cursor?: session_checkpointsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Session_checkpointsScalarFieldEnum | Session_checkpointsScalarFieldEnum[]
+  }
+
+  /**
    * sessions.teams
    */
   export type sessions$teamsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9053,6 +9569,9 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    session_answers?: boolean | checkpoint_tasks$session_answersArgs<ExtArgs>
+    task_choice_options?: boolean | checkpoint_tasks$task_choice_optionsArgs<ExtArgs>
+    _count?: boolean | Checkpoint_tasksCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["checkpoint_tasks"]>
 
   export type checkpoint_tasksSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9090,6 +9609,9 @@ export namespace Prisma {
   export type checkpoint_tasksOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "checkpoint_id" | "task_type" | "question_text" | "correct_answer" | "created_at" | "updated_at", ExtArgs["result"]["checkpoint_tasks"]>
   export type checkpoint_tasksInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    session_answers?: boolean | checkpoint_tasks$session_answersArgs<ExtArgs>
+    task_choice_options?: boolean | checkpoint_tasks$task_choice_optionsArgs<ExtArgs>
+    _count?: boolean | Checkpoint_tasksCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type checkpoint_tasksIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
@@ -9102,6 +9624,8 @@ export namespace Prisma {
     name: "checkpoint_tasks"
     objects: {
       quest_checkpoints: Prisma.$quest_checkpointsPayload<ExtArgs>
+      session_answers: Prisma.$session_answersPayload<ExtArgs>[]
+      task_choice_options: Prisma.$task_choice_optionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -9506,6 +10030,8 @@ export namespace Prisma {
   export interface Prisma__checkpoint_tasksClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     quest_checkpoints<T extends quest_checkpointsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, quest_checkpointsDefaultArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    session_answers<T extends checkpoint_tasks$session_answersArgs<ExtArgs> = {}>(args?: Subset<T, checkpoint_tasks$session_answersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    task_choice_options<T extends checkpoint_tasks$task_choice_optionsArgs<ExtArgs> = {}>(args?: Subset<T, checkpoint_tasks$task_choice_optionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9943,6 +10469,54 @@ export namespace Prisma {
   }
 
   /**
+   * checkpoint_tasks.session_answers
+   */
+  export type checkpoint_tasks$session_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    where?: session_answersWhereInput
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    cursor?: session_answersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Session_answersScalarFieldEnum | Session_answersScalarFieldEnum[]
+  }
+
+  /**
+   * checkpoint_tasks.task_choice_options
+   */
+  export type checkpoint_tasks$task_choice_optionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    where?: task_choice_optionsWhereInput
+    orderBy?: task_choice_optionsOrderByWithRelationInput | task_choice_optionsOrderByWithRelationInput[]
+    cursor?: task_choice_optionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Task_choice_optionsScalarFieldEnum | Task_choice_optionsScalarFieldEnum[]
+  }
+
+  /**
    * checkpoint_tasks without action
    */
   export type checkpoint_tasksDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9958,6 +10532,3419 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: checkpoint_tasksInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model task_choice_options
+   */
+
+  export type AggregateTask_choice_options = {
+    _count: Task_choice_optionsCountAggregateOutputType | null
+    _avg: Task_choice_optionsAvgAggregateOutputType | null
+    _sum: Task_choice_optionsSumAggregateOutputType | null
+    _min: Task_choice_optionsMinAggregateOutputType | null
+    _max: Task_choice_optionsMaxAggregateOutputType | null
+  }
+
+  export type Task_choice_optionsAvgAggregateOutputType = {
+    id: number | null
+    task_id: number | null
+  }
+
+  export type Task_choice_optionsSumAggregateOutputType = {
+    id: number | null
+    task_id: number | null
+  }
+
+  export type Task_choice_optionsMinAggregateOutputType = {
+    id: number | null
+    task_id: number | null
+    option_text: string | null
+  }
+
+  export type Task_choice_optionsMaxAggregateOutputType = {
+    id: number | null
+    task_id: number | null
+    option_text: string | null
+  }
+
+  export type Task_choice_optionsCountAggregateOutputType = {
+    id: number
+    task_id: number
+    option_text: number
+    _all: number
+  }
+
+
+  export type Task_choice_optionsAvgAggregateInputType = {
+    id?: true
+    task_id?: true
+  }
+
+  export type Task_choice_optionsSumAggregateInputType = {
+    id?: true
+    task_id?: true
+  }
+
+  export type Task_choice_optionsMinAggregateInputType = {
+    id?: true
+    task_id?: true
+    option_text?: true
+  }
+
+  export type Task_choice_optionsMaxAggregateInputType = {
+    id?: true
+    task_id?: true
+    option_text?: true
+  }
+
+  export type Task_choice_optionsCountAggregateInputType = {
+    id?: true
+    task_id?: true
+    option_text?: true
+    _all?: true
+  }
+
+  export type Task_choice_optionsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which task_choice_options to aggregate.
+     */
+    where?: task_choice_optionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of task_choice_options to fetch.
+     */
+    orderBy?: task_choice_optionsOrderByWithRelationInput | task_choice_optionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: task_choice_optionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` task_choice_options from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` task_choice_options.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned task_choice_options
+    **/
+    _count?: true | Task_choice_optionsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Task_choice_optionsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Task_choice_optionsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Task_choice_optionsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Task_choice_optionsMaxAggregateInputType
+  }
+
+  export type GetTask_choice_optionsAggregateType<T extends Task_choice_optionsAggregateArgs> = {
+        [P in keyof T & keyof AggregateTask_choice_options]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTask_choice_options[P]>
+      : GetScalarType<T[P], AggregateTask_choice_options[P]>
+  }
+
+
+
+
+  export type task_choice_optionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: task_choice_optionsWhereInput
+    orderBy?: task_choice_optionsOrderByWithAggregationInput | task_choice_optionsOrderByWithAggregationInput[]
+    by: Task_choice_optionsScalarFieldEnum[] | Task_choice_optionsScalarFieldEnum
+    having?: task_choice_optionsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Task_choice_optionsCountAggregateInputType | true
+    _avg?: Task_choice_optionsAvgAggregateInputType
+    _sum?: Task_choice_optionsSumAggregateInputType
+    _min?: Task_choice_optionsMinAggregateInputType
+    _max?: Task_choice_optionsMaxAggregateInputType
+  }
+
+  export type Task_choice_optionsGroupByOutputType = {
+    id: number
+    task_id: number
+    option_text: string
+    _count: Task_choice_optionsCountAggregateOutputType | null
+    _avg: Task_choice_optionsAvgAggregateOutputType | null
+    _sum: Task_choice_optionsSumAggregateOutputType | null
+    _min: Task_choice_optionsMinAggregateOutputType | null
+    _max: Task_choice_optionsMaxAggregateOutputType | null
+  }
+
+  type GetTask_choice_optionsGroupByPayload<T extends task_choice_optionsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Task_choice_optionsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Task_choice_optionsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Task_choice_optionsGroupByOutputType[P]>
+            : GetScalarType<T[P], Task_choice_optionsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type task_choice_optionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    task_id?: boolean
+    option_text?: boolean
+    session_answers?: boolean | task_choice_options$session_answersArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+    _count?: boolean | Task_choice_optionsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["task_choice_options"]>
+
+  export type task_choice_optionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    task_id?: boolean
+    option_text?: boolean
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["task_choice_options"]>
+
+  export type task_choice_optionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    task_id?: boolean
+    option_text?: boolean
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["task_choice_options"]>
+
+  export type task_choice_optionsSelectScalar = {
+    id?: boolean
+    task_id?: boolean
+    option_text?: boolean
+  }
+
+  export type task_choice_optionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "task_id" | "option_text", ExtArgs["result"]["task_choice_options"]>
+  export type task_choice_optionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session_answers?: boolean | task_choice_options$session_answersArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+    _count?: boolean | Task_choice_optionsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type task_choice_optionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }
+  export type task_choice_optionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }
+
+  export type $task_choice_optionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "task_choice_options"
+    objects: {
+      session_answers: Prisma.$session_answersPayload<ExtArgs>[]
+      checkpoint_tasks: Prisma.$checkpoint_tasksPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      task_id: number
+      option_text: string
+    }, ExtArgs["result"]["task_choice_options"]>
+    composites: {}
+  }
+
+  type task_choice_optionsGetPayload<S extends boolean | null | undefined | task_choice_optionsDefaultArgs> = $Result.GetResult<Prisma.$task_choice_optionsPayload, S>
+
+  type task_choice_optionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<task_choice_optionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Task_choice_optionsCountAggregateInputType | true
+    }
+
+  export interface task_choice_optionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['task_choice_options'], meta: { name: 'task_choice_options' } }
+    /**
+     * Find zero or one Task_choice_options that matches the filter.
+     * @param {task_choice_optionsFindUniqueArgs} args - Arguments to find a Task_choice_options
+     * @example
+     * // Get one Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends task_choice_optionsFindUniqueArgs>(args: SelectSubset<T, task_choice_optionsFindUniqueArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Task_choice_options that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {task_choice_optionsFindUniqueOrThrowArgs} args - Arguments to find a Task_choice_options
+     * @example
+     * // Get one Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends task_choice_optionsFindUniqueOrThrowArgs>(args: SelectSubset<T, task_choice_optionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Task_choice_options that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {task_choice_optionsFindFirstArgs} args - Arguments to find a Task_choice_options
+     * @example
+     * // Get one Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends task_choice_optionsFindFirstArgs>(args?: SelectSubset<T, task_choice_optionsFindFirstArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Task_choice_options that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {task_choice_optionsFindFirstOrThrowArgs} args - Arguments to find a Task_choice_options
+     * @example
+     * // Get one Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends task_choice_optionsFindFirstOrThrowArgs>(args?: SelectSubset<T, task_choice_optionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Task_choice_options that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {task_choice_optionsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.findMany()
+     * 
+     * // Get first 10 Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const task_choice_optionsWithIdOnly = await prisma.task_choice_options.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends task_choice_optionsFindManyArgs>(args?: SelectSubset<T, task_choice_optionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Task_choice_options.
+     * @param {task_choice_optionsCreateArgs} args - Arguments to create a Task_choice_options.
+     * @example
+     * // Create one Task_choice_options
+     * const Task_choice_options = await prisma.task_choice_options.create({
+     *   data: {
+     *     // ... data to create a Task_choice_options
+     *   }
+     * })
+     * 
+     */
+    create<T extends task_choice_optionsCreateArgs>(args: SelectSubset<T, task_choice_optionsCreateArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Task_choice_options.
+     * @param {task_choice_optionsCreateManyArgs} args - Arguments to create many Task_choice_options.
+     * @example
+     * // Create many Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends task_choice_optionsCreateManyArgs>(args?: SelectSubset<T, task_choice_optionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Task_choice_options and returns the data saved in the database.
+     * @param {task_choice_optionsCreateManyAndReturnArgs} args - Arguments to create many Task_choice_options.
+     * @example
+     * // Create many Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Task_choice_options and only return the `id`
+     * const task_choice_optionsWithIdOnly = await prisma.task_choice_options.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends task_choice_optionsCreateManyAndReturnArgs>(args?: SelectSubset<T, task_choice_optionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Task_choice_options.
+     * @param {task_choice_optionsDeleteArgs} args - Arguments to delete one Task_choice_options.
+     * @example
+     * // Delete one Task_choice_options
+     * const Task_choice_options = await prisma.task_choice_options.delete({
+     *   where: {
+     *     // ... filter to delete one Task_choice_options
+     *   }
+     * })
+     * 
+     */
+    delete<T extends task_choice_optionsDeleteArgs>(args: SelectSubset<T, task_choice_optionsDeleteArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Task_choice_options.
+     * @param {task_choice_optionsUpdateArgs} args - Arguments to update one Task_choice_options.
+     * @example
+     * // Update one Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends task_choice_optionsUpdateArgs>(args: SelectSubset<T, task_choice_optionsUpdateArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Task_choice_options.
+     * @param {task_choice_optionsDeleteManyArgs} args - Arguments to filter Task_choice_options to delete.
+     * @example
+     * // Delete a few Task_choice_options
+     * const { count } = await prisma.task_choice_options.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends task_choice_optionsDeleteManyArgs>(args?: SelectSubset<T, task_choice_optionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Task_choice_options.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {task_choice_optionsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends task_choice_optionsUpdateManyArgs>(args: SelectSubset<T, task_choice_optionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Task_choice_options and returns the data updated in the database.
+     * @param {task_choice_optionsUpdateManyAndReturnArgs} args - Arguments to update many Task_choice_options.
+     * @example
+     * // Update many Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Task_choice_options and only return the `id`
+     * const task_choice_optionsWithIdOnly = await prisma.task_choice_options.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends task_choice_optionsUpdateManyAndReturnArgs>(args: SelectSubset<T, task_choice_optionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Task_choice_options.
+     * @param {task_choice_optionsUpsertArgs} args - Arguments to update or create a Task_choice_options.
+     * @example
+     * // Update or create a Task_choice_options
+     * const task_choice_options = await prisma.task_choice_options.upsert({
+     *   create: {
+     *     // ... data to create a Task_choice_options
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Task_choice_options we want to update
+     *   }
+     * })
+     */
+    upsert<T extends task_choice_optionsUpsertArgs>(args: SelectSubset<T, task_choice_optionsUpsertArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Task_choice_options.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {task_choice_optionsCountArgs} args - Arguments to filter Task_choice_options to count.
+     * @example
+     * // Count the number of Task_choice_options
+     * const count = await prisma.task_choice_options.count({
+     *   where: {
+     *     // ... the filter for the Task_choice_options we want to count
+     *   }
+     * })
+    **/
+    count<T extends task_choice_optionsCountArgs>(
+      args?: Subset<T, task_choice_optionsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Task_choice_optionsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Task_choice_options.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Task_choice_optionsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Task_choice_optionsAggregateArgs>(args: Subset<T, Task_choice_optionsAggregateArgs>): Prisma.PrismaPromise<GetTask_choice_optionsAggregateType<T>>
+
+    /**
+     * Group by Task_choice_options.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {task_choice_optionsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends task_choice_optionsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: task_choice_optionsGroupByArgs['orderBy'] }
+        : { orderBy?: task_choice_optionsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, task_choice_optionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTask_choice_optionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the task_choice_options model
+   */
+  readonly fields: task_choice_optionsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for task_choice_options.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__task_choice_optionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    session_answers<T extends task_choice_options$session_answersArgs<ExtArgs> = {}>(args?: Subset<T, task_choice_options$session_answersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    checkpoint_tasks<T extends checkpoint_tasksDefaultArgs<ExtArgs> = {}>(args?: Subset<T, checkpoint_tasksDefaultArgs<ExtArgs>>): Prisma__checkpoint_tasksClient<$Result.GetResult<Prisma.$checkpoint_tasksPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the task_choice_options model
+   */
+  interface task_choice_optionsFieldRefs {
+    readonly id: FieldRef<"task_choice_options", 'Int'>
+    readonly task_id: FieldRef<"task_choice_options", 'Int'>
+    readonly option_text: FieldRef<"task_choice_options", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * task_choice_options findUnique
+   */
+  export type task_choice_optionsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * Filter, which task_choice_options to fetch.
+     */
+    where: task_choice_optionsWhereUniqueInput
+  }
+
+  /**
+   * task_choice_options findUniqueOrThrow
+   */
+  export type task_choice_optionsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * Filter, which task_choice_options to fetch.
+     */
+    where: task_choice_optionsWhereUniqueInput
+  }
+
+  /**
+   * task_choice_options findFirst
+   */
+  export type task_choice_optionsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * Filter, which task_choice_options to fetch.
+     */
+    where?: task_choice_optionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of task_choice_options to fetch.
+     */
+    orderBy?: task_choice_optionsOrderByWithRelationInput | task_choice_optionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for task_choice_options.
+     */
+    cursor?: task_choice_optionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` task_choice_options from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` task_choice_options.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of task_choice_options.
+     */
+    distinct?: Task_choice_optionsScalarFieldEnum | Task_choice_optionsScalarFieldEnum[]
+  }
+
+  /**
+   * task_choice_options findFirstOrThrow
+   */
+  export type task_choice_optionsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * Filter, which task_choice_options to fetch.
+     */
+    where?: task_choice_optionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of task_choice_options to fetch.
+     */
+    orderBy?: task_choice_optionsOrderByWithRelationInput | task_choice_optionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for task_choice_options.
+     */
+    cursor?: task_choice_optionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` task_choice_options from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` task_choice_options.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of task_choice_options.
+     */
+    distinct?: Task_choice_optionsScalarFieldEnum | Task_choice_optionsScalarFieldEnum[]
+  }
+
+  /**
+   * task_choice_options findMany
+   */
+  export type task_choice_optionsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * Filter, which task_choice_options to fetch.
+     */
+    where?: task_choice_optionsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of task_choice_options to fetch.
+     */
+    orderBy?: task_choice_optionsOrderByWithRelationInput | task_choice_optionsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing task_choice_options.
+     */
+    cursor?: task_choice_optionsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` task_choice_options from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` task_choice_options.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of task_choice_options.
+     */
+    distinct?: Task_choice_optionsScalarFieldEnum | Task_choice_optionsScalarFieldEnum[]
+  }
+
+  /**
+   * task_choice_options create
+   */
+  export type task_choice_optionsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a task_choice_options.
+     */
+    data: XOR<task_choice_optionsCreateInput, task_choice_optionsUncheckedCreateInput>
+  }
+
+  /**
+   * task_choice_options createMany
+   */
+  export type task_choice_optionsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many task_choice_options.
+     */
+    data: task_choice_optionsCreateManyInput | task_choice_optionsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * task_choice_options createManyAndReturn
+   */
+  export type task_choice_optionsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * The data used to create many task_choice_options.
+     */
+    data: task_choice_optionsCreateManyInput | task_choice_optionsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * task_choice_options update
+   */
+  export type task_choice_optionsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a task_choice_options.
+     */
+    data: XOR<task_choice_optionsUpdateInput, task_choice_optionsUncheckedUpdateInput>
+    /**
+     * Choose, which task_choice_options to update.
+     */
+    where: task_choice_optionsWhereUniqueInput
+  }
+
+  /**
+   * task_choice_options updateMany
+   */
+  export type task_choice_optionsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update task_choice_options.
+     */
+    data: XOR<task_choice_optionsUpdateManyMutationInput, task_choice_optionsUncheckedUpdateManyInput>
+    /**
+     * Filter which task_choice_options to update
+     */
+    where?: task_choice_optionsWhereInput
+    /**
+     * Limit how many task_choice_options to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * task_choice_options updateManyAndReturn
+   */
+  export type task_choice_optionsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * The data used to update task_choice_options.
+     */
+    data: XOR<task_choice_optionsUpdateManyMutationInput, task_choice_optionsUncheckedUpdateManyInput>
+    /**
+     * Filter which task_choice_options to update
+     */
+    where?: task_choice_optionsWhereInput
+    /**
+     * Limit how many task_choice_options to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * task_choice_options upsert
+   */
+  export type task_choice_optionsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the task_choice_options to update in case it exists.
+     */
+    where: task_choice_optionsWhereUniqueInput
+    /**
+     * In case the task_choice_options found by the `where` argument doesn't exist, create a new task_choice_options with this data.
+     */
+    create: XOR<task_choice_optionsCreateInput, task_choice_optionsUncheckedCreateInput>
+    /**
+     * In case the task_choice_options was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<task_choice_optionsUpdateInput, task_choice_optionsUncheckedUpdateInput>
+  }
+
+  /**
+   * task_choice_options delete
+   */
+  export type task_choice_optionsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    /**
+     * Filter which task_choice_options to delete.
+     */
+    where: task_choice_optionsWhereUniqueInput
+  }
+
+  /**
+   * task_choice_options deleteMany
+   */
+  export type task_choice_optionsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which task_choice_options to delete
+     */
+    where?: task_choice_optionsWhereInput
+    /**
+     * Limit how many task_choice_options to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * task_choice_options.session_answers
+   */
+  export type task_choice_options$session_answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    where?: session_answersWhereInput
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    cursor?: session_answersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Session_answersScalarFieldEnum | Session_answersScalarFieldEnum[]
+  }
+
+  /**
+   * task_choice_options without action
+   */
+  export type task_choice_optionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model session_answers
+   */
+
+  export type AggregateSession_answers = {
+    _count: Session_answersCountAggregateOutputType | null
+    _avg: Session_answersAvgAggregateOutputType | null
+    _sum: Session_answersSumAggregateOutputType | null
+    _min: Session_answersMinAggregateOutputType | null
+    _max: Session_answersMaxAggregateOutputType | null
+  }
+
+  export type Session_answersAvgAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+    task_id: number | null
+    chosen_option_id: number | null
+  }
+
+  export type Session_answersSumAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+    task_id: number | null
+    chosen_option_id: number | null
+  }
+
+  export type Session_answersMinAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+    task_id: number | null
+    answer_text: string | null
+    chosen_option_id: number | null
+    is_correct: boolean | null
+    answered_at: Date | null
+  }
+
+  export type Session_answersMaxAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+    task_id: number | null
+    answer_text: string | null
+    chosen_option_id: number | null
+    is_correct: boolean | null
+    answered_at: Date | null
+  }
+
+  export type Session_answersCountAggregateOutputType = {
+    id: number
+    session_id: number
+    checkpoint_id: number
+    task_id: number
+    answer_text: number
+    chosen_option_id: number
+    is_correct: number
+    answered_at: number
+    _all: number
+  }
+
+
+  export type Session_answersAvgAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    task_id?: true
+    chosen_option_id?: true
+  }
+
+  export type Session_answersSumAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    task_id?: true
+    chosen_option_id?: true
+  }
+
+  export type Session_answersMinAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    task_id?: true
+    answer_text?: true
+    chosen_option_id?: true
+    is_correct?: true
+    answered_at?: true
+  }
+
+  export type Session_answersMaxAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    task_id?: true
+    answer_text?: true
+    chosen_option_id?: true
+    is_correct?: true
+    answered_at?: true
+  }
+
+  export type Session_answersCountAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    task_id?: true
+    answer_text?: true
+    chosen_option_id?: true
+    is_correct?: true
+    answered_at?: true
+    _all?: true
+  }
+
+  export type Session_answersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which session_answers to aggregate.
+     */
+    where?: session_answersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_answers to fetch.
+     */
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: session_answersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_answers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_answers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned session_answers
+    **/
+    _count?: true | Session_answersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Session_answersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Session_answersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Session_answersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Session_answersMaxAggregateInputType
+  }
+
+  export type GetSession_answersAggregateType<T extends Session_answersAggregateArgs> = {
+        [P in keyof T & keyof AggregateSession_answers]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSession_answers[P]>
+      : GetScalarType<T[P], AggregateSession_answers[P]>
+  }
+
+
+
+
+  export type session_answersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_answersWhereInput
+    orderBy?: session_answersOrderByWithAggregationInput | session_answersOrderByWithAggregationInput[]
+    by: Session_answersScalarFieldEnum[] | Session_answersScalarFieldEnum
+    having?: session_answersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Session_answersCountAggregateInputType | true
+    _avg?: Session_answersAvgAggregateInputType
+    _sum?: Session_answersSumAggregateInputType
+    _min?: Session_answersMinAggregateInputType
+    _max?: Session_answersMaxAggregateInputType
+  }
+
+  export type Session_answersGroupByOutputType = {
+    id: number
+    session_id: number
+    checkpoint_id: number
+    task_id: number
+    answer_text: string | null
+    chosen_option_id: number | null
+    is_correct: boolean
+    answered_at: Date
+    _count: Session_answersCountAggregateOutputType | null
+    _avg: Session_answersAvgAggregateOutputType | null
+    _sum: Session_answersSumAggregateOutputType | null
+    _min: Session_answersMinAggregateOutputType | null
+    _max: Session_answersMaxAggregateOutputType | null
+  }
+
+  type GetSession_answersGroupByPayload<T extends session_answersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Session_answersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Session_answersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Session_answersGroupByOutputType[P]>
+            : GetScalarType<T[P], Session_answersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type session_answersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    task_id?: boolean
+    answer_text?: boolean
+    chosen_option_id?: boolean
+    is_correct?: boolean
+    answered_at?: boolean
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    task_choice_options?: boolean | session_answers$task_choice_optionsArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session_answers"]>
+
+  export type session_answersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    task_id?: boolean
+    answer_text?: boolean
+    chosen_option_id?: boolean
+    is_correct?: boolean
+    answered_at?: boolean
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    task_choice_options?: boolean | session_answers$task_choice_optionsArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session_answers"]>
+
+  export type session_answersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    task_id?: boolean
+    answer_text?: boolean
+    chosen_option_id?: boolean
+    is_correct?: boolean
+    answered_at?: boolean
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    task_choice_options?: boolean | session_answers$task_choice_optionsArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session_answers"]>
+
+  export type session_answersSelectScalar = {
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    task_id?: boolean
+    answer_text?: boolean
+    chosen_option_id?: boolean
+    is_correct?: boolean
+    answered_at?: boolean
+  }
+
+  export type session_answersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "session_id" | "checkpoint_id" | "task_id" | "answer_text" | "chosen_option_id" | "is_correct" | "answered_at", ExtArgs["result"]["session_answers"]>
+  export type session_answersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    task_choice_options?: boolean | session_answers$task_choice_optionsArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }
+  export type session_answersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    task_choice_options?: boolean | session_answers$task_choice_optionsArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }
+  export type session_answersIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    task_choice_options?: boolean | session_answers$task_choice_optionsArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+    checkpoint_tasks?: boolean | checkpoint_tasksDefaultArgs<ExtArgs>
+  }
+
+  export type $session_answersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "session_answers"
+    objects: {
+      quest_checkpoints: Prisma.$quest_checkpointsPayload<ExtArgs>
+      task_choice_options: Prisma.$task_choice_optionsPayload<ExtArgs> | null
+      sessions: Prisma.$sessionsPayload<ExtArgs>
+      checkpoint_tasks: Prisma.$checkpoint_tasksPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      session_id: number
+      checkpoint_id: number
+      task_id: number
+      answer_text: string | null
+      chosen_option_id: number | null
+      is_correct: boolean
+      answered_at: Date
+    }, ExtArgs["result"]["session_answers"]>
+    composites: {}
+  }
+
+  type session_answersGetPayload<S extends boolean | null | undefined | session_answersDefaultArgs> = $Result.GetResult<Prisma.$session_answersPayload, S>
+
+  type session_answersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<session_answersFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Session_answersCountAggregateInputType | true
+    }
+
+  export interface session_answersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['session_answers'], meta: { name: 'session_answers' } }
+    /**
+     * Find zero or one Session_answers that matches the filter.
+     * @param {session_answersFindUniqueArgs} args - Arguments to find a Session_answers
+     * @example
+     * // Get one Session_answers
+     * const session_answers = await prisma.session_answers.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends session_answersFindUniqueArgs>(args: SelectSubset<T, session_answersFindUniqueArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Session_answers that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {session_answersFindUniqueOrThrowArgs} args - Arguments to find a Session_answers
+     * @example
+     * // Get one Session_answers
+     * const session_answers = await prisma.session_answers.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends session_answersFindUniqueOrThrowArgs>(args: SelectSubset<T, session_answersFindUniqueOrThrowArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Session_answers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_answersFindFirstArgs} args - Arguments to find a Session_answers
+     * @example
+     * // Get one Session_answers
+     * const session_answers = await prisma.session_answers.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends session_answersFindFirstArgs>(args?: SelectSubset<T, session_answersFindFirstArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Session_answers that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_answersFindFirstOrThrowArgs} args - Arguments to find a Session_answers
+     * @example
+     * // Get one Session_answers
+     * const session_answers = await prisma.session_answers.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends session_answersFindFirstOrThrowArgs>(args?: SelectSubset<T, session_answersFindFirstOrThrowArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Session_answers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_answersFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Session_answers
+     * const session_answers = await prisma.session_answers.findMany()
+     * 
+     * // Get first 10 Session_answers
+     * const session_answers = await prisma.session_answers.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const session_answersWithIdOnly = await prisma.session_answers.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends session_answersFindManyArgs>(args?: SelectSubset<T, session_answersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Session_answers.
+     * @param {session_answersCreateArgs} args - Arguments to create a Session_answers.
+     * @example
+     * // Create one Session_answers
+     * const Session_answers = await prisma.session_answers.create({
+     *   data: {
+     *     // ... data to create a Session_answers
+     *   }
+     * })
+     * 
+     */
+    create<T extends session_answersCreateArgs>(args: SelectSubset<T, session_answersCreateArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Session_answers.
+     * @param {session_answersCreateManyArgs} args - Arguments to create many Session_answers.
+     * @example
+     * // Create many Session_answers
+     * const session_answers = await prisma.session_answers.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends session_answersCreateManyArgs>(args?: SelectSubset<T, session_answersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Session_answers and returns the data saved in the database.
+     * @param {session_answersCreateManyAndReturnArgs} args - Arguments to create many Session_answers.
+     * @example
+     * // Create many Session_answers
+     * const session_answers = await prisma.session_answers.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Session_answers and only return the `id`
+     * const session_answersWithIdOnly = await prisma.session_answers.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends session_answersCreateManyAndReturnArgs>(args?: SelectSubset<T, session_answersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Session_answers.
+     * @param {session_answersDeleteArgs} args - Arguments to delete one Session_answers.
+     * @example
+     * // Delete one Session_answers
+     * const Session_answers = await prisma.session_answers.delete({
+     *   where: {
+     *     // ... filter to delete one Session_answers
+     *   }
+     * })
+     * 
+     */
+    delete<T extends session_answersDeleteArgs>(args: SelectSubset<T, session_answersDeleteArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Session_answers.
+     * @param {session_answersUpdateArgs} args - Arguments to update one Session_answers.
+     * @example
+     * // Update one Session_answers
+     * const session_answers = await prisma.session_answers.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends session_answersUpdateArgs>(args: SelectSubset<T, session_answersUpdateArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Session_answers.
+     * @param {session_answersDeleteManyArgs} args - Arguments to filter Session_answers to delete.
+     * @example
+     * // Delete a few Session_answers
+     * const { count } = await prisma.session_answers.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends session_answersDeleteManyArgs>(args?: SelectSubset<T, session_answersDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Session_answers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_answersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Session_answers
+     * const session_answers = await prisma.session_answers.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends session_answersUpdateManyArgs>(args: SelectSubset<T, session_answersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Session_answers and returns the data updated in the database.
+     * @param {session_answersUpdateManyAndReturnArgs} args - Arguments to update many Session_answers.
+     * @example
+     * // Update many Session_answers
+     * const session_answers = await prisma.session_answers.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Session_answers and only return the `id`
+     * const session_answersWithIdOnly = await prisma.session_answers.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends session_answersUpdateManyAndReturnArgs>(args: SelectSubset<T, session_answersUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Session_answers.
+     * @param {session_answersUpsertArgs} args - Arguments to update or create a Session_answers.
+     * @example
+     * // Update or create a Session_answers
+     * const session_answers = await prisma.session_answers.upsert({
+     *   create: {
+     *     // ... data to create a Session_answers
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Session_answers we want to update
+     *   }
+     * })
+     */
+    upsert<T extends session_answersUpsertArgs>(args: SelectSubset<T, session_answersUpsertArgs<ExtArgs>>): Prisma__session_answersClient<$Result.GetResult<Prisma.$session_answersPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Session_answers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_answersCountArgs} args - Arguments to filter Session_answers to count.
+     * @example
+     * // Count the number of Session_answers
+     * const count = await prisma.session_answers.count({
+     *   where: {
+     *     // ... the filter for the Session_answers we want to count
+     *   }
+     * })
+    **/
+    count<T extends session_answersCountArgs>(
+      args?: Subset<T, session_answersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Session_answersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Session_answers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Session_answersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Session_answersAggregateArgs>(args: Subset<T, Session_answersAggregateArgs>): Prisma.PrismaPromise<GetSession_answersAggregateType<T>>
+
+    /**
+     * Group by Session_answers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_answersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends session_answersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: session_answersGroupByArgs['orderBy'] }
+        : { orderBy?: session_answersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, session_answersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSession_answersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the session_answers model
+   */
+  readonly fields: session_answersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for session_answers.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__session_answersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quest_checkpoints<T extends quest_checkpointsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, quest_checkpointsDefaultArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    task_choice_options<T extends session_answers$task_choice_optionsArgs<ExtArgs> = {}>(args?: Subset<T, session_answers$task_choice_optionsArgs<ExtArgs>>): Prisma__task_choice_optionsClient<$Result.GetResult<Prisma.$task_choice_optionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    sessions<T extends sessionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sessionsDefaultArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    checkpoint_tasks<T extends checkpoint_tasksDefaultArgs<ExtArgs> = {}>(args?: Subset<T, checkpoint_tasksDefaultArgs<ExtArgs>>): Prisma__checkpoint_tasksClient<$Result.GetResult<Prisma.$checkpoint_tasksPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the session_answers model
+   */
+  interface session_answersFieldRefs {
+    readonly id: FieldRef<"session_answers", 'Int'>
+    readonly session_id: FieldRef<"session_answers", 'Int'>
+    readonly checkpoint_id: FieldRef<"session_answers", 'Int'>
+    readonly task_id: FieldRef<"session_answers", 'Int'>
+    readonly answer_text: FieldRef<"session_answers", 'String'>
+    readonly chosen_option_id: FieldRef<"session_answers", 'Int'>
+    readonly is_correct: FieldRef<"session_answers", 'Boolean'>
+    readonly answered_at: FieldRef<"session_answers", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * session_answers findUnique
+   */
+  export type session_answersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * Filter, which session_answers to fetch.
+     */
+    where: session_answersWhereUniqueInput
+  }
+
+  /**
+   * session_answers findUniqueOrThrow
+   */
+  export type session_answersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * Filter, which session_answers to fetch.
+     */
+    where: session_answersWhereUniqueInput
+  }
+
+  /**
+   * session_answers findFirst
+   */
+  export type session_answersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * Filter, which session_answers to fetch.
+     */
+    where?: session_answersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_answers to fetch.
+     */
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for session_answers.
+     */
+    cursor?: session_answersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_answers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_answers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of session_answers.
+     */
+    distinct?: Session_answersScalarFieldEnum | Session_answersScalarFieldEnum[]
+  }
+
+  /**
+   * session_answers findFirstOrThrow
+   */
+  export type session_answersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * Filter, which session_answers to fetch.
+     */
+    where?: session_answersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_answers to fetch.
+     */
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for session_answers.
+     */
+    cursor?: session_answersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_answers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_answers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of session_answers.
+     */
+    distinct?: Session_answersScalarFieldEnum | Session_answersScalarFieldEnum[]
+  }
+
+  /**
+   * session_answers findMany
+   */
+  export type session_answersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * Filter, which session_answers to fetch.
+     */
+    where?: session_answersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_answers to fetch.
+     */
+    orderBy?: session_answersOrderByWithRelationInput | session_answersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing session_answers.
+     */
+    cursor?: session_answersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_answers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_answers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of session_answers.
+     */
+    distinct?: Session_answersScalarFieldEnum | Session_answersScalarFieldEnum[]
+  }
+
+  /**
+   * session_answers create
+   */
+  export type session_answersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * The data needed to create a session_answers.
+     */
+    data: XOR<session_answersCreateInput, session_answersUncheckedCreateInput>
+  }
+
+  /**
+   * session_answers createMany
+   */
+  export type session_answersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many session_answers.
+     */
+    data: session_answersCreateManyInput | session_answersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * session_answers createManyAndReturn
+   */
+  export type session_answersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * The data used to create many session_answers.
+     */
+    data: session_answersCreateManyInput | session_answersCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * session_answers update
+   */
+  export type session_answersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * The data needed to update a session_answers.
+     */
+    data: XOR<session_answersUpdateInput, session_answersUncheckedUpdateInput>
+    /**
+     * Choose, which session_answers to update.
+     */
+    where: session_answersWhereUniqueInput
+  }
+
+  /**
+   * session_answers updateMany
+   */
+  export type session_answersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update session_answers.
+     */
+    data: XOR<session_answersUpdateManyMutationInput, session_answersUncheckedUpdateManyInput>
+    /**
+     * Filter which session_answers to update
+     */
+    where?: session_answersWhereInput
+    /**
+     * Limit how many session_answers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * session_answers updateManyAndReturn
+   */
+  export type session_answersUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * The data used to update session_answers.
+     */
+    data: XOR<session_answersUpdateManyMutationInput, session_answersUncheckedUpdateManyInput>
+    /**
+     * Filter which session_answers to update
+     */
+    where?: session_answersWhereInput
+    /**
+     * Limit how many session_answers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * session_answers upsert
+   */
+  export type session_answersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * The filter to search for the session_answers to update in case it exists.
+     */
+    where: session_answersWhereUniqueInput
+    /**
+     * In case the session_answers found by the `where` argument doesn't exist, create a new session_answers with this data.
+     */
+    create: XOR<session_answersCreateInput, session_answersUncheckedCreateInput>
+    /**
+     * In case the session_answers was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<session_answersUpdateInput, session_answersUncheckedUpdateInput>
+  }
+
+  /**
+   * session_answers delete
+   */
+  export type session_answersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+    /**
+     * Filter which session_answers to delete.
+     */
+    where: session_answersWhereUniqueInput
+  }
+
+  /**
+   * session_answers deleteMany
+   */
+  export type session_answersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which session_answers to delete
+     */
+    where?: session_answersWhereInput
+    /**
+     * Limit how many session_answers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * session_answers.task_choice_options
+   */
+  export type session_answers$task_choice_optionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task_choice_options
+     */
+    select?: task_choice_optionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the task_choice_options
+     */
+    omit?: task_choice_optionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: task_choice_optionsInclude<ExtArgs> | null
+    where?: task_choice_optionsWhereInput
+  }
+
+  /**
+   * session_answers without action
+   */
+  export type session_answersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_answers
+     */
+    select?: session_answersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_answers
+     */
+    omit?: session_answersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_answersInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model session_checkpoints
+   */
+
+  export type AggregateSession_checkpoints = {
+    _count: Session_checkpointsCountAggregateOutputType | null
+    _avg: Session_checkpointsAvgAggregateOutputType | null
+    _sum: Session_checkpointsSumAggregateOutputType | null
+    _min: Session_checkpointsMinAggregateOutputType | null
+    _max: Session_checkpointsMaxAggregateOutputType | null
+  }
+
+  export type Session_checkpointsAvgAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+  }
+
+  export type Session_checkpointsSumAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+  }
+
+  export type Session_checkpointsMinAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+    status: string | null
+    completed_at: Date | null
+  }
+
+  export type Session_checkpointsMaxAggregateOutputType = {
+    id: number | null
+    session_id: number | null
+    checkpoint_id: number | null
+    status: string | null
+    completed_at: Date | null
+  }
+
+  export type Session_checkpointsCountAggregateOutputType = {
+    id: number
+    session_id: number
+    checkpoint_id: number
+    status: number
+    completed_at: number
+    _all: number
+  }
+
+
+  export type Session_checkpointsAvgAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+  }
+
+  export type Session_checkpointsSumAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+  }
+
+  export type Session_checkpointsMinAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    status?: true
+    completed_at?: true
+  }
+
+  export type Session_checkpointsMaxAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    status?: true
+    completed_at?: true
+  }
+
+  export type Session_checkpointsCountAggregateInputType = {
+    id?: true
+    session_id?: true
+    checkpoint_id?: true
+    status?: true
+    completed_at?: true
+    _all?: true
+  }
+
+  export type Session_checkpointsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which session_checkpoints to aggregate.
+     */
+    where?: session_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_checkpoints to fetch.
+     */
+    orderBy?: session_checkpointsOrderByWithRelationInput | session_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: session_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned session_checkpoints
+    **/
+    _count?: true | Session_checkpointsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Session_checkpointsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Session_checkpointsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Session_checkpointsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Session_checkpointsMaxAggregateInputType
+  }
+
+  export type GetSession_checkpointsAggregateType<T extends Session_checkpointsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSession_checkpoints]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSession_checkpoints[P]>
+      : GetScalarType<T[P], AggregateSession_checkpoints[P]>
+  }
+
+
+
+
+  export type session_checkpointsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: session_checkpointsWhereInput
+    orderBy?: session_checkpointsOrderByWithAggregationInput | session_checkpointsOrderByWithAggregationInput[]
+    by: Session_checkpointsScalarFieldEnum[] | Session_checkpointsScalarFieldEnum
+    having?: session_checkpointsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Session_checkpointsCountAggregateInputType | true
+    _avg?: Session_checkpointsAvgAggregateInputType
+    _sum?: Session_checkpointsSumAggregateInputType
+    _min?: Session_checkpointsMinAggregateInputType
+    _max?: Session_checkpointsMaxAggregateInputType
+  }
+
+  export type Session_checkpointsGroupByOutputType = {
+    id: number
+    session_id: number
+    checkpoint_id: number
+    status: string
+    completed_at: Date | null
+    _count: Session_checkpointsCountAggregateOutputType | null
+    _avg: Session_checkpointsAvgAggregateOutputType | null
+    _sum: Session_checkpointsSumAggregateOutputType | null
+    _min: Session_checkpointsMinAggregateOutputType | null
+    _max: Session_checkpointsMaxAggregateOutputType | null
+  }
+
+  type GetSession_checkpointsGroupByPayload<T extends session_checkpointsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Session_checkpointsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Session_checkpointsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Session_checkpointsGroupByOutputType[P]>
+            : GetScalarType<T[P], Session_checkpointsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type session_checkpointsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    status?: boolean
+    completed_at?: boolean
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session_checkpoints"]>
+
+  export type session_checkpointsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    status?: boolean
+    completed_at?: boolean
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session_checkpoints"]>
+
+  export type session_checkpointsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    status?: boolean
+    completed_at?: boolean
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session_checkpoints"]>
+
+  export type session_checkpointsSelectScalar = {
+    id?: boolean
+    session_id?: boolean
+    checkpoint_id?: boolean
+    status?: boolean
+    completed_at?: boolean
+  }
+
+  export type session_checkpointsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "session_id" | "checkpoint_id" | "status" | "completed_at", ExtArgs["result"]["session_checkpoints"]>
+  export type session_checkpointsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+  }
+  export type session_checkpointsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+  }
+  export type session_checkpointsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest_checkpoints?: boolean | quest_checkpointsDefaultArgs<ExtArgs>
+    sessions?: boolean | sessionsDefaultArgs<ExtArgs>
+  }
+
+  export type $session_checkpointsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "session_checkpoints"
+    objects: {
+      quest_checkpoints: Prisma.$quest_checkpointsPayload<ExtArgs>
+      sessions: Prisma.$sessionsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      session_id: number
+      checkpoint_id: number
+      status: string
+      completed_at: Date | null
+    }, ExtArgs["result"]["session_checkpoints"]>
+    composites: {}
+  }
+
+  type session_checkpointsGetPayload<S extends boolean | null | undefined | session_checkpointsDefaultArgs> = $Result.GetResult<Prisma.$session_checkpointsPayload, S>
+
+  type session_checkpointsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<session_checkpointsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Session_checkpointsCountAggregateInputType | true
+    }
+
+  export interface session_checkpointsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['session_checkpoints'], meta: { name: 'session_checkpoints' } }
+    /**
+     * Find zero or one Session_checkpoints that matches the filter.
+     * @param {session_checkpointsFindUniqueArgs} args - Arguments to find a Session_checkpoints
+     * @example
+     * // Get one Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends session_checkpointsFindUniqueArgs>(args: SelectSubset<T, session_checkpointsFindUniqueArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Session_checkpoints that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {session_checkpointsFindUniqueOrThrowArgs} args - Arguments to find a Session_checkpoints
+     * @example
+     * // Get one Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends session_checkpointsFindUniqueOrThrowArgs>(args: SelectSubset<T, session_checkpointsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Session_checkpoints that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_checkpointsFindFirstArgs} args - Arguments to find a Session_checkpoints
+     * @example
+     * // Get one Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends session_checkpointsFindFirstArgs>(args?: SelectSubset<T, session_checkpointsFindFirstArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Session_checkpoints that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_checkpointsFindFirstOrThrowArgs} args - Arguments to find a Session_checkpoints
+     * @example
+     * // Get one Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends session_checkpointsFindFirstOrThrowArgs>(args?: SelectSubset<T, session_checkpointsFindFirstOrThrowArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Session_checkpoints that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_checkpointsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.findMany()
+     * 
+     * // Get first 10 Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const session_checkpointsWithIdOnly = await prisma.session_checkpoints.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends session_checkpointsFindManyArgs>(args?: SelectSubset<T, session_checkpointsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Session_checkpoints.
+     * @param {session_checkpointsCreateArgs} args - Arguments to create a Session_checkpoints.
+     * @example
+     * // Create one Session_checkpoints
+     * const Session_checkpoints = await prisma.session_checkpoints.create({
+     *   data: {
+     *     // ... data to create a Session_checkpoints
+     *   }
+     * })
+     * 
+     */
+    create<T extends session_checkpointsCreateArgs>(args: SelectSubset<T, session_checkpointsCreateArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Session_checkpoints.
+     * @param {session_checkpointsCreateManyArgs} args - Arguments to create many Session_checkpoints.
+     * @example
+     * // Create many Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends session_checkpointsCreateManyArgs>(args?: SelectSubset<T, session_checkpointsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Session_checkpoints and returns the data saved in the database.
+     * @param {session_checkpointsCreateManyAndReturnArgs} args - Arguments to create many Session_checkpoints.
+     * @example
+     * // Create many Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Session_checkpoints and only return the `id`
+     * const session_checkpointsWithIdOnly = await prisma.session_checkpoints.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends session_checkpointsCreateManyAndReturnArgs>(args?: SelectSubset<T, session_checkpointsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Session_checkpoints.
+     * @param {session_checkpointsDeleteArgs} args - Arguments to delete one Session_checkpoints.
+     * @example
+     * // Delete one Session_checkpoints
+     * const Session_checkpoints = await prisma.session_checkpoints.delete({
+     *   where: {
+     *     // ... filter to delete one Session_checkpoints
+     *   }
+     * })
+     * 
+     */
+    delete<T extends session_checkpointsDeleteArgs>(args: SelectSubset<T, session_checkpointsDeleteArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Session_checkpoints.
+     * @param {session_checkpointsUpdateArgs} args - Arguments to update one Session_checkpoints.
+     * @example
+     * // Update one Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends session_checkpointsUpdateArgs>(args: SelectSubset<T, session_checkpointsUpdateArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Session_checkpoints.
+     * @param {session_checkpointsDeleteManyArgs} args - Arguments to filter Session_checkpoints to delete.
+     * @example
+     * // Delete a few Session_checkpoints
+     * const { count } = await prisma.session_checkpoints.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends session_checkpointsDeleteManyArgs>(args?: SelectSubset<T, session_checkpointsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Session_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_checkpointsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends session_checkpointsUpdateManyArgs>(args: SelectSubset<T, session_checkpointsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Session_checkpoints and returns the data updated in the database.
+     * @param {session_checkpointsUpdateManyAndReturnArgs} args - Arguments to update many Session_checkpoints.
+     * @example
+     * // Update many Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Session_checkpoints and only return the `id`
+     * const session_checkpointsWithIdOnly = await prisma.session_checkpoints.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends session_checkpointsUpdateManyAndReturnArgs>(args: SelectSubset<T, session_checkpointsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Session_checkpoints.
+     * @param {session_checkpointsUpsertArgs} args - Arguments to update or create a Session_checkpoints.
+     * @example
+     * // Update or create a Session_checkpoints
+     * const session_checkpoints = await prisma.session_checkpoints.upsert({
+     *   create: {
+     *     // ... data to create a Session_checkpoints
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Session_checkpoints we want to update
+     *   }
+     * })
+     */
+    upsert<T extends session_checkpointsUpsertArgs>(args: SelectSubset<T, session_checkpointsUpsertArgs<ExtArgs>>): Prisma__session_checkpointsClient<$Result.GetResult<Prisma.$session_checkpointsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Session_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_checkpointsCountArgs} args - Arguments to filter Session_checkpoints to count.
+     * @example
+     * // Count the number of Session_checkpoints
+     * const count = await prisma.session_checkpoints.count({
+     *   where: {
+     *     // ... the filter for the Session_checkpoints we want to count
+     *   }
+     * })
+    **/
+    count<T extends session_checkpointsCountArgs>(
+      args?: Subset<T, session_checkpointsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Session_checkpointsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Session_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Session_checkpointsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Session_checkpointsAggregateArgs>(args: Subset<T, Session_checkpointsAggregateArgs>): Prisma.PrismaPromise<GetSession_checkpointsAggregateType<T>>
+
+    /**
+     * Group by Session_checkpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {session_checkpointsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends session_checkpointsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: session_checkpointsGroupByArgs['orderBy'] }
+        : { orderBy?: session_checkpointsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, session_checkpointsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSession_checkpointsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the session_checkpoints model
+   */
+  readonly fields: session_checkpointsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for session_checkpoints.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__session_checkpointsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quest_checkpoints<T extends quest_checkpointsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, quest_checkpointsDefaultArgs<ExtArgs>>): Prisma__quest_checkpointsClient<$Result.GetResult<Prisma.$quest_checkpointsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sessions<T extends sessionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, sessionsDefaultArgs<ExtArgs>>): Prisma__sessionsClient<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the session_checkpoints model
+   */
+  interface session_checkpointsFieldRefs {
+    readonly id: FieldRef<"session_checkpoints", 'Int'>
+    readonly session_id: FieldRef<"session_checkpoints", 'Int'>
+    readonly checkpoint_id: FieldRef<"session_checkpoints", 'Int'>
+    readonly status: FieldRef<"session_checkpoints", 'String'>
+    readonly completed_at: FieldRef<"session_checkpoints", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * session_checkpoints findUnique
+   */
+  export type session_checkpointsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which session_checkpoints to fetch.
+     */
+    where: session_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * session_checkpoints findUniqueOrThrow
+   */
+  export type session_checkpointsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which session_checkpoints to fetch.
+     */
+    where: session_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * session_checkpoints findFirst
+   */
+  export type session_checkpointsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which session_checkpoints to fetch.
+     */
+    where?: session_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_checkpoints to fetch.
+     */
+    orderBy?: session_checkpointsOrderByWithRelationInput | session_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for session_checkpoints.
+     */
+    cursor?: session_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of session_checkpoints.
+     */
+    distinct?: Session_checkpointsScalarFieldEnum | Session_checkpointsScalarFieldEnum[]
+  }
+
+  /**
+   * session_checkpoints findFirstOrThrow
+   */
+  export type session_checkpointsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which session_checkpoints to fetch.
+     */
+    where?: session_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_checkpoints to fetch.
+     */
+    orderBy?: session_checkpointsOrderByWithRelationInput | session_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for session_checkpoints.
+     */
+    cursor?: session_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of session_checkpoints.
+     */
+    distinct?: Session_checkpointsScalarFieldEnum | Session_checkpointsScalarFieldEnum[]
+  }
+
+  /**
+   * session_checkpoints findMany
+   */
+  export type session_checkpointsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter, which session_checkpoints to fetch.
+     */
+    where?: session_checkpointsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of session_checkpoints to fetch.
+     */
+    orderBy?: session_checkpointsOrderByWithRelationInput | session_checkpointsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing session_checkpoints.
+     */
+    cursor?: session_checkpointsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` session_checkpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` session_checkpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of session_checkpoints.
+     */
+    distinct?: Session_checkpointsScalarFieldEnum | Session_checkpointsScalarFieldEnum[]
+  }
+
+  /**
+   * session_checkpoints create
+   */
+  export type session_checkpointsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a session_checkpoints.
+     */
+    data: XOR<session_checkpointsCreateInput, session_checkpointsUncheckedCreateInput>
+  }
+
+  /**
+   * session_checkpoints createMany
+   */
+  export type session_checkpointsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many session_checkpoints.
+     */
+    data: session_checkpointsCreateManyInput | session_checkpointsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * session_checkpoints createManyAndReturn
+   */
+  export type session_checkpointsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * The data used to create many session_checkpoints.
+     */
+    data: session_checkpointsCreateManyInput | session_checkpointsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * session_checkpoints update
+   */
+  export type session_checkpointsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a session_checkpoints.
+     */
+    data: XOR<session_checkpointsUpdateInput, session_checkpointsUncheckedUpdateInput>
+    /**
+     * Choose, which session_checkpoints to update.
+     */
+    where: session_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * session_checkpoints updateMany
+   */
+  export type session_checkpointsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update session_checkpoints.
+     */
+    data: XOR<session_checkpointsUpdateManyMutationInput, session_checkpointsUncheckedUpdateManyInput>
+    /**
+     * Filter which session_checkpoints to update
+     */
+    where?: session_checkpointsWhereInput
+    /**
+     * Limit how many session_checkpoints to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * session_checkpoints updateManyAndReturn
+   */
+  export type session_checkpointsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * The data used to update session_checkpoints.
+     */
+    data: XOR<session_checkpointsUpdateManyMutationInput, session_checkpointsUncheckedUpdateManyInput>
+    /**
+     * Filter which session_checkpoints to update
+     */
+    where?: session_checkpointsWhereInput
+    /**
+     * Limit how many session_checkpoints to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * session_checkpoints upsert
+   */
+  export type session_checkpointsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the session_checkpoints to update in case it exists.
+     */
+    where: session_checkpointsWhereUniqueInput
+    /**
+     * In case the session_checkpoints found by the `where` argument doesn't exist, create a new session_checkpoints with this data.
+     */
+    create: XOR<session_checkpointsCreateInput, session_checkpointsUncheckedCreateInput>
+    /**
+     * In case the session_checkpoints was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<session_checkpointsUpdateInput, session_checkpointsUncheckedUpdateInput>
+  }
+
+  /**
+   * session_checkpoints delete
+   */
+  export type session_checkpointsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
+    /**
+     * Filter which session_checkpoints to delete.
+     */
+    where: session_checkpointsWhereUniqueInput
+  }
+
+  /**
+   * session_checkpoints deleteMany
+   */
+  export type session_checkpointsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which session_checkpoints to delete
+     */
+    where?: session_checkpointsWhereInput
+    /**
+     * Limit how many session_checkpoints to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * session_checkpoints without action
+   */
+  export type session_checkpointsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the session_checkpoints
+     */
+    select?: session_checkpointsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the session_checkpoints
+     */
+    omit?: session_checkpointsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: session_checkpointsInclude<ExtArgs> | null
   }
 
 
@@ -10076,6 +14063,40 @@ export namespace Prisma {
   };
 
   export type Checkpoint_tasksScalarFieldEnum = (typeof Checkpoint_tasksScalarFieldEnum)[keyof typeof Checkpoint_tasksScalarFieldEnum]
+
+
+  export const Task_choice_optionsScalarFieldEnum: {
+    id: 'id',
+    task_id: 'task_id',
+    option_text: 'option_text'
+  };
+
+  export type Task_choice_optionsScalarFieldEnum = (typeof Task_choice_optionsScalarFieldEnum)[keyof typeof Task_choice_optionsScalarFieldEnum]
+
+
+  export const Session_answersScalarFieldEnum: {
+    id: 'id',
+    session_id: 'session_id',
+    checkpoint_id: 'checkpoint_id',
+    task_id: 'task_id',
+    answer_text: 'answer_text',
+    chosen_option_id: 'chosen_option_id',
+    is_correct: 'is_correct',
+    answered_at: 'answered_at'
+  };
+
+  export type Session_answersScalarFieldEnum = (typeof Session_answersScalarFieldEnum)[keyof typeof Session_answersScalarFieldEnum]
+
+
+  export const Session_checkpointsScalarFieldEnum: {
+    id: 'id',
+    session_id: 'session_id',
+    checkpoint_id: 'checkpoint_id',
+    status: 'status',
+    completed_at: 'completed_at'
+  };
+
+  export type Session_checkpointsScalarFieldEnum = (typeof Session_checkpointsScalarFieldEnum)[keyof typeof Session_checkpointsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10523,6 +14544,8 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
     checkpoint_tasks?: Checkpoint_tasksListRelationFilter
     quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
+    session_answers?: Session_answersListRelationFilter
+    session_checkpoints?: Session_checkpointsListRelationFilter
   }
 
   export type quest_checkpointsOrderByWithRelationInput = {
@@ -10540,6 +14563,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     checkpoint_tasks?: checkpoint_tasksOrderByRelationAggregateInput
     quests?: questsOrderByWithRelationInput
+    session_answers?: session_answersOrderByRelationAggregateInput
+    session_checkpoints?: session_checkpointsOrderByRelationAggregateInput
   }
 
   export type quest_checkpointsWhereUniqueInput = Prisma.AtLeast<{
@@ -10561,6 +14586,8 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"quest_checkpoints"> | Date | string
     checkpoint_tasks?: Checkpoint_tasksListRelationFilter
     quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
+    session_answers?: Session_answersListRelationFilter
+    session_checkpoints?: Session_checkpointsListRelationFilter
   }, "id" | "quest_id_order_index">
 
   export type quest_checkpointsOrderByWithAggregationInput = {
@@ -10614,6 +14641,8 @@ export namespace Prisma {
     started_at?: DateTimeFilter<"sessions"> | Date | string
     finished_at?: DateTimeNullableFilter<"sessions"> | Date | string | null
     current_checkpoint_order?: IntNullableFilter<"sessions"> | number | null
+    session_answers?: Session_answersListRelationFilter
+    session_checkpoints?: Session_checkpointsListRelationFilter
     quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
     teams?: XOR<TeamsNullableScalarRelationFilter, teamsWhereInput> | null
     users?: XOR<UsersNullableScalarRelationFilter, usersWhereInput> | null
@@ -10629,6 +14658,8 @@ export namespace Prisma {
     started_at?: SortOrder
     finished_at?: SortOrderInput | SortOrder
     current_checkpoint_order?: SortOrderInput | SortOrder
+    session_answers?: session_answersOrderByRelationAggregateInput
+    session_checkpoints?: session_checkpointsOrderByRelationAggregateInput
     quests?: questsOrderByWithRelationInput
     teams?: teamsOrderByWithRelationInput
     users?: usersOrderByWithRelationInput
@@ -10647,6 +14678,8 @@ export namespace Prisma {
     started_at?: DateTimeFilter<"sessions"> | Date | string
     finished_at?: DateTimeNullableFilter<"sessions"> | Date | string | null
     current_checkpoint_order?: IntNullableFilter<"sessions"> | number | null
+    session_answers?: Session_answersListRelationFilter
+    session_checkpoints?: Session_checkpointsListRelationFilter
     quests?: XOR<QuestsScalarRelationFilter, questsWhereInput>
     teams?: XOR<TeamsNullableScalarRelationFilter, teamsWhereInput> | null
     users?: XOR<UsersNullableScalarRelationFilter, usersWhereInput> | null
@@ -10696,6 +14729,8 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"checkpoint_tasks"> | Date | string
     updated_at?: DateTimeFilter<"checkpoint_tasks"> | Date | string
     quest_checkpoints?: XOR<Quest_checkpointsScalarRelationFilter, quest_checkpointsWhereInput>
+    session_answers?: Session_answersListRelationFilter
+    task_choice_options?: Task_choice_optionsListRelationFilter
   }
 
   export type checkpoint_tasksOrderByWithRelationInput = {
@@ -10707,6 +14742,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     quest_checkpoints?: quest_checkpointsOrderByWithRelationInput
+    session_answers?: session_answersOrderByRelationAggregateInput
+    task_choice_options?: task_choice_optionsOrderByRelationAggregateInput
   }
 
   export type checkpoint_tasksWhereUniqueInput = Prisma.AtLeast<{
@@ -10722,6 +14759,8 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"checkpoint_tasks"> | Date | string
     updated_at?: DateTimeFilter<"checkpoint_tasks"> | Date | string
     quest_checkpoints?: XOR<Quest_checkpointsScalarRelationFilter, quest_checkpointsWhereInput>
+    session_answers?: Session_answersListRelationFilter
+    task_choice_options?: Task_choice_optionsListRelationFilter
   }, "id" | "checkpoint_id_task_type">
 
   export type checkpoint_tasksOrderByWithAggregationInput = {
@@ -10750,6 +14789,200 @@ export namespace Prisma {
     correct_answer?: StringWithAggregatesFilter<"checkpoint_tasks"> | string
     created_at?: DateTimeWithAggregatesFilter<"checkpoint_tasks"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"checkpoint_tasks"> | Date | string
+  }
+
+  export type task_choice_optionsWhereInput = {
+    AND?: task_choice_optionsWhereInput | task_choice_optionsWhereInput[]
+    OR?: task_choice_optionsWhereInput[]
+    NOT?: task_choice_optionsWhereInput | task_choice_optionsWhereInput[]
+    id?: IntFilter<"task_choice_options"> | number
+    task_id?: IntFilter<"task_choice_options"> | number
+    option_text?: StringFilter<"task_choice_options"> | string
+    session_answers?: Session_answersListRelationFilter
+    checkpoint_tasks?: XOR<Checkpoint_tasksScalarRelationFilter, checkpoint_tasksWhereInput>
+  }
+
+  export type task_choice_optionsOrderByWithRelationInput = {
+    id?: SortOrder
+    task_id?: SortOrder
+    option_text?: SortOrder
+    session_answers?: session_answersOrderByRelationAggregateInput
+    checkpoint_tasks?: checkpoint_tasksOrderByWithRelationInput
+  }
+
+  export type task_choice_optionsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    task_id_option_text?: task_choice_optionsTask_idOption_textCompoundUniqueInput
+    AND?: task_choice_optionsWhereInput | task_choice_optionsWhereInput[]
+    OR?: task_choice_optionsWhereInput[]
+    NOT?: task_choice_optionsWhereInput | task_choice_optionsWhereInput[]
+    task_id?: IntFilter<"task_choice_options"> | number
+    option_text?: StringFilter<"task_choice_options"> | string
+    session_answers?: Session_answersListRelationFilter
+    checkpoint_tasks?: XOR<Checkpoint_tasksScalarRelationFilter, checkpoint_tasksWhereInput>
+  }, "id" | "task_id_option_text">
+
+  export type task_choice_optionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    task_id?: SortOrder
+    option_text?: SortOrder
+    _count?: task_choice_optionsCountOrderByAggregateInput
+    _avg?: task_choice_optionsAvgOrderByAggregateInput
+    _max?: task_choice_optionsMaxOrderByAggregateInput
+    _min?: task_choice_optionsMinOrderByAggregateInput
+    _sum?: task_choice_optionsSumOrderByAggregateInput
+  }
+
+  export type task_choice_optionsScalarWhereWithAggregatesInput = {
+    AND?: task_choice_optionsScalarWhereWithAggregatesInput | task_choice_optionsScalarWhereWithAggregatesInput[]
+    OR?: task_choice_optionsScalarWhereWithAggregatesInput[]
+    NOT?: task_choice_optionsScalarWhereWithAggregatesInput | task_choice_optionsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"task_choice_options"> | number
+    task_id?: IntWithAggregatesFilter<"task_choice_options"> | number
+    option_text?: StringWithAggregatesFilter<"task_choice_options"> | string
+  }
+
+  export type session_answersWhereInput = {
+    AND?: session_answersWhereInput | session_answersWhereInput[]
+    OR?: session_answersWhereInput[]
+    NOT?: session_answersWhereInput | session_answersWhereInput[]
+    id?: IntFilter<"session_answers"> | number
+    session_id?: IntFilter<"session_answers"> | number
+    checkpoint_id?: IntFilter<"session_answers"> | number
+    task_id?: IntFilter<"session_answers"> | number
+    answer_text?: StringNullableFilter<"session_answers"> | string | null
+    chosen_option_id?: IntNullableFilter<"session_answers"> | number | null
+    is_correct?: BoolFilter<"session_answers"> | boolean
+    answered_at?: DateTimeFilter<"session_answers"> | Date | string
+    quest_checkpoints?: XOR<Quest_checkpointsScalarRelationFilter, quest_checkpointsWhereInput>
+    task_choice_options?: XOR<Task_choice_optionsNullableScalarRelationFilter, task_choice_optionsWhereInput> | null
+    sessions?: XOR<SessionsScalarRelationFilter, sessionsWhereInput>
+    checkpoint_tasks?: XOR<Checkpoint_tasksScalarRelationFilter, checkpoint_tasksWhereInput>
+  }
+
+  export type session_answersOrderByWithRelationInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    task_id?: SortOrder
+    answer_text?: SortOrderInput | SortOrder
+    chosen_option_id?: SortOrderInput | SortOrder
+    is_correct?: SortOrder
+    answered_at?: SortOrder
+    quest_checkpoints?: quest_checkpointsOrderByWithRelationInput
+    task_choice_options?: task_choice_optionsOrderByWithRelationInput
+    sessions?: sessionsOrderByWithRelationInput
+    checkpoint_tasks?: checkpoint_tasksOrderByWithRelationInput
+  }
+
+  export type session_answersWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    session_id_checkpoint_id_task_id?: session_answersSession_idCheckpoint_idTask_idCompoundUniqueInput
+    AND?: session_answersWhereInput | session_answersWhereInput[]
+    OR?: session_answersWhereInput[]
+    NOT?: session_answersWhereInput | session_answersWhereInput[]
+    session_id?: IntFilter<"session_answers"> | number
+    checkpoint_id?: IntFilter<"session_answers"> | number
+    task_id?: IntFilter<"session_answers"> | number
+    answer_text?: StringNullableFilter<"session_answers"> | string | null
+    chosen_option_id?: IntNullableFilter<"session_answers"> | number | null
+    is_correct?: BoolFilter<"session_answers"> | boolean
+    answered_at?: DateTimeFilter<"session_answers"> | Date | string
+    quest_checkpoints?: XOR<Quest_checkpointsScalarRelationFilter, quest_checkpointsWhereInput>
+    task_choice_options?: XOR<Task_choice_optionsNullableScalarRelationFilter, task_choice_optionsWhereInput> | null
+    sessions?: XOR<SessionsScalarRelationFilter, sessionsWhereInput>
+    checkpoint_tasks?: XOR<Checkpoint_tasksScalarRelationFilter, checkpoint_tasksWhereInput>
+  }, "id" | "session_id_checkpoint_id_task_id">
+
+  export type session_answersOrderByWithAggregationInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    task_id?: SortOrder
+    answer_text?: SortOrderInput | SortOrder
+    chosen_option_id?: SortOrderInput | SortOrder
+    is_correct?: SortOrder
+    answered_at?: SortOrder
+    _count?: session_answersCountOrderByAggregateInput
+    _avg?: session_answersAvgOrderByAggregateInput
+    _max?: session_answersMaxOrderByAggregateInput
+    _min?: session_answersMinOrderByAggregateInput
+    _sum?: session_answersSumOrderByAggregateInput
+  }
+
+  export type session_answersScalarWhereWithAggregatesInput = {
+    AND?: session_answersScalarWhereWithAggregatesInput | session_answersScalarWhereWithAggregatesInput[]
+    OR?: session_answersScalarWhereWithAggregatesInput[]
+    NOT?: session_answersScalarWhereWithAggregatesInput | session_answersScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"session_answers"> | number
+    session_id?: IntWithAggregatesFilter<"session_answers"> | number
+    checkpoint_id?: IntWithAggregatesFilter<"session_answers"> | number
+    task_id?: IntWithAggregatesFilter<"session_answers"> | number
+    answer_text?: StringNullableWithAggregatesFilter<"session_answers"> | string | null
+    chosen_option_id?: IntNullableWithAggregatesFilter<"session_answers"> | number | null
+    is_correct?: BoolWithAggregatesFilter<"session_answers"> | boolean
+    answered_at?: DateTimeWithAggregatesFilter<"session_answers"> | Date | string
+  }
+
+  export type session_checkpointsWhereInput = {
+    AND?: session_checkpointsWhereInput | session_checkpointsWhereInput[]
+    OR?: session_checkpointsWhereInput[]
+    NOT?: session_checkpointsWhereInput | session_checkpointsWhereInput[]
+    id?: IntFilter<"session_checkpoints"> | number
+    session_id?: IntFilter<"session_checkpoints"> | number
+    checkpoint_id?: IntFilter<"session_checkpoints"> | number
+    status?: StringFilter<"session_checkpoints"> | string
+    completed_at?: DateTimeNullableFilter<"session_checkpoints"> | Date | string | null
+    quest_checkpoints?: XOR<Quest_checkpointsScalarRelationFilter, quest_checkpointsWhereInput>
+    sessions?: XOR<SessionsScalarRelationFilter, sessionsWhereInput>
+  }
+
+  export type session_checkpointsOrderByWithRelationInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    status?: SortOrder
+    completed_at?: SortOrderInput | SortOrder
+    quest_checkpoints?: quest_checkpointsOrderByWithRelationInput
+    sessions?: sessionsOrderByWithRelationInput
+  }
+
+  export type session_checkpointsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    session_id_checkpoint_id?: session_checkpointsSession_idCheckpoint_idCompoundUniqueInput
+    AND?: session_checkpointsWhereInput | session_checkpointsWhereInput[]
+    OR?: session_checkpointsWhereInput[]
+    NOT?: session_checkpointsWhereInput | session_checkpointsWhereInput[]
+    session_id?: IntFilter<"session_checkpoints"> | number
+    checkpoint_id?: IntFilter<"session_checkpoints"> | number
+    status?: StringFilter<"session_checkpoints"> | string
+    completed_at?: DateTimeNullableFilter<"session_checkpoints"> | Date | string | null
+    quest_checkpoints?: XOR<Quest_checkpointsScalarRelationFilter, quest_checkpointsWhereInput>
+    sessions?: XOR<SessionsScalarRelationFilter, sessionsWhereInput>
+  }, "id" | "session_id_checkpoint_id">
+
+  export type session_checkpointsOrderByWithAggregationInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    status?: SortOrder
+    completed_at?: SortOrderInput | SortOrder
+    _count?: session_checkpointsCountOrderByAggregateInput
+    _avg?: session_checkpointsAvgOrderByAggregateInput
+    _max?: session_checkpointsMaxOrderByAggregateInput
+    _min?: session_checkpointsMinOrderByAggregateInput
+    _sum?: session_checkpointsSumOrderByAggregateInput
+  }
+
+  export type session_checkpointsScalarWhereWithAggregatesInput = {
+    AND?: session_checkpointsScalarWhereWithAggregatesInput | session_checkpointsScalarWhereWithAggregatesInput[]
+    OR?: session_checkpointsScalarWhereWithAggregatesInput[]
+    NOT?: session_checkpointsScalarWhereWithAggregatesInput | session_checkpointsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"session_checkpoints"> | number
+    session_id?: IntWithAggregatesFilter<"session_checkpoints"> | number
+    checkpoint_id?: IntWithAggregatesFilter<"session_checkpoints"> | number
+    status?: StringWithAggregatesFilter<"session_checkpoints"> | string
+    completed_at?: DateTimeNullableWithAggregatesFilter<"session_checkpoints"> | Date | string | null
   }
 
   export type usersCreateInput = {
@@ -11096,6 +15329,8 @@ export namespace Prisma {
     updated_at?: Date | string
     checkpoint_tasks?: checkpoint_tasksCreateNestedManyWithoutQuest_checkpointsInput
     quests: questsCreateNestedOneWithoutQuest_checkpointsInput
+    session_answers?: session_answersCreateNestedManyWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutQuest_checkpointsInput
   }
 
   export type quest_checkpointsUncheckedCreateInput = {
@@ -11112,6 +15347,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     checkpoint_tasks?: checkpoint_tasksUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutQuest_checkpointsInput
   }
 
   export type quest_checkpointsUpdateInput = {
@@ -11127,6 +15364,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     checkpoint_tasks?: checkpoint_tasksUpdateManyWithoutQuest_checkpointsNestedInput
     quests?: questsUpdateOneRequiredWithoutQuest_checkpointsNestedInput
+    session_answers?: session_answersUpdateManyWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutQuest_checkpointsNestedInput
   }
 
   export type quest_checkpointsUncheckedUpdateInput = {
@@ -11143,6 +15382,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     checkpoint_tasks?: checkpoint_tasksUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+    session_answers?: session_answersUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
   }
 
   export type quest_checkpointsCreateManyInput = {
@@ -11194,6 +15435,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
     teams?: teamsCreateNestedOneWithoutSessionsInput
     users?: usersCreateNestedOneWithoutSessionsInput
@@ -11209,6 +15452,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
 
   export type sessionsUpdateInput = {
@@ -11217,6 +15462,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
     teams?: teamsUpdateOneWithoutSessionsNestedInput
     users?: usersUpdateOneWithoutSessionsNestedInput
@@ -11232,6 +15479,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
   export type sessionsCreateManyInput = {
@@ -11273,6 +15522,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quest_checkpoints: quest_checkpointsCreateNestedOneWithoutCheckpoint_tasksInput
+    session_answers?: session_answersCreateNestedManyWithoutCheckpoint_tasksInput
+    task_choice_options?: task_choice_optionsCreateNestedManyWithoutCheckpoint_tasksInput
   }
 
   export type checkpoint_tasksUncheckedCreateInput = {
@@ -11283,6 +15534,8 @@ export namespace Prisma {
     correct_answer: string
     created_at?: Date | string
     updated_at?: Date | string
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutCheckpoint_tasksInput
+    task_choice_options?: task_choice_optionsUncheckedCreateNestedManyWithoutCheckpoint_tasksInput
   }
 
   export type checkpoint_tasksUpdateInput = {
@@ -11292,6 +15545,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutCheckpoint_tasksNestedInput
+    session_answers?: session_answersUpdateManyWithoutCheckpoint_tasksNestedInput
+    task_choice_options?: task_choice_optionsUpdateManyWithoutCheckpoint_tasksNestedInput
   }
 
   export type checkpoint_tasksUncheckedUpdateInput = {
@@ -11302,6 +15557,8 @@ export namespace Prisma {
     correct_answer?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    session_answers?: session_answersUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput
+    task_choice_options?: task_choice_optionsUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput
   }
 
   export type checkpoint_tasksCreateManyInput = {
@@ -11330,6 +15587,169 @@ export namespace Prisma {
     correct_answer?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type task_choice_optionsCreateInput = {
+    option_text: string
+    session_answers?: session_answersCreateNestedManyWithoutTask_choice_optionsInput
+    checkpoint_tasks: checkpoint_tasksCreateNestedOneWithoutTask_choice_optionsInput
+  }
+
+  export type task_choice_optionsUncheckedCreateInput = {
+    id?: number
+    task_id: number
+    option_text: string
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutTask_choice_optionsInput
+  }
+
+  export type task_choice_optionsUpdateInput = {
+    option_text?: StringFieldUpdateOperationsInput | string
+    session_answers?: session_answersUpdateManyWithoutTask_choice_optionsNestedInput
+    checkpoint_tasks?: checkpoint_tasksUpdateOneRequiredWithoutTask_choice_optionsNestedInput
+  }
+
+  export type task_choice_optionsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    option_text?: StringFieldUpdateOperationsInput | string
+    session_answers?: session_answersUncheckedUpdateManyWithoutTask_choice_optionsNestedInput
+  }
+
+  export type task_choice_optionsCreateManyInput = {
+    id?: number
+    task_id: number
+    option_text: string
+  }
+
+  export type task_choice_optionsUpdateManyMutationInput = {
+    option_text?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type task_choice_optionsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    option_text?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type session_answersCreateInput = {
+    answer_text?: string | null
+    is_correct: boolean
+    answered_at?: Date | string
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutSession_answersInput
+    task_choice_options?: task_choice_optionsCreateNestedOneWithoutSession_answersInput
+    sessions: sessionsCreateNestedOneWithoutSession_answersInput
+    checkpoint_tasks: checkpoint_tasksCreateNestedOneWithoutSession_answersInput
+  }
+
+  export type session_answersUncheckedCreateInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    task_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_answersUpdateInput = {
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutSession_answersNestedInput
+    task_choice_options?: task_choice_optionsUpdateOneWithoutSession_answersNestedInput
+    sessions?: sessionsUpdateOneRequiredWithoutSession_answersNestedInput
+    checkpoint_tasks?: checkpoint_tasksUpdateOneRequiredWithoutSession_answersNestedInput
+  }
+
+  export type session_answersUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_answersCreateManyInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    task_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_answersUpdateManyMutationInput = {
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_answersUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_checkpointsCreateInput = {
+    status: string
+    completed_at?: Date | string | null
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutSession_checkpointsInput
+    sessions: sessionsCreateNestedOneWithoutSession_checkpointsInput
+  }
+
+  export type session_checkpointsUncheckedCreateInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    status: string
+    completed_at?: Date | string | null
+  }
+
+  export type session_checkpointsUpdateInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutSession_checkpointsNestedInput
+    sessions?: sessionsUpdateOneRequiredWithoutSession_checkpointsNestedInput
+  }
+
+  export type session_checkpointsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type session_checkpointsCreateManyInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    status: string
+    completed_at?: Date | string | null
+  }
+
+  export type session_checkpointsUpdateManyMutationInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type session_checkpointsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -11734,7 +16154,27 @@ export namespace Prisma {
     isNot?: questsWhereInput
   }
 
+  export type Session_answersListRelationFilter = {
+    every?: session_answersWhereInput
+    some?: session_answersWhereInput
+    none?: session_answersWhereInput
+  }
+
+  export type Session_checkpointsListRelationFilter = {
+    every?: session_checkpointsWhereInput
+    some?: session_checkpointsWhereInput
+    none?: session_checkpointsWhereInput
+  }
+
   export type checkpoint_tasksOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type session_answersOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type session_checkpointsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11939,6 +16379,16 @@ export namespace Prisma {
     isNot?: quest_checkpointsWhereInput
   }
 
+  export type Task_choice_optionsListRelationFilter = {
+    every?: task_choice_optionsWhereInput
+    some?: task_choice_optionsWhereInput
+    none?: task_choice_optionsWhereInput
+  }
+
+  export type task_choice_optionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type checkpoint_tasksCheckpoint_idTask_typeCompoundUniqueInput = {
     checkpoint_id: number
     task_type: string
@@ -11981,6 +16431,163 @@ export namespace Prisma {
 
   export type checkpoint_tasksSumOrderByAggregateInput = {
     id?: SortOrder
+    checkpoint_id?: SortOrder
+  }
+
+  export type Checkpoint_tasksScalarRelationFilter = {
+    is?: checkpoint_tasksWhereInput
+    isNot?: checkpoint_tasksWhereInput
+  }
+
+  export type task_choice_optionsTask_idOption_textCompoundUniqueInput = {
+    task_id: number
+    option_text: string
+  }
+
+  export type task_choice_optionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    task_id?: SortOrder
+    option_text?: SortOrder
+  }
+
+  export type task_choice_optionsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    task_id?: SortOrder
+  }
+
+  export type task_choice_optionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    task_id?: SortOrder
+    option_text?: SortOrder
+  }
+
+  export type task_choice_optionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    task_id?: SortOrder
+    option_text?: SortOrder
+  }
+
+  export type task_choice_optionsSumOrderByAggregateInput = {
+    id?: SortOrder
+    task_id?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type Task_choice_optionsNullableScalarRelationFilter = {
+    is?: task_choice_optionsWhereInput | null
+    isNot?: task_choice_optionsWhereInput | null
+  }
+
+  export type SessionsScalarRelationFilter = {
+    is?: sessionsWhereInput
+    isNot?: sessionsWhereInput
+  }
+
+  export type session_answersSession_idCheckpoint_idTask_idCompoundUniqueInput = {
+    session_id: number
+    checkpoint_id: number
+    task_id: number
+  }
+
+  export type session_answersCountOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    task_id?: SortOrder
+    answer_text?: SortOrder
+    chosen_option_id?: SortOrder
+    is_correct?: SortOrder
+    answered_at?: SortOrder
+  }
+
+  export type session_answersAvgOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    task_id?: SortOrder
+    chosen_option_id?: SortOrder
+  }
+
+  export type session_answersMaxOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    task_id?: SortOrder
+    answer_text?: SortOrder
+    chosen_option_id?: SortOrder
+    is_correct?: SortOrder
+    answered_at?: SortOrder
+  }
+
+  export type session_answersMinOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    task_id?: SortOrder
+    answer_text?: SortOrder
+    chosen_option_id?: SortOrder
+    is_correct?: SortOrder
+    answered_at?: SortOrder
+  }
+
+  export type session_answersSumOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    task_id?: SortOrder
+    chosen_option_id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type session_checkpointsSession_idCheckpoint_idCompoundUniqueInput = {
+    session_id: number
+    checkpoint_id: number
+  }
+
+  export type session_checkpointsCountOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    status?: SortOrder
+    completed_at?: SortOrder
+  }
+
+  export type session_checkpointsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+  }
+
+  export type session_checkpointsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    status?: SortOrder
+    completed_at?: SortOrder
+  }
+
+  export type session_checkpointsMinOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    checkpoint_id?: SortOrder
+    status?: SortOrder
+    completed_at?: SortOrder
+  }
+
+  export type session_checkpointsSumOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
     checkpoint_id?: SortOrder
   }
 
@@ -12413,11 +17020,39 @@ export namespace Prisma {
     connect?: questsWhereUniqueInput
   }
 
+  export type session_answersCreateNestedManyWithoutQuest_checkpointsInput = {
+    create?: XOR<session_answersCreateWithoutQuest_checkpointsInput, session_answersUncheckedCreateWithoutQuest_checkpointsInput> | session_answersCreateWithoutQuest_checkpointsInput[] | session_answersUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutQuest_checkpointsInput | session_answersCreateOrConnectWithoutQuest_checkpointsInput[]
+    createMany?: session_answersCreateManyQuest_checkpointsInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type session_checkpointsCreateNestedManyWithoutQuest_checkpointsInput = {
+    create?: XOR<session_checkpointsCreateWithoutQuest_checkpointsInput, session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput> | session_checkpointsCreateWithoutQuest_checkpointsInput[] | session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput | session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput[]
+    createMany?: session_checkpointsCreateManyQuest_checkpointsInputEnvelope
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+  }
+
   export type checkpoint_tasksUncheckedCreateNestedManyWithoutQuest_checkpointsInput = {
     create?: XOR<checkpoint_tasksCreateWithoutQuest_checkpointsInput, checkpoint_tasksUncheckedCreateWithoutQuest_checkpointsInput> | checkpoint_tasksCreateWithoutQuest_checkpointsInput[] | checkpoint_tasksUncheckedCreateWithoutQuest_checkpointsInput[]
     connectOrCreate?: checkpoint_tasksCreateOrConnectWithoutQuest_checkpointsInput | checkpoint_tasksCreateOrConnectWithoutQuest_checkpointsInput[]
     createMany?: checkpoint_tasksCreateManyQuest_checkpointsInputEnvelope
     connect?: checkpoint_tasksWhereUniqueInput | checkpoint_tasksWhereUniqueInput[]
+  }
+
+  export type session_answersUncheckedCreateNestedManyWithoutQuest_checkpointsInput = {
+    create?: XOR<session_answersCreateWithoutQuest_checkpointsInput, session_answersUncheckedCreateWithoutQuest_checkpointsInput> | session_answersCreateWithoutQuest_checkpointsInput[] | session_answersUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutQuest_checkpointsInput | session_answersCreateOrConnectWithoutQuest_checkpointsInput[]
+    createMany?: session_answersCreateManyQuest_checkpointsInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type session_checkpointsUncheckedCreateNestedManyWithoutQuest_checkpointsInput = {
+    create?: XOR<session_checkpointsCreateWithoutQuest_checkpointsInput, session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput> | session_checkpointsCreateWithoutQuest_checkpointsInput[] | session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput | session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput[]
+    createMany?: session_checkpointsCreateManyQuest_checkpointsInputEnvelope
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -12450,6 +17085,34 @@ export namespace Prisma {
     update?: XOR<XOR<questsUpdateToOneWithWhereWithoutQuest_checkpointsInput, questsUpdateWithoutQuest_checkpointsInput>, questsUncheckedUpdateWithoutQuest_checkpointsInput>
   }
 
+  export type session_answersUpdateManyWithoutQuest_checkpointsNestedInput = {
+    create?: XOR<session_answersCreateWithoutQuest_checkpointsInput, session_answersUncheckedCreateWithoutQuest_checkpointsInput> | session_answersCreateWithoutQuest_checkpointsInput[] | session_answersUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutQuest_checkpointsInput | session_answersCreateOrConnectWithoutQuest_checkpointsInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutQuest_checkpointsInput | session_answersUpsertWithWhereUniqueWithoutQuest_checkpointsInput[]
+    createMany?: session_answersCreateManyQuest_checkpointsInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutQuest_checkpointsInput | session_answersUpdateWithWhereUniqueWithoutQuest_checkpointsInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutQuest_checkpointsInput | session_answersUpdateManyWithWhereWithoutQuest_checkpointsInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type session_checkpointsUpdateManyWithoutQuest_checkpointsNestedInput = {
+    create?: XOR<session_checkpointsCreateWithoutQuest_checkpointsInput, session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput> | session_checkpointsCreateWithoutQuest_checkpointsInput[] | session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput | session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput[]
+    upsert?: session_checkpointsUpsertWithWhereUniqueWithoutQuest_checkpointsInput | session_checkpointsUpsertWithWhereUniqueWithoutQuest_checkpointsInput[]
+    createMany?: session_checkpointsCreateManyQuest_checkpointsInputEnvelope
+    set?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    disconnect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    delete?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    update?: session_checkpointsUpdateWithWhereUniqueWithoutQuest_checkpointsInput | session_checkpointsUpdateWithWhereUniqueWithoutQuest_checkpointsInput[]
+    updateMany?: session_checkpointsUpdateManyWithWhereWithoutQuest_checkpointsInput | session_checkpointsUpdateManyWithWhereWithoutQuest_checkpointsInput[]
+    deleteMany?: session_checkpointsScalarWhereInput | session_checkpointsScalarWhereInput[]
+  }
+
   export type checkpoint_tasksUncheckedUpdateManyWithoutQuest_checkpointsNestedInput = {
     create?: XOR<checkpoint_tasksCreateWithoutQuest_checkpointsInput, checkpoint_tasksUncheckedCreateWithoutQuest_checkpointsInput> | checkpoint_tasksCreateWithoutQuest_checkpointsInput[] | checkpoint_tasksUncheckedCreateWithoutQuest_checkpointsInput[]
     connectOrCreate?: checkpoint_tasksCreateOrConnectWithoutQuest_checkpointsInput | checkpoint_tasksCreateOrConnectWithoutQuest_checkpointsInput[]
@@ -12462,6 +17125,48 @@ export namespace Prisma {
     update?: checkpoint_tasksUpdateWithWhereUniqueWithoutQuest_checkpointsInput | checkpoint_tasksUpdateWithWhereUniqueWithoutQuest_checkpointsInput[]
     updateMany?: checkpoint_tasksUpdateManyWithWhereWithoutQuest_checkpointsInput | checkpoint_tasksUpdateManyWithWhereWithoutQuest_checkpointsInput[]
     deleteMany?: checkpoint_tasksScalarWhereInput | checkpoint_tasksScalarWhereInput[]
+  }
+
+  export type session_answersUncheckedUpdateManyWithoutQuest_checkpointsNestedInput = {
+    create?: XOR<session_answersCreateWithoutQuest_checkpointsInput, session_answersUncheckedCreateWithoutQuest_checkpointsInput> | session_answersCreateWithoutQuest_checkpointsInput[] | session_answersUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutQuest_checkpointsInput | session_answersCreateOrConnectWithoutQuest_checkpointsInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutQuest_checkpointsInput | session_answersUpsertWithWhereUniqueWithoutQuest_checkpointsInput[]
+    createMany?: session_answersCreateManyQuest_checkpointsInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutQuest_checkpointsInput | session_answersUpdateWithWhereUniqueWithoutQuest_checkpointsInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutQuest_checkpointsInput | session_answersUpdateManyWithWhereWithoutQuest_checkpointsInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type session_checkpointsUncheckedUpdateManyWithoutQuest_checkpointsNestedInput = {
+    create?: XOR<session_checkpointsCreateWithoutQuest_checkpointsInput, session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput> | session_checkpointsCreateWithoutQuest_checkpointsInput[] | session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput | session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput[]
+    upsert?: session_checkpointsUpsertWithWhereUniqueWithoutQuest_checkpointsInput | session_checkpointsUpsertWithWhereUniqueWithoutQuest_checkpointsInput[]
+    createMany?: session_checkpointsCreateManyQuest_checkpointsInputEnvelope
+    set?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    disconnect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    delete?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    update?: session_checkpointsUpdateWithWhereUniqueWithoutQuest_checkpointsInput | session_checkpointsUpdateWithWhereUniqueWithoutQuest_checkpointsInput[]
+    updateMany?: session_checkpointsUpdateManyWithWhereWithoutQuest_checkpointsInput | session_checkpointsUpdateManyWithWhereWithoutQuest_checkpointsInput[]
+    deleteMany?: session_checkpointsScalarWhereInput | session_checkpointsScalarWhereInput[]
+  }
+
+  export type session_answersCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput> | session_answersCreateWithoutSessionsInput[] | session_answersUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutSessionsInput | session_answersCreateOrConnectWithoutSessionsInput[]
+    createMany?: session_answersCreateManySessionsInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type session_checkpointsCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<session_checkpointsCreateWithoutSessionsInput, session_checkpointsUncheckedCreateWithoutSessionsInput> | session_checkpointsCreateWithoutSessionsInput[] | session_checkpointsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutSessionsInput | session_checkpointsCreateOrConnectWithoutSessionsInput[]
+    createMany?: session_checkpointsCreateManySessionsInputEnvelope
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
   }
 
   export type questsCreateNestedOneWithoutSessionsInput = {
@@ -12482,6 +17187,20 @@ export namespace Prisma {
     connect?: usersWhereUniqueInput
   }
 
+  export type session_answersUncheckedCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput> | session_answersCreateWithoutSessionsInput[] | session_answersUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutSessionsInput | session_answersCreateOrConnectWithoutSessionsInput[]
+    createMany?: session_answersCreateManySessionsInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput = {
+    create?: XOR<session_checkpointsCreateWithoutSessionsInput, session_checkpointsUncheckedCreateWithoutSessionsInput> | session_checkpointsCreateWithoutSessionsInput[] | session_checkpointsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutSessionsInput | session_checkpointsCreateOrConnectWithoutSessionsInput[]
+    createMany?: session_checkpointsCreateManySessionsInputEnvelope
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -12492,6 +17211,34 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type session_answersUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput> | session_answersCreateWithoutSessionsInput[] | session_answersUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutSessionsInput | session_answersCreateOrConnectWithoutSessionsInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutSessionsInput | session_answersUpsertWithWhereUniqueWithoutSessionsInput[]
+    createMany?: session_answersCreateManySessionsInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutSessionsInput | session_answersUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutSessionsInput | session_answersUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type session_checkpointsUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<session_checkpointsCreateWithoutSessionsInput, session_checkpointsUncheckedCreateWithoutSessionsInput> | session_checkpointsCreateWithoutSessionsInput[] | session_checkpointsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutSessionsInput | session_checkpointsCreateOrConnectWithoutSessionsInput[]
+    upsert?: session_checkpointsUpsertWithWhereUniqueWithoutSessionsInput | session_checkpointsUpsertWithWhereUniqueWithoutSessionsInput[]
+    createMany?: session_checkpointsCreateManySessionsInputEnvelope
+    set?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    disconnect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    delete?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    update?: session_checkpointsUpdateWithWhereUniqueWithoutSessionsInput | session_checkpointsUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: session_checkpointsUpdateManyWithWhereWithoutSessionsInput | session_checkpointsUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: session_checkpointsScalarWhereInput | session_checkpointsScalarWhereInput[]
   }
 
   export type questsUpdateOneRequiredWithoutSessionsNestedInput = {
@@ -12522,10 +17269,66 @@ export namespace Prisma {
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutSessionsInput, usersUpdateWithoutSessionsInput>, usersUncheckedUpdateWithoutSessionsInput>
   }
 
+  export type session_answersUncheckedUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput> | session_answersCreateWithoutSessionsInput[] | session_answersUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutSessionsInput | session_answersCreateOrConnectWithoutSessionsInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutSessionsInput | session_answersUpsertWithWhereUniqueWithoutSessionsInput[]
+    createMany?: session_answersCreateManySessionsInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutSessionsInput | session_answersUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutSessionsInput | session_answersUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput = {
+    create?: XOR<session_checkpointsCreateWithoutSessionsInput, session_checkpointsUncheckedCreateWithoutSessionsInput> | session_checkpointsCreateWithoutSessionsInput[] | session_checkpointsUncheckedCreateWithoutSessionsInput[]
+    connectOrCreate?: session_checkpointsCreateOrConnectWithoutSessionsInput | session_checkpointsCreateOrConnectWithoutSessionsInput[]
+    upsert?: session_checkpointsUpsertWithWhereUniqueWithoutSessionsInput | session_checkpointsUpsertWithWhereUniqueWithoutSessionsInput[]
+    createMany?: session_checkpointsCreateManySessionsInputEnvelope
+    set?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    disconnect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    delete?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    connect?: session_checkpointsWhereUniqueInput | session_checkpointsWhereUniqueInput[]
+    update?: session_checkpointsUpdateWithWhereUniqueWithoutSessionsInput | session_checkpointsUpdateWithWhereUniqueWithoutSessionsInput[]
+    updateMany?: session_checkpointsUpdateManyWithWhereWithoutSessionsInput | session_checkpointsUpdateManyWithWhereWithoutSessionsInput[]
+    deleteMany?: session_checkpointsScalarWhereInput | session_checkpointsScalarWhereInput[]
+  }
+
   export type quest_checkpointsCreateNestedOneWithoutCheckpoint_tasksInput = {
     create?: XOR<quest_checkpointsCreateWithoutCheckpoint_tasksInput, quest_checkpointsUncheckedCreateWithoutCheckpoint_tasksInput>
     connectOrCreate?: quest_checkpointsCreateOrConnectWithoutCheckpoint_tasksInput
     connect?: quest_checkpointsWhereUniqueInput
+  }
+
+  export type session_answersCreateNestedManyWithoutCheckpoint_tasksInput = {
+    create?: XOR<session_answersCreateWithoutCheckpoint_tasksInput, session_answersUncheckedCreateWithoutCheckpoint_tasksInput> | session_answersCreateWithoutCheckpoint_tasksInput[] | session_answersUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutCheckpoint_tasksInput | session_answersCreateOrConnectWithoutCheckpoint_tasksInput[]
+    createMany?: session_answersCreateManyCheckpoint_tasksInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type task_choice_optionsCreateNestedManyWithoutCheckpoint_tasksInput = {
+    create?: XOR<task_choice_optionsCreateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput> | task_choice_optionsCreateWithoutCheckpoint_tasksInput[] | task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput | task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput[]
+    createMany?: task_choice_optionsCreateManyCheckpoint_tasksInputEnvelope
+    connect?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+  }
+
+  export type session_answersUncheckedCreateNestedManyWithoutCheckpoint_tasksInput = {
+    create?: XOR<session_answersCreateWithoutCheckpoint_tasksInput, session_answersUncheckedCreateWithoutCheckpoint_tasksInput> | session_answersCreateWithoutCheckpoint_tasksInput[] | session_answersUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutCheckpoint_tasksInput | session_answersCreateOrConnectWithoutCheckpoint_tasksInput[]
+    createMany?: session_answersCreateManyCheckpoint_tasksInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type task_choice_optionsUncheckedCreateNestedManyWithoutCheckpoint_tasksInput = {
+    create?: XOR<task_choice_optionsCreateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput> | task_choice_optionsCreateWithoutCheckpoint_tasksInput[] | task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput | task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput[]
+    createMany?: task_choice_optionsCreateManyCheckpoint_tasksInputEnvelope
+    connect?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
   }
 
   export type quest_checkpointsUpdateOneRequiredWithoutCheckpoint_tasksNestedInput = {
@@ -12534,6 +17337,208 @@ export namespace Prisma {
     upsert?: quest_checkpointsUpsertWithoutCheckpoint_tasksInput
     connect?: quest_checkpointsWhereUniqueInput
     update?: XOR<XOR<quest_checkpointsUpdateToOneWithWhereWithoutCheckpoint_tasksInput, quest_checkpointsUpdateWithoutCheckpoint_tasksInput>, quest_checkpointsUncheckedUpdateWithoutCheckpoint_tasksInput>
+  }
+
+  export type session_answersUpdateManyWithoutCheckpoint_tasksNestedInput = {
+    create?: XOR<session_answersCreateWithoutCheckpoint_tasksInput, session_answersUncheckedCreateWithoutCheckpoint_tasksInput> | session_answersCreateWithoutCheckpoint_tasksInput[] | session_answersUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutCheckpoint_tasksInput | session_answersCreateOrConnectWithoutCheckpoint_tasksInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutCheckpoint_tasksInput | session_answersUpsertWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    createMany?: session_answersCreateManyCheckpoint_tasksInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutCheckpoint_tasksInput | session_answersUpdateWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutCheckpoint_tasksInput | session_answersUpdateManyWithWhereWithoutCheckpoint_tasksInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type task_choice_optionsUpdateManyWithoutCheckpoint_tasksNestedInput = {
+    create?: XOR<task_choice_optionsCreateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput> | task_choice_optionsCreateWithoutCheckpoint_tasksInput[] | task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput | task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput[]
+    upsert?: task_choice_optionsUpsertWithWhereUniqueWithoutCheckpoint_tasksInput | task_choice_optionsUpsertWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    createMany?: task_choice_optionsCreateManyCheckpoint_tasksInputEnvelope
+    set?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    disconnect?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    delete?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    connect?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    update?: task_choice_optionsUpdateWithWhereUniqueWithoutCheckpoint_tasksInput | task_choice_optionsUpdateWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    updateMany?: task_choice_optionsUpdateManyWithWhereWithoutCheckpoint_tasksInput | task_choice_optionsUpdateManyWithWhereWithoutCheckpoint_tasksInput[]
+    deleteMany?: task_choice_optionsScalarWhereInput | task_choice_optionsScalarWhereInput[]
+  }
+
+  export type session_answersUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput = {
+    create?: XOR<session_answersCreateWithoutCheckpoint_tasksInput, session_answersUncheckedCreateWithoutCheckpoint_tasksInput> | session_answersCreateWithoutCheckpoint_tasksInput[] | session_answersUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutCheckpoint_tasksInput | session_answersCreateOrConnectWithoutCheckpoint_tasksInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutCheckpoint_tasksInput | session_answersUpsertWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    createMany?: session_answersCreateManyCheckpoint_tasksInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutCheckpoint_tasksInput | session_answersUpdateWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutCheckpoint_tasksInput | session_answersUpdateManyWithWhereWithoutCheckpoint_tasksInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type task_choice_optionsUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput = {
+    create?: XOR<task_choice_optionsCreateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput> | task_choice_optionsCreateWithoutCheckpoint_tasksInput[] | task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput[]
+    connectOrCreate?: task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput | task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput[]
+    upsert?: task_choice_optionsUpsertWithWhereUniqueWithoutCheckpoint_tasksInput | task_choice_optionsUpsertWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    createMany?: task_choice_optionsCreateManyCheckpoint_tasksInputEnvelope
+    set?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    disconnect?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    delete?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    connect?: task_choice_optionsWhereUniqueInput | task_choice_optionsWhereUniqueInput[]
+    update?: task_choice_optionsUpdateWithWhereUniqueWithoutCheckpoint_tasksInput | task_choice_optionsUpdateWithWhereUniqueWithoutCheckpoint_tasksInput[]
+    updateMany?: task_choice_optionsUpdateManyWithWhereWithoutCheckpoint_tasksInput | task_choice_optionsUpdateManyWithWhereWithoutCheckpoint_tasksInput[]
+    deleteMany?: task_choice_optionsScalarWhereInput | task_choice_optionsScalarWhereInput[]
+  }
+
+  export type session_answersCreateNestedManyWithoutTask_choice_optionsInput = {
+    create?: XOR<session_answersCreateWithoutTask_choice_optionsInput, session_answersUncheckedCreateWithoutTask_choice_optionsInput> | session_answersCreateWithoutTask_choice_optionsInput[] | session_answersUncheckedCreateWithoutTask_choice_optionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutTask_choice_optionsInput | session_answersCreateOrConnectWithoutTask_choice_optionsInput[]
+    createMany?: session_answersCreateManyTask_choice_optionsInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type checkpoint_tasksCreateNestedOneWithoutTask_choice_optionsInput = {
+    create?: XOR<checkpoint_tasksCreateWithoutTask_choice_optionsInput, checkpoint_tasksUncheckedCreateWithoutTask_choice_optionsInput>
+    connectOrCreate?: checkpoint_tasksCreateOrConnectWithoutTask_choice_optionsInput
+    connect?: checkpoint_tasksWhereUniqueInput
+  }
+
+  export type session_answersUncheckedCreateNestedManyWithoutTask_choice_optionsInput = {
+    create?: XOR<session_answersCreateWithoutTask_choice_optionsInput, session_answersUncheckedCreateWithoutTask_choice_optionsInput> | session_answersCreateWithoutTask_choice_optionsInput[] | session_answersUncheckedCreateWithoutTask_choice_optionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutTask_choice_optionsInput | session_answersCreateOrConnectWithoutTask_choice_optionsInput[]
+    createMany?: session_answersCreateManyTask_choice_optionsInputEnvelope
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+  }
+
+  export type session_answersUpdateManyWithoutTask_choice_optionsNestedInput = {
+    create?: XOR<session_answersCreateWithoutTask_choice_optionsInput, session_answersUncheckedCreateWithoutTask_choice_optionsInput> | session_answersCreateWithoutTask_choice_optionsInput[] | session_answersUncheckedCreateWithoutTask_choice_optionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutTask_choice_optionsInput | session_answersCreateOrConnectWithoutTask_choice_optionsInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutTask_choice_optionsInput | session_answersUpsertWithWhereUniqueWithoutTask_choice_optionsInput[]
+    createMany?: session_answersCreateManyTask_choice_optionsInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutTask_choice_optionsInput | session_answersUpdateWithWhereUniqueWithoutTask_choice_optionsInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutTask_choice_optionsInput | session_answersUpdateManyWithWhereWithoutTask_choice_optionsInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type checkpoint_tasksUpdateOneRequiredWithoutTask_choice_optionsNestedInput = {
+    create?: XOR<checkpoint_tasksCreateWithoutTask_choice_optionsInput, checkpoint_tasksUncheckedCreateWithoutTask_choice_optionsInput>
+    connectOrCreate?: checkpoint_tasksCreateOrConnectWithoutTask_choice_optionsInput
+    upsert?: checkpoint_tasksUpsertWithoutTask_choice_optionsInput
+    connect?: checkpoint_tasksWhereUniqueInput
+    update?: XOR<XOR<checkpoint_tasksUpdateToOneWithWhereWithoutTask_choice_optionsInput, checkpoint_tasksUpdateWithoutTask_choice_optionsInput>, checkpoint_tasksUncheckedUpdateWithoutTask_choice_optionsInput>
+  }
+
+  export type session_answersUncheckedUpdateManyWithoutTask_choice_optionsNestedInput = {
+    create?: XOR<session_answersCreateWithoutTask_choice_optionsInput, session_answersUncheckedCreateWithoutTask_choice_optionsInput> | session_answersCreateWithoutTask_choice_optionsInput[] | session_answersUncheckedCreateWithoutTask_choice_optionsInput[]
+    connectOrCreate?: session_answersCreateOrConnectWithoutTask_choice_optionsInput | session_answersCreateOrConnectWithoutTask_choice_optionsInput[]
+    upsert?: session_answersUpsertWithWhereUniqueWithoutTask_choice_optionsInput | session_answersUpsertWithWhereUniqueWithoutTask_choice_optionsInput[]
+    createMany?: session_answersCreateManyTask_choice_optionsInputEnvelope
+    set?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    disconnect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    delete?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    connect?: session_answersWhereUniqueInput | session_answersWhereUniqueInput[]
+    update?: session_answersUpdateWithWhereUniqueWithoutTask_choice_optionsInput | session_answersUpdateWithWhereUniqueWithoutTask_choice_optionsInput[]
+    updateMany?: session_answersUpdateManyWithWhereWithoutTask_choice_optionsInput | session_answersUpdateManyWithWhereWithoutTask_choice_optionsInput[]
+    deleteMany?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+  }
+
+  export type quest_checkpointsCreateNestedOneWithoutSession_answersInput = {
+    create?: XOR<quest_checkpointsCreateWithoutSession_answersInput, quest_checkpointsUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutSession_answersInput
+    connect?: quest_checkpointsWhereUniqueInput
+  }
+
+  export type task_choice_optionsCreateNestedOneWithoutSession_answersInput = {
+    create?: XOR<task_choice_optionsCreateWithoutSession_answersInput, task_choice_optionsUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: task_choice_optionsCreateOrConnectWithoutSession_answersInput
+    connect?: task_choice_optionsWhereUniqueInput
+  }
+
+  export type sessionsCreateNestedOneWithoutSession_answersInput = {
+    create?: XOR<sessionsCreateWithoutSession_answersInput, sessionsUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: sessionsCreateOrConnectWithoutSession_answersInput
+    connect?: sessionsWhereUniqueInput
+  }
+
+  export type checkpoint_tasksCreateNestedOneWithoutSession_answersInput = {
+    create?: XOR<checkpoint_tasksCreateWithoutSession_answersInput, checkpoint_tasksUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: checkpoint_tasksCreateOrConnectWithoutSession_answersInput
+    connect?: checkpoint_tasksWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type quest_checkpointsUpdateOneRequiredWithoutSession_answersNestedInput = {
+    create?: XOR<quest_checkpointsCreateWithoutSession_answersInput, quest_checkpointsUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutSession_answersInput
+    upsert?: quest_checkpointsUpsertWithoutSession_answersInput
+    connect?: quest_checkpointsWhereUniqueInput
+    update?: XOR<XOR<quest_checkpointsUpdateToOneWithWhereWithoutSession_answersInput, quest_checkpointsUpdateWithoutSession_answersInput>, quest_checkpointsUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type task_choice_optionsUpdateOneWithoutSession_answersNestedInput = {
+    create?: XOR<task_choice_optionsCreateWithoutSession_answersInput, task_choice_optionsUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: task_choice_optionsCreateOrConnectWithoutSession_answersInput
+    upsert?: task_choice_optionsUpsertWithoutSession_answersInput
+    disconnect?: task_choice_optionsWhereInput | boolean
+    delete?: task_choice_optionsWhereInput | boolean
+    connect?: task_choice_optionsWhereUniqueInput
+    update?: XOR<XOR<task_choice_optionsUpdateToOneWithWhereWithoutSession_answersInput, task_choice_optionsUpdateWithoutSession_answersInput>, task_choice_optionsUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type sessionsUpdateOneRequiredWithoutSession_answersNestedInput = {
+    create?: XOR<sessionsCreateWithoutSession_answersInput, sessionsUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: sessionsCreateOrConnectWithoutSession_answersInput
+    upsert?: sessionsUpsertWithoutSession_answersInput
+    connect?: sessionsWhereUniqueInput
+    update?: XOR<XOR<sessionsUpdateToOneWithWhereWithoutSession_answersInput, sessionsUpdateWithoutSession_answersInput>, sessionsUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type checkpoint_tasksUpdateOneRequiredWithoutSession_answersNestedInput = {
+    create?: XOR<checkpoint_tasksCreateWithoutSession_answersInput, checkpoint_tasksUncheckedCreateWithoutSession_answersInput>
+    connectOrCreate?: checkpoint_tasksCreateOrConnectWithoutSession_answersInput
+    upsert?: checkpoint_tasksUpsertWithoutSession_answersInput
+    connect?: checkpoint_tasksWhereUniqueInput
+    update?: XOR<XOR<checkpoint_tasksUpdateToOneWithWhereWithoutSession_answersInput, checkpoint_tasksUpdateWithoutSession_answersInput>, checkpoint_tasksUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type quest_checkpointsCreateNestedOneWithoutSession_checkpointsInput = {
+    create?: XOR<quest_checkpointsCreateWithoutSession_checkpointsInput, quest_checkpointsUncheckedCreateWithoutSession_checkpointsInput>
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutSession_checkpointsInput
+    connect?: quest_checkpointsWhereUniqueInput
+  }
+
+  export type sessionsCreateNestedOneWithoutSession_checkpointsInput = {
+    create?: XOR<sessionsCreateWithoutSession_checkpointsInput, sessionsUncheckedCreateWithoutSession_checkpointsInput>
+    connectOrCreate?: sessionsCreateOrConnectWithoutSession_checkpointsInput
+    connect?: sessionsWhereUniqueInput
+  }
+
+  export type quest_checkpointsUpdateOneRequiredWithoutSession_checkpointsNestedInput = {
+    create?: XOR<quest_checkpointsCreateWithoutSession_checkpointsInput, quest_checkpointsUncheckedCreateWithoutSession_checkpointsInput>
+    connectOrCreate?: quest_checkpointsCreateOrConnectWithoutSession_checkpointsInput
+    upsert?: quest_checkpointsUpsertWithoutSession_checkpointsInput
+    connect?: quest_checkpointsWhereUniqueInput
+    update?: XOR<XOR<quest_checkpointsUpdateToOneWithWhereWithoutSession_checkpointsInput, quest_checkpointsUpdateWithoutSession_checkpointsInput>, quest_checkpointsUncheckedUpdateWithoutSession_checkpointsInput>
+  }
+
+  export type sessionsUpdateOneRequiredWithoutSession_checkpointsNestedInput = {
+    create?: XOR<sessionsCreateWithoutSession_checkpointsInput, sessionsUncheckedCreateWithoutSession_checkpointsInput>
+    connectOrCreate?: sessionsCreateOrConnectWithoutSession_checkpointsInput
+    upsert?: sessionsUpsertWithoutSession_checkpointsInput
+    connect?: sessionsWhereUniqueInput
+    update?: XOR<XOR<sessionsUpdateToOneWithWhereWithoutSession_checkpointsInput, sessionsUpdateWithoutSession_checkpointsInput>, sessionsUncheckedUpdateWithoutSession_checkpointsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -12764,6 +17769,19 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type questsCreateWithoutUsersInput = {
     title: string
     description: string
@@ -12815,6 +17833,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
     teams?: teamsCreateNestedOneWithoutSessionsInput
   }
@@ -12828,6 +17848,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
 
   export type sessionsCreateOrConnectWithoutUsersInput = {
@@ -13145,6 +18167,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     quests: questsCreateNestedOneWithoutSessionsInput
     users?: usersCreateNestedOneWithoutSessionsInput
   }
@@ -13158,6 +18182,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
 
   export type sessionsCreateOrConnectWithoutTeamsInput = {
@@ -13309,6 +18335,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     checkpoint_tasks?: checkpoint_tasksCreateNestedManyWithoutQuest_checkpointsInput
+    session_answers?: session_answersCreateNestedManyWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutQuest_checkpointsInput
   }
 
   export type quest_checkpointsUncheckedCreateWithoutQuestsInput = {
@@ -13324,6 +18352,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     checkpoint_tasks?: checkpoint_tasksUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutQuest_checkpointsInput
   }
 
   export type quest_checkpointsCreateOrConnectWithoutQuestsInput = {
@@ -13376,6 +18406,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
     teams?: teamsCreateNestedOneWithoutSessionsInput
     users?: usersCreateNestedOneWithoutSessionsInput
   }
@@ -13389,6 +18421,8 @@ export namespace Prisma {
     started_at?: Date | string
     finished_at?: Date | string | null
     current_checkpoint_order?: number | null
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
   }
 
   export type sessionsCreateOrConnectWithoutQuestsInput = {
@@ -13497,6 +18531,8 @@ export namespace Prisma {
     correct_answer: string
     created_at?: Date | string
     updated_at?: Date | string
+    session_answers?: session_answersCreateNestedManyWithoutCheckpoint_tasksInput
+    task_choice_options?: task_choice_optionsCreateNestedManyWithoutCheckpoint_tasksInput
   }
 
   export type checkpoint_tasksUncheckedCreateWithoutQuest_checkpointsInput = {
@@ -13506,6 +18542,8 @@ export namespace Prisma {
     correct_answer: string
     created_at?: Date | string
     updated_at?: Date | string
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutCheckpoint_tasksInput
+    task_choice_options?: task_choice_optionsUncheckedCreateNestedManyWithoutCheckpoint_tasksInput
   }
 
   export type checkpoint_tasksCreateOrConnectWithoutQuest_checkpointsInput = {
@@ -13556,6 +18594,58 @@ export namespace Prisma {
   export type questsCreateOrConnectWithoutQuest_checkpointsInput = {
     where: questsWhereUniqueInput
     create: XOR<questsCreateWithoutQuest_checkpointsInput, questsUncheckedCreateWithoutQuest_checkpointsInput>
+  }
+
+  export type session_answersCreateWithoutQuest_checkpointsInput = {
+    answer_text?: string | null
+    is_correct: boolean
+    answered_at?: Date | string
+    task_choice_options?: task_choice_optionsCreateNestedOneWithoutSession_answersInput
+    sessions: sessionsCreateNestedOneWithoutSession_answersInput
+    checkpoint_tasks: checkpoint_tasksCreateNestedOneWithoutSession_answersInput
+  }
+
+  export type session_answersUncheckedCreateWithoutQuest_checkpointsInput = {
+    id?: number
+    session_id: number
+    task_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_answersCreateOrConnectWithoutQuest_checkpointsInput = {
+    where: session_answersWhereUniqueInput
+    create: XOR<session_answersCreateWithoutQuest_checkpointsInput, session_answersUncheckedCreateWithoutQuest_checkpointsInput>
+  }
+
+  export type session_answersCreateManyQuest_checkpointsInputEnvelope = {
+    data: session_answersCreateManyQuest_checkpointsInput | session_answersCreateManyQuest_checkpointsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type session_checkpointsCreateWithoutQuest_checkpointsInput = {
+    status: string
+    completed_at?: Date | string | null
+    sessions: sessionsCreateNestedOneWithoutSession_checkpointsInput
+  }
+
+  export type session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput = {
+    id?: number
+    session_id: number
+    status: string
+    completed_at?: Date | string | null
+  }
+
+  export type session_checkpointsCreateOrConnectWithoutQuest_checkpointsInput = {
+    where: session_checkpointsWhereUniqueInput
+    create: XOR<session_checkpointsCreateWithoutQuest_checkpointsInput, session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput>
+  }
+
+  export type session_checkpointsCreateManyQuest_checkpointsInputEnvelope = {
+    data: session_checkpointsCreateManyQuest_checkpointsInput | session_checkpointsCreateManyQuest_checkpointsInput[]
+    skipDuplicates?: boolean
   }
 
   export type checkpoint_tasksUpsertWithWhereUniqueWithoutQuest_checkpointsInput = {
@@ -13631,6 +18721,115 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rejection_reason?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: sessionsUncheckedUpdateManyWithoutQuestsNestedInput
+  }
+
+  export type session_answersUpsertWithWhereUniqueWithoutQuest_checkpointsInput = {
+    where: session_answersWhereUniqueInput
+    update: XOR<session_answersUpdateWithoutQuest_checkpointsInput, session_answersUncheckedUpdateWithoutQuest_checkpointsInput>
+    create: XOR<session_answersCreateWithoutQuest_checkpointsInput, session_answersUncheckedCreateWithoutQuest_checkpointsInput>
+  }
+
+  export type session_answersUpdateWithWhereUniqueWithoutQuest_checkpointsInput = {
+    where: session_answersWhereUniqueInput
+    data: XOR<session_answersUpdateWithoutQuest_checkpointsInput, session_answersUncheckedUpdateWithoutQuest_checkpointsInput>
+  }
+
+  export type session_answersUpdateManyWithWhereWithoutQuest_checkpointsInput = {
+    where: session_answersScalarWhereInput
+    data: XOR<session_answersUpdateManyMutationInput, session_answersUncheckedUpdateManyWithoutQuest_checkpointsInput>
+  }
+
+  export type session_answersScalarWhereInput = {
+    AND?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+    OR?: session_answersScalarWhereInput[]
+    NOT?: session_answersScalarWhereInput | session_answersScalarWhereInput[]
+    id?: IntFilter<"session_answers"> | number
+    session_id?: IntFilter<"session_answers"> | number
+    checkpoint_id?: IntFilter<"session_answers"> | number
+    task_id?: IntFilter<"session_answers"> | number
+    answer_text?: StringNullableFilter<"session_answers"> | string | null
+    chosen_option_id?: IntNullableFilter<"session_answers"> | number | null
+    is_correct?: BoolFilter<"session_answers"> | boolean
+    answered_at?: DateTimeFilter<"session_answers"> | Date | string
+  }
+
+  export type session_checkpointsUpsertWithWhereUniqueWithoutQuest_checkpointsInput = {
+    where: session_checkpointsWhereUniqueInput
+    update: XOR<session_checkpointsUpdateWithoutQuest_checkpointsInput, session_checkpointsUncheckedUpdateWithoutQuest_checkpointsInput>
+    create: XOR<session_checkpointsCreateWithoutQuest_checkpointsInput, session_checkpointsUncheckedCreateWithoutQuest_checkpointsInput>
+  }
+
+  export type session_checkpointsUpdateWithWhereUniqueWithoutQuest_checkpointsInput = {
+    where: session_checkpointsWhereUniqueInput
+    data: XOR<session_checkpointsUpdateWithoutQuest_checkpointsInput, session_checkpointsUncheckedUpdateWithoutQuest_checkpointsInput>
+  }
+
+  export type session_checkpointsUpdateManyWithWhereWithoutQuest_checkpointsInput = {
+    where: session_checkpointsScalarWhereInput
+    data: XOR<session_checkpointsUpdateManyMutationInput, session_checkpointsUncheckedUpdateManyWithoutQuest_checkpointsInput>
+  }
+
+  export type session_checkpointsScalarWhereInput = {
+    AND?: session_checkpointsScalarWhereInput | session_checkpointsScalarWhereInput[]
+    OR?: session_checkpointsScalarWhereInput[]
+    NOT?: session_checkpointsScalarWhereInput | session_checkpointsScalarWhereInput[]
+    id?: IntFilter<"session_checkpoints"> | number
+    session_id?: IntFilter<"session_checkpoints"> | number
+    checkpoint_id?: IntFilter<"session_checkpoints"> | number
+    status?: StringFilter<"session_checkpoints"> | string
+    completed_at?: DateTimeNullableFilter<"session_checkpoints"> | Date | string | null
+  }
+
+  export type session_answersCreateWithoutSessionsInput = {
+    answer_text?: string | null
+    is_correct: boolean
+    answered_at?: Date | string
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutSession_answersInput
+    task_choice_options?: task_choice_optionsCreateNestedOneWithoutSession_answersInput
+    checkpoint_tasks: checkpoint_tasksCreateNestedOneWithoutSession_answersInput
+  }
+
+  export type session_answersUncheckedCreateWithoutSessionsInput = {
+    id?: number
+    checkpoint_id: number
+    task_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_answersCreateOrConnectWithoutSessionsInput = {
+    where: session_answersWhereUniqueInput
+    create: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type session_answersCreateManySessionsInputEnvelope = {
+    data: session_answersCreateManySessionsInput | session_answersCreateManySessionsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type session_checkpointsCreateWithoutSessionsInput = {
+    status: string
+    completed_at?: Date | string | null
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutSession_checkpointsInput
+  }
+
+  export type session_checkpointsUncheckedCreateWithoutSessionsInput = {
+    id?: number
+    checkpoint_id: number
+    status: string
+    completed_at?: Date | string | null
+  }
+
+  export type session_checkpointsCreateOrConnectWithoutSessionsInput = {
+    where: session_checkpointsWhereUniqueInput
+    create: XOR<session_checkpointsCreateWithoutSessionsInput, session_checkpointsUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type session_checkpointsCreateManySessionsInputEnvelope = {
+    data: session_checkpointsCreateManySessionsInput | session_checkpointsCreateManySessionsInput[]
+    skipDuplicates?: boolean
   }
 
   export type questsCreateWithoutSessionsInput = {
@@ -13729,6 +18928,38 @@ export namespace Prisma {
   export type usersCreateOrConnectWithoutSessionsInput = {
     where: usersWhereUniqueInput
     create: XOR<usersCreateWithoutSessionsInput, usersUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type session_answersUpsertWithWhereUniqueWithoutSessionsInput = {
+    where: session_answersWhereUniqueInput
+    update: XOR<session_answersUpdateWithoutSessionsInput, session_answersUncheckedUpdateWithoutSessionsInput>
+    create: XOR<session_answersCreateWithoutSessionsInput, session_answersUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type session_answersUpdateWithWhereUniqueWithoutSessionsInput = {
+    where: session_answersWhereUniqueInput
+    data: XOR<session_answersUpdateWithoutSessionsInput, session_answersUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type session_answersUpdateManyWithWhereWithoutSessionsInput = {
+    where: session_answersScalarWhereInput
+    data: XOR<session_answersUpdateManyMutationInput, session_answersUncheckedUpdateManyWithoutSessionsInput>
+  }
+
+  export type session_checkpointsUpsertWithWhereUniqueWithoutSessionsInput = {
+    where: session_checkpointsWhereUniqueInput
+    update: XOR<session_checkpointsUpdateWithoutSessionsInput, session_checkpointsUncheckedUpdateWithoutSessionsInput>
+    create: XOR<session_checkpointsCreateWithoutSessionsInput, session_checkpointsUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type session_checkpointsUpdateWithWhereUniqueWithoutSessionsInput = {
+    where: session_checkpointsWhereUniqueInput
+    data: XOR<session_checkpointsUpdateWithoutSessionsInput, session_checkpointsUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type session_checkpointsUpdateManyWithWhereWithoutSessionsInput = {
+    where: session_checkpointsScalarWhereInput
+    data: XOR<session_checkpointsUpdateManyMutationInput, session_checkpointsUncheckedUpdateManyWithoutSessionsInput>
   }
 
   export type questsUpsertWithoutSessionsInput = {
@@ -13859,6 +19090,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     quests: questsCreateNestedOneWithoutQuest_checkpointsInput
+    session_answers?: session_answersCreateNestedManyWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutQuest_checkpointsInput
   }
 
   export type quest_checkpointsUncheckedCreateWithoutCheckpoint_tasksInput = {
@@ -13874,11 +19107,63 @@ export namespace Prisma {
     point_rules?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutQuest_checkpointsInput
   }
 
   export type quest_checkpointsCreateOrConnectWithoutCheckpoint_tasksInput = {
     where: quest_checkpointsWhereUniqueInput
     create: XOR<quest_checkpointsCreateWithoutCheckpoint_tasksInput, quest_checkpointsUncheckedCreateWithoutCheckpoint_tasksInput>
+  }
+
+  export type session_answersCreateWithoutCheckpoint_tasksInput = {
+    answer_text?: string | null
+    is_correct: boolean
+    answered_at?: Date | string
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutSession_answersInput
+    task_choice_options?: task_choice_optionsCreateNestedOneWithoutSession_answersInput
+    sessions: sessionsCreateNestedOneWithoutSession_answersInput
+  }
+
+  export type session_answersUncheckedCreateWithoutCheckpoint_tasksInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_answersCreateOrConnectWithoutCheckpoint_tasksInput = {
+    where: session_answersWhereUniqueInput
+    create: XOR<session_answersCreateWithoutCheckpoint_tasksInput, session_answersUncheckedCreateWithoutCheckpoint_tasksInput>
+  }
+
+  export type session_answersCreateManyCheckpoint_tasksInputEnvelope = {
+    data: session_answersCreateManyCheckpoint_tasksInput | session_answersCreateManyCheckpoint_tasksInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type task_choice_optionsCreateWithoutCheckpoint_tasksInput = {
+    option_text: string
+    session_answers?: session_answersCreateNestedManyWithoutTask_choice_optionsInput
+  }
+
+  export type task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput = {
+    id?: number
+    option_text: string
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutTask_choice_optionsInput
+  }
+
+  export type task_choice_optionsCreateOrConnectWithoutCheckpoint_tasksInput = {
+    where: task_choice_optionsWhereUniqueInput
+    create: XOR<task_choice_optionsCreateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput>
+  }
+
+  export type task_choice_optionsCreateManyCheckpoint_tasksInputEnvelope = {
+    data: task_choice_optionsCreateManyCheckpoint_tasksInput | task_choice_optionsCreateManyCheckpoint_tasksInput[]
+    skipDuplicates?: boolean
   }
 
   export type quest_checkpointsUpsertWithoutCheckpoint_tasksInput = {
@@ -13904,6 +19189,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     quests?: questsUpdateOneRequiredWithoutQuest_checkpointsNestedInput
+    session_answers?: session_answersUpdateManyWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutQuest_checkpointsNestedInput
   }
 
   export type quest_checkpointsUncheckedUpdateWithoutCheckpoint_tasksInput = {
@@ -13919,6 +19206,544 @@ export namespace Prisma {
     point_rules?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    session_answers?: session_answersUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+  }
+
+  export type session_answersUpsertWithWhereUniqueWithoutCheckpoint_tasksInput = {
+    where: session_answersWhereUniqueInput
+    update: XOR<session_answersUpdateWithoutCheckpoint_tasksInput, session_answersUncheckedUpdateWithoutCheckpoint_tasksInput>
+    create: XOR<session_answersCreateWithoutCheckpoint_tasksInput, session_answersUncheckedCreateWithoutCheckpoint_tasksInput>
+  }
+
+  export type session_answersUpdateWithWhereUniqueWithoutCheckpoint_tasksInput = {
+    where: session_answersWhereUniqueInput
+    data: XOR<session_answersUpdateWithoutCheckpoint_tasksInput, session_answersUncheckedUpdateWithoutCheckpoint_tasksInput>
+  }
+
+  export type session_answersUpdateManyWithWhereWithoutCheckpoint_tasksInput = {
+    where: session_answersScalarWhereInput
+    data: XOR<session_answersUpdateManyMutationInput, session_answersUncheckedUpdateManyWithoutCheckpoint_tasksInput>
+  }
+
+  export type task_choice_optionsUpsertWithWhereUniqueWithoutCheckpoint_tasksInput = {
+    where: task_choice_optionsWhereUniqueInput
+    update: XOR<task_choice_optionsUpdateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedUpdateWithoutCheckpoint_tasksInput>
+    create: XOR<task_choice_optionsCreateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedCreateWithoutCheckpoint_tasksInput>
+  }
+
+  export type task_choice_optionsUpdateWithWhereUniqueWithoutCheckpoint_tasksInput = {
+    where: task_choice_optionsWhereUniqueInput
+    data: XOR<task_choice_optionsUpdateWithoutCheckpoint_tasksInput, task_choice_optionsUncheckedUpdateWithoutCheckpoint_tasksInput>
+  }
+
+  export type task_choice_optionsUpdateManyWithWhereWithoutCheckpoint_tasksInput = {
+    where: task_choice_optionsScalarWhereInput
+    data: XOR<task_choice_optionsUpdateManyMutationInput, task_choice_optionsUncheckedUpdateManyWithoutCheckpoint_tasksInput>
+  }
+
+  export type task_choice_optionsScalarWhereInput = {
+    AND?: task_choice_optionsScalarWhereInput | task_choice_optionsScalarWhereInput[]
+    OR?: task_choice_optionsScalarWhereInput[]
+    NOT?: task_choice_optionsScalarWhereInput | task_choice_optionsScalarWhereInput[]
+    id?: IntFilter<"task_choice_options"> | number
+    task_id?: IntFilter<"task_choice_options"> | number
+    option_text?: StringFilter<"task_choice_options"> | string
+  }
+
+  export type session_answersCreateWithoutTask_choice_optionsInput = {
+    answer_text?: string | null
+    is_correct: boolean
+    answered_at?: Date | string
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutSession_answersInput
+    sessions: sessionsCreateNestedOneWithoutSession_answersInput
+    checkpoint_tasks: checkpoint_tasksCreateNestedOneWithoutSession_answersInput
+  }
+
+  export type session_answersUncheckedCreateWithoutTask_choice_optionsInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    task_id: number
+    answer_text?: string | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_answersCreateOrConnectWithoutTask_choice_optionsInput = {
+    where: session_answersWhereUniqueInput
+    create: XOR<session_answersCreateWithoutTask_choice_optionsInput, session_answersUncheckedCreateWithoutTask_choice_optionsInput>
+  }
+
+  export type session_answersCreateManyTask_choice_optionsInputEnvelope = {
+    data: session_answersCreateManyTask_choice_optionsInput | session_answersCreateManyTask_choice_optionsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type checkpoint_tasksCreateWithoutTask_choice_optionsInput = {
+    task_type: string
+    question_text?: string | null
+    correct_answer: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutCheckpoint_tasksInput
+    session_answers?: session_answersCreateNestedManyWithoutCheckpoint_tasksInput
+  }
+
+  export type checkpoint_tasksUncheckedCreateWithoutTask_choice_optionsInput = {
+    id?: number
+    checkpoint_id: number
+    task_type: string
+    question_text?: string | null
+    correct_answer: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutCheckpoint_tasksInput
+  }
+
+  export type checkpoint_tasksCreateOrConnectWithoutTask_choice_optionsInput = {
+    where: checkpoint_tasksWhereUniqueInput
+    create: XOR<checkpoint_tasksCreateWithoutTask_choice_optionsInput, checkpoint_tasksUncheckedCreateWithoutTask_choice_optionsInput>
+  }
+
+  export type session_answersUpsertWithWhereUniqueWithoutTask_choice_optionsInput = {
+    where: session_answersWhereUniqueInput
+    update: XOR<session_answersUpdateWithoutTask_choice_optionsInput, session_answersUncheckedUpdateWithoutTask_choice_optionsInput>
+    create: XOR<session_answersCreateWithoutTask_choice_optionsInput, session_answersUncheckedCreateWithoutTask_choice_optionsInput>
+  }
+
+  export type session_answersUpdateWithWhereUniqueWithoutTask_choice_optionsInput = {
+    where: session_answersWhereUniqueInput
+    data: XOR<session_answersUpdateWithoutTask_choice_optionsInput, session_answersUncheckedUpdateWithoutTask_choice_optionsInput>
+  }
+
+  export type session_answersUpdateManyWithWhereWithoutTask_choice_optionsInput = {
+    where: session_answersScalarWhereInput
+    data: XOR<session_answersUpdateManyMutationInput, session_answersUncheckedUpdateManyWithoutTask_choice_optionsInput>
+  }
+
+  export type checkpoint_tasksUpsertWithoutTask_choice_optionsInput = {
+    update: XOR<checkpoint_tasksUpdateWithoutTask_choice_optionsInput, checkpoint_tasksUncheckedUpdateWithoutTask_choice_optionsInput>
+    create: XOR<checkpoint_tasksCreateWithoutTask_choice_optionsInput, checkpoint_tasksUncheckedCreateWithoutTask_choice_optionsInput>
+    where?: checkpoint_tasksWhereInput
+  }
+
+  export type checkpoint_tasksUpdateToOneWithWhereWithoutTask_choice_optionsInput = {
+    where?: checkpoint_tasksWhereInput
+    data: XOR<checkpoint_tasksUpdateWithoutTask_choice_optionsInput, checkpoint_tasksUncheckedUpdateWithoutTask_choice_optionsInput>
+  }
+
+  export type checkpoint_tasksUpdateWithoutTask_choice_optionsInput = {
+    task_type?: StringFieldUpdateOperationsInput | string
+    question_text?: NullableStringFieldUpdateOperationsInput | string | null
+    correct_answer?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutCheckpoint_tasksNestedInput
+    session_answers?: session_answersUpdateManyWithoutCheckpoint_tasksNestedInput
+  }
+
+  export type checkpoint_tasksUncheckedUpdateWithoutTask_choice_optionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_type?: StringFieldUpdateOperationsInput | string
+    question_text?: NullableStringFieldUpdateOperationsInput | string | null
+    correct_answer?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    session_answers?: session_answersUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput
+  }
+
+  export type quest_checkpointsCreateWithoutSession_answersInput = {
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    checkpoint_tasks?: checkpoint_tasksCreateNestedManyWithoutQuest_checkpointsInput
+    quests: questsCreateNestedOneWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutQuest_checkpointsInput
+  }
+
+  export type quest_checkpointsUncheckedCreateWithoutSession_answersInput = {
+    id?: number
+    quest_id: number
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    checkpoint_tasks?: checkpoint_tasksUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+  }
+
+  export type quest_checkpointsCreateOrConnectWithoutSession_answersInput = {
+    where: quest_checkpointsWhereUniqueInput
+    create: XOR<quest_checkpointsCreateWithoutSession_answersInput, quest_checkpointsUncheckedCreateWithoutSession_answersInput>
+  }
+
+  export type task_choice_optionsCreateWithoutSession_answersInput = {
+    option_text: string
+    checkpoint_tasks: checkpoint_tasksCreateNestedOneWithoutTask_choice_optionsInput
+  }
+
+  export type task_choice_optionsUncheckedCreateWithoutSession_answersInput = {
+    id?: number
+    task_id: number
+    option_text: string
+  }
+
+  export type task_choice_optionsCreateOrConnectWithoutSession_answersInput = {
+    where: task_choice_optionsWhereUniqueInput
+    create: XOR<task_choice_optionsCreateWithoutSession_answersInput, task_choice_optionsUncheckedCreateWithoutSession_answersInput>
+  }
+
+  export type sessionsCreateWithoutSession_answersInput = {
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    session_checkpoints?: session_checkpointsCreateNestedManyWithoutSessionsInput
+    quests: questsCreateNestedOneWithoutSessionsInput
+    teams?: teamsCreateNestedOneWithoutSessionsInput
+    users?: usersCreateNestedOneWithoutSessionsInput
+  }
+
+  export type sessionsUncheckedCreateWithoutSession_answersInput = {
+    id?: number
+    quest_id: number
+    user_id?: number | null
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    session_checkpoints?: session_checkpointsUncheckedCreateNestedManyWithoutSessionsInput
+  }
+
+  export type sessionsCreateOrConnectWithoutSession_answersInput = {
+    where: sessionsWhereUniqueInput
+    create: XOR<sessionsCreateWithoutSession_answersInput, sessionsUncheckedCreateWithoutSession_answersInput>
+  }
+
+  export type checkpoint_tasksCreateWithoutSession_answersInput = {
+    task_type: string
+    question_text?: string | null
+    correct_answer: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    quest_checkpoints: quest_checkpointsCreateNestedOneWithoutCheckpoint_tasksInput
+    task_choice_options?: task_choice_optionsCreateNestedManyWithoutCheckpoint_tasksInput
+  }
+
+  export type checkpoint_tasksUncheckedCreateWithoutSession_answersInput = {
+    id?: number
+    checkpoint_id: number
+    task_type: string
+    question_text?: string | null
+    correct_answer: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    task_choice_options?: task_choice_optionsUncheckedCreateNestedManyWithoutCheckpoint_tasksInput
+  }
+
+  export type checkpoint_tasksCreateOrConnectWithoutSession_answersInput = {
+    where: checkpoint_tasksWhereUniqueInput
+    create: XOR<checkpoint_tasksCreateWithoutSession_answersInput, checkpoint_tasksUncheckedCreateWithoutSession_answersInput>
+  }
+
+  export type quest_checkpointsUpsertWithoutSession_answersInput = {
+    update: XOR<quest_checkpointsUpdateWithoutSession_answersInput, quest_checkpointsUncheckedUpdateWithoutSession_answersInput>
+    create: XOR<quest_checkpointsCreateWithoutSession_answersInput, quest_checkpointsUncheckedCreateWithoutSession_answersInput>
+    where?: quest_checkpointsWhereInput
+  }
+
+  export type quest_checkpointsUpdateToOneWithWhereWithoutSession_answersInput = {
+    where?: quest_checkpointsWhereInput
+    data: XOR<quest_checkpointsUpdateWithoutSession_answersInput, quest_checkpointsUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type quest_checkpointsUpdateWithoutSession_answersInput = {
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkpoint_tasks?: checkpoint_tasksUpdateManyWithoutQuest_checkpointsNestedInput
+    quests?: questsUpdateOneRequiredWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutQuest_checkpointsNestedInput
+  }
+
+  export type quest_checkpointsUncheckedUpdateWithoutSession_answersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkpoint_tasks?: checkpoint_tasksUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+  }
+
+  export type task_choice_optionsUpsertWithoutSession_answersInput = {
+    update: XOR<task_choice_optionsUpdateWithoutSession_answersInput, task_choice_optionsUncheckedUpdateWithoutSession_answersInput>
+    create: XOR<task_choice_optionsCreateWithoutSession_answersInput, task_choice_optionsUncheckedCreateWithoutSession_answersInput>
+    where?: task_choice_optionsWhereInput
+  }
+
+  export type task_choice_optionsUpdateToOneWithWhereWithoutSession_answersInput = {
+    where?: task_choice_optionsWhereInput
+    data: XOR<task_choice_optionsUpdateWithoutSession_answersInput, task_choice_optionsUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type task_choice_optionsUpdateWithoutSession_answersInput = {
+    option_text?: StringFieldUpdateOperationsInput | string
+    checkpoint_tasks?: checkpoint_tasksUpdateOneRequiredWithoutTask_choice_optionsNestedInput
+  }
+
+  export type task_choice_optionsUncheckedUpdateWithoutSession_answersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    option_text?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type sessionsUpsertWithoutSession_answersInput = {
+    update: XOR<sessionsUpdateWithoutSession_answersInput, sessionsUncheckedUpdateWithoutSession_answersInput>
+    create: XOR<sessionsCreateWithoutSession_answersInput, sessionsUncheckedCreateWithoutSession_answersInput>
+    where?: sessionsWhereInput
+  }
+
+  export type sessionsUpdateToOneWithWhereWithoutSession_answersInput = {
+    where?: sessionsWhereInput
+    data: XOR<sessionsUpdateWithoutSession_answersInput, sessionsUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type sessionsUpdateWithoutSession_answersInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
+    quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
+    teams?: teamsUpdateOneWithoutSessionsNestedInput
+    users?: usersUpdateOneWithoutSessionsNestedInput
+  }
+
+  export type sessionsUncheckedUpdateWithoutSession_answersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
+  }
+
+  export type checkpoint_tasksUpsertWithoutSession_answersInput = {
+    update: XOR<checkpoint_tasksUpdateWithoutSession_answersInput, checkpoint_tasksUncheckedUpdateWithoutSession_answersInput>
+    create: XOR<checkpoint_tasksCreateWithoutSession_answersInput, checkpoint_tasksUncheckedCreateWithoutSession_answersInput>
+    where?: checkpoint_tasksWhereInput
+  }
+
+  export type checkpoint_tasksUpdateToOneWithWhereWithoutSession_answersInput = {
+    where?: checkpoint_tasksWhereInput
+    data: XOR<checkpoint_tasksUpdateWithoutSession_answersInput, checkpoint_tasksUncheckedUpdateWithoutSession_answersInput>
+  }
+
+  export type checkpoint_tasksUpdateWithoutSession_answersInput = {
+    task_type?: StringFieldUpdateOperationsInput | string
+    question_text?: NullableStringFieldUpdateOperationsInput | string | null
+    correct_answer?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutCheckpoint_tasksNestedInput
+    task_choice_options?: task_choice_optionsUpdateManyWithoutCheckpoint_tasksNestedInput
+  }
+
+  export type checkpoint_tasksUncheckedUpdateWithoutSession_answersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_type?: StringFieldUpdateOperationsInput | string
+    question_text?: NullableStringFieldUpdateOperationsInput | string | null
+    correct_answer?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    task_choice_options?: task_choice_optionsUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput
+  }
+
+  export type quest_checkpointsCreateWithoutSession_checkpointsInput = {
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    checkpoint_tasks?: checkpoint_tasksCreateNestedManyWithoutQuest_checkpointsInput
+    quests: questsCreateNestedOneWithoutQuest_checkpointsInput
+    session_answers?: session_answersCreateNestedManyWithoutQuest_checkpointsInput
+  }
+
+  export type quest_checkpointsUncheckedCreateWithoutSession_checkpointsInput = {
+    id?: number
+    quest_id: number
+    order_index: number
+    title: string
+    task_description: string
+    code_word: string
+    latitude: Decimal | DecimalJsLike | number | string
+    longitude: Decimal | DecimalJsLike | number | string
+    hint?: string | null
+    point_rules?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    checkpoint_tasks?: checkpoint_tasksUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutQuest_checkpointsInput
+  }
+
+  export type quest_checkpointsCreateOrConnectWithoutSession_checkpointsInput = {
+    where: quest_checkpointsWhereUniqueInput
+    create: XOR<quest_checkpointsCreateWithoutSession_checkpointsInput, quest_checkpointsUncheckedCreateWithoutSession_checkpointsInput>
+  }
+
+  export type sessionsCreateWithoutSession_checkpointsInput = {
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    session_answers?: session_answersCreateNestedManyWithoutSessionsInput
+    quests: questsCreateNestedOneWithoutSessionsInput
+    teams?: teamsCreateNestedOneWithoutSessionsInput
+    users?: usersCreateNestedOneWithoutSessionsInput
+  }
+
+  export type sessionsUncheckedCreateWithoutSession_checkpointsInput = {
+    id?: number
+    quest_id: number
+    user_id?: number | null
+    team_id?: number | null
+    status?: string
+    transport_mode?: string | null
+    started_at?: Date | string
+    finished_at?: Date | string | null
+    current_checkpoint_order?: number | null
+    session_answers?: session_answersUncheckedCreateNestedManyWithoutSessionsInput
+  }
+
+  export type sessionsCreateOrConnectWithoutSession_checkpointsInput = {
+    where: sessionsWhereUniqueInput
+    create: XOR<sessionsCreateWithoutSession_checkpointsInput, sessionsUncheckedCreateWithoutSession_checkpointsInput>
+  }
+
+  export type quest_checkpointsUpsertWithoutSession_checkpointsInput = {
+    update: XOR<quest_checkpointsUpdateWithoutSession_checkpointsInput, quest_checkpointsUncheckedUpdateWithoutSession_checkpointsInput>
+    create: XOR<quest_checkpointsCreateWithoutSession_checkpointsInput, quest_checkpointsUncheckedCreateWithoutSession_checkpointsInput>
+    where?: quest_checkpointsWhereInput
+  }
+
+  export type quest_checkpointsUpdateToOneWithWhereWithoutSession_checkpointsInput = {
+    where?: quest_checkpointsWhereInput
+    data: XOR<quest_checkpointsUpdateWithoutSession_checkpointsInput, quest_checkpointsUncheckedUpdateWithoutSession_checkpointsInput>
+  }
+
+  export type quest_checkpointsUpdateWithoutSession_checkpointsInput = {
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkpoint_tasks?: checkpoint_tasksUpdateManyWithoutQuest_checkpointsNestedInput
+    quests?: questsUpdateOneRequiredWithoutQuest_checkpointsNestedInput
+    session_answers?: session_answersUpdateManyWithoutQuest_checkpointsNestedInput
+  }
+
+  export type quest_checkpointsUncheckedUpdateWithoutSession_checkpointsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    order_index?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    task_description?: StringFieldUpdateOperationsInput | string
+    code_word?: StringFieldUpdateOperationsInput | string
+    latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    point_rules?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkpoint_tasks?: checkpoint_tasksUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+    session_answers?: session_answersUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+  }
+
+  export type sessionsUpsertWithoutSession_checkpointsInput = {
+    update: XOR<sessionsUpdateWithoutSession_checkpointsInput, sessionsUncheckedUpdateWithoutSession_checkpointsInput>
+    create: XOR<sessionsCreateWithoutSession_checkpointsInput, sessionsUncheckedCreateWithoutSession_checkpointsInput>
+    where?: sessionsWhereInput
+  }
+
+  export type sessionsUpdateToOneWithWhereWithoutSession_checkpointsInput = {
+    where?: sessionsWhereInput
+    data: XOR<sessionsUpdateWithoutSession_checkpointsInput, sessionsUncheckedUpdateWithoutSession_checkpointsInput>
+  }
+
+  export type sessionsUpdateWithoutSession_checkpointsInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
+    quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
+    teams?: teamsUpdateOneWithoutSessionsNestedInput
+    users?: usersUpdateOneWithoutSessionsNestedInput
+  }
+
+  export type sessionsUncheckedUpdateWithoutSession_checkpointsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quest_id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    team_id?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    transport_mode?: NullableStringFieldUpdateOperationsInput | string | null
+    started_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
   export type questsCreateManyUsersInput = {
@@ -14019,6 +19844,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
     teams?: teamsUpdateOneWithoutSessionsNestedInput
   }
@@ -14032,6 +19859,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
   export type sessionsUncheckedUpdateManyWithoutUsersInput = {
@@ -14112,6 +19941,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     quests?: questsUpdateOneRequiredWithoutSessionsNestedInput
     users?: usersUpdateOneWithoutSessionsNestedInput
   }
@@ -14125,6 +19956,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
   export type sessionsUncheckedUpdateManyWithoutTeamsInput = {
@@ -14192,6 +20025,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     checkpoint_tasks?: checkpoint_tasksUpdateManyWithoutQuest_checkpointsNestedInput
+    session_answers?: session_answersUpdateManyWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutQuest_checkpointsNestedInput
   }
 
   export type quest_checkpointsUncheckedUpdateWithoutQuestsInput = {
@@ -14207,6 +20042,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     checkpoint_tasks?: checkpoint_tasksUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+    session_answers?: session_answersUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutQuest_checkpointsNestedInput
   }
 
   export type quest_checkpointsUncheckedUpdateManyWithoutQuestsInput = {
@@ -14229,6 +20066,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUpdateManyWithoutSessionsNestedInput
     teams?: teamsUpdateOneWithoutSessionsNestedInput
     users?: usersUpdateOneWithoutSessionsNestedInput
   }
@@ -14242,6 +20081,8 @@ export namespace Prisma {
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     current_checkpoint_order?: NullableIntFieldUpdateOperationsInput | number | null
+    session_answers?: session_answersUncheckedUpdateManyWithoutSessionsNestedInput
+    session_checkpoints?: session_checkpointsUncheckedUpdateManyWithoutSessionsNestedInput
   }
 
   export type sessionsUncheckedUpdateManyWithoutQuestsInput = {
@@ -14264,12 +20105,31 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type session_answersCreateManyQuest_checkpointsInput = {
+    id?: number
+    session_id: number
+    task_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_checkpointsCreateManyQuest_checkpointsInput = {
+    id?: number
+    session_id: number
+    status: string
+    completed_at?: Date | string | null
+  }
+
   export type checkpoint_tasksUpdateWithoutQuest_checkpointsInput = {
     task_type?: StringFieldUpdateOperationsInput | string
     question_text?: NullableStringFieldUpdateOperationsInput | string | null
     correct_answer?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    session_answers?: session_answersUpdateManyWithoutCheckpoint_tasksNestedInput
+    task_choice_options?: task_choice_optionsUpdateManyWithoutCheckpoint_tasksNestedInput
   }
 
   export type checkpoint_tasksUncheckedUpdateWithoutQuest_checkpointsInput = {
@@ -14279,6 +20139,8 @@ export namespace Prisma {
     correct_answer?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    session_answers?: session_answersUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput
+    task_choice_options?: task_choice_optionsUncheckedUpdateManyWithoutCheckpoint_tasksNestedInput
   }
 
   export type checkpoint_tasksUncheckedUpdateManyWithoutQuest_checkpointsInput = {
@@ -14288,6 +20150,220 @@ export namespace Prisma {
     correct_answer?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_answersUpdateWithoutQuest_checkpointsInput = {
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    task_choice_options?: task_choice_optionsUpdateOneWithoutSession_answersNestedInput
+    sessions?: sessionsUpdateOneRequiredWithoutSession_answersNestedInput
+    checkpoint_tasks?: checkpoint_tasksUpdateOneRequiredWithoutSession_answersNestedInput
+  }
+
+  export type session_answersUncheckedUpdateWithoutQuest_checkpointsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_answersUncheckedUpdateManyWithoutQuest_checkpointsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_checkpointsUpdateWithoutQuest_checkpointsInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sessions?: sessionsUpdateOneRequiredWithoutSession_checkpointsNestedInput
+  }
+
+  export type session_checkpointsUncheckedUpdateWithoutQuest_checkpointsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type session_checkpointsUncheckedUpdateManyWithoutQuest_checkpointsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type session_answersCreateManySessionsInput = {
+    id?: number
+    checkpoint_id: number
+    task_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_checkpointsCreateManySessionsInput = {
+    id?: number
+    checkpoint_id: number
+    status: string
+    completed_at?: Date | string | null
+  }
+
+  export type session_answersUpdateWithoutSessionsInput = {
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutSession_answersNestedInput
+    task_choice_options?: task_choice_optionsUpdateOneWithoutSession_answersNestedInput
+    checkpoint_tasks?: checkpoint_tasksUpdateOneRequiredWithoutSession_answersNestedInput
+  }
+
+  export type session_answersUncheckedUpdateWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_answersUncheckedUpdateManyWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_checkpointsUpdateWithoutSessionsInput = {
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutSession_checkpointsNestedInput
+  }
+
+  export type session_checkpointsUncheckedUpdateWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type session_checkpointsUncheckedUpdateManyWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type session_answersCreateManyCheckpoint_tasksInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    answer_text?: string | null
+    chosen_option_id?: number | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type task_choice_optionsCreateManyCheckpoint_tasksInput = {
+    id?: number
+    option_text: string
+  }
+
+  export type session_answersUpdateWithoutCheckpoint_tasksInput = {
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutSession_answersNestedInput
+    task_choice_options?: task_choice_optionsUpdateOneWithoutSession_answersNestedInput
+    sessions?: sessionsUpdateOneRequiredWithoutSession_answersNestedInput
+  }
+
+  export type session_answersUncheckedUpdateWithoutCheckpoint_tasksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_answersUncheckedUpdateManyWithoutCheckpoint_tasksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    chosen_option_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type task_choice_optionsUpdateWithoutCheckpoint_tasksInput = {
+    option_text?: StringFieldUpdateOperationsInput | string
+    session_answers?: session_answersUpdateManyWithoutTask_choice_optionsNestedInput
+  }
+
+  export type task_choice_optionsUncheckedUpdateWithoutCheckpoint_tasksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    option_text?: StringFieldUpdateOperationsInput | string
+    session_answers?: session_answersUncheckedUpdateManyWithoutTask_choice_optionsNestedInput
+  }
+
+  export type task_choice_optionsUncheckedUpdateManyWithoutCheckpoint_tasksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    option_text?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type session_answersCreateManyTask_choice_optionsInput = {
+    id?: number
+    session_id: number
+    checkpoint_id: number
+    task_id: number
+    answer_text?: string | null
+    is_correct: boolean
+    answered_at?: Date | string
+  }
+
+  export type session_answersUpdateWithoutTask_choice_optionsInput = {
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest_checkpoints?: quest_checkpointsUpdateOneRequiredWithoutSession_answersNestedInput
+    sessions?: sessionsUpdateOneRequiredWithoutSession_answersNestedInput
+    checkpoint_tasks?: checkpoint_tasksUpdateOneRequiredWithoutSession_answersNestedInput
+  }
+
+  export type session_answersUncheckedUpdateWithoutTask_choice_optionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type session_answersUncheckedUpdateManyWithoutTask_choice_optionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session_id?: IntFieldUpdateOperationsInput | number
+    checkpoint_id?: IntFieldUpdateOperationsInput | number
+    task_id?: IntFieldUpdateOperationsInput | number
+    answer_text?: NullableStringFieldUpdateOperationsInput | string | null
+    is_correct?: BoolFieldUpdateOperationsInput | boolean
+    answered_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -3,8 +3,9 @@ const prisma = require("../client");
 
 // создание сессии прохождения
 const createSession = async (req, res) => {
-  const { questId, mode, transportMode } = req.body;
+  const { questIdStr, mode, transportMode } = req.body;
   const userId = req.user.userId;
+  const questId = parseInt(questIdStr);
 
   try {
     // проверяем, существует ли квест и опубликован ли он
@@ -19,6 +20,17 @@ const createSession = async (req, res) => {
         .status(404)
         .json({ error: "Квест не найден или не опубликован" });
     }
+
+    const ALLOWED_TRANSPORT_MODES = ['walk', 'public_transport', 'car', 'offroad', 'no_roads'];
+
+    if (transportMode !== undefined && transportMode !== null) {
+      if (!ALLOWED_TRANSPORT_MODES.includes(transportMode)) {
+        return res.status(400).json({
+          error: `Недопустимый способ передвижения. Разрешённые значения: ${ALLOWED_TRANSPORT_MODES.join(', ')}`
+        });
+      }
+    }
+
 
     // 2. Режим соло
     if (mode === "solo") {
@@ -69,8 +81,8 @@ const createSession = async (req, res) => {
           current_checkpoint_order: 0,
         },
         include: {
-          quest: true,
-          user: { select: { id: true, nickname: true, avatar: true } },
+          quests: true,
+          users: { select: { id: true, nickname: true, avatar: true } },
         },
       });
       return res.status(201).json(session);
@@ -155,8 +167,8 @@ const createSession = async (req, res) => {
           current_checkpoint_order: 0,
         },
         include: {
-          quest: true,
-          team: {
+          quests: true,
+          teams: {
             include: {
               team_members: {
                 include: {
@@ -167,7 +179,7 @@ const createSession = async (req, res) => {
           },
         },
       });
-      return res.status(201).json(session);
+      return res.status(201).json({ message: "Вы успешно записались на квест", session: session });
     }
 
     // если mode не распознан
@@ -198,12 +210,12 @@ const getCurrentSession = async (req, res) => {
       where: {
         OR: [
           { user_id: userId },          // соло-сессия
-          { team: { team_members: { some: { user_id: userId } } } } // командная сессия
+          { teams: { team_members: { some: { user_id: userId } } } } // командная сессия
         ],
         status: { in: ['started', 'in_progress'] }
       },
       include: {
-        quest: {
+        quests: {
           select: {
             id: true,
             title: true,
@@ -213,10 +225,10 @@ const getCurrentSession = async (req, res) => {
             // можно добавить другие поля, нужные фронту
           }
         },
-        user: {   // для соло-сессии
+        users: {   // для соло-сессии
           select: { id: true, nickname: true, avatar: true }
         },
-        team: {   // для командной сессии
+        teams: {   // для командной сессии
           include: {
             team_members: {
               include: {
@@ -257,12 +269,12 @@ const getCurrentCheckpoint = async (req, res) => {
       where: {
         OR: [
           { user_id: userId },
-          { team: { team_members: { some: { user_id: userId } } } }
+          { teams: { team_members: { some: { user_id: userId } } } }
         ],
         status: { in: ['started', 'in_progress'] }
       },
       include: {
-        quest: {
+        quests: {
           include: {
             quest_checkpoints: {
               orderBy: { order_index: 'asc' }
@@ -277,7 +289,7 @@ const getCurrentCheckpoint = async (req, res) => {
     }
 
     const currentOrder = session.current_checkpoint_order;
-    const currentCp = session.quest.quest_checkpoints.find(cp => cp.order_index === currentOrder);
+    const currentCp = session.quests.quest_checkpoints.find(cp => cp.order_index === currentOrder);
 
     if (!currentCp) {
       // Если чекпоинт не найден (например, квест без точек), завершаем сессию?
@@ -288,7 +300,7 @@ const getCurrentCheckpoint = async (req, res) => {
     const tasks = await prisma.checkpoint_tasks.findMany({
       where: { checkpoint_id: currentCp.id },
       include: {
-        options: true   // варианты ответов для choice_question
+        task_choice_options: true   // варианты ответов для choice_question
       }
     });
 
@@ -327,7 +339,7 @@ const abandonSession = async (req, res) => {
       where: {
         OR: [
           { user_id: userId },
-          { team: { team_members: { some: { user_id: userId } } } }
+          { teams: { team_members: { some: { user_id: userId } } } }
         ],
         status: { in: ['started', 'in_progress'] }
       }
@@ -353,4 +365,7 @@ const abandonSession = async (req, res) => {
 
 module.exports = {
   createSession,
+  getCurrentSession,
+  getCurrentCheckpoint,
+  abandonSession
 };
