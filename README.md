@@ -52,7 +52,19 @@ PORT = 3000
     3) создать bucket под названием: <strong>technostrelka-2026</strong>
     4) скачать файл default-avatar.png и добавить его в этот bucket
 
+**Frontend:**
+1. Перейдите в папку frontend
+2. В терминале написать:
+    1) ```docker build -t flutter_app .```
+    2) ```docker run -p 80:80 flutter_app  ```
+3. Перейти по ссылке http://localhost
 
+**Android:**
+1. Запустить эмулятор
+2. Перейти в папку android
+3. В терминале написать 
+```adb install app-release.apk```
+4. Запустить установленное приложение
 
 
 <!-- 

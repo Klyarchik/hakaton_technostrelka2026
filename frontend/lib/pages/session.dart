@@ -173,7 +173,7 @@ class _SessionState extends State<Session> {
                     children: [
                       TileLayer(
                         urlTemplate:
-                            'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                        'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
                         userAgentPackageName: 'com.example.app',
                       ),
                       PolylineLayer(
@@ -197,7 +197,7 @@ class _SessionState extends State<Session> {
                         vertical: 10,
                         horizontal: 15,
                       ),
-                      constraints: BoxConstraints(maxWidth: 350),
+                      constraints: BoxConstraints(maxWidth: 360),
                       width: double.infinity,
                       height: 230,
                       decoration: BoxDecoration(

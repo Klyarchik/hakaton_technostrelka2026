@@ -77,36 +77,34 @@ class _DraftsState extends State<Drafts> {
             width: double.infinity,
             child:
             SafeArea(
-              child:                   Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: MediaQuery.of(context).size.width > 725 ?  3 : MediaQuery.of(context).size.width > 450 ? 2 : 1,
-                      childAspectRatio: 4 / 5,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                    ),
-                    itemCount: _routers.length,
-                    itemBuilder: (context, i) {
-                      return CardRoute(
-                        data: _routers[i],
-                        onTap: () async {
-                          final response = await _dio.get(
-                            '/api/quest/get-quest-by-id',
-                            queryParameters: {'id': _routers[i]['id']},
-                          );
-                          final data = response.data['questById'];
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Center(child: AboutRoute(data: _routers[i], isSession: false,));
-                            },
-                          );
-                        },
-                      );
-                    },
+              child:                                  Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: MediaQuery.of(context).size.width > 725 ?  3 : MediaQuery.of(context).size.width > 450 ? 2 : 1,
+                    childAspectRatio: 4 / 5,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
                   ),
+                  itemCount: _routers.length,
+                  itemBuilder: (context, i) {
+                    return CardRoute(
+                      data: _routers[i],
+                      onTap: () async {
+                        final response = await _dio.get(
+                          '/api/quest/get-quest-by-id',
+                          queryParameters: {'id': _routers[i]['id']},
+                        );
+                        final data = response.data['questById'];
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Center(child: AboutRoute(data: _routers[i], isSession: false,));
+                          },
+                        );
+                      },
+                    );
+                  },
                 ),
               )
             ),

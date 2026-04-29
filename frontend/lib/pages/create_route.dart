@@ -231,7 +231,8 @@ class _CreateRouteState extends State<CreateRoute> {
           )
         ],
       ),
-      body: MediaQuery
+      body:
+      MediaQuery
           .of(context)
           .size
           .width < 1200 ? ListView(
@@ -366,7 +367,7 @@ class _CreateRouteState extends State<CreateRoute> {
                           children: [
                             TileLayer(
                               urlTemplate:
-                              'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                              'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
                               //'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
                               userAgentPackageName: 'com.example.app',
                             ),
@@ -545,7 +546,8 @@ class _CreateRouteState extends State<CreateRoute> {
                       ),
                       SizedBox(width: 20),
                       Expanded(
-                        child: Column(
+                        child:
+                        Column(
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
@@ -719,309 +721,307 @@ class _CreateRouteState extends State<CreateRoute> {
             ),
             margin: EdgeInsets.only(right: 20, top: 20, bottom: 20),
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 20),
+            child:               ListView(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Основная информация',
+                    style: TextStyle(
+                      color: ColorThema.colorText,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
                     child: Text(
-                      'Основная информация',
+                      'Изображение',
                       style: TextStyle(
-                        color: ColorThema.colorText,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(164, 168, 185, 1),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 20),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Изображение',
-                        style: TextStyle(
-                          color: Color.fromRGBO(164, 168, 185, 1),
+                ),
+                SizedBox(height: 6.5),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      child: Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(15),
                         ),
+                        child: _bytes != null
+                            ? ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.memory(_bytes, fit: BoxFit.cover),
+                        )
+                            : Icon(Icons.add, color: Colors.white),
                       ),
+                      onTap: () async {
+                        final picker = ImagePicker();
+                        XFile? file = await picker.pickImage(
+                          source: ImageSource.gallery,
+                        );
+                        if (file != null) {
+                          final newBytes = await file.readAsBytes();
+                          setState(() {
+                            _bytes = newBytes;
+                          });
+                        }
+                      },
                     ),
                   ),
-                  SizedBox(height: 6.5),
-                  Container(
-                    margin: EdgeInsets.only(left: 20),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: GestureDetector(
-                        child: Container(
-                          height: 120,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: _bytes != null
-                              ? ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.memory(_bytes, fit: BoxFit.cover),
-                          )
-                              : Icon(Icons.add, color: Colors.white),
-                        ),
-                        onTap: () async {
-                          final picker = ImagePicker();
-                          XFile? file = await picker.pickImage(
-                            source: ImageSource.gallery,
-                          );
-                          if (file != null) {
-                            final newBytes = await file.readAsBytes();
-                            setState(() {
-                              _bytes = newBytes;
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Название',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(164, 168, 185, 1),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 6.5),
-                            Container(
-                              height: 40,
-                              child: Input(
-                                controller: _controllerName,
-                                hintText: '',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Место',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(164, 168, 185, 1),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 6.5),
-                            Container(
-                              height: 40,
-                              child: Input(
-                                controller: _controllerPlace,
-                                hintText: '',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Уровень сложности',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(164, 168, 185, 1),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 6.5),
-                            Container(
-                              height: 40,
-                              child: Input(
-                                controller: _controllerLevel,
-                                hintText: '',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Длительность',
-                                style: TextStyle(
-                                  color: Color.fromRGBO(164, 168, 185, 1),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 6.5),
-                            Container(
-                              height: 40,
-                              child: Input(
-                                controller: _controllerTime,
-                                hintText: '',
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Описание',
-                        style: TextStyle(
-                          color: Color.fromRGBO(164, 168, 185, 1),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 6.5),
-                  Container(
-                    height: 40,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    child: Input(
-                      controller: _controllerDescription,
-                      hintText: '',
-                    ),
-                  ),
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      constraints: BoxConstraints(maxWidth: 500),
-                      width: double.infinity,
-                      child: Row(
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
                         children: [
-                          Checkbox(
-                            value: _isHidden,
-                            activeColor: Color.fromRGBO(255, 98, 64, 1),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _isHidden = newValue!;
-                              });
-                            },
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Название',
+                              style: TextStyle(
+                                color: Color.fromRGBO(164, 168, 185, 1),
+                              ),
+                            ),
                           ),
-                          Text('Черновик', style: TextStyle(
-                              color: ColorThema.colorText
-                          ),),
+                          SizedBox(height: 6.5),
+                          Container(
+                            height: 40,
+                            child: Input(
+                              controller: _controllerName,
+                              hintText: '',
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 20),
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Место',
+                              style: TextStyle(
+                                color: Color.fromRGBO(164, 168, 185, 1),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 6.5),
+                          Container(
+                            height: 40,
+                            child: Input(
+                              controller: _controllerPlace,
+                              hintText: '',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Уровень сложности',
+                              style: TextStyle(
+                                color: Color.fromRGBO(164, 168, 185, 1),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 6.5),
+                          Container(
+                            height: 40,
+                            child: Input(
+                              controller: _controllerLevel,
+                              hintText: '',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Длительность',
+                              style: TextStyle(
+                                color: Color.fromRGBO(164, 168, 185, 1),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 6.5),
+                          Container(
+                            height: 40,
+                            child: Input(
+                              controller: _controllerTime,
+                              hintText: '',
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
                     child: Text(
-                      'Чекпоинты:',
+                      'Описание',
                       style: TextStyle(
-                        color: ColorThema.colorText,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(164, 168, 185, 1),
                       ),
                     ),
                   ),
-                  ListView.builder(
-                    shrinkWrap: true, // Высота по содержимому
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: _points.length,
-                    itemBuilder: (context, i) {
-                      return LeftCreateRoute(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Text(
-                                  'Чекпоинт ${i + 1}',
-                                  style: TextStyle(
-                                      color: ColorThema.colorText
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    foregroundColor: Colors.redAccent,
-                                  ),
-                                  onPressed: () async {
-                                    _points.removeAt(i);
-                                    _markers.removeAt(i);
-                                    await _buildRoute();
-                                  },
-                                  child: Text(
-                                    'Удалить',
-                                    style: TextStyle(color: Colors.redAccent),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Container(
-                              height: 40,
-                              child: Input(
-                                controller: _points[i]['name'],
-                                hintText: 'Название',
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Container(
-                              height: 40,
-                              child: Input(
-                                controller: _points[i]['question'],
-                                hintText: 'Вопрос',
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Container(
-                              height: 40,
-                              child: Input(
-                                controller: _points[i]['answer'],
-                                hintText: 'Ответ',
-                              ),
-                            ),
-                          ],
+                ),
+                SizedBox(height: 6.5),
+                Container(
+                  height: 40,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: Input(
+                    controller: _controllerDescription,
+                    hintText: '',
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, right: 20),
+                    constraints: BoxConstraints(maxWidth: 500),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Checkbox(
+                          value: _isHidden,
+                          activeColor: Color.fromRGBO(255, 98, 64, 1),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _isHidden = newValue!;
+                            });
+                          },
                         ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      constraints: BoxConstraints(maxWidth: 500),
-                      width: double.infinity,
-                      height: 40,
-                      child: PrimaryButton(
-                        text: 'Создать',
-                        onPressed: _createRoute,
-                      ),
+                        Text('Черновик', style: TextStyle(
+                            color: ColorThema.colorText
+                        ),),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Чекпоинты:',
+                    style: TextStyle(
+                      color: ColorThema.colorText,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                ListView.builder(
+                  shrinkWrap: true, // Высота по содержимому
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _points.length,
+                  itemBuilder: (context, i) {
+                    return LeftCreateRoute(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Text(
+                                'Чекпоинт ${i + 1}',
+                                style: TextStyle(
+                                    color: ColorThema.colorText
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.redAccent,
+                                ),
+                                onPressed: () async {
+                                  _points.removeAt(i);
+                                  _markers.removeAt(i);
+                                  await _buildRoute();
+                                },
+                                child: Text(
+                                  'Удалить',
+                                  style: TextStyle(color: Colors.redAccent),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            height: 40,
+                            child: Input(
+                              controller: _points[i]['name'],
+                              hintText: 'Название',
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            height: 40,
+                            child: Input(
+                              controller: _points[i]['question'],
+                              hintText: 'Вопрос',
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            height: 40,
+                            child: Input(
+                              controller: _points[i]['answer'],
+                              hintText: 'Ответ',
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 15),
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    constraints: BoxConstraints(maxWidth: 500),
+                    width: double.infinity,
+                    height: 40,
+                    child: PrimaryButton(
+                      text: 'Создать',
+                      onPressed: _createRoute,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -1104,7 +1104,7 @@ class _CreateRouteState extends State<CreateRoute> {
                         children: [
                           TileLayer(
                             urlTemplate:
-                            'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                            'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
                             userAgentPackageName: 'com.example.app',
                           ),
                           PolylineLayer(
