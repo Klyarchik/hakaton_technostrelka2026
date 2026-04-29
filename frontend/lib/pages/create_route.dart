@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:frontend/widgets/alerts.dart';
 import 'package:frontend/widgets/input.dart';
 import 'package:frontend/widgets/left_create_route.dart';
 import 'package:frontend/widgets/primary_button.dart';
@@ -12,6 +13,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 import '../color_thema.dart';
+import '../widgets/theme_button.dart';
 
 class CreateRoute extends StatefulWidget {
   const CreateRoute({super.key});
@@ -34,6 +36,94 @@ class _CreateRouteState extends State<CreateRoute> {
   List controllersCheckPoint = [];
   bool _can = false;
   late final Dio _dio;
+
+  Future<void> _createRoute() async {
+    int? number = int.tryParse(_controllerTime.text);
+    if (_controllerName.text.length < 5) {
+      Alerts.showError(
+          context, 'Название квеста должно быть минимум 5 символов');
+    } else if (_controllerDescription.text.length < 30) {
+      Alerts.showError(
+          context, 'Описание квеста должно быть минимум 30 символов');
+    } else if (_controllerPlace.text.isEmpty) {
+      Alerts.showError(context, 'Место обязательно');
+    } else if (_controllerLevel.text != '1' && _controllerLevel.text != '2' &&
+        _controllerLevel.text != '3' && _controllerLevel.text != '4' &&
+        _controllerLevel.text != '5') {
+      Alerts.showError(context, 'Введите корректную сложность');
+    } else if (number == null) {
+      Alerts.showError(context, 'Введите корректное время');
+    } else if (_bytes == null) {
+      Alerts.showError(context, 'Загрузите изображение');
+    } else if (_points.length < 3){
+      Alerts.showError(context, 'У квеста должно быть миниму 3 чекпоинта');
+    } else {
+      bool canCreate = true;
+      for (final point in _points) {
+        if (point['name'].text.length < 5) {
+          Alerts.showError(
+              context, 'У чекпоинта название должно быть минимум 5 символов');
+          canCreate = false;
+          break;
+        } else if (point['question'].text.length < 30) {
+          Alerts.showError(
+              context, 'У чекпоинта вопрос должен быть минимум 30 символов');
+          canCreate = false;
+          break;
+        } else if (point['answer'].text.length == 0) {
+          Alerts.showError(context, 'У чекпоинта ответ обязателен');
+          canCreate = false;
+          break;
+        }
+      }
+      if (canCreate){
+        final response = await _dio.post(
+          '/api/quest/create',
+          data: FormData.fromMap({
+            "title": _controllerName.text,
+            "description": _controllerDescription.text,
+            "location_text": _controllerPlace.text,
+            "difficulty": int.parse(
+              _controllerLevel.text,
+            ),
+            "duration_minutes": int.parse(
+              _controllerTime.text,
+            ),
+            "is_hidden": _isHidden,
+            'image': MultipartFile.fromBytes(
+              _bytes,
+              filename: 'image.png',
+            ),
+          }),
+        );
+        int questId = response.data['quest']['id'];
+        for (int i = 0; i < _points.length; ++i) {
+          print({
+            'quest_id': questId,
+            'title': _points[i]['name'].text,
+            'task_description':
+            _points[i]['question'].text,
+            'code_word': _points[i]['answer'].text,
+            'latitude': _points[i]['latitude'],
+            'longitude': _points[i]['longitude'],
+          });
+          await _dio.post(
+            '/api/checkpoint/new',
+            data: jsonEncode({
+              'quest_id': questId,
+              'title': _points[i]['name'].text,
+              'task_description':
+              _points[i]['question'].text,
+              'code_word': _points[i]['answer'].text,
+              'latitude': _points[i]['latitude'],
+              'longitude': _points[i]['longitude'],
+            }),
+          );
+        }
+        Navigator.pop(context);
+      }
+    }
+  }
 
   void _checkCan() {
     if (_controllerName.text.isNotEmpty &&
@@ -96,7 +186,12 @@ class _CreateRouteState extends State<CreateRoute> {
             width: 50,
             height: 50,
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Color.fromRGBO(
+                255,
+                159,
+                90,
+                1,
+              ),
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -114,14 +209,17 @@ class _CreateRouteState extends State<CreateRoute> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        leading: MediaQuery.of(context).size.width > 540
+        leading: MediaQuery
+            .of(context)
+            .size
+            .width > 540
             ? SizedBox.shrink()
             : null,
         iconTheme: IconThemeData(color: ColorThema.colorIcon),
         actions: [
           IconButton(
-            onPressed: () {
-              ColorThema.changeThema();
+            onPressed: () async {
+              await ColorThema.changeThema();
               setState(() {});
             },
             icon: Icon(
@@ -130,13 +228,17 @@ class _CreateRouteState extends State<CreateRoute> {
                   : Icons.sunny,
               color: ColorThema.colorIcon,
             ),
-          ),
+          )
         ],
       ),
-      body: MediaQuery.of(context).size.width < 1200 ? ListView(
+      body: MediaQuery
+          .of(context)
+          .size
+          .width < 1200 ? ListView(
         children: [
           Center(
             child: Container(
+              width: 550,
               decoration: BoxDecoration(
                 color: ColorThema.panelColor,
                 borderRadius: BorderRadius.circular(15),
@@ -147,7 +249,10 @@ class _CreateRouteState extends State<CreateRoute> {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    if (MediaQuery.of(context).size.width > 450)
+                    if (MediaQuery
+                        .of(context)
+                        .size
+                        .width > 450)
                       Container(
                         width: 550,
                         child:
@@ -190,7 +295,10 @@ class _CreateRouteState extends State<CreateRoute> {
                           ],
                         ),
                       ),
-                    if (MediaQuery.of(context).size.width < 450)
+                    if (MediaQuery
+                        .of(context)
+                        .size
+                        .width < 450)
                       Column(
                         children: [
                           Row(
@@ -234,7 +342,8 @@ class _CreateRouteState extends State<CreateRoute> {
                       height: 400,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: FlutterMap(
+                        child:
+                        FlutterMap(
                           options: MapOptions(
                             initialCenter: LatLng(56.324379, 43.984067),
                             initialZoom: 15,
@@ -258,6 +367,7 @@ class _CreateRouteState extends State<CreateRoute> {
                             TileLayer(
                               urlTemplate:
                               'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                              //'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
                               userAgentPackageName: 'com.example.app',
                             ),
                             PolylineLayer(
@@ -265,7 +375,7 @@ class _CreateRouteState extends State<CreateRoute> {
                                 if (_routePoints.isNotEmpty)
                                   Polyline(
                                     points: _routePoints,
-                                    color: Colors.blue,
+                                    color: Color.fromRGBO(255, 159, 90, 1),
                                     strokeWidth: 5.0,
                                   ),
                               ],
@@ -281,7 +391,7 @@ class _CreateRouteState extends State<CreateRoute> {
             ),
           ),
           Center(
-            child:           Container(
+            child: Container(
               width: 550,
               decoration: BoxDecoration(
                 border: Border.all(color: ColorThema.colorBorder, width: 1),
@@ -528,7 +638,7 @@ class _CreateRouteState extends State<CreateRoute> {
                             Row(
                               children: [
                                 Text(
-                                  '${_points[i]['latitude']}, ${_points[i]['longitude']}',
+                                  'Чекпоинт ${i + 1}',
                                   style: TextStyle(
                                       color: ColorThema.colorText
                                   ),
@@ -588,54 +698,7 @@ class _CreateRouteState extends State<CreateRoute> {
                       height: 40,
                       child: PrimaryButton(
                         text: 'Создать',
-                        onPressed: _can
-                            ? () async {
-                          final response = await _dio.post(
-                            '/api/quest/create',
-                            data: FormData.fromMap({
-                              "title": _controllerName.text,
-                              "description": _controllerDescription.text,
-                              "location_text": _controllerPlace.text,
-                              "difficulty": int.parse(
-                                _controllerLevel.text,
-                              ),
-                              "duration_minutes": int.parse(
-                                _controllerTime.text,
-                              ),
-                              "is_hidden": _isHidden,
-                              'image': MultipartFile.fromBytes(
-                                _bytes,
-                                filename: 'image.png',
-                              ),
-                            }),
-                          );
-                          int questId = response.data['quest']['id'];
-                          for (int i = 0; i < _points.length; ++i) {
-                            print({
-                              'quest_id': questId,
-                              'title': _points[i]['name'].text,
-                              'task_description':
-                              _points[i]['question'].text,
-                              'code_word': _points[i]['answer'].text,
-                              'latitude': _points[i]['latitude'],
-                              'longitude': _points[i]['longitude'],
-                            });
-                            await _dio.post(
-                              '/api/checkpoint/new',
-                              data: jsonEncode({
-                                'quest_id': questId,
-                                'title': _points[i]['name'].text,
-                                'task_description':
-                                _points[i]['question'].text,
-                                'code_word': _points[i]['answer'].text,
-                                'latitude': _points[i]['latitude'],
-                                'longitude': _points[i]['longitude'],
-                              }),
-                            );
-                          }
-                          Navigator.pop(context);
-                        }
-                            : null,
+                        onPressed: _createRoute,
                       ),
                     ),
                   ),
@@ -697,9 +760,9 @@ class _CreateRouteState extends State<CreateRoute> {
                           ),
                           child: _bytes != null
                               ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image.memory(_bytes, fit: BoxFit.cover),
-                                )
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.memory(_bytes, fit: BoxFit.cover),
+                          )
                               : Icon(Icons.add, color: Colors.white),
                         ),
                         onTap: () async {
@@ -788,13 +851,13 @@ class _CreateRouteState extends State<CreateRoute> {
                               ),
                             ),
                             SizedBox(height: 6.5),
-                        Container(
-                          height: 40,
-                          child: Input(
-                            controller: _controllerLevel,
-                            hintText: '',
-                          ),
-                        ),
+                            Container(
+                              height: 40,
+                              child: Input(
+                                controller: _controllerLevel,
+                                hintText: '',
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -893,9 +956,9 @@ class _CreateRouteState extends State<CreateRoute> {
                             Row(
                               children: [
                                 Text(
-                                  '${_points[i]['latitude']}, ${_points[i]['longitude']}',
+                                  'Чекпоинт ${i + 1}',
                                   style: TextStyle(
-                                    color: ColorThema.colorText
+                                      color: ColorThema.colorText
                                   ),
                                 ),
                                 SizedBox(width: 10),
@@ -953,54 +1016,7 @@ class _CreateRouteState extends State<CreateRoute> {
                       height: 40,
                       child: PrimaryButton(
                         text: 'Создать',
-                        onPressed: _can
-                            ? () async {
-                                final response = await _dio.post(
-                                  '/api/quest/create',
-                                  data: FormData.fromMap({
-                                    "title": _controllerName.text,
-                                    "description": _controllerDescription.text,
-                                    "location_text": _controllerPlace.text,
-                                    "difficulty": int.parse(
-                                      _controllerLevel.text,
-                                    ),
-                                    "duration_minutes": int.parse(
-                                      _controllerTime.text,
-                                    ),
-                                    "is_hidden": _isHidden,
-                                    'image': MultipartFile.fromBytes(
-                                      _bytes,
-                                      filename: 'image.png',
-                                    ),
-                                  }),
-                                );
-                                int questId = response.data['quest']['id'];
-                                for (int i = 0; i < _points.length; ++i) {
-                                  print({
-                                    'quest_id': questId,
-                                    'title': _points[i]['name'].text,
-                                    'task_description':
-                                        _points[i]['question'].text,
-                                    'code_word': _points[i]['answer'].text,
-                                    'latitude': _points[i]['latitude'],
-                                    'longitude': _points[i]['longitude'],
-                                  });
-                                  await _dio.post(
-                                    '/api/checkpoint/new',
-                                    data: jsonEncode({
-                                      'quest_id': questId,
-                                      'title': _points[i]['name'].text,
-                                      'task_description':
-                                          _points[i]['question'].text,
-                                      'code_word': _points[i]['answer'].text,
-                                      'latitude': _points[i]['latitude'],
-                                      'longitude': _points[i]['longitude'],
-                                    }),
-                                  );
-                                }
-                                Navigator.pop(context);
-                              }
-                            : null,
+                        onPressed: _createRoute,
                       ),
                     ),
                   ),
@@ -1088,7 +1104,7 @@ class _CreateRouteState extends State<CreateRoute> {
                         children: [
                           TileLayer(
                             urlTemplate:
-                                'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                            'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
                             userAgentPackageName: 'com.example.app',
                           ),
                           PolylineLayer(
@@ -1096,7 +1112,7 @@ class _CreateRouteState extends State<CreateRoute> {
                               if (_routePoints.isNotEmpty)
                                 Polyline(
                                   points: _routePoints,
-                                  color: Colors.blue,
+                                  color: Color.fromRGBO(255, 159, 90, 1),
                                   strokeWidth: 5.0,
                                 ),
                             ],

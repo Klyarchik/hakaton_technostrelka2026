@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../color_thema.dart';
 import '../widgets/alerts.dart';
@@ -11,6 +13,8 @@ import '../widgets/input.dart';
 import '../widgets/input_password.dart';
 import '../widgets/primary_button.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/theme_button.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -72,8 +76,8 @@ class _RegisterState extends State<Register> {
         leading: SizedBox.shrink(),
         actions: [
           IconButton(
-            onPressed: () {
-              ColorThema.changeThema();
+            onPressed: () async {
+              await ColorThema.changeThema();
               setState(() {});
             },
             icon: Icon(
@@ -82,293 +86,320 @@ class _RegisterState extends State<Register> {
                   : Icons.sunny,
               color: ColorThema.colorIcon,
             ),
-          ),
+          )
         ],
       ),
       body: SafeArea(
-        child: ListView(
+        child: Stack(
           children: [
-            Center(
-              child: Container(
-                width: double.infinity,
-                height:
-                    MediaQuery.of(context).size.height -
-                    AppBar().preferredSize.height -
-                    MediaQuery.of(context).padding.top,
-                constraints: BoxConstraints(maxWidth: 300),
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: ColorThema.colorBorder,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                        color: ColorThema.panelColor,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromRGBO(164, 168, 185, 1),
-                                  width: 0.1,
-                                ),
-                              ),
+            Container(
+              padding: EdgeInsets.only(bottom: AppBar().preferredSize.height, left: 15,
+                  right: 15),
+              width: double.infinity,
+              height: double.infinity,
+              child: SvgPicture.asset(
+                'images/fon.svg',
+                color: ColorThema.backIcon,
+              ),
+            ),
+            ListView(
+              children: [
+                Center(
+                  child: Container(
+                    width: double.infinity,
+                    height:
+                        MediaQuery.of(context).size.height -
+                        AppBar().preferredSize.height -
+                        MediaQuery.of(context).padding.top,
+                    constraints: BoxConstraints(maxWidth: 300),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: ColorThema.colorBorder,
+                              width: 1,
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    GestureDetector(
-                                      child: Container(
-                                        child: Text(
-                                          'Вход',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Color.fromRGBO(
-                                              164,
-                                              168,
-                                              185,
-                                              1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                          context,
-                                          '/entrance',
-                                        );
-                                      },
+                            borderRadius: BorderRadius.circular(12),
+                            color: ColorThema.panelColor,
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(bottom: 10),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Color.fromRGBO(164, 168, 185, 1),
+                                      width: 0.1,
                                     ),
-                                    SizedBox(width: 10),
-                                    GestureDetector(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border(
-                                            bottom: BorderSide(
-                                              color: Color.fromRGBO(
-                                                255,
-                                                159,
-                                                90,
-                                                1,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        GestureDetector(
+                                          child: Container(
+                                            child: Text(
+                                              'Вход',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromRGBO(
+                                                  164,
+                                                  168,
+                                                  185,
+                                                  1,
+                                                ),
                                               ),
-                                              width: 1,
                                             ),
                                           ),
+                                          onTap: () {
+                                            Navigator.pushNamed(
+                                              context,
+                                              '/entrance',
+                                            );
+                                          },
                                         ),
-                                        child: Text(
-                                          'Регистрация',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Color.fromRGBO(
-                                              255,
-                                              159,
-                                              90,
-                                              1,
+                                        SizedBox(width: 10),
+                                        GestureDetector(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                  color: Color.fromRGBO(
+                                                    255,
+                                                    159,
+                                                    90,
+                                                    1,
+                                                  ),
+                                                  width: 1,
+                                                ),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'Регистрация',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromRGBO(
+                                                  255,
+                                                  159,
+                                                  90,
+                                                  1,
+                                                ),
+                                              ),
                                             ),
                                           ),
+                                          onTap: () {},
                                         ),
-                                      ),
-                                      onTap: () {},
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.person_add_alt_rounded,
+                                      color: Color.fromRGBO(255, 159, 90, 1),
                                     ),
                                   ],
                                 ),
-                                Icon(
-                                  Icons.person_add_alt_rounded,
-                                  color: Color.fromRGBO(255, 159, 90, 1),
+                              ),
+                              SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Никнейм',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(164, 168, 185, 1),
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Никнейм',
-                              style: TextStyle(
-                                color: Color.fromRGBO(164, 168, 185, 1),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 6.5),
-                          SizedBox(
-                            height: 40,
-                            child: Input(
-                              controller: _controllerNickName,
-                              hintText: '',
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Email',
-                              style: TextStyle(
-                                color: Color.fromRGBO(164, 168, 185, 1),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 6.5),
-                          SizedBox(
-                            height: 40,
-                            child: Input(
-                              controller: _controllerEmail,
-                              hintText: '',
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Выберите возраст',
-                              style: TextStyle(
-                                color: Color.fromRGBO(164, 168, 185, 1),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 6.5),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: ColorThema.colorBorder,
-                                width: 1,
-                              ),
-                              color: ColorThema.panelColor
-                            ),
-                            height: 40,
-                            child: DropdownButton<String>(
-                              dropdownColor: ColorThema.backgroundColor,
-                              underline: SizedBox(),
-                              style: TextStyle(
-                                color: ColorThema.colorText,
-                                fontSize: 12,
-                              ),
-                              isExpanded: true,
-                              value: _selectedAge,
-                              items: [
-                                DropdownMenuItem(
-                                  value: '14-15',
-                                  child: Text('14-15'),
+                              SizedBox(height: 6.5),
+                              SizedBox(
+                                height: 40,
+                                child: Input(
+                                  controller: _controllerNickName,
+                                  hintText: '',
                                 ),
-                                DropdownMenuItem(
-                                  value: '16-17',
-                                  child: Text('16-17'),
+                              ),
+                              SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Email',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(164, 168, 185, 1),
+                                  ),
                                 ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedAge = value;
-                                });
-                                _check();
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Пароль',
-                              style: TextStyle(
-                                color: Color.fromRGBO(164, 168, 185, 1),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 6.5),
-                          SizedBox(
-                            height: 40,
-                            child: InputPassword(
-                              controller: _controllerPassword,
-                              hintText: 'Пароль',
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Повторите пароль',
-                              style: TextStyle(
-                                color: Color.fromRGBO(164, 168, 185, 1),
+                              SizedBox(height: 6.5),
+                              SizedBox(
+                                height: 40,
+                                child: Input(
+                                  controller: _controllerEmail,
+                                  hintText: '',
+                                ),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 6.5),
-                          SizedBox(
-                            height: 40,
-                            child: InputPassword(
-                              controller: _controllerRepeatPassword,
-                              hintText: 'Повторите пароль',
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          SizedBox(
-                            height: 40,
-                            width: double.infinity,
-                            child: PrimaryButton(
-                              text: 'Зарегистрироваться',
-                              onPressed: _can
-                                  ? () async {
-                                      if (_controllerPassword.text !=
-                                          _controllerRepeatPassword.text) {
-                                        Alerts.showError(
-                                          context,
-                                          'Пароли не совпадают',
-                                        );
-                                      } else {
-                                        try {
-                                          final response = await _dio.post(
-                                            '/api/user/register',
-                                            data: jsonEncode({
-                                              'nickname':
-                                                  _controllerNickName.text,
-                                              'password':
-                                                  _controllerPassword.text,
-                                              'email': _controllerEmail.text,
-                                              'age_group': _selectedAge,
-                                            }),
-                                          );
-                                          final storage =
-                                              FlutterSecureStorage();
-                                          String token = response.data['token'];
-                                          await storage.write(
-                                            key: 'token',
-                                            value: token,
-                                          );
-                                          _dio
-                                                  .options
-                                                  .headers['Authorization'] =
-                                              'Bearer $token';
-                                          Navigator.pushNamed(
-                                            context,
-                                            '/profile',
-                                          );
-                                        } on DioException catch (e) {
-                                          Alerts.showError(
-                                            context,
-                                            e.response?.data['error'],
-                                          );
+                              SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Выберите возраст',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(164, 168, 185, 1),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 6.5),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(
+                                    color: ColorThema.colorBorder,
+                                    width: 1,
+                                  ),
+                                  color: ColorThema.backgroundColor
+                                ),
+                                height: 40,
+                                child: DropdownButton<String>(
+                                  dropdownColor: ColorThema.backgroundColor,
+                                  underline: SizedBox(),
+                                  style: TextStyle(
+                                    color: ColorThema.colorText,
+                                    fontSize: 12,
+                                  ),
+                                  isExpanded: true,
+                                  value: _selectedAge,
+                                  items: [
+                                    DropdownMenuItem(
+                                      value: '14-15',
+                                      child: Text('14-15'),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: '16-17',
+                                      child: Text('16-17'),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedAge = value;
+                                    });
+                                    _check();
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Пароль',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(164, 168, 185, 1),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 6.5),
+                              SizedBox(
+                                height: 40,
+                                child: InputPassword(
+                                  controller: _controllerPassword,
+                                  hintText: 'Пароль',
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Повторите пароль',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(164, 168, 185, 1),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 6.5),
+                              SizedBox(
+                                height: 40,
+                                child: InputPassword(
+                                  controller: _controllerRepeatPassword,
+                                  hintText: 'Повторите пароль',
+                                ),
+                              ),
+                              SizedBox(height: 15),
+                              SizedBox(
+                                height: 40,
+                                width: double.infinity,
+                                child: PrimaryButton(
+                                  text: 'Зарегистрироваться',
+                                  onPressed: _can
+                                      ? () async {
+                                          if (_controllerPassword.text !=
+                                              _controllerRepeatPassword.text) {
+                                            Alerts.showError(
+                                              context,
+                                              'Пароли не совпадают',
+                                            );
+                                          } else {
+                                            try {
+                                              final response = await _dio.post(
+                                                '/api/user/register',
+                                                data: jsonEncode({
+                                                  'nickname':
+                                                      _controllerNickName.text,
+                                                  'password':
+                                                      _controllerPassword.text,
+                                                  'email': _controllerEmail.text,
+                                                  'age_group': _selectedAge,
+                                                }),
+                                              );
+                                              final storage =
+                                                  FlutterSecureStorage();
+                                              String token = response.data['token'];
+                                              await storage.write(
+                                                key: 'token',
+                                                value: token,
+                                              );
+                                              _dio
+                                                      .options
+                                                      .headers['Authorization'] =
+                                                  'Bearer $token';
+                                              String? tokenFire = '';
+                                              if (defaultTargetPlatform != TargetPlatform.android &&
+                                                  defaultTargetPlatform != TargetPlatform.iOS) {
+                                                tokenFire = await FirebaseMessaging.instance.getToken(
+                                                  vapidKey:
+                                                  'BKOhBZ-Pjf04gW73vDF_oZEm8JB-whHJFNXFHHf942-tyUTLuEiLlnd5-MojWeoNlCSh0FNemixQUw3iLxxP-hE',
+                                                );
+                                              } else if (defaultTargetPlatform == TargetPlatform.android){
+                                                tokenFire = await FirebaseMessaging.instance.getToken();
+                                              }
+                                              _dio.post('/api/token/device', data: jsonEncode({
+                                                'token_device': tokenFire
+                                              }));
+                                              Navigator.pushNamed(
+                                                context,
+                                                '/profile',
+                                              );
+                                            } on DioException catch (e) {
+                                              Alerts.showError(
+                                                context,
+                                                e.response?.data['error'],
+                                              );
+                                            }
+                                          }
                                         }
-                                      }
-                                    }
-                                  : null,
-                            ),
+                                      : null,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),

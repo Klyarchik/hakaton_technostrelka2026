@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:frontend/color_thema.dart';
 import 'package:frontend/widgets/input.dart';
 import 'package:frontend/widgets/input_password.dart';
@@ -11,6 +13,7 @@ import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/alerts.dart';
+import '../widgets/theme_button.dart';
 
 class Entrance extends StatefulWidget {
   const Entrance({super.key});
@@ -61,8 +64,8 @@ class _EntranceState extends State<Entrance> {
         leading: SizedBox.shrink(),
         actions: [
           IconButton(
-            onPressed: () {
-              ColorThema.changeThema();
+            onPressed: () async {
+              await ColorThema.changeThema();
               setState(() {});
             },
             icon: Icon(
@@ -75,189 +78,221 @@ class _EntranceState extends State<Entrance> {
         ],
       ),
       body: SafeArea(
-        child: ListView(
+        child: Stack(
           children: [
-            Center(
-              child: Container(
-                width: double.infinity,
-                height:
-                    MediaQuery.of(context).size.height -
-                    AppBar().preferredSize.height -
-                    MediaQuery.of(context).padding.top,
-                constraints: BoxConstraints(maxWidth: 300),
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: ColorThema.colorBorder,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                        color: ColorThema.panelColor,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromRGBO(164, 168, 185, 1),
-                                  width: 0.1,
-                                ),
-                              ),
+            Container(
+              padding: EdgeInsets.only(bottom: AppBar().preferredSize.height, left: 15,
+                  right: 15),
+              width: double.infinity,
+              height: double.infinity,
+              child: SvgPicture.asset(
+                'images/fon.svg',
+                color: ColorThema.backIcon,
+              ),
+            ),
+            ListView(
+              children: [
+                Center(
+                  child: Container(
+                    width: double.infinity,
+                    height:
+                        MediaQuery.of(context).size.height -
+                        AppBar().preferredSize.height -
+                        MediaQuery.of(context).padding.top,
+                    constraints: BoxConstraints(maxWidth: 300),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: ColorThema.colorBorder,
+                              width: 1,
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
+                            borderRadius: BorderRadius.circular(12),
+                            color: ColorThema.panelColor,
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(bottom: 10),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Color.fromRGBO(164, 168, 185, 1),
+                                      width: 0.1,
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    GestureDetector(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border(
-                                            bottom: BorderSide(
+                                    Row(
+                                      children: [
+                                        GestureDetector(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                  color: Color.fromRGBO(
+                                                    255,
+                                                    159,
+                                                    90,
+                                                    1,
+                                                  ),
+                                                  width: 1,
+                                                ),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'Вход',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromRGBO(
+                                                  255,
+                                                  159,
+                                                  90,
+                                                  1,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {},
+                                        ),
+                                        SizedBox(width: 10),
+                                        GestureDetector(
+                                          child: Text(
+                                            'Регистрация',
+                                            style: TextStyle(
+                                              fontSize: 16,
                                               color: Color.fromRGBO(
-                                                255,
-                                                159,
-                                                90,
+                                                164,
+                                                168,
+                                                185,
                                                 1,
                                               ),
-                                              width: 1,
                                             ),
                                           ),
+                                          onTap: () {
+                                            Navigator.pushNamed(
+                                              context,
+                                              '/register',
+                                            );
+                                          },
                                         ),
-                                        child: Text(
-                                          'Вход',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Color.fromRGBO(
-                                              255,
-                                              159,
-                                              90,
-                                              1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      onTap: () {},
+                                      ],
                                     ),
-                                    SizedBox(width: 10),
-                                    GestureDetector(
-                                      child: Text(
-                                        'Регистрация',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Color.fromRGBO(
-                                            164,
-                                            168,
-                                            185,
-                                            1,
-                                          ),
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                          context,
-                                          '/register',
-                                        );
-                                      },
+                                    Icon(
+                                      Icons.person,
+                                      color: Color.fromRGBO(255, 159, 90, 1),
                                     ),
                                   ],
                                 ),
-                                Icon(
-                                  Icons.person,
-                                  color: Color.fromRGBO(255, 159, 90, 1),
+                              ),
+                              SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Никнейм',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(164, 168, 185, 1),
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Никнейм',
-                              style: TextStyle(
-                                color: Color.fromRGBO(164, 168, 185, 1),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 6.5,),
-                          SizedBox(
-                            height: 40,
-                            child: Input(
-                              controller: _controllerUsername,
-                              hintText: '',
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Пароль',
-                              style: TextStyle(
-                                color: Color.fromRGBO(164, 168, 185, 1),
+                              SizedBox(height: 6.5),
+                              SizedBox(
+                                height: 40,
+                                child: Input(
+                                  controller: _controllerUsername,
+                                  hintText: '',
+                                ),
                               ),
-                            ),
+                              SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Пароль',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(164, 168, 185, 1),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 6.5),
+                              SizedBox(
+                                height: 40,
+                                child: InputPassword(
+                                  controller: _controllerPassword,
+                                  hintText: '',
+                                ),
+                              ),
+                              SizedBox(height: 15),
+                              SizedBox(
+                                height: 40,
+                                width: double.infinity,
+                                child: PrimaryButton(
+                                  text: 'Войти',
+                                  onPressed: _can
+                                      ? () async {
+                                          try {
+                                            final response = await _dio.post(
+                                              '/api/user/entrance',
+                                              data: jsonEncode({
+                                                'nickname':
+                                                    _controllerUsername.text,
+                                                'password':
+                                                    _controllerPassword.text,
+                                              }),
+                                            );
+                                            final storage =
+                                                FlutterSecureStorage();
+                                            String token =
+                                                response.data['token'];
+                                            await storage.write(
+                                              key: 'token',
+                                              value: token,
+                                            );
+                                            _dio
+                                                    .options
+                                                    .headers['Authorization'] =
+                                                'Bearer $token';
+                                            String? tokenFire = '';
+                                            if (defaultTargetPlatform != TargetPlatform.android &&
+                                                defaultTargetPlatform != TargetPlatform.iOS) {
+                                              tokenFire = await FirebaseMessaging.instance.getToken(
+                                                vapidKey:
+                                                'BKOhBZ-Pjf04gW73vDF_oZEm8JB-whHJFNXFHHf942-tyUTLuEiLlnd5-MojWeoNlCSh0FNemixQUw3iLxxP-hE',
+                                              );
+                                            } else if (defaultTargetPlatform == TargetPlatform.android){
+                                              tokenFire = await FirebaseMessaging.instance.getToken();
+                                            }
+                                            _dio.post('/api/token/device', data: jsonEncode({
+                                              'token_device': tokenFire
+                                            }));
+                                            Navigator.pushNamed(
+                                              context,
+                                              '/profile',
+                                            );
+                                          } on DioException catch (e) {
+                                            Alerts.showError(
+                                              context,
+                                              'Неверный логин или пароль',
+                                            );
+                                          }
+                                        }
+                                      : null,
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 6.5,),
-                          SizedBox(
-                            height: 40,
-                            child: InputPassword(
-                              controller: _controllerPassword,
-                              hintText: '',
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          SizedBox(
-                            height: 40,
-                            width: double.infinity,
-                            child: PrimaryButton(
-                              text: 'Войти',
-                              onPressed: _can
-                                  ? () async {
-                                      try {
-                                        final response = await _dio.post(
-                                          '/api/user/entrance',
-                                          data: jsonEncode({
-                                            'nickname':
-                                                _controllerUsername.text,
-                                            'password':
-                                                _controllerPassword.text,
-                                          }),
-                                        );
-                                        final storage = FlutterSecureStorage();
-                                        String token = response.data['token'];
-                                        await storage.write(
-                                          key: 'token',
-                                          value: token,
-                                        );
-                                        _dio.options.headers['Authorization'] =
-                                            'Bearer $token';
-                                        Navigator.pushNamed(
-                                          context,
-                                          '/profile',
-                                        );
-                                      } on DioException catch (e) {
-                                        Alerts.showError(
-                                          context,
-                                          'Неверный логин или пароль',
-                                        );
-                                      }
-                                    }
-                                  : null,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),

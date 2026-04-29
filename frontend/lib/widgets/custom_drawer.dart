@@ -15,6 +15,7 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
   late final Dio _dio;
   bool _isAdmin = false;
+  bool _isSession = false;
 
   Future<void> _init() async {
     final responseMe = await _dio.get('/api/user/me');
@@ -23,6 +24,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
         _isAdmin = true;
       });
       print('ADMIN');
+    }
+    final responseSession = await _dio.get('/api/session/current');
+    if (responseSession.data['message'] != 'Нет активной сессии'){
+      setState(() {
+        _isSession = true;
+      });
     }
   }
 
@@ -61,17 +68,36 @@ class _CustomDrawerState extends State<CustomDrawer> {
               icon: Icons.drafts_outlined,
             ),
             _buildDrawerItem(
-              title: 'Мои маршруты',
+              title: 'Мои квесты',
               index: 3,
               route: '/my_route',
               icon: Icons.map_outlined,
             ),
+            _buildDrawerItem(
+              title: 'Команда',
+              index: 4,
+              route: '/team',
+              icon: Icons.people,
+            ),
+            _buildDrawerItem(
+              title: 'Рейтинг',
+              index: 7,
+              route: '/leadboard',
+              icon: Icons.leaderboard,
+            ),
             if (_isAdmin)
               _buildDrawerItem(
                 title: 'Модерация',
-                index: 4,
+                index: 5,
                 route: '/moderation',
                 icon: Icons.verified_outlined,
+              ),
+            if (_isSession)
+              _buildDrawerItem(
+                title: 'Сессия',
+                index: 6,
+                route: '/session',
+                icon: Icons.gamepad,
               ),
           ],
         ),

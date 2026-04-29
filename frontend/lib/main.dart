@@ -1,21 +1,81 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:frontend/pages/about_route.dart';
+import 'package:frontend/color_thema.dart';
 import 'package:frontend/pages/change_password.dart';
 import 'package:frontend/pages/create_route.dart';
 import 'package:frontend/pages/drafts.dart';
 import 'package:frontend/pages/entrance.dart';
 import 'package:frontend/pages/head.dart';
+import 'package:frontend/pages/leadboard.dart';
 import 'package:frontend/pages/moderation.dart';
 import 'package:frontend/pages/my_route.dart';
 import 'package:frontend/pages/profile.dart';
 import 'package:frontend/pages/register.dart';
+import 'package:frontend/pages/session.dart';
+import 'package:frontend/pages/team.dart';
 import 'package:provider/provider.dart';
+
+import 'firebase_options.dart';
+import 'notification_stub.dart' if (dart.library.html) 'notification_web.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description: 'This channel is used for important notifications.',
+    // description
+    importance: Importance.max,
+  );
+
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin
+      >()
+      ?.createNotificationChannel(channel);
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    print('MESSAGE');
+    final notification = message.notification;
+    final android = message.notification?.android;
+
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+          id: notification.hashCode,
+          title: notification.title,
+          body: notification.body,
+          notificationDetails: NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              channelDescription: channel.description,
+              icon: '@mipmap/ic_launcher',
+            ),
+          ),
+        );
+      }
+    } else {
+      final title = message.notification?.title;
+      final body = message.notification?.body;
+      showWebNotification(title!, body!);
+    }
+  });
   final dio = Dio(
     BaseOptions(
       baseUrl: defaultTargetPlatform != TargetPlatform.android
@@ -24,6 +84,10 @@ void main() async {
     ),
   );
   final storage = FlutterSecureStorage();
+  String? thema = await storage.read(key: 'thema');
+  if (thema == 'black') {
+    ColorThema.changeThema();
+  }
   String? token = await storage.read(key: 'token');
   if (token != null) {
     dio.options.headers['Authorization'] = 'Bearer $token';
@@ -79,11 +143,12 @@ void main() async {
               return PageRouteBuilder(
                 pageBuilder: (_, __, ___) => Moderation(),
               );
-            case '/about_route':
-              final args = settings.arguments as Map;
-              return PageRouteBuilder(
-                pageBuilder: (_, __, ___) => AboutRoute(id: args['id']),
-              );
+            case '/team':
+              return PageRouteBuilder(pageBuilder: (_, __, ___) => Team());
+            case '/session':
+              return PageRouteBuilder(pageBuilder: (_, __, ___) => Session());
+            case '/leadboard':
+              return PageRouteBuilder(pageBuilder: (_, __, ___) => Leadboard());
           }
         },
       ),

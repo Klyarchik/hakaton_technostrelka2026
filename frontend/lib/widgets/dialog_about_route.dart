@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/color_thema.dart';
 import 'package:provider/provider.dart';
@@ -97,7 +98,7 @@ class _DialogAboutRouteState extends State<DialogAboutRoute> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.network(
-                      widget.data['image'],
+                      defaultTargetPlatform == TargetPlatform.android ? widget.data['image'].replaceAll('localhost', '10.0.2.2') : widget.data['image'],
                       fit: BoxFit.cover,
                     ),
                   ),

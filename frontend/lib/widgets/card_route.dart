@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/color_thema.dart';
 
@@ -32,7 +33,7 @@ class CardRoute extends StatelessWidget {
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
                     ),
-                    child: Image.network(data['image'], fit: BoxFit.cover),
+                    child: Image.network(defaultTargetPlatform == TargetPlatform.android ? data['image'].replaceAll('localhost', '10.0.2.2') : data['image'], fit: BoxFit.cover),
                   ),
                 ),
               ),
@@ -56,10 +57,10 @@ class CardRoute extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: ColorThema.colorBorder.withAlpha(127),
+                        color: Color.fromRGBO(255, 159, 90, 0.5),
                       ),
                       child: Text(
-                        data['duration_minutes'].toString(),
+                        '${data['duration_minutes'].toString()} мин',
                         style: TextStyle(color: ColorThema.colorText),
                       ),
                     ),
@@ -153,8 +154,8 @@ class CardRoute extends StatelessWidget {
                       : data['status'] == 'rejected'
                       ? Colors.redAccent.withAlpha(127)
                       : data['status'] == 'moderation'
-                      ? Colors.orangeAccent.withAlpha(127)
-                      : Colors.black.withAlpha(127),
+                      ? Colors.yellowAccent.withAlpha(127)
+                      : Colors.orangeAccent.withAlpha(127),
                 ),
                 child: Text(
                   '• ${data['status'] == 'draft'

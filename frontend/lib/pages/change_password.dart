@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/input_password.dart';
 import 'package:frontend/widgets/primary_button.dart';
+import 'package:frontend/widgets/theme_button.dart';
 import 'package:provider/provider.dart';
 
 import '../color_thema.dart';
@@ -55,8 +56,8 @@ class _ChangePasswordState extends State<ChangePassword> {
         iconTheme: IconThemeData(color: ColorThema.colorIcon),
         actions: [
           IconButton(
-            onPressed: () {
-              ColorThema.changeThema();
+            onPressed: () async {
+              await ColorThema.changeThema();
               setState(() {});
             },
             icon: Icon(
@@ -65,7 +66,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   : Icons.sunny,
               color: ColorThema.colorIcon,
             ),
-          ),
+          )
         ],
       ),
       body: SafeArea(

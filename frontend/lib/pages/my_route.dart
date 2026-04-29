@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/color_thema.dart';
+import 'package:frontend/widgets/about_route.dart';
 import 'package:frontend/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/card_route.dart';
 import '../widgets/dialog_about_route.dart';
+import '../widgets/theme_button.dart';
 
 class MyRoute extends StatefulWidget {
   const MyRoute({super.key});
@@ -42,8 +44,8 @@ class _MyRouteState extends State<MyRoute> {
         iconTheme: IconThemeData(color: ColorThema.colorIcon),
         actions: [
           IconButton(
-            onPressed: () {
-              ColorThema.changeThema();
+            onPressed: () async {
+              await ColorThema.changeThema();
               setState(() {});
             },
             icon: Icon(
@@ -54,15 +56,22 @@ class _MyRouteState extends State<MyRoute> {
             ),
           ),
         ],
+          title: Text(
+            'Мои квесты',
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              color: ColorThema.colorText,
+            ),
+          )
       ),
-      drawer: CustomDrawer(currentIndex: 3,),
-      body:       SafeArea(
+      drawer: CustomDrawer(currentIndex: 3),
+      body: SafeArea(
         child: Center(
           child: Container(
             constraints: BoxConstraints(maxWidth: 700),
             width: double.infinity,
-            child:
-            SafeArea(
+            child: SafeArea(
               child: Column(
                 children: [
                   Center(
@@ -71,25 +80,22 @@ class _MyRouteState extends State<MyRoute> {
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         children: [
-                          Text(
-                            'Мои маршруты',
-                            style: TextStyle(
-                              color: ColorThema.colorText,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 10),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: MediaQuery.of(context).size.width > 725 ?  3 : MediaQuery.of(context).size.width > 450 ? 2 : 1,
+                          crossAxisCount:
+                              MediaQuery.of(context).size.width > 725
+                              ? 3
+                              : MediaQuery.of(context).size.width > 450
+                              ? 2
+                              : 1,
                           childAspectRatio: 4 / 5,
                           crossAxisSpacing: 20,
                           mainAxisSpacing: 20,
@@ -107,7 +113,14 @@ class _MyRouteState extends State<MyRoute> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return DialogAboutRoute(data: data, update: (){}, moderation: false);
+                                  return Center(
+                                    child: AboutRoute(
+                                      data: data,
+                                      isSession: false,
+                                      update: _init,
+                                      isHidden: true,
+                                    ),
+                                  );
                                 },
                               );
                               // Navigator.pushNamed(context, '/about_route', arguments: {
@@ -137,8 +150,12 @@ class _MyRouteState extends State<MyRoute> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/create_route');
+        onPressed: () async {
+          await Navigator.pushNamed(context, '/create_route');
+          await _init();
+          setState(() {
+
+          });
         },
         backgroundColor: Color.fromRGBO(255, 98, 64, 1),
         child: Icon(Icons.add, color: Colors.white),
